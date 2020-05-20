@@ -1,13 +1,15 @@
 {
   "name": "ember-emeis",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "The frontend for the emeis user management service",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "ember-engine",
+    "emeis",
+    "caluma"
   ],
-  "repository": "",
-  "license": "MIT",
-  "author": "",
+  "repository": "github:projectcaluma/ember-emeis",
+  "license": "LGPL-3.0-or-later",
   "directories": {
     "doc": "doc",
     "test": "tests"

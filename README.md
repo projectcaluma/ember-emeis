@@ -1,38 +1,19 @@
-ember-emeis
-==============================================================================
+# ember-emeis
 
-[Short description of the addon.]
+## Compatibility
 
+- Ember latest LTS (3.16)
 
-Compatibility
-------------------------------------------------------------------------------
+## Installation
 
-* Ember.js v3.12 or above
-* Ember CLI v2.13 or above
-* Node.js v10 or above
-
-
-Installation
-------------------------------------------------------------------------------
-
-```
-ember install ember-emeis
+```bash
+$ ember install ember-emeis
 ```
 
-
-Usage
-------------------------------------------------------------------------------
-
-[Longer description of how to use the addon in apps.]
-
-
-Contributing
-------------------------------------------------------------------------------
+## Contributing
 
 See the [Contributing](CONTRIBUTING.md) guide for details.
 
+# License
 
-License
-------------------------------------------------------------------------------
-
-This project is licensed under the [MIT License](LICENSE.md).
+This project is licensed under the [LGPL-3.0-or-later license](LICENSE).
