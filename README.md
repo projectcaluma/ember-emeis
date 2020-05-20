@@ -17,6 +17,13 @@ The frontend for the [emeis](https://github.com/projectcaluma/emeis) user manage
 $ ember install ember-emeis
 ```
 
+Then add the following lines to your `app/styles/app.scss`:
+
+```scss
+@import "ember-uikit";
+@import "ember-emeis";
+```
+
 ## Contributing
 
 See the [Contributing](CONTRIBUTING.md) guide for details.

@@ -11,7 +11,7 @@ export default class EmberEmeisEngine extends Engine {
   Resolver = Resolver;
 
   dependencies = {
-    services: ["store", "intl"],
+    services: ["store", "intl", "notification"],
   };
 }
 

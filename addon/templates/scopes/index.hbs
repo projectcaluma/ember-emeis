@@ -1,0 +1,7 @@
+<h2>{{t "emeis.scopes.title"}}</h2>
+
+<ul>
+  {{#each @model as |scope|}}
+    <li>{{scope.name}}, <em>{{scope.description}}</em></li>
+  {{/each}}
+</ul>
