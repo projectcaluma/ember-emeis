@@ -9,6 +9,10 @@ const { modulePrefix } = config;
 export default class EmberEmeisEngine extends Engine {
   modulePrefix = modulePrefix;
   Resolver = Resolver;
+
+  dependencies = {
+    services: ["store", "intl"],
+  };
 }
 
 loadInitializers(EmberEmeisEngine, modulePrefix);
