@@ -28,7 +28,7 @@
     "ember-cli-babel": "^7.21.0",
     "ember-cli-htmlbars": "^5.1.2",
     "ember-data": "^3.19.0",
-    "ember-intl": "^5.2.0",
+    "ember-intl": "^5.3.0",
     "ember-uikit": "^2.1.2"
   },
   "devDependencies": {
