@@ -1,0 +1,11 @@
+<div class="uk-flex uk-flex-between uk-flex-middle">
+  <h2 class="uk-margin-remove">
+    {{t (concat "emeis." @model ".title")}}
+  </h2>
+  {{#unless @noCreateLink}}
+    <LinkTo @route="{{@model}}.new" class="uk-button uk-button-primary" data-test-new>
+      {{t (concat "emeis." @model ".new")}}
+    </LinkTo>
+  {{/unless}}
+</div>
+<hr />
