@@ -4,6 +4,7 @@ import faker from "faker";
 import localize from "./localize";
 
 export default Factory.extend({
-  name: () => localize(faker.company.companyName()),
-  description: () => localize(faker.lorem.paragraph()),
+  slug: () => faker.lorem.slug(),
+  name: () => localize(faker.lorem.word()),
+  description: () => localize(faker.lorem.sentence()),
 });

@@ -15,7 +15,7 @@ export default class App extends Application {
     this.engines = {
       emberEmeis: {
         dependencies: {
-          services: ["store", "intl", "notification"],
+          services: ["store", "intl", "notification", "router"],
         },
       },
     };

@@ -1,3 +1,5 @@
-import { JSONAPISerializer } from "ember-cli-mirage";
+import PaginationSerializer from "./pagination";
 
-export default class extends JSONAPISerializer {}
+export default class extends PaginationSerializer {
+  alwaysIncludeLinkageData = true;
+}
