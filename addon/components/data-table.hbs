@@ -1,0 +1,94 @@
+<div class="uk-animation-fade uk-flex uk-flex-right uk-width-1">
+  <form
+    class="uk-search uk-search-default uk-width-1-3"
+    {{on "submit" this.updateSearch}}
+  >
+    <input
+      name="search"
+      class="uk-search-input"
+      type="search"
+      value={{this.search}}
+      placeholder={{t "emeis.search.placeholder"}}
+      data-test-search-input
+    />
+    <button
+      type="submit"
+      class="uk-search-icon-flip"
+      uk-search-icon
+      data-test-search-submit
+    ></button>
+  </form>
+</div>
+
+<table
+  class="uk-animation-fade uk-table uk-table-divider"
+  {{did-insert (perform this.fetchData)}}
+  {{did-update (perform this.fetchData) this.page this.search}}
+  ...attributes
+>
+  {{#if this.isLoading}}
+    <tbody>
+      <td colspan="99" class="uk-padding-large uk-animation-fade">
+        <UkFlex
+          @direction="column"
+          @horizontal="center"
+          @vertical="middle"
+          class="uk-height-large"
+        >
+         <UkSpinner @ratio="3" />
+        </UkFlex>
+      </td>
+    </tbody>
+  {{else}}
+    {{yield
+      (hash
+        body=(component "data-table/body" models=this.models)
+        head=(component "data-table/head")
+        refresh=(perform this.fetchData)
+      )
+    }}
+
+    <tfoot>
+      <tr>
+        <td colspan="99">
+          <ul class="uk-pagination uk-flex uk-flex-between" uk-margin>
+            <li
+              class={{unless this.previousPage "uk-disabled"}}
+              data-test-previous-page
+            >
+              <button
+                type="button"
+                class="no-style-button"
+                {{on "click" (set this.page this.previousPage)}}
+              >
+                <span
+                  class="uk-margin-small-right"
+                  uk-pagination-previous
+                ></span>
+                {{t "emeis.pagination.previous"}}
+              </button>
+            </li>
+            <li class="uk-active">
+              <span data-test-page>
+                {{this.page}} / {{this.numPages}}
+              </span>
+            </li>
+            <li
+              class={{unless this.nextPage "uk-disabled"}}
+              data-test-next-page
+            >
+              <button
+                type="button"
+                class="no-style-button"
+                {{on "click" (set this.page this.nextPage)}}
+              >
+                {{t "emeis.pagination.next"}}
+                <span class="uk-margin-small-left" uk-pagination-next></span>
+              </button>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tfoot>
+  {{/if}}
+</table>

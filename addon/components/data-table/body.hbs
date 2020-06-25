@@ -1,0 +1,24 @@
+<tbody ...attributes>
+  {{#each @models as |model|}}
+    {{yield (hash model=model row=(component "data-table/body/row"))}}
+  {{else}}
+    <td colspan="99" class="uk-padding-large uk-animation-fade">
+      <UkFlex
+        @direction="column"
+        @horizontal="center"
+        @vertical="middle"
+        class="uk-height-large"
+      >
+        <UkIcon
+          @ratio="5"
+          @icon="search"
+          class="uk-margin-bottom"
+          data-test-loading
+        />
+        <span>
+          {{t "emeis.empty"}}
+        </span>
+      </UkFlex>
+    </td>
+  {{/each}}
+</tbody>
