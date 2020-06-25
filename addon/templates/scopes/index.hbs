@@ -1,7 +1,31 @@
-<h2>{{t "emeis.scopes.title"}}</h2>
+<DataTable
+  @modelName="scope"
+  @page={{this.page}}
+  @search={{this.search}}
+  @updatePage={{fn this.updateQueryParam "page"}}
+  @updateSearch={{fn this.updateQueryParam "search"}} as |table|
+>
+  <table.head>
+    <th>
+      {{t "emeis.roles.headings.name"}}
+    </th>
+    <th>
+      {{t "emeis.roles.headings.description"}}
+    </th>
+  </table.head>
+  <table.body as |body|>
+    <body.row>
+      {{#with body.model as |scope|}}
+        <td class="uk-width-1-4" data-test-scope-name={{scope.id}}>
+          <LinkTo @route="scopes.edit" @model={{scope}} class="uk-link-text">
+            {{scope.name}}
+          </LinkTo>
+        </td>
 
-<ul>
-  {{#each @model as |scope|}}
-    <li>{{scope.name}}, <em>{{scope.description}}</em></li>
-  {{/each}}
-</ul>
+        <td class="uk-width-expand" data-test-scope-desc={{scope.id}}>
+          {{scope.description}}
+        </td>
+      {{/with}}
+    </body.row>
+  </table.body>
+</DataTable>
