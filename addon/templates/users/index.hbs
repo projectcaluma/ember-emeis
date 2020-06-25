@@ -1,0 +1,38 @@
+<DataTable
+  @modelName="user"
+  @page={{this.page}}
+  @search={{this.search}}
+  @updatePage={{fn this.updateQueryParam "page"}}
+  @updateSearch={{fn this.updateQueryParam "search"}} as |table|
+>
+  <table.head>
+    <th>
+      {{t "emeis.users.headings.username"}}
+    </th>
+    <th>
+      {{t "emeis.users.headings.fullName"}}
+    </th>
+    <th>
+      {{t "emeis.users.headings.email"}}
+    </th>
+  </table.head>
+  <table.body as |body|>
+    <body.row>
+      {{#with body.model as |user|}}
+        <td data-test-user-username={{user.id}}>
+          <LinkTo @route="users.edit" @model={{user}} class="uk-link-text">
+            {{user.username}}
+          </LinkTo>
+        </td>
+
+        <td data-test-user-full-name={{user.id}}>
+          {{user.fullName}}
+        </td>
+
+        <td data-test-user-email={{user.id}}>
+          {{user.email}}
+        </td>
+      {{/with}}
+    </body.row>
+  </table.body>
+</DataTable>
