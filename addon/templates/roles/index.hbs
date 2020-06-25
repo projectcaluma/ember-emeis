@@ -1,0 +1,38 @@
+<DataTable
+  @modelName="role"
+  @page={{this.page}}
+  @search={{this.search}}
+  @updatePage={{fn this.updateQueryParam "page"}}
+  @updateSearch={{fn this.updateQueryParam "search"}} as |table|
+>
+  <table.head>
+    <th>
+      {{t "emeis.roles.headings.name"}}
+    </th>
+    <th>
+      {{t "emeis.roles.headings.slug"}}
+    </th>
+    <th>
+      {{t "emeis.roles.headings.description"}}
+    </th>
+  </table.head>
+  <table.body as |body|>
+    <body.row>
+      {{#with body.model as |role|}}
+        <td class="uk-width-1-4" data-test-role-name={{role.id}}>
+          <LinkTo @route="roles.edit" @model={{role}} class="uk-link-text">
+            {{role.name}}
+          </LinkTo>
+        </td>
+
+        <td class="uk-width-1-4" data-test-role-slug={{role.id}}>
+          {{role.slug}}
+        </td>
+
+        <td class="uk-width-expand" data-test-role-desc={{role.id}}>
+          {{role.description}}
+        </td>
+      {{/with}}
+    </body.row>
+  </table.body>
+</DataTable>
