@@ -1,0 +1,42 @@
+<DataTable
+  @modelName="permission"
+  @page={{this.page}}
+  @search={{this.search}}
+  @updatePage={{fn this.updateQueryParam "page"}}
+  @updateSearch={{fn this.updateQueryParam "search"}} as |table|
+>
+  <table.head>
+    <th>
+      {{t "emeis.permissions.headings.name"}}
+    </th>
+    <th>
+      {{t "emeis.permissions.headings.slug"}}
+    </th>
+    <th>
+      {{t "emeis.permissions.headings.description"}}
+    </th>
+  </table.head>
+  <table.body as |body|>
+    <body.row>
+      {{#with body.model as |permission|}}
+        <td class="uk-width-1-4" data-test-permission-name={{permission.id}}>
+          <LinkTo
+            @route="permissions.edit"
+            @model={{permission}}
+            class="uk-link-text"
+          >
+            {{permission.name}}
+          </LinkTo>
+        </td>
+
+        <td class="uk-width-1-4" data-test-permission-slug={{permission.id}}>
+          {{permission.slug}}
+        </td>
+
+        <td class="uk-width-expand" data-test-permission-desc={{permission.id}}>
+          {{permission.description}}
+        </td>
+      {{/with}}
+    </body.row>
+  </table.body>
+</DataTable>
