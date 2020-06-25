@@ -1,5 +1,91 @@
 emeis:
   title: "Emeis"
+  not-found: "This page could not be found."
+  empty: "No entries found..."
+  loading: "Loading..."
+  general-error: "A problem occured. Please try again."
 
   scopes:
-    title: "scopes"
+    title: "Scopes"
+    headings:
+      name: "Name"
+      description: "Description"
+      parent: "Parent Scope"
+    new: "Add Scope"
+
+  users:
+    title: "Users"
+    headings:
+      username: "Username"
+      fullName: "Name"
+      firstName: "First name"
+      lastName: "Last Name"
+      email: "E-Mail"
+      phone: "Phone"
+      language: "Language"
+      address: "Address"
+      city: "City"
+      zip: "ZIP"
+      isActive: "Active"
+
+    edit:
+      edit-user: "Edit User"
+      acl: "ACL"
+    new: "Add User"
+
+  permissions:
+    title: "Permissions"
+    headings:
+      name: "Name"
+      slug: "Slug"
+      description: "Description"
+      roles: "Roles"
+    new: "Add Permission"
+
+  roles:
+    title: "Roles"
+    headings:
+      name: "Name"
+      slug: "Slug"
+      description: "Description"
+    new: "Add Role"
+
+  pagination:
+    next: "Next"
+    previous: "Previous"
+
+  search:
+    placeholder: "Search..."
+
+  form:
+    save: "Save"
+    back: "Back"
+    delete: "Delete"
+    save-success: "Saved successfully"
+    delete-success: "Deleted successfully"
+    save-error: "A problem occurred while saving. Please try again."
+    delete-error: "A problem occurred while deleting. Please check if the entry still exists and try again."
+    phone-hint: "Letters are not allowed in phone numbers."
+    slug-hint: "Only letters, numbers and hyphens are allowed."
+
+  acl-table:
+    title: "ACL"
+    headings:
+      user: "User"
+      scope: "Scope"
+      role: "Role"
+      add-entry: "Add entry"
+
+  acl-wizzard:
+    add-entry: "Add ACL Entry"
+    duplicate: "This ACL combination already exists. ACL's are unique."
+    scope:
+      select: "Click here to select a Scope"
+      select-different: "Select a different Scope"
+    role:
+      select: "Click here to select a Role"
+      select-different: "Select a different Role"
+    user:
+      select: "Click here to select a user"
+      select-different: "Select a different User"
+

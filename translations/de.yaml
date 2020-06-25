@@ -1,5 +1,91 @@
 emeis:
   title: "Emeis"
+  not-found: "Diese Seite konnte nicht gefunden werden."
+  empty: "Keine Einträge gefunden..."
+  loading: "Laden..."
+  general-error: "Ein Problem ist aufgetretten. Bitte versuchen Sie es erneut."
 
   scopes:
-    title: "Scopes"
+    title: "Berechtigungsbereiche"
+    headings:
+      name: "Name"
+      description: "Beschreibung"
+      parent: "Übergeordneter Berechtigungsbereich"
+    new: "Neuen Berechtigungsbereich erstellen"
+
+  users:
+    title: "Benutzer"
+    headings:
+      username: "Benutzername"
+      fullName: "Name"
+      firstName: "Name"
+      lastName: "Nachname"
+      email: "E-Mail"
+      phone: "Telefonnummer"
+      language: "Sprache"
+      address: "Adresse"
+      city: "Stadt"
+      zip: "ZIP"
+      isActive: "Aktiv"
+
+    edit:
+      edit-user: "Benutzer Bearbeiten"
+      acl: "ACL"
+    new: "Benutzer hinzufügen"
+
+  permissions:
+    title: "Berechtigungen"
+    headings:
+      name: "Name"
+      slug: "Slug"
+      description: "Beschreibung"
+      roles: "Rollen"
+    new: "Neue Berechtigung erstellen"
+
+  roles:
+    title: "Rollen"
+    headings:
+      name: "Name"
+      slug: "Slug"
+      description: "Beschreibung"
+    new: "Neue Rolle erstellen"
+
+  pagination:
+    next: "Nächste"
+    previous: "Vorherige"
+
+  search:
+    placeholder: "Suche..."
+
+  form:
+    save: "Speichern"
+    back: "Zurück"
+    save-success: "Erfolgreich gespeichert."
+    save-error: "Während dem Speichern ist ein Fehler aufgetretten. Bitte versuchen Sie es erneut."
+    delete: "Löschen"
+    delete-success: "Erfolgreich gelöscht."
+    delete-error: "Beim löschen ist ein Problem aufgetretten. Falls der Eintrag noch existiert, versuchen Sie es erneut."
+    phone-hint: "Buchstaben sind in Telefonnummern nicht erlaubt."
+    slug-hint: "Es sind nur Buchstaben, Nummern und Bindestriche erlaubt."
+
+  acl-table:
+    title: "ACL"
+    headings:
+      user: "Benutzer"
+      scope: "Berechtigungsbereich"
+      role: "Rolle"
+      add-entry: "Eintrag hinzufügen"
+
+  acl-wizzard:
+    add-entry: "ACL Eintrag hinzufügen"
+    duplicate: "Diese ACL Kombination existiert bereits. ACL Einträge sind eindeutig."
+    scope:
+      select: "Klicken Sie hier um einen Berechtigungsbereich auszuwählen"
+      select-different: "Anderen Berechtigungsbereich auswählen"
+    role:
+      select: "Klicken Sie hier um eine Rolle auszuwählen"
+      select-different: "Andere Rolle auswählen"
+    user:
+      select: "Klicken Sie hier um einen Benutzer auszuwählen"
+      select-different: "Anderen Benutzer auswählen"
+
