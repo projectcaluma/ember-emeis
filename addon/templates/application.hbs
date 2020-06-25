@@ -1,5 +1,18 @@
-<h1>{{t "emeis.title"}}</h1>
+<div class="uk-padding">
+  <Nav>
+    <Nav::Item @route="users" data-test-nav-users>
+      {{t "emeis.users.title"}}
+    </Nav::Item>
+    <Nav::Item @route="scopes" data-test-nav-scopes>
+      {{t "emeis.scopes.title"}}
+    </Nav::Item>
+    <Nav::Item @route="roles" data-test-nav-roles>
+      {{t "emeis.roles.title"}}
+    </Nav::Item>
+    <Nav::Item @route="permissions" data-test-nav-permissions>
+      {{t "emeis.permissions.title"}}
+    </Nav::Item>
+  </Nav>
 
-<LinkTo @route="scopes.index">{{t "emeis.scopes.title"}}</LinkTo>
-
-{{outlet}}
+  {{outlet}}
+</div>
