@@ -1,0 +1,85 @@
+<EditForm @model={{@model}} @updateModel={{this.updateModel}} class="uk-margin">
+  <EditForm::Element @label={{t "emeis.roles.headings.slug"}}>
+    <input
+      class="uk-input"
+      type="text"
+      name="slug"
+      pattern="^[-a-zA-Z0-9_]+$"
+      disabled={{not @model.isNew}}
+      value={{@model.slug}}
+    />
+    <span class="uk-text-meta">
+      {{t "emeis.form.slug-hint"}}
+    </span>
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.roles.headings.name"}}>
+    <input
+      class="uk-input"
+      type="text"
+      name="name"
+      placeholder="{{t "emeis.roles.headings.name"}}..."
+      required
+      value={{@model.name}}
+    />
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.roles.headings.description"}}>
+    <textarea
+      class="uk-textarea"
+      rows="5"
+      name="description"
+      placeholder="{{t "emeis.roles.headings.description"}}..."
+      value={{@model.description}}
+      required
+    ></textarea>
+  </EditForm::Element>
+</EditForm>
+
+{{#if this.displayPermissionTable}}
+  <SectionTitle @model="permissions" @noCreateLink="true" />
+  <DataTable
+    @modelName="permission"
+    @filter={{this.permissionFilter}}
+    class="uk-margin"
+    data-test-permissions as |table|
+  >
+    <table.head>
+      <th>
+        {{t "emeis.permissions.headings.name"}}
+      </th>
+      <th>
+        {{t "emeis.permissions.headings.slug"}}
+      </th>
+      <th>
+        {{t "emeis.permissions.headings.description"}}
+      </th>
+    </table.head>
+    <table.body as |body|>
+      <body.row data-test-row>
+        {{#with body.model as |permission|}}
+          <td class="uk-width-1-4" data-test-permission-name={{permission.id}}>
+            <LinkTo
+              @route="permissions.edit"
+              @model={{permission}}
+              class="uk-link-text"
+            >
+              {{permission.name}}
+            </LinkTo>
+          </td>
+
+          <td class="uk-width-1-4" data-test-permission-slug={{permission.id}}>
+            {{permission.slug}}
+          </td>
+
+          <td
+            class="uk-width-expand"
+            data-test-permission-desc={{permission.id}}
+          >
+            {{permission.description}}
+          </td>
+        {{/with}}
+      </body.row>
+    </table.body>
+  </DataTable>
+{{/if}}
