@@ -45,7 +45,7 @@ module("Integration | Component | relationship-select", function (hooks) {
     assert.dom("[data-test-name]").hasText(role.name.en);
 
     this.assertRequest("GET", "/api/v1/roles", (request) => {
-      assert.equal(request.queryParams.search, "test");
+      assert.equal(request.queryParams["filter[search]"], "test");
     });
     await typeInSearch("test");
 
@@ -81,7 +81,7 @@ module("Integration | Component | relationship-select", function (hooks) {
     assert.dom("[data-test-name]").hasText(role.name.en);
 
     this.assertRequest("GET", "/api/v1/roles", (request) => {
-      assert.equal(request.queryParams.search, "test");
+      assert.equal(request.queryParams["filter[search]"], "test");
     });
     await typeInSearch("test");
 

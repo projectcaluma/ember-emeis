@@ -137,11 +137,12 @@ module("Acceptance | roles", function (hooks) {
   test("detail view /roles/:id permission table", async function (assert) {
     assert.expect(4);
 
-    const role = this.server.create("role");
-    this.server.createList("permission", 10);
+    const role = this.server.create("role", {
+      permissions: this.server.createList("permission", 10),
+    });
 
     this.assertRequest("GET", `/api/v1/permissions`, (request) => {
-      assert.equal(request.queryParams["filter[role]"], role.id);
+      assert.equal(request.queryParams["filter[roles]"], role.id);
     });
 
     await visit(`/roles/${role.id}`);
