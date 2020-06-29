@@ -1,11 +1,21 @@
-import { visit, currentURL } from "@ember/test-helpers";
+import {
+  visit,
+  currentURL,
+  fillIn,
+  click,
+  waitUntil,
+} from "@ember/test-helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
+import { selectChoose } from "ember-power-select/test-support";
 import { setupApplicationTest } from "ember-qunit";
 import { module, test } from "qunit";
+
+import setupRequestAssertions from "./../helpers/assert-request";
 
 module("Acceptance | permissions", function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupRequestAssertions(hooks);
 
   test("list view /permissions", async function (assert) {
     assert.expect(6);
@@ -29,5 +39,74 @@ module("Acceptance | permissions", function (hooks) {
     assert
       .dom(`[data-test-permission-name="${permission.id}"] a`)
       .hasAttribute("href", `/permissions/${permission.id}`);
+  });
+
+  test("detail view /permissions/:id", async function (assert) {
+    assert.expect(9);
+
+    const permission = this.server.create("permission");
+    const role = this.server.create("role");
+
+    await visit(`/permissions/${permission.id}`);
+
+    assert.equal(currentURL(), `/permissions/${permission.id}`);
+
+    assert.dom('[name="slug"]').hasValue(permission.slug);
+    assert.dom('[name="slug"]').hasAttribute("disabled");
+    assert.dom('[name="name"]').hasValue(permission.name.en);
+    assert.dom('[name="description"]').hasValue(permission.description.en);
+
+    const name = "Permission 1",
+      description = "The one and only";
+
+    await fillIn('[name="name"]', name);
+    await fillIn('[name="description"]', description);
+
+    await selectChoose(".ember-power-select-trigger", role.name.en);
+
+    this.assertRequest(
+      "PATCH",
+      `/api/v1/permissions/${permission.id}`,
+      (request) => {
+        const { attributes, relationships } = JSON.parse(
+          request.requestBody
+        ).data;
+
+        assert.equal(attributes.name.en, name);
+        assert.equal(attributes.description.en, description);
+        assert.equal(relationships.roles.data[0].id, role.id);
+      }
+    );
+    await click("[data-test-save]");
+
+    await click("[data-test-back]");
+    assert.equal(currentURL(), "/permissions");
+  });
+
+  test("delete /permissions/:id", async function (assert) {
+    assert.expect(5);
+
+    const permission = this.server.create("permission", {
+      name: "test 1",
+      description: "this is test one.",
+    });
+
+    await visit(`/permissions`);
+    assert.dom("[data-test-permission-name]").exists({ count: 1 });
+
+    await click("[data-test-permission-name] a");
+    assert.equal(currentURL(), `/permissions/${permission.id}`);
+
+    this.assertRequest("DELETE", `/api/v1/permissions/:id`, (request) => {
+      assert.equal(permission.id, request.params.id);
+    });
+    await click("[data-test-delete]");
+
+    // For some reason the await click is not actually waiting for the delete task to finish.
+    // Probably some runloop issue.
+    await waitUntil(() => currentURL() !== `/permissions/${permission.id}`);
+
+    assert.equal(currentURL(), `/permissions?page=1`);
+    assert.dom("[data-test-permission-name]").doesNotExist();
   });
 });

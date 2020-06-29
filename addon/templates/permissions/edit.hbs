@@ -1,0 +1,50 @@
+<EditForm @model={{@model}} @updateModel={{this.updateModel}}>
+  <EditForm::Element @label={{t "emeis.permissions.headings.slug"}}>
+    <input
+      class="uk-input"
+      type="text"
+      name="slug"
+      pattern="^[-a-zA-Z0-9_]+$"
+      disabled={{not @model.isNew}}
+      value={{@model.slug}}
+    />
+    <span class="uk-text-meta">
+      {{t "emeis.form.slug-hint"}}
+    </span>
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.permissions.headings.name"}}>
+    <input
+      class="uk-input"
+      type="text"
+      name="name"
+      placeholder="{{t "emeis.permissions.headings.name"}}..."
+      required
+      value={{@model.name}}
+    />
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.permissions.headings.description"}}>
+    <textarea
+      class="uk-textarea"
+      rows="5"
+      name="description"
+      placeholder="{{t "emeis.permissions.headings.description"}}..."
+      value={{@model.description}}
+      required
+    ></textarea>
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.permissions.headings.roles"}}>
+    <RelationshipSelect
+      @modelName="role"
+      @selected={{@model.roles}}
+      @placeholder="{{t "emeis.permissions.headings.roles"}}..."
+      @onChange={{set @model.roles}}
+      @multiple="true"
+      required as |role|
+    >
+      {{role.name}}
+    </RelationshipSelect>
+  </EditForm::Element>
+</EditForm>
