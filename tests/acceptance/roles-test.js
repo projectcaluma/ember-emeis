@@ -68,6 +68,45 @@ module("Acceptance | roles", function (hooks) {
     assert.equal(currentURL(), "/roles");
   });
 
+  test("create view /roles/new", async function (assert) {
+    assert.expect(10);
+
+    await visit("/roles");
+    assert.equal(currentURL(), "/roles");
+    assert.dom("[data-test-role-name]").doesNotExist();
+
+    await click("[data-test-new]");
+    assert.equal(currentURL(), "/roles/new");
+
+    const name = "Role 1",
+      description = "The one and only",
+      slug = "role-1";
+
+    await fillIn('[name="name"]', name);
+    await fillIn('[name="description"]', description);
+    await fillIn('[name="slug"]', slug);
+
+    this.assertRequest("POST", `/api/v1/roles`, (request) => {
+      const attributes = JSON.parse(request.requestBody).data.attributes;
+
+      assert.equal(attributes.slug, slug);
+      assert.equal(attributes.name.en, name);
+      assert.equal(attributes.description.en, description);
+    });
+    await click("[data-test-save]");
+
+    // For some reason the await click is not actually waiting for the save task to finish.
+    // Probably some runloop issue.
+    await waitUntil(() => currentURL() !== "/roles/new");
+
+    const role = this.server.schema.roles.first();
+    assert.equal(currentURL(), `/roles/${role.id}`);
+
+    assert.dom('[name="slug"]').hasAttribute("disabled");
+    assert.dom('[name="name"]').hasValue(role.name.en);
+    assert.dom('[name="description"]').hasValue(role.description.en);
+  });
+
   test("delete /roles/:id", async function (assert) {
     assert.expect(5);
 
