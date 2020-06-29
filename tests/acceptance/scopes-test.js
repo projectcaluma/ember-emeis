@@ -81,6 +81,40 @@ module("Acceptance | scopes", function (hooks) {
     assert.equal(currentURL(), "/scopes");
   });
 
+  test("create view /scopes/new", async function (assert) {
+    assert.expect(8);
+
+    await visit("/scopes");
+    assert.equal(currentURL(), "/scopes");
+    assert.dom("[data-test-scope-name]").doesNotExist();
+
+    await click("[data-test-new]");
+    assert.equal(currentURL(), "/scopes/new");
+
+    await fillIn('[name="name"]', "test");
+    await fillIn('[name="description"]', "test");
+
+    this.assertRequest("POST", `/api/v1/scopes`, (request) => {
+      const { name, description } = JSON.parse(
+        request.requestBody
+      ).data.attributes;
+
+      assert.equal(name.en, "test");
+      assert.equal(description.en, "test");
+    });
+    await click("[data-test-save]");
+
+    // For some reason the await click is not actually waiting for the save task to finish.
+    // Probably some runloop issue.
+    await waitUntil(() => currentURL() !== "/scopes/new");
+
+    const scope = this.server.schema.scopes.first();
+    assert.equal(currentURL(), `/scopes/${scope.id}`);
+
+    assert.dom('[name="name"]').hasValue(scope.name.en);
+    assert.dom('[name="description"]').hasValue(scope.description.en);
+  });
+
   test("delete /scopes/:id", async function (assert) {
     assert.expect(5);
 
