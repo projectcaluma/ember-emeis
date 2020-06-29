@@ -18,3 +18,15 @@
   cursor: pointer;
   outline: inherit;
 }
+
+.hidden-input {
+  height: 0;
+  width: 100%;
+  border: none;
+  display: block;
+  font-size: 0;
+}
+
+$ember-power-select-default-border-radius: 0;
+$ember-power-select-border-color: $global-border;
+@import "ember-power-select";

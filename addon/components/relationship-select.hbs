@@ -1,0 +1,25 @@
+<input
+  class="hidden-input"
+  value={{or (or @selected.id @selected.length) ""}}
+  ...attributes
+  {{did-insert (perform this.fetchModels)}}
+/>
+{{#with
+  (component
+    (if @multiple "power-select-multiple" "power-select")
+  ) as |RelationPowerSelect|
+}}
+  <RelationPowerSelect
+    @searchEnabled={{true}}
+    @search={{perform this.fetchModels}}
+    @options={{this.models}}
+    @selected={{@selected}}
+    @placeholder={{
+      if this.fetchModels.isRunning (t "emeis.loading") @placeholder
+    }}
+    @noMatchesMessage={{t "emeis.empty"}}
+    @onChange={{@onChange}} as |model|
+  >
+    {{yield model}}
+  </RelationPowerSelect>
+{{/with}}
