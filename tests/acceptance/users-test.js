@@ -103,4 +103,78 @@ module("Acceptance | users", function (hooks) {
     await click("[data-test-back]");
     assert.equal(currentURL(), "/users");
   });
+
+  test("create view /users/new", async function (assert) {
+    assert.expect(28);
+
+    await visit("/users");
+    assert.equal(currentURL(), "/users");
+    assert.dom("[data-test-user-name]").doesNotExist();
+
+    await click("[data-test-new]");
+    assert.equal(currentURL(), "/users/new");
+
+    assert.dom("[data-test-edit-link]").doesNotExist();
+    assert.dom("[data-test-acl-link]").doesNotExist();
+
+    const username = "newusername",
+      firstName = "John",
+      lastName = "Doe",
+      email = "john.doe@adfinis.com",
+      phone = "123 123 12 23",
+      language = "de",
+      address = "Somestreet 32",
+      city = "Sity",
+      zip = "2313";
+
+    await fillIn('[name="username"]', username);
+    await fillIn('[name="firstName"]', firstName);
+    await fillIn('[name="lastName"]', lastName);
+    await fillIn('[name="email"]', email);
+    await fillIn('[name="phone"]', phone);
+    await fillIn('[name="language"]', language);
+    await fillIn('[name="address"]', address);
+    await fillIn('[name="city"]', city);
+    await fillIn('[name="zip"]', zip);
+
+    await click('[name="isActive"]');
+
+    this.assertRequest("POST", "/api/v1/users", (request) => {
+      const { attributes } = JSON.parse(request.requestBody).data;
+
+      assert.equal(attributes.username, username);
+      assert.equal(attributes["first-name"], firstName);
+      assert.equal(attributes["last-name"], lastName);
+      assert.equal(attributes.email, email);
+      assert.equal(attributes.phone, phone);
+      assert.equal(attributes.language, language);
+      assert.equal(attributes.address, address);
+      assert.equal(attributes.city.en, city);
+      assert.equal(attributes.zip, zip);
+      assert.equal(attributes["is-active"], true);
+    });
+    await click("[data-test-save]");
+
+    // For some reason the await click is not actually waiting for the save task to finish.
+    // Probably some runloop issue.
+    await waitUntil(() => currentURL() !== "/users/new");
+
+    const user = this.server.schema.users.first();
+    assert.equal(currentURL(), `/users/${user.id}`);
+
+    assert.dom('[name="username"]').hasValue(user.username);
+    assert.dom('[name="firstName"]').hasValue(user.firstName);
+    assert.dom('[name="lastName"]').hasValue(user.lastName);
+    assert.dom('[name="email"]').hasValue(user.email);
+    assert.dom('[name="phone"]').hasValue(user.phone);
+    assert.dom('[name="language"]').hasValue(user.language);
+    assert.dom('[name="address"]').hasValue(user.address);
+    assert.dom('[name="city"]').hasValue(user.city.en);
+    assert.dom('[name="zip"]').hasValue(user.zip.toString());
+
+    assert.dom('[name="isActive"]').isChecked();
+
+    assert.dom("[data-test-edit-link]").exists();
+    assert.dom("[data-test-acl-link]").exists();
+  });
 });
