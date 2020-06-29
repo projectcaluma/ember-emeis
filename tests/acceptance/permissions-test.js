@@ -83,6 +83,51 @@ module("Acceptance | permissions", function (hooks) {
     assert.equal(currentURL(), "/permissions");
   });
 
+  test("create view /permissions/new", async function (assert) {
+    assert.expect(11);
+
+    const role = this.server.create("role");
+
+    await visit("/permissions");
+    assert.equal(currentURL(), "/permissions");
+    assert.dom("[data-test-permission-name]").doesNotExist();
+
+    await click("[data-test-new]");
+    assert.equal(currentURL(), "/permissions/new");
+
+    const name = "Permission 1",
+      description = "The one and only",
+      slug = "permission-1";
+
+    await fillIn('[name="name"]', name);
+    await fillIn('[name="description"]', description);
+    await fillIn('[name="slug"]', slug);
+    await selectChoose(".ember-power-select-trigger", role.name.en);
+
+    this.assertRequest("POST", "/api/v1/permissions", (request) => {
+      const { attributes, relationships } = JSON.parse(
+        request.requestBody
+      ).data;
+
+      assert.equal(attributes.slug, slug);
+      assert.equal(attributes.name.en, name);
+      assert.equal(attributes.description.en, description);
+      assert.equal(relationships.roles.data[0].id, role.id);
+    });
+    await click("[data-test-save]");
+
+    // For some reason the await click is not actually waiting for the save task to finish.
+    // Probably some runloop issue.
+    await waitUntil(() => currentURL() !== "/permissions/new");
+
+    const permission = this.server.schema.permissions.first();
+    assert.equal(currentURL(), `/permissions/${permission.id}`);
+
+    assert.dom('[name="slug"]').hasAttribute("disabled");
+    assert.dom('[name="name"]').hasValue(permission.name.en);
+    assert.dom('[name="description"]').hasValue(permission.description.en);
+  });
+
   test("delete /permissions/:id", async function (assert) {
     assert.expect(5);
 
