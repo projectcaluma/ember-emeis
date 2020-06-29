@@ -1,3 +1,3 @@
-import PaginationController from "ember-emeis/controllers/pagination";
+import PaginationController from "ember-emeis/-private/controllers/pagination";
 
 export default class PermissionsIndexController extends PaginationController {}
