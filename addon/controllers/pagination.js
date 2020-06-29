@@ -13,6 +13,11 @@ export default class PaginationController extends Controller {
 
   @action
   updateQueryParam(field, value) {
-    this.router.transitionTo({ queryParams: { [field]: value || null } });
+    // We dont want to set an empty stirng as this is still serialized
+    if (typeof value === "string" && !value.length) {
+      value = null;
+    }
+
+    this.router.transitionTo({ queryParams: { [field]: value } });
   }
 }
