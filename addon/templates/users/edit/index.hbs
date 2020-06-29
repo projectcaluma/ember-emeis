@@ -1,0 +1,122 @@
+<EditForm
+  @model={{@model}}
+  @updateModel={{this.updateModel}}
+  @noDelete={{true}}
+  @listViewRouteName="users.index"
+>
+  <EditForm::Element @label={{t "emeis.users.headings.username"}}>
+    <input
+      class="uk-input"
+      type="text"
+      name="username"
+      placeholder="{{t "emeis.users.headings.username"}}..."
+      required
+      value={{@model.username}}
+    />
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.users.headings.firstName"}}>
+    <input
+      class="uk-input"
+      type="text"
+      name="firstName"
+      placeholder="{{t "emeis.users.headings.firstName"}}..."
+      required
+      value={{@model.firstName}}
+    />
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.users.headings.lastName"}}>
+    <input
+      class="uk-input"
+      type="text"
+      name="lastName"
+      placeholder="{{t "emeis.users.headings.lastName"}}..."
+      required
+      value={{@model.lastName}}
+    />
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.users.headings.email"}}>
+    <input
+      class="uk-input"
+      type="email"
+      name="email"
+      placeholder="{{t "emeis.users.headings.email"}}..."
+      required
+      value={{@model.email}}
+    />
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.users.headings.phone"}}>
+    <input
+      class="uk-input"
+      type="tel"
+      name="phone"
+      placeholder="{{t "emeis.users.headings.phone"}}..."
+      required
+      pattern="^[0-9()\-\s]+$"
+      value={{@model.phone}}
+    />
+
+    <span class="uk-text-meta">
+      {{t "emeis.form.phone-hint"}}
+    </span>
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.users.headings.language"}}>
+    <select class="uk-select uk-text-uppercase" required name="language">
+      <option value="" class="uk-text-capitalize">
+        {{t "emeis.users.headings.language"}}...
+      </option>
+      {{#each this.intl.locales as |language|}}
+        <option value={{language}} selected={{eq language @model.language}}>
+          {{language}}
+        </option>
+      {{/each}}
+    </select>
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.users.headings.address"}}>
+    <input
+      class="uk-input"
+      type="text"
+      name="address"
+      placeholder="{{t "emeis.users.headings.address"}}..."
+      required
+      value={{@model.address}}
+    />
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.users.headings.city"}}>
+    <input
+      class="uk-input"
+      type="text"
+      name="city"
+      placeholder="{{t "emeis.users.headings.city"}}..."
+      required
+      value={{@model.city}}
+    />
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.users.headings.zip"}}>
+    <input
+      class="uk-input"
+      type="number"
+      name="zip"
+      placeholder="{{t "emeis.users.headings.zip"}}..."
+      required
+      value={{@model.zip}}
+    />
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.users.headings.isActive"}}>
+    <input
+      class="uk-checkbox"
+      type="checkbox"
+      name="isActive"
+      placeholder="{{t "emeis.users.headings.isActive"}}..."
+      checked={{@model.isActive}}
+    />
+  </EditForm::Element>
+</EditForm>
