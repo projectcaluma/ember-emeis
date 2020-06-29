@@ -1,0 +1,63 @@
+{{#if this.showAclWizzard}}
+  <span class="uk-flex uk-flex-left">
+    <UkButton data-test-back {{on "click" (set this.showAclWizzard false)}}>
+      <UkIcon @icon="arrow-left" @ratio="1.5" />
+      {{t "emeis.form.back"}}
+    </UkButton>
+  </span>
+  <AclWizzard @createAclEntry={{perform this.createEntry}} @user={{@model}} />
+{{else}}
+  <DataTable
+    @modelName="acl"
+    @filter={{this.queryParamsfilter}}
+    @include="user,role,scope"
+    @page={{this.page}}
+    @search={{this.search}}
+    @updatePage={{fn this.updateQueryParam "page"}}
+    @updateSearch={{fn this.updateQueryParam "search"}} as |table|
+  >
+    <table.head>
+      <th>
+        {{t "emeis.acl-table.headings.role"}}
+      </th>
+
+      <th>
+        {{t "emeis.acl-table.headings.scope"}}
+      </th>
+      <th class="uk-table-shrink uk-text-nowrap">
+        <UkButton
+          data-test-add-acl
+          @color="primary"
+          {{on "click" (fn (set this.showAclWizzard true))}}
+        >
+          {{t "emeis.acl-table.headings.add-entry"}}
+        </UkButton>
+      </th>
+    </table.head>
+    <table.body as |body|>
+      <body.row>
+        {{#with body.model as |aclEntry|}}
+          <td data-test-acl-role={{aclEntry.id}}>
+            {{aclEntry.role.name}}
+          </td>
+
+          <td data-test-acl-scope={{aclEntry.id}}>
+            {{aclEntry.scope.name}}
+          </td>
+
+          <td data-test-acl-delete={{aclEntry.id}}>
+            <span class="uk-flex uk-flex-center">
+              <button
+                type="button"
+                class="uk-icon-button uk-margin-small-right"
+                uk-icon="trash"
+                tooltip="hey there"
+                {{on "click" (perform this.deleteEntry aclEntry table.refresh)}}
+              ></button>
+            </span>
+          </td>
+        {{/with}}
+      </body.row>
+    </table.body>
+  </DataTable>
+{{/if}}
