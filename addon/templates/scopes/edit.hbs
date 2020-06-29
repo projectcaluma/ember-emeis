@@ -1,0 +1,34 @@
+<EditForm @model={{@model}} @updateModel={{this.updateModel}}>
+  <EditForm::Element @label={{t "emeis.scopes.headings.name"}}>
+    <input
+      class="uk-input"
+      type="text"
+      name="name"
+      placeholder="{{t "emeis.scopes.headings.name"}}..."
+      required
+      value={{@model.name}}
+    />
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.scopes.headings.description"}}>
+    <textarea
+      class="uk-textarea"
+      rows="5"
+      name="description"
+      placeholder="{{t "emeis.scopes.headings.description"}}..."
+      value={{@model.description}}
+      required
+    ></textarea>
+  </EditForm::Element>
+
+  <EditForm::Element @label={{t "emeis.scopes.headings.parent"}}>
+    <RelationshipSelect
+      @modelName="scope"
+      @selected={{@model.parent}}
+      @placeholder="{{t "emeis.scopes.headings.parent"}}..."
+      @onChange={{set @model.parent}} as |scope|
+    >
+      {{scope.name}}
+    </RelationshipSelect>
+  </EditForm::Element>
+</EditForm>
