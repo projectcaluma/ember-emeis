@@ -1,0 +1,40 @@
+<form
+  class="uk-form-stacked"
+  {{did-insert (set this.form)}}
+  {{on "submit" (perform this.save)}}
+>
+  {{yield}}
+
+  <div class="uk-flex uk-flex-right uk-margin">
+    {{! without quotes on the @route the LinkTo component tries to set the property listViewRouteName which has no setter}}
+    <LinkTo
+      @route="{{this.listViewRouteName}}"
+      class="uk-button uk-button-default uk-margin-right"
+      data-test-back
+    >
+      {{t "emeis.form.back"}}
+    </LinkTo>
+
+    {{#unless @noDelete}}
+      <UkButton
+        @loading={{this.delete.isRunning}}
+        @disabled={{this.delete.isRunning}}
+        class="uk-margin-right uk-button-danger"
+        data-test-delete
+        {{on "click" (perform this.delete)}}
+      >
+        {{t "emeis.form.delete"}}
+      </UkButton>
+    {{/unless}}
+
+    <UkButton
+      @loading={{this.save.isRunning}}
+      @disabled={{this.save.isRunning}}
+      @color="primary"
+      @type="submit"
+      data-test-save
+    >
+      {{t "emeis.form.save"}}
+    </UkButton>
+  </div>
+</form>
