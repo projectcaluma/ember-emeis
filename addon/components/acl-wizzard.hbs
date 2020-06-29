@@ -1,0 +1,104 @@
+{{#if this.modelToSelect}}
+  <div class="uk-margin">
+    <SectionTitle @model="{{this.modelToSelect}}s" @noCreateLink="true" />
+    <DataTable @modelName={{this.modelToSelect}} as |table|>
+      <table.head>
+        {{#each (get this.fields this.modelToSelect) as |field|}}
+          <th>
+            {{t (concat "emeis." this.modelToSelect "s.headings." field)}}
+          </th>
+        {{/each}}
+      </table.head>
+      <table.body as |body|>
+        <body.row
+          class="pointer"
+          data-test-row
+          {{on "click" (fn this.selectModel body.model)}}
+        >
+          {{#with body.model as |model|}}
+            {{#each (get this.fields this.modelToSelect) as |field|}}
+              <td>
+                {{get model field}}
+              </td>
+            {{/each}}
+          {{/with}}
+        </body.row>
+      </table.body>
+    </DataTable>
+  </div>
+{{else}}
+  <div class="uk-background-muted uk-padding uk-margin">
+    <div
+      class="uk-flex uk-flex-middle uk-flex-between uk-margin-bottom"
+      uk-height-match=".uk-card-body"
+    >
+      {{#unless @user}}
+        <AclWizzard::SelectCard
+          @selected={{this.user}}
+          @header={{this.user.username}}
+          @model="user"
+          @selectEntry={{set this.modelToSelect "user"}}
+          data-test-select-user
+        >
+          <div uk-grid data-test-body>
+            <span>
+              {{this.user.fullName}}
+            </span>
+            <span>
+              {{this.user.email}}
+            </span>
+          </div>
+        </AclWizzard::SelectCard>
+
+        <span
+          class="uk-margin-left uk-margin-right uk-width-1-6 uk-flex uk-flex-center uk-flex-middle"
+        >
+          <UkIcon @icon="plus" @ratio="2" />
+        </span>
+      {{/unless}}
+
+      {{#unless @role}}
+        <AclWizzard::SelectCard
+          @selected={{this.role}}
+          @model="role"
+          @selectEntry={{set this.modelToSelect "role"}}
+          data-test-select-role
+        />
+
+        {{#unless @scope}}
+          <span
+            class="uk-margin-left uk-margin-right uk-width-1-6 uk-flex uk-flex-center uk-flex-middle"
+          >
+            <UkIcon @icon="plus" @ratio="2" />
+          </span>
+        {{/unless}}
+      {{/unless}}
+
+      {{#unless @scope}}
+        <AclWizzard::SelectCard
+          @selected={{this.scope}}
+          @model="scope"
+          @selectEntry={{set this.modelToSelect "scope"}}
+          data-test-select-scope
+        />
+      {{/unless}}
+    </div>
+  </div>
+
+  <div class="uk-flex uk-flex-right">
+    <UkButton
+      @color="primary"
+      disabled={{not this.isValidAcl}}
+      data-test-create-acl
+      {{on
+        "click"
+        (fn
+          @createAclEntry (hash user=this.user role=this.role scope=this.scope)
+        )
+      }}
+    >
+      <UkIcon @icon="check" class="uk-margin-small-right" />
+      {{t "emeis.acl-wizzard.add-entry"}}
+    </UkButton>
+  </div>
+{{/if}}

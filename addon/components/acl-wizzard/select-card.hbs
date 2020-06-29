@@ -1,0 +1,51 @@
+{{#if @selected}}
+  <UkCard class="uk-width-2-5" ...attributes as |card|>
+    <card.header>
+      <card.title data-test-title>
+        {{#if @header}}
+          {{@header}}
+        {{else}}
+          {{@selected.name}}
+        {{/if}}
+      </card.title>
+    </card.header>
+    <card.body data-test-body>
+      {{#if hasBlock}}
+        {{yield}}
+      {{else}}
+        {{@selected.description}}
+      {{/if}}
+    </card.body>
+    <card.footer>
+      <UkButton
+        @color="primary"
+        class="uk-width-1 uk-text-center"
+        data-test-change
+        {{on "click" @selectEntry}}
+      >
+        <UkIcon @icon="pencil" class="uk-margin-small-right" />
+        {{t (concat "emeis.acl-wizzard." @model ".select-different")}}
+      </UkButton>
+    </card.footer>
+  </UkCard>
+{{else}}
+  <button
+    class="no-style-button uk-width-2-5"
+    type="button"
+    ...attributes
+    {{on "click" @selectEntry}}
+  >
+    <UkCard
+      @hover="true"
+      @color="primary"
+      class="uk-height-1"
+      data-test-change as |card|
+    >
+      <card.body>
+        <h3>
+          {{t (concat "emeis.acl-wizzard." @model ".select")}}
+        </h3>
+      </card.body>
+    </UkCard>
+  </button>
+{{/if}}
