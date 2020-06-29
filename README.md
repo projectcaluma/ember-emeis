@@ -24,6 +24,14 @@ Then add the following lines to your `app/styles/app.scss`:
 @import "ember-emeis";
 ```
 
+## Configuration
+If you need to customize your store service passed to emeis, use:
+`ember g emeis-store <your_name>`
+
+This will generate a store service and an adapter for you. In those two files
+ you can then configure custom api endpoints or hosts and/or custom
+authentication.
+
 ## Contributing
 
 See the [Contributing](CONTRIBUTING.md) guide for details.
