@@ -5,7 +5,7 @@ module("Unit | Route | create", function (hooks) {
   setupTest(hooks);
 
   test("getDetailView", function (assert) {
-    const route = this.owner.lookup("route:create");
+    const route = this.owner.lookup("-private/route:create");
     assert.ok(route);
 
     route.detailView = "test";
