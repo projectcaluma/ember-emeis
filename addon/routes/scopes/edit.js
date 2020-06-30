@@ -8,7 +8,7 @@ export default class ScopesEditRoute extends Route {
   @service intl;
 
   @handleModelErrors({ routeFor404: "scopes.index" })
-  async model({ scope_id: id }) {
-    return await this.store.findRecord("scope", id);
+  model({ scope_id: id }) {
+    return this.store.findRecord("scope", id);
   }
 }

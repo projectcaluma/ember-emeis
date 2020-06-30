@@ -8,7 +8,7 @@ export default class PermissionsEditRoute extends Route {
   @service intl;
 
   @handleModelErrors({ routeFor404: "permissions.index" })
-  async model({ permission_id: id }) {
-    return await this.store.findRecord("permission", id);
+  model({ permission_id: id }) {
+    return this.store.findRecord("permission", id);
   }
 }
