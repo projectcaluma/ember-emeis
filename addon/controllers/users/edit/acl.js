@@ -2,7 +2,7 @@ import { inject as service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import { task } from "ember-concurrency-decorators";
 
-import PaginationController from "ember-emeis/controllers/pagination";
+import PaginationController from "ember-emeis/-private/controllers/pagination";
 import handleModelErrors from "ember-emeis/decorators/handle-model-errors";
 
 export default class UsersEditAclController extends PaginationController {
