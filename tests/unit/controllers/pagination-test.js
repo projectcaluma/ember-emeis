@@ -5,7 +5,7 @@ module("Unit | Controller | pagination", function (hooks) {
   setupTest(hooks);
 
   test("updateQueryParam", function (assert) {
-    const controller = this.owner.lookup("controller:pagination");
+    const controller = this.owner.lookup("-private/controller:pagination");
     assert.ok(controller);
 
     const router = this.owner.lookup("service:router");
