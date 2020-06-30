@@ -5055,7 +5055,7 @@ ember-cli-lodash-subset@^2.0.1:
   resolved "https://registry.yarnpkg.com/ember-cli-lodash-subset/-/ember-cli-lodash-subset-2.0.1.tgz#20cb68a790fe0fde2488ddfd8efbb7df6fe766f2"
   integrity sha1-IMtop5D+D94kiN39jvu332/nZvI=
 
-ember-cli-mirage@^1.1.7:
+ember-cli-mirage@1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/ember-cli-mirage/-/ember-cli-mirage-1.1.7.tgz#846ec8e5199b15fa670da30dfa1708a8ee11e9dc"
   integrity sha512-4kVLXXvgHYlv30ChM47U4xYnUtphIoEj+BQwXX0QT7pvD3KQxYnmfZSwlevSEVUy2UhbsBUPw6merENb+dIQ0A==
@@ -5092,7 +5092,7 @@ ember-cli-preprocess-registry@^3.3.0:
     debug "^3.0.1"
     process-relative-require "^1.0.0"
 
-ember-cli-sass@^10.0.1:
+ember-cli-sass@10.0.1:
   version "10.0.1"
   resolved "https://registry.yarnpkg.com/ember-cli-sass/-/ember-cli-sass-10.0.1.tgz#afa91eb7dfe3890be0390639d66976512e7d8edc"
   integrity sha512-dWVoX03O2Mot1dEB1AN3ofC8DDZb6iU4Kfkbr3WYi9S9bGVHrpR/ngsR7tuVBuTugTyG53FPtLLqYdqx7XjXdA==
