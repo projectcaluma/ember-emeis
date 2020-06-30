@@ -8,7 +8,7 @@ export default class RolesEditRoute extends Route {
   @service intl;
 
   @handleModelErrors({ routeFor404: "roles.index" })
-  async model({ role_id: id }) {
-    return await this.store.findRecord("role", id);
+  model({ role_id: id }) {
+    return this.store.findRecord("role", id);
   }
 }
