@@ -13,7 +13,7 @@ module("Unit | Controller | users/edit/acl", function (hooks) {
     assert.ok(controller);
 
     controller.model = { id: 1 };
-    assert.deepEqual(controller.queryParamsfilter, { "user": 1 });
+    assert.deepEqual(controller.queryParamsfilter, { user: 1 });
   });
 
   test("createEntry", async function (assert) {
