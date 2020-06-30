@@ -19,7 +19,8 @@
       <UkButton
         @loading={{this.delete.isRunning}}
         @disabled={{this.delete.isRunning}}
-        class="uk-margin-right uk-button-danger"
+        @color="danger"
+        class="uk-margin-right"
         data-test-delete
         {{on "click" (perform this.delete)}}
       >
