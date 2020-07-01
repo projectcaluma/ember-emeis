@@ -20,7 +20,7 @@ module("Integration | Component | relationship-select", function (hooks) {
 
   test("single select", async function (assert) {
     this.set("modelName", "role");
-    const role = this.server.create("role");
+    const role = this.server.createList("role", 10)[0];
 
     await render(hbs`
       <RelationshipSelect
@@ -53,9 +53,33 @@ module("Integration | Component | relationship-select", function (hooks) {
     assert.equal(this.selected.name, role.name.en);
   });
 
+  test("search not enabled with less than 5 entries", async function (assert) {
+    this.set("modelName", "role");
+    this.server.create("role");
+
+    await render(hbs`
+      <RelationshipSelect
+        @modelName={{this.modelName}}
+        @onChange={{set this.selected}}
+        @selected={{this.selected}}
+        as |model|
+      >
+        <span data-test-name>{{model.name}}</span>
+      </RelationshipSelect>
+    `);
+
+    await clickTrigger();
+
+    // For some reason the await click is not actually waiting for the fetch task to finish.
+    // Probably some runloop issue.
+    await waitUntil(() => this.element.querySelector("[data-test-name]"));
+
+    assert.dom(".ember-power-select-search").doesNotExist();
+  });
+
   test("multiple select", async function (assert) {
     this.set("modelName", "role");
-    const role = this.server.create("role");
+    const role = this.server.createList("role", 10)[0];
 
     await render(hbs`
       <RelationshipSelect

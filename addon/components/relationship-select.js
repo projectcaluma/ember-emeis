@@ -13,7 +13,7 @@ export default class RelationshipSelectComponent extends Component {
   @lastValue("fetchModels") models;
 
   get searchEnabled() {
-    return this.models.length > 5;
+    return this.models && this.models.length > 5;
   }
 
   @restartableTask
