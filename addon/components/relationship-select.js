@@ -12,12 +12,20 @@ export default class RelationshipSelectComponent extends Component {
 
   @lastValue("fetchModels") models;
 
+  get searchEnabled() {
+    return this.models.length > 5;
+  }
+
   @restartableTask
   @handleModelErrors
   *fetchModels(search) {
-    yield timeout(200);
-    return yield typeof search === "string"
-      ? this.store.query(this.args.modelName, { filter: { search } })
-      : this.store.findAll(this.args.modelName);
+    if (typeof search === "string") {
+      yield timeout(500);
+      return yield this.store.query(this.args.modelName, {
+        filter: { search },
+      });
+    }
+
+    return this.store.findAll(this.args.modelName);
   }
 }
