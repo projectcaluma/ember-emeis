@@ -13,10 +13,23 @@ export default class EditFormComponent extends Component {
     return this.router.currentRoute.parent.name;
   }
 
+  get relativeParentRouteName() {
+    // Remove the top level route
+    return this.router.currentRoute.parent.name.split(".").slice(1).join(".");
+  }
+
   get listViewRouteName() {
+    return this.args.listViewRouteName || `${this.parentRouteName}.index`;
+  }
+
+  get editViewRouteName() {
+    return `${this.parentRouteName}.edit`;
+  }
+
+  get relativeListViewRouteName() {
     return (
-      this.args.listViewRouteName ||
-      `${this.parentRouteName}.index`.replace("ember-emeis.", "")
+      this.args.listViewRouteName.split(".").slice(1).join(".") ||
+      `${this.relativeParentRouteName}.index`
     );
   }
 
@@ -33,7 +46,7 @@ export default class EditFormComponent extends Component {
       this.notification.success(this.intl.t("emeis.form.save-success"));
 
       if (isNew) {
-        this.router.replaceWith(`${this.parentRouteName}.edit`, model);
+        this.router.replaceWith(this.editViewRouteName, model);
       }
     } catch (exception) {
       this.notification.danger(this.intl.t("emeis.form.save-error"));
@@ -45,7 +58,6 @@ export default class EditFormComponent extends Component {
   *delete() {
     yield this.args.model.destroyRecord();
     this.notification.success(this.intl.t("emeis.form.delete-success"));
-    // I dont really understand why this replaceWith needs the "ember-emeis." prefix and the onw in save does not :/.
-    this.router.replaceWith(`ember-emeis.${this.listViewRouteName}`);
+    this.router.replaceWith(this.listViewRouteName);
   }
 }
