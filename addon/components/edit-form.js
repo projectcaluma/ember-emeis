@@ -27,10 +27,11 @@ export default class EditFormComponent extends Component {
   }
 
   get relativeListViewRouteName() {
-    return (
-      this.args.listViewRouteName.split(".").slice(1).join(".") ||
-      `${this.relativeParentRouteName}.index`
-    );
+    if (this.args.listViewRouteName) {
+      return this.args.listViewRouteName.split(".").slice(1).join(".");
+    }
+
+    return `${this.relativeParentRouteName}.index`;
   }
 
   @task
