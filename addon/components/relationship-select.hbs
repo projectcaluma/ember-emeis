@@ -4,13 +4,13 @@
   ...attributes
   {{did-insert (perform this.fetchModels)}}
 />
-{{#with
+{{#let
   (component
     (if @multiple "power-select-multiple" "power-select")
   ) as |RelationPowerSelect|
 }}
   <RelationPowerSelect
-    @searchEnabled={{true}}
+    @searchEnabled={{this.searchEnabled}}
     @search={{perform this.fetchModels}}
     @options={{this.models}}
     @selected={{@selected}}
@@ -22,4 +22,4 @@
   >
     {{yield model}}
   </RelationPowerSelect>
-{{/with}}
+{{/let}}
