@@ -6,7 +6,6 @@ update_configs:
     version_requirement_updates: "increase_versions"
     default_reviewers:
       - "velrest"
-      - "anehx"
     automerged_updates:
       - match:
           dependency_type: "development"
