@@ -31,7 +31,7 @@
     "ember-concurrency": "^1.1.7",
     "ember-concurrency-decorators": "^1.0.0",
     "ember-data": "^3.20.0",
-    "ember-intl": "^5.4.0",
+    "ember-intl": "^5.4.1",
     "ember-modifier": "^1.0.4",
     "ember-simple-set-helper": "^0.1.2",
     "ember-test-selectors": "^4.1.0",
