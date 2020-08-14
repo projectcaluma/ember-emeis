@@ -19,7 +19,9 @@ export default class EditFormComponent extends Component {
   }
 
   get listViewRouteName() {
-    return this.args.listViewRouteName || `${this.parentRouteName}.index`;
+    return this.args.listViewRouteName
+      ? `${this.parentRouteName}.${this.args.listViewRouteName}`
+      : `${this.parentRouteName}.index`;
   }
 
   get editViewRouteName() {
@@ -27,11 +29,9 @@ export default class EditFormComponent extends Component {
   }
 
   get relativeListViewRouteName() {
-    if (this.args.listViewRouteName) {
-      return this.args.listViewRouteName.split(".").slice(1).join(".");
-    }
-
-    return `${this.relativeParentRouteName}.index`;
+    return (
+      this.args.listViewRouteName || `${this.relativeParentRouteName}.index`
+    );
   }
 
   @task
