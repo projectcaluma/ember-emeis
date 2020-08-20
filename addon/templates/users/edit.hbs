@@ -1,10 +1,14 @@
-<UkTab class="uk-child-width-1-2" as |tab|>
-  <tab.link-item @route="ember-emeis.users.edit.index" data-test-edit-link>
-    {{t "emeis.users.edit.edit-user"}}
-  </tab.link-item>
+<ul uk-tab class="uk-child-width-1-2">
+  <li>
+    <LinkTo @route="users.edit.index" data-test-edit-link>
+      {{t "emeis.users.edit.edit-user"}}
+    </LinkTo>
+  </li>
 
-  <tab.link-item @route="ember-emeis.users.edit.acl" data-test-acl-link>
-    {{t "emeis.users.edit.acl"}}
-  </tab.link-item>
-</UkTab>
+  <li>
+    <LinkTo @route="users.edit.acl" data-test-acl-link>
+      {{t "emeis.users.edit.acl"}}
+    </LinkTo>
+  </li>
+</ul>
 {{outlet}}
