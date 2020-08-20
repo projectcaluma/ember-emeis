@@ -26,6 +26,9 @@ export default class RelationshipSelectComponent extends Component {
       });
     }
 
-    return this.store.findAll(this.args.modelName);
+    // For some reason the this.model.lenght is 1 and this.model.content.length is 2
+    // It looks like an issue with the way findAll retrieves all cached first before making a request.
+    // The {reload: true} fixes this since the cached are ignored.
+    return yield this.store.findAll(this.args.modelName, { reload: true });
   }
 }
