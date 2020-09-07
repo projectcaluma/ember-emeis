@@ -34,7 +34,7 @@
     "ember-intl": "^5.4.2",
     "ember-modifier": "^2.1.0",
     "ember-simple-set-helper": "^0.1.2",
-    "ember-test-selectors": "^4.1.0",
+    "ember-test-selectors": "^5.0.0",
     "ember-truth-helpers": "^2.1.0",
     "ember-uikit": "^2.1.2"
   },
