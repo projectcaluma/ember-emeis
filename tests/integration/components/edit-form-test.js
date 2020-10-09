@@ -30,10 +30,10 @@ module("Integration | Component | edit-form", function (hooks) {
     delete this.router;
   });
 
-  test("noDelete", async function (assert) {
+  test("disableDelete", async function (assert) {
     assert.expect(3);
 
-    await render(hbs`<EditForm @noDelete="true"/>`);
+    await render(hbs`<EditForm @disableDelete="true"/>`);
 
     assert.dom("[data-test-back]").exists();
     assert.dom("[data-test-delete]").doesNotExist();

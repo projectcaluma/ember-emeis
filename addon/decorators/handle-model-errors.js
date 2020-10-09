@@ -1,7 +1,13 @@
 import { assert } from "@ember/debug";
 
 export default function (...args) {
-  const [{ routeFor404, errorMessage = "emeis.not-found" } = {}] = args;
+  const [
+    {
+      routeFor404,
+      errorMessage = "emeis.general-error",
+      notFoundErrorMessage = "emeis.not-found",
+    } = {},
+  ] = args;
 
   const decorate = function (target, name, descriptor) {
     const originalDescriptor = descriptor.value;
@@ -13,15 +19,16 @@ export default function (...args) {
       );
 
       const catchErrors = (exception) => {
+        // Transition to route if 404 recieved and routeFor404 is set
         if (
           routeFor404 &&
           exception.isAdapterError &&
           exception.errors[0].status === "404"
         ) {
-          this.notification.danger(this.intl.t(errorMessage));
+          this.notification.danger(this.intl.t(notFoundErrorMessage));
           this.replaceWith(routeFor404);
         } else {
-          this.notification.danger(this.intl.t("emeis.general-error"));
+          this.notification.danger(this.intl.t(errorMessage));
         }
       };
 
