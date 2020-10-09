@@ -15,7 +15,7 @@
       {{t "emeis.form.back"}}
     </LinkTo>
 
-    {{#if (and (not @noDelete) (not @model.isNew))}}
+    {{#if (and (not @disableDelete) (not @model.isNew))}}
       <UkButton
         @loading={{this.delete.isRunning}}
         @disabled={{this.delete.isRunning}}

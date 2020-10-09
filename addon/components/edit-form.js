@@ -35,22 +35,19 @@ export default class EditFormComponent extends Component {
   }
 
   @task
+  @handleModelErrors({ errorMessage: "emeis.form.save-error" })
   *save(event) {
-    try {
-      event.preventDefault();
+    event.preventDefault();
 
-      const model = this.args.updateModel(this.args.model, this.form.elements);
-      const isNew = model.isNew;
+    const model = this.args.updateModel(this.args.model, this.form.elements);
+    const isNew = model.isNew;
 
-      yield model.save();
+    yield model.save();
 
-      this.notification.success(this.intl.t("emeis.form.save-success"));
+    this.notification.success(this.intl.t("emeis.form.save-success"));
 
-      if (isNew) {
-        this.router.replaceWith(this.editViewRouteName, model);
-      }
-    } catch (exception) {
-      this.notification.danger(this.intl.t("emeis.form.save-error"));
+    if (isNew) {
+      this.router.replaceWith(this.editViewRouteName, model);
     }
   }
 
