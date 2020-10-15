@@ -36,7 +36,7 @@
     </table.head>
     <table.body as |body|>
       <body.row>
-        {{#with body.model as |aclEntry|}}
+        {{#let body.model as |aclEntry|}}
           <td data-test-acl-role={{aclEntry.id}}>
             {{aclEntry.role.name}}
           </td>
@@ -56,7 +56,7 @@
               ></button>
             </span>
           </td>
-        {{/with}}
+        {{/let}}
       </body.row>
     </table.body>
   </DataTable>

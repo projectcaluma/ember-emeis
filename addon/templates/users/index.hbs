@@ -18,7 +18,7 @@
   </table.head>
   <table.body as |body|>
     <body.row>
-      {{#with body.model as |user|}}
+      {{#let body.model as |user|}}
         <td data-test-user-username={{user.id}}>
           <LinkTo @route="users.edit" @model={{user}} class="uk-link-text">
             {{user.username}}
@@ -32,7 +32,7 @@
         <td data-test-user-email={{user.id}}>
           {{user.email}}
         </td>
-      {{/with}}
+      {{/let}}
     </body.row>
   </table.body>
 </DataTable>

@@ -18,7 +18,7 @@
   </table.head>
   <table.body as |body|>
     <body.row>
-      {{#with body.model as |permission|}}
+      {{#let body.model as |permission|}}
         <td class="uk-width-1-4" data-test-permission-name={{permission.id}}>
           <LinkTo
             @route="permissions.edit"
@@ -36,7 +36,7 @@
         <td class="uk-width-expand" data-test-permission-desc={{permission.id}}>
           {{permission.description}}
         </td>
-      {{/with}}
+      {{/let}}
     </body.row>
   </table.body>
 </DataTable>
