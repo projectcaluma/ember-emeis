@@ -33,7 +33,7 @@
     "ember-data": "^3.22.0",
     "ember-intl": "^5.5.0",
     "ember-modifier": "^2.1.1",
-    "ember-power-select": "^4.0.2",
+    "ember-power-select": "^4.0.5",
     "ember-simple-set-helper": "^0.1.2",
     "ember-test-selectors": "^5.0.0",
     "ember-truth-helpers": "^2.1.0",
