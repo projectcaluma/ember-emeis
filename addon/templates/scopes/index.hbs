@@ -15,7 +15,7 @@
   </table.head>
   <table.body as |body|>
     <body.row>
-      {{#with body.model as |scope|}}
+      {{#let body.model as |scope|}}
         <td class="uk-width-1-4" data-test-scope-name={{scope.id}}>
           <LinkTo @route="scopes.edit" @model={{scope}} class="uk-link-text">
             {{scope.name}}
@@ -25,7 +25,7 @@
         <td class="uk-width-expand" data-test-scope-desc={{scope.id}}>
           {{scope.description}}
         </td>
-      {{/with}}
+      {{/let}}
     </body.row>
   </table.body>
 </DataTable>

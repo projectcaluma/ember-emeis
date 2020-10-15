@@ -15,13 +15,13 @@
           data-test-row
           {{on "click" (fn this.selectModel body.model)}}
         >
-          {{#with body.model as |model|}}
+          {{#let body.model as |model|}}
             {{#each (get this.fields this.modelToSelect) as |field|}}
               <td>
                 {{get model field}}
               </td>
             {{/each}}
-          {{/with}}
+          {{/let}}
         </body.row>
       </table.body>
     </DataTable>

@@ -33,10 +33,10 @@ module("Integration | Component | data-table", function (hooks) {
         </table.head>
         <table.body as |body|>
           <body.row>
-            {{#with body.model as |role|}}
+            {{#let body.model as |role|}}
               <td>{{role.name}}</td>
               <td>{{role.slug}}</td>
-            {{/with}}
+            {{/let}}
           </body.row>
         </table.body>
       </DataTable>
