@@ -36,7 +36,7 @@
     "ember-power-select": "^4.0.6",
     "ember-simple-set-helper": "^0.1.2",
     "ember-test-selectors": "^5.0.0",
-    "ember-truth-helpers": "^2.1.0",
+    "ember-truth-helpers": "^3.0.0",
     "ember-uikit": "^2.2.0"
   },
   "devDependencies": {
