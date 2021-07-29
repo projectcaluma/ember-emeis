@@ -24,6 +24,23 @@ Then add the following lines to your `app/styles/app.scss`:
 @import "ember-emeis";
 ```
 
+Register the engine in `app/app.js`:
+
+```js
+export default class App extends Application {
+  // ...
+
+  this.engines = {
+    emberEmeis: {
+      dependencies: {
+        services: ["store", "intl", "notification", "router"],
+      },
+    },
+  };
+}
+});
+```
+
 ## Configuration
 If you need to customize your store service passed to emeis, use:
 `ember g emeis-store <your_name>`
