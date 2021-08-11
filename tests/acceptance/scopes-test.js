@@ -29,7 +29,10 @@ module("Acceptance | scopes", function (hooks) {
     assert.equal(currentURL(), "/scopes");
 
     assert.dom("[data-test-scope-name]").exists({ count: 10 });
-    assert.dom(`[data-test-scope-name="${scope.id}"]`).hasText(scope.name.en);
+    assert
+      .dom(`[data-test-scope-name="${scope.id}"]`)
+      // &nbsp; is represented as \xa0 in JS
+      .hasText("\xa0".repeat(2 * scope.level) + " " + scope.name.en);
     assert
       .dom(`[data-test-scope-desc="${scope.id}"]`)
       .hasText(scope.description.en);
