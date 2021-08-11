@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/projectcaluma/ember-emeis/compare/v1.0.0...v1.1.0) (2021-08-11)
+
+
+### Bug Fixes
+
+* add ember-engines to blueprint, docs ([#258](https://github.com/projectcaluma/ember-emeis/issues/258)) ([35c40a7](https://github.com/projectcaluma/ember-emeis/commit/35c40a742e3d00ea0b5860f826a613777b09402f))
+
+
+### Features
+
+* indent scopes list according to level ([#260](https://github.com/projectcaluma/ember-emeis/issues/260)) ([13c822f](https://github.com/projectcaluma/ember-emeis/commit/13c822fcd172c9a871eefd10e4a1a638ae0e72fb))
+
 # 1.0.0 (2021-08-11)
 
 
