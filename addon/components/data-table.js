@@ -1,4 +1,3 @@
-import { getOwner } from "@ember/application";
 import { assert } from "@ember/debug";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
@@ -9,6 +8,7 @@ import { task, lastValue } from "ember-concurrency-decorators";
 export default class DataTableComponent extends Component {
   @service store;
   @service router;
+  @service emeisOptions;
 
   @tracked numPages;
   @tracked internalSearch;
@@ -62,12 +62,10 @@ export default class DataTableComponent extends Component {
       typeof this.args.modelName === "string"
     );
 
-    const ENV = getOwner(this).resolveRegistration("config:environment");
-
     const options = {
       page: {
         number: this.page,
-        size: ENV["ember-emeis"].pageSize,
+        size: this.emeisOptions.pageSize,
       },
       filter: { search: this.search, ...(this.args.filter || {}) },
       include: this.args.include || "",

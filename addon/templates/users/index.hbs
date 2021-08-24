@@ -6,9 +6,11 @@
   @updateSearch={{fn this.updateQueryParam "search"}} as |table|
 >
   <table.head>
-    <th>
-      {{t "emeis.users.headings.username"}}
-    </th>
+    {{#unless this.emailAsUsername}}
+      <th>
+        {{t "emeis.users.headings.username"}}
+      </th>
+    {{/unless}}
     <th>
       {{t "emeis.users.headings.fullName"}}
     </th>
@@ -19,15 +21,23 @@
   <table.body as |body|>
     <body.row>
       {{#let body.model as |user|}}
-        <td data-test-user-username={{user.id}}>
-          <LinkTo @route="users.edit" @model={{user}} class="uk-link-text">
-            {{user.username}}
-          </LinkTo>
-        </td>
+        {{#if this.emailAsUsername}}
+          <td data-test-user-full-name={{user.id}}>
+            <LinkTo @route="users.edit" @model={{user}} class="uk-link-text">
+              {{user.fullName}}
+            </LinkTo>
+          </td>
+        {{else}}
+          <td data-test-user-username={{user.id}}>
+            <LinkTo @route="users.edit" @model={{user}} class="uk-link-text">
+              {{user.username}}
+            </LinkTo>
+          </td>
 
-        <td data-test-user-full-name={{user.id}}>
-          {{user.fullName}}
-        </td>
+          <td data-test-user-full-name={{user.id}}>
+            {{user.fullName}}
+          </td>
+        {{/if}}
 
         <td data-test-user-email={{user.id}}>
           {{user.email}}
