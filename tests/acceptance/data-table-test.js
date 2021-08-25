@@ -86,6 +86,7 @@ module("Acceptance | data-table", function (hooks) {
     });
     await click("[data-test-next-page] button");
     // For some reason the click does not await the data loading
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
 
     assert.equal(currentURL(), "/permissions?page=2");

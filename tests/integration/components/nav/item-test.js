@@ -7,8 +7,9 @@ module("Integration | Component | nav/item", function (hooks) {
   setupRenderingTest(hooks);
 
   test("it renders", async function (assert) {
-    this.set("route", "test");
+    this.set("route", "ember-emeis.users");
 
+    // eslint-disable-next-line ember/no-private-routing-service
     this.set("router", this.owner.lookup("router:main"));
     this.set("router.currentRoute", { name: "someotherroute" });
 
@@ -21,7 +22,7 @@ module("Integration | Component | nav/item", function (hooks) {
     assert.dom("li").doesNotHaveClass("uk-active");
     assert.dom("li a").hasText("Test");
 
-    this.set("router.currentRoute", { name: "some.test" });
+    this.set("router.currentRoute", { name: "ember-emeis.users" });
 
     assert.dom("li").hasClass("uk-active");
   });

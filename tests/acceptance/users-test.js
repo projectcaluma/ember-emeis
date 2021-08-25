@@ -96,7 +96,7 @@ module("Acceptance | users", function (hooks) {
       assert.equal(attributes.address, address);
       assert.equal(attributes.city.en, city);
       assert.equal(attributes.zip, zip);
-      assert.equal(attributes["is-active"], false);
+      assert.false(attributes["is-active"]);
     });
     await click("[data-test-save]");
 
@@ -151,7 +151,7 @@ module("Acceptance | users", function (hooks) {
       assert.equal(attributes.address, address);
       assert.equal(attributes.city.en, city);
       assert.equal(attributes.zip, zip);
-      assert.equal(attributes["is-active"], true);
+      assert.true(attributes["is-active"]);
     });
     await click("[data-test-save]");
 

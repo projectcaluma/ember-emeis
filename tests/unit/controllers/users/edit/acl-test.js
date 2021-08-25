@@ -29,7 +29,7 @@ module("Unit | Controller | users/edit/acl", function (hooks) {
     await controller.createEntry.perform({ role: 1, scope: 2 });
   });
 
-  test("createEntry", async function (assert) {
+  test("deleteEntry", async function (assert) {
     assert.expect(3);
     const controller = this.owner.lookup("controller:users/edit/acl");
     assert.ok(controller);

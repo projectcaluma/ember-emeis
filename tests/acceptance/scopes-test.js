@@ -20,7 +20,7 @@ module("Acceptance | scopes", function (hooks) {
   setupIntl(hooks, ["en"]);
 
   test("list view /scopes", async function (assert) {
-    assert.expect(5);
+    assert.expect(4);
 
     const scope = this.server.createList("scope", 10)[0];
 
@@ -94,9 +94,8 @@ module("Acceptance | scopes", function (hooks) {
     await fillIn('[name="description"]', "test");
 
     this.assertRequest("POST", `/api/v1/scopes`, (request) => {
-      const { name, description } = JSON.parse(
-        request.requestBody
-      ).data.attributes;
+      const { name, description } = JSON.parse(request.requestBody).data
+        .attributes;
 
       assert.equal(name.en, "test");
       assert.equal(description.en, "test");
