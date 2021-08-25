@@ -4,10 +4,10 @@ import { inject as service } from "@ember/service";
 
 export default class UsersEditIndexController extends Controller {
   @service intl;
+  @service emeisOptions;
 
   @action
   updateModel(model, formElements) {
-    model.username = formElements.username.value;
     model.firstName = formElements.firstName.value;
     model.lastName = formElements.lastName.value;
     model.email = formElements.email.value;
@@ -18,6 +18,14 @@ export default class UsersEditIndexController extends Controller {
     model.zip = formElements.zip.value;
     model.isActive = formElements.isActive.checked;
 
+    model.username = this.emailAsUsername
+      ? formElements.email.value
+      : formElements.username.value;
+
     return model;
+  }
+
+  get emailAsUsername() {
+    return this.emeisOptions.emailAsUsername;
   }
 }

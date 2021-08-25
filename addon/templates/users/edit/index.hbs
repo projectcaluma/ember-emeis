@@ -4,16 +4,18 @@
   @noDelete={{true}}
   @listViewRouteName="users.index"
 >
-  <EditForm::Element @label={{t "emeis.users.headings.username"}}>
-    <input
-      class="uk-input"
-      type="text"
-      name="username"
-      placeholder="{{t "emeis.users.headings.username"}}..."
-      required
-      value={{@model.username}}
-    />
-  </EditForm::Element>
+  {{#unless this.emailAsUsername}}
+    <EditForm::Element @label={{t "emeis.users.headings.username"}}>
+      <input
+        class="uk-input"
+        type="text"
+        name="username"
+        placeholder="{{t "emeis.users.headings.username"}}..."
+        required
+        value={{@model.username}}
+      />
+    </EditForm::Element>
+  {{/unless}}
 
   <EditForm::Element @label={{t "emeis.users.headings.firstName"}}>
     <input

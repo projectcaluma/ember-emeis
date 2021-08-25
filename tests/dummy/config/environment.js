@@ -21,9 +21,6 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
-    "ember-emeis": {
-      pageSize: 10,
-    },
   };
 
   if (environment === "development") {
