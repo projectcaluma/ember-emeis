@@ -3,7 +3,9 @@ import {
   currentURL,
   click,
   fillIn,
+  findAll,
   waitUntil,
+  settled,
 } from "@ember/test-helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupApplicationTest } from "ember-qunit";
@@ -22,6 +24,7 @@ module("Acceptance | roles", function (hooks) {
     const role = this.server.createList("role", 10)[0];
 
     await visit("/roles");
+    await settled();
 
     assert.equal(currentURL(), "/roles");
 
@@ -116,6 +119,7 @@ module("Acceptance | roles", function (hooks) {
     });
 
     await visit(`/roles`);
+    await settled();
     assert.dom("[data-test-role-name]").exists({ count: 1 });
 
     await click("[data-test-role-name] a");
@@ -148,7 +152,11 @@ module("Acceptance | roles", function (hooks) {
     await visit(`/roles/${role.id}`);
     assert.equal(currentURL(), `/roles/${role.id}`);
 
+    await settled();
     assert.dom("[data-test-permissions]").exists();
+    await waitUntil(
+      () => findAll("[data-test-permissions] [data-test-row]").length > 1
+    );
     assert.dom("[data-test-permissions] [data-test-row]").exists({ count: 10 });
   });
 });
