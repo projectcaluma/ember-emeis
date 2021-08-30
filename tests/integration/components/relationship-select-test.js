@@ -19,6 +19,7 @@ module("Integration | Component | relationship-select", function (hooks) {
   setupIntl(hooks, ["en"]);
 
   test("single select", async function (assert) {
+    assert.expect(4);
     this.set("modelName", "role");
     const role = this.server.createList("role", 10)[0];
 
@@ -78,6 +79,7 @@ module("Integration | Component | relationship-select", function (hooks) {
   });
 
   test("multiple select", async function (assert) {
+    assert.expect(4);
     this.set("modelName", "role");
     const role = this.server.createList("role", 10)[0];
 

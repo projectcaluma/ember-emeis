@@ -76,6 +76,7 @@ module("Acceptance | data-table", function (hooks) {
 
     assert.equal(currentURL(), "/permissions");
 
+    await settled();
     assert.dom("[data-test-page]").hasText("1 / 5");
 
     assert.dom("[data-test-next-page]").doesNotHaveClass("uk-disabled");
@@ -85,10 +86,10 @@ module("Acceptance | data-table", function (hooks) {
       assert.equal(request.queryParams["page[number]"], 2);
     });
     await click("[data-test-next-page] button");
-    // For some reason the click does not await the data loading
     await settled();
-
     assert.equal(currentURL(), "/permissions?page=2");
+
+    await settled();
     assert.dom("[data-test-page]").hasText("2 / 5");
 
     assert.dom("[data-test-next-page]").doesNotHaveClass("uk-disabled");
@@ -100,6 +101,7 @@ module("Acceptance | data-table", function (hooks) {
     });
 
     assert.equal(currentURL(), "/permissions?page=5");
+    await settled();
     assert.dom("[data-test-page]").hasText("5 / 5");
 
     assert.dom("[data-test-next-page]").hasClass("uk-disabled");

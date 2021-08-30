@@ -31,6 +31,6 @@ module("Unit | Controller | users/edit/index", function (hooks) {
     assert.equal(model.address, "address");
     assert.equal(model.city, "city");
     assert.equal(model.zip, "zip");
-    assert.equal(model.isActive, true);
+    assert.true(model.isActive);
   });
 });

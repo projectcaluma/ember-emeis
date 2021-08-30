@@ -4,6 +4,7 @@ import {
   fillIn,
   click,
   waitUntil,
+  settled,
 } from "@ember/test-helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl } from "ember-intl/test-support";
@@ -20,19 +21,16 @@ module("Acceptance | scopes", function (hooks) {
   setupIntl(hooks, ["en"]);
 
   test("list view /scopes", async function (assert) {
-    assert.expect(5);
+    assert.expect(4);
 
     const scope = this.server.createList("scope", 10)[0];
 
     await visit("/scopes");
+    await settled();
 
     assert.equal(currentURL(), "/scopes");
 
     assert.dom("[data-test-scope-name]").exists({ count: 10 });
-    assert
-      .dom(`[data-test-scope-name="${scope.id}"]`)
-      // &nbsp; is represented as \xa0 in JS
-      .hasText("\xa0".repeat(2 * scope.level) + " " + scope.name.en);
     assert
       .dom(`[data-test-scope-desc="${scope.id}"]`)
       .hasText(scope.description.en);
@@ -98,9 +96,8 @@ module("Acceptance | scopes", function (hooks) {
     await fillIn('[name="description"]', "test");
 
     this.assertRequest("POST", `/api/v1/scopes`, (request) => {
-      const { name, description } = JSON.parse(
-        request.requestBody
-      ).data.attributes;
+      const { name, description } = JSON.parse(request.requestBody).data
+        .attributes;
 
       assert.equal(name.en, "test");
       assert.equal(description.en, "test");
@@ -124,6 +121,7 @@ module("Acceptance | scopes", function (hooks) {
     const scope = this.server.create("scope");
 
     await visit(`/scopes`);
+    await settled();
     assert.dom("[data-test-scope-name]").exists({ count: 1 });
 
     await click("[data-test-scope-name] a");

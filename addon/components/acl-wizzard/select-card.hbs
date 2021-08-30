@@ -10,7 +10,7 @@
       </card.title>
     </card.header>
     <card.body data-test-body>
-      {{#if hasBlock}}
+      {{#if (has-block)}}
         {{yield}}
       {{else}}
         {{@selected.description}}
@@ -42,9 +42,7 @@
       data-test-change as |card|
     >
       <card.body>
-        <h3>
-          {{t (concat "emeis.acl-wizzard." @model ".select")}}
-        </h3>
+        <p class="uk-text-lead">{{t (concat "emeis.acl-wizzard." @model ".select")}}</p>
       </card.body>
     </UkCard>
   </button>

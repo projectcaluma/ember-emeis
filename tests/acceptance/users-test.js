@@ -4,6 +4,7 @@ import {
   click,
   fillIn,
   waitUntil,
+  settled,
 } from "@ember/test-helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl } from "ember-intl/test-support";
@@ -24,6 +25,7 @@ module("Acceptance | users", function (hooks) {
     const user = this.server.createList("user", 10)[0];
 
     await visit("/users");
+    await settled();
 
     assert.equal(currentURL(), "/users");
 
@@ -47,6 +49,7 @@ module("Acceptance | users", function (hooks) {
     this.intl.locale = ["en", "de"];
 
     await visit(`/users/${user.id}`);
+    await settled();
 
     assert.equal(currentURL(), `/users/${user.id}`);
 
@@ -96,7 +99,7 @@ module("Acceptance | users", function (hooks) {
       assert.equal(attributes.address, address);
       assert.equal(attributes.city.en, city);
       assert.equal(attributes.zip, zip);
-      assert.equal(attributes["is-active"], false);
+      assert.false(attributes["is-active"]);
     });
     await click("[data-test-save]");
 
@@ -151,7 +154,7 @@ module("Acceptance | users", function (hooks) {
       assert.equal(attributes.address, address);
       assert.equal(attributes.city.en, city);
       assert.equal(attributes.zip, zip);
-      assert.equal(attributes["is-active"], true);
+      assert.true(attributes["is-active"]);
     });
     await click("[data-test-save]");
 
@@ -185,6 +188,7 @@ module("Acceptance | users", function (hooks) {
     const acl = this.server.createList("acl", 3)[0];
 
     await visit(`/users`);
+    await settled();
     // Each acl also creates a user
     assert.dom("[data-test-user-username]").exists({ count: 4 });
 
@@ -216,6 +220,7 @@ module("Acceptance | users", function (hooks) {
     await click("[data-test-acl-delete] button");
     // For some reason the await click is not actually waiting for the delete task to finish.
     // Probably some runloop issue.
+    await settled();
     await waitUntil(() => this.element.querySelector("table thead"));
     assert.dom("[data-test-acl-role]").exists({ count: 2 });
   });
@@ -228,6 +233,7 @@ module("Acceptance | users", function (hooks) {
     const scope = this.server.createList("scope", 2)[0];
 
     await visit(`/users/${user.id}/acl`);
+    await settled();
     assert.equal(currentURL(), `/users/${user.id}/acl`);
 
     assert.dom("[data-test-acl-role]").doesNotExist();

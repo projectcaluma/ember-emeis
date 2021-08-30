@@ -1,6 +1,6 @@
 import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
-import { task } from "ember-concurrency-decorators";
+import { task } from "ember-concurrency";
 
 import handleModelErrors from "ember-emeis/decorators/handle-model-errors";
 

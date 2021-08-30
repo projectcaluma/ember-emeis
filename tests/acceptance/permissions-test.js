@@ -4,6 +4,7 @@ import {
   fillIn,
   click,
   waitUntil,
+  settled,
 } from "@ember/test-helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { selectChoose } from "ember-power-select/test-support";
@@ -25,6 +26,7 @@ module("Acceptance | permissions", function (hooks) {
     await visit("/permissions");
 
     assert.equal(currentURL(), "/permissions");
+    await settled();
 
     assert.dom("[data-test-permission-name]").exists({ count: 10 });
     assert
@@ -137,6 +139,7 @@ module("Acceptance | permissions", function (hooks) {
     });
 
     await visit(`/permissions`);
+    await settled();
     assert.dom("[data-test-permission-name]").exists({ count: 1 });
 
     await click("[data-test-permission-name] a");

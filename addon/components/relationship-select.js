@@ -1,7 +1,6 @@
 import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
-import { timeout } from "ember-concurrency";
-import { restartableTask, lastValue } from "ember-concurrency-decorators";
+import { restartableTask, lastValue, timeout } from "ember-concurrency";
 
 import handleModelErrors from "ember-emeis/decorators/handle-model-errors";
 
