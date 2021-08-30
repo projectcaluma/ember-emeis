@@ -1,5 +1,7 @@
-<li class="uk-child-width-1-1 {{if this.isActive 'uk-active'}}" ...attributes>
-  <LinkTo @route={{@route}}>
-    {{yield}}
-  </LinkTo>
-</li>
+{{#if this.isVisible}}
+  <li class="uk-child-width-1-1 {{if this.isActive 'uk-active'}}" ...attributes>
+    <LinkTo @route={{@route}}>
+      {{yield}}
+    </LinkTo>
+  </li>
+{{/if}}
