@@ -50,14 +50,14 @@
     />
   </EditForm::Element>
 
-  {{#if (includes "phone" this.additionalUserFields)}}
+  {{#if (includes "phone" this.visibleFields)}}
     <EditForm::Element @label={{t "emeis.users.headings.phone"}}>
       <input
         class="uk-input"
         type="tel"
         name="phone"
         placeholder="{{t "emeis.users.headings.phone"}}..."
-        required
+        required={{includes "phone" this.requiredFields}}
         pattern="^[0-9()\-\s]+$"
         value={{@model.phone}}
       />
@@ -68,9 +68,12 @@
     </EditForm::Element>
   {{/if}}
 
-  {{#if (includes "language" this.additionalUserFields)}}
+  {{#if (includes "language" this.visibleFields)}}
     <EditForm::Element @label={{t "emeis.users.headings.language"}}>
-      <select class="uk-select uk-text-uppercase" required name="language">
+      <select
+          class="uk-select uk-text-uppercase"
+          required={{includes "language" this.requiredFields}}
+          name="language">
         <option value="" class="uk-text-capitalize">
           {{t "emeis.users.headings.language"}}...
         </option>
@@ -83,40 +86,40 @@
     </EditForm::Element>
   {{/if}}
 
-  {{#if (includes "address" this.additionalUserFields)}}
+  {{#if (includes "address" this.visibleFields)}}
     <EditForm::Element @label={{t "emeis.users.headings.address"}}>
       <input
         class="uk-input"
         type="text"
         name="address"
         placeholder="{{t "emeis.users.headings.address"}}..."
-        required
+        required={{includes "phone" this.requiredFields}}
         value={{@model.address}}
       />
     </EditForm::Element>
   {{/if}}
 
-  {{#if (includes "city" this.additionalUserFields)}}
+  {{#if (includes "city" this.visibleFields)}}
     <EditForm::Element @label={{t "emeis.users.headings.city"}}>
       <input
         class="uk-input"
         type="text"
         name="city"
         placeholder="{{t "emeis.users.headings.city"}}..."
-        required
+        required={{includes "city" this.requiredFields}}
         value={{@model.city}}
       />
     </EditForm::Element>
   {{/if}}
 
-  {{#if (includes "zip" this.additionalUserFields)}}
+  {{#if (includes "zip" this.visibleFields)}}
     <EditForm::Element @label={{t "emeis.users.headings.zip"}}>
       <input
         class="uk-input"
         type="number"
         name="zip"
         placeholder="{{t "emeis.users.headings.zip"}}..."
-        required
+        required={{includes "zip" this.requiredFields}}
         value={{@model.zip}}
       />
     </EditForm::Element>

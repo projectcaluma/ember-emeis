@@ -1,3 +1,4 @@
+import Service from "@ember/service";
 import {
   visit,
   currentURL,
@@ -12,6 +13,13 @@ import { setupApplicationTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
+
+class EmeisOptionsStub extends Service {
+  additionalUserFields = {
+    phone: "optional",
+    language: "required",
+  };
+}
 
 module("Acceptance | users", function (hooks) {
   setupApplicationTest(hooks);
@@ -40,8 +48,27 @@ module("Acceptance | users", function (hooks) {
       .hasAttribute("href", `/users/${user.id}`);
   });
 
+  test("can hide fields via config", async function (assert) {
+    this.owner.register("service:emeis-options", EmeisOptionsStub);
+
+    const user = this.server.create("user", {
+      isActive: true,
+    });
+    this.intl.locale = ["en", "de"];
+
+    await visit(`/users/${user.id}`);
+    await settled();
+
+    assert.dom('[name="address"]').doesNotExist();
+    assert.dom('[name="city"]').doesNotExist();
+    assert.dom('[name="zip"]').doesNotExist();
+
+    assert.dom('[name="phone"]').isNotRequired();
+    assert.dom('[name="language"]').isRequired();
+  });
+
   test("detail view /users/:id", async function (assert) {
-    assert.expect(22);
+    assert.expect(27);
 
     const user = this.server.create("user", {
       isActive: true,
@@ -62,6 +89,12 @@ module("Acceptance | users", function (hooks) {
     assert.dom('[name="address"]').hasValue(user.address);
     assert.dom('[name="city"]').hasValue(user.city.en);
     assert.dom('[name="zip"]').hasValue(user.zip.toString());
+
+    assert.dom('[name="phone"]').isRequired();
+    assert.dom('[name="language"]').isRequired();
+    assert.dom('[name="address"]').isRequired();
+    assert.dom('[name="city"]').isRequired();
+    assert.dom('[name="zip"]').isRequired();
 
     assert.dom('[name="isActive"]').isChecked();
 

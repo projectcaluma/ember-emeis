@@ -2,6 +2,8 @@ import Controller from "@ember/controller";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 
+const ALL_ADDITIONAL_FIELDS = ["phone", "language", "address", "city", "zip"];
+
 export default class UsersEditIndexController extends Controller {
   @service intl;
   @service emeisOptions;
@@ -31,15 +33,20 @@ export default class UsersEditIndexController extends Controller {
     return this.emeisOptions.emailAsUsername;
   }
 
-  get additionalUserFields() {
-    return (
-      this.emeisOptions.additionalUserFields || [
-        "phone",
-        "language",
-        "address",
-        "city",
-        "zip",
-      ]
-    );
+  get visibleFields() {
+    if (!this.emeisOptions.additionalUserFields) {
+      return ALL_ADDITIONAL_FIELDS;
+    }
+
+    return Object.keys(this.emeisOptions.additionalUserFields);
+  }
+
+  get requiredFields() {
+    if (!this.emeisOptions.additionalUserFields) {
+      return ALL_ADDITIONAL_FIELDS;
+    }
+    return Object.entries(this.emeisOptions.additionalUserFields, {})
+      .filter(([, value]) => value === "required")
+      .map(([key]) => key);
   }
 }

@@ -77,7 +77,13 @@ export default class EmeisOptionsService extends Service {
   emailAsUsername = false;
 
   // show only a subset of the "additional" fields on the user model
-  additionalUserFields = ["phone", "language", "address", "city", "zip"];
+  additionalUserFields = {
+    "phone": "required",
+    "language": "required",
+    "address": "optional",
+    "city": "optional",
+    "zip": "optional"
+  ];
 
   // show only a subset of the main navigation entries
   navigationEntries = ["users", "scopes"];
