@@ -11,12 +11,14 @@ export default class UsersEditIndexController extends Controller {
     model.firstName = formElements.firstName.value;
     model.lastName = formElements.lastName.value;
     model.email = formElements.email.value;
-    model.phone = formElements.phone.value;
-    model.language = formElements.language.selectedOptions[0].value;
-    model.address = formElements.address.value;
-    model.city = formElements.city.value;
-    model.zip = formElements.zip.value;
     model.isActive = formElements.isActive.checked;
+
+    // additional fields might not be present
+    model.phone = formElements.phone?.value;
+    model.language = formElements.language?.selectedOptions[0].value;
+    model.address = formElements.address?.value;
+    model.city = formElements.city?.value;
+    model.zip = formElements.zip?.value;
 
     model.username = this.emailAsUsername
       ? formElements.email.value
@@ -27,5 +29,17 @@ export default class UsersEditIndexController extends Controller {
 
   get emailAsUsername() {
     return this.emeisOptions.emailAsUsername;
+  }
+
+  get additionalUserFields() {
+    return (
+      this.emeisOptions.additionalUserFields || [
+        "phone",
+        "language",
+        "address",
+        "city",
+        "zip",
+      ]
+    );
   }
 }
