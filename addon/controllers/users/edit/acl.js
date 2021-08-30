@@ -1,6 +1,6 @@
 import { inject as service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
-import { dropTask } from "ember-concurrency-decorators";
+import { dropTask } from "ember-concurrency";
 
 import PaginationController from "ember-emeis/-private/controllers/pagination";
 import handleModelErrors from "ember-emeis/decorators/handle-model-errors";
