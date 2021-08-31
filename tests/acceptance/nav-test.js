@@ -12,7 +12,7 @@ module("Acceptance | nav", function (hooks) {
 
     await visit("/");
 
-    assert.equal(currentURL(), "/");
+    assert.equal(currentURL(), "/users");
     assert.dom("[data-test-nav-users]").exists();
     assert.dom("[data-test-nav-scopes]").exists();
     assert.dom("[data-test-nav-permissions]").exists();
