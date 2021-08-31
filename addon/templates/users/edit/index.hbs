@@ -4,16 +4,18 @@
   @noDelete={{true}}
   @listViewRouteName="users.index"
 >
-  <EditForm::Element @label={{t "emeis.users.headings.username"}}>
-    <input
-      class="uk-input"
-      type="text"
-      name="username"
-      placeholder="{{t "emeis.users.headings.username"}}..."
-      required
-      value={{@model.username}}
-    />
-  </EditForm::Element>
+  {{#unless this.emailAsUsername}}
+    <EditForm::Element @label={{t "emeis.users.headings.username"}}>
+      <input
+        class="uk-input"
+        type="text"
+        name="username"
+        placeholder="{{t "emeis.users.headings.username"}}..."
+        required
+        value={{@model.username}}
+      />
+    </EditForm::Element>
+  {{/unless}}
 
   <EditForm::Element @label={{t "emeis.users.headings.firstName"}}>
     <input
@@ -48,67 +50,80 @@
     />
   </EditForm::Element>
 
-  <EditForm::Element @label={{t "emeis.users.headings.phone"}}>
-    <input
-      class="uk-input"
-      type="tel"
-      name="phone"
-      placeholder="{{t "emeis.users.headings.phone"}}..."
-      required
-      pattern="^[0-9()\-\s]+$"
-      value={{@model.phone}}
-    />
+  {{#if (includes "phone" this.visibleFields)}}
+    <EditForm::Element @label={{t "emeis.users.headings.phone"}}>
+      <input
+        class="uk-input"
+        type="tel"
+        name="phone"
+        placeholder="{{t "emeis.users.headings.phone"}}..."
+        required={{includes "phone" this.requiredFields}}
+        pattern="^[0-9()\-\s]+$"
+        value={{@model.phone}}
+      />
 
-    <span class="uk-text-meta">
-      {{t "emeis.form.phone-hint"}}
-    </span>
-  </EditForm::Element>
+      <span class="uk-text-meta">
+        {{t "emeis.form.phone-hint"}}
+      </span>
+    </EditForm::Element>
+  {{/if}}
 
-  <EditForm::Element @label={{t "emeis.users.headings.language"}}>
-    <select class="uk-select uk-text-uppercase" required name="language">
-      <option value="" class="uk-text-capitalize">
-        {{t "emeis.users.headings.language"}}...
-      </option>
-      {{#each this.intl.locales as |language|}}
-        <option value={{language}} selected={{eq language @model.language}}>
-          {{language}}
+  {{#if (includes "language" this.visibleFields)}}
+    <EditForm::Element @label={{t "emeis.users.headings.language"}}>
+      <select
+          class="uk-select uk-text-uppercase"
+          required={{includes "language" this.requiredFields}}
+          name="language">
+        <option value="" class="uk-text-capitalize">
+          {{t "emeis.users.headings.language"}}...
         </option>
-      {{/each}}
-    </select>
-  </EditForm::Element>
+        {{#each this.intl.locales as |language|}}
+          <option value={{language}} selected={{eq language @model.language}}>
+            {{language}}
+          </option>
+        {{/each}}
+      </select>
+    </EditForm::Element>
+  {{/if}}
 
-  <EditForm::Element @label={{t "emeis.users.headings.address"}}>
-    <input
-      class="uk-input"
-      type="text"
-      name="address"
-      placeholder="{{t "emeis.users.headings.address"}}..."
-      required
-      value={{@model.address}}
-    />
-  </EditForm::Element>
+  {{#if (includes "address" this.visibleFields)}}
+    <EditForm::Element @label={{t "emeis.users.headings.address"}}>
+      <input
+        class="uk-input"
+        type="text"
+        name="address"
+        placeholder="{{t "emeis.users.headings.address"}}..."
+        required={{includes "phone" this.requiredFields}}
+        value={{@model.address}}
+      />
+    </EditForm::Element>
+  {{/if}}
 
-  <EditForm::Element @label={{t "emeis.users.headings.city"}}>
-    <input
-      class="uk-input"
-      type="text"
-      name="city"
-      placeholder="{{t "emeis.users.headings.city"}}..."
-      required
-      value={{@model.city}}
-    />
-  </EditForm::Element>
+  {{#if (includes "city" this.visibleFields)}}
+    <EditForm::Element @label={{t "emeis.users.headings.city"}}>
+      <input
+        class="uk-input"
+        type="text"
+        name="city"
+        placeholder="{{t "emeis.users.headings.city"}}..."
+        required={{includes "city" this.requiredFields}}
+        value={{@model.city}}
+      />
+    </EditForm::Element>
+  {{/if}}
 
-  <EditForm::Element @label={{t "emeis.users.headings.zip"}}>
-    <input
-      class="uk-input"
-      type="number"
-      name="zip"
-      placeholder="{{t "emeis.users.headings.zip"}}..."
-      required
-      value={{@model.zip}}
-    />
-  </EditForm::Element>
+  {{#if (includes "zip" this.visibleFields)}}
+    <EditForm::Element @label={{t "emeis.users.headings.zip"}}>
+      <input
+        class="uk-input"
+        type="number"
+        name="zip"
+        placeholder="{{t "emeis.users.headings.zip"}}..."
+        required={{includes "zip" this.requiredFields}}
+        value={{@model.zip}}
+      />
+    </EditForm::Element>
+  {{/if}}
 
   <EditForm::Element @label={{t "emeis.users.headings.isActive"}}>
     <input

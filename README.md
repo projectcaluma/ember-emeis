@@ -44,6 +44,54 @@ export default class App extends Application {
 ```
 
 ## Configuration
+
+### Emeis options
+
+Basic configuration of ember-emeis can be done via the `emeis-options` service. To generate it, run `ember g service emeis-options` and add it to the dependencies in `app/app.js`:
+
+```js
+export default class App extends Application {
+  // ...
+
+  this.engines = {
+    emberEmeis: {
+      dependencies: {
+        services: ["store", "intl", "notification", "router", "emeis-options"],
+      },
+    },
+  };
+}
+});
+```
+
+The config service supports the following options:
+
+```js
+import Service from "@ember/service";
+
+export default class EmeisOptionsService extends Service {
+  // number of items in list views
+  pageSize = 10;
+
+  // hide "username" field
+  emailAsUsername = false;
+
+  // show only a subset of the "additional" fields on the user model
+  additionalUserFields = {
+    "phone": "required",
+    "language": "required",
+    "address": "optional",
+    "city": "optional",
+    "zip": "optional"
+  ];
+
+  // show only a subset of the main navigation entries
+  navigationEntries = ["users", "scopes"];
+}
+```
+
+### Emeis store
+
 If you need to customize your store service passed to emeis, use:
 `ember g emeis-store <your_name>`
 
