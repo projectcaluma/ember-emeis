@@ -30,4 +30,31 @@
       {{scope.name}}
     </RelationshipSelect>
   </EditForm::Element>
+
+  {{#each this.metaFields as |field|}}
+    {{#if field.visible}}
+      <EditForm::Element @label={{get field.label this.intl.primaryLocale}}>
+        {{#if (eq field.type "choice")}}
+          <PowerSelect
+            @disabled={{field.readOnly}}
+            @options={{field.options}}
+            @selected={{find-by "value" (get @model.meta field.slug) field.options}}
+            @onChange={{fn this.updateMetaField field @model}}
+            @placeholder={{concat (get field.label this.intl.primaryLocale) "..."}}
+            as |option|
+          >
+            {{get option.label this.intl.primaryLocale}}
+          </PowerSelect>
+        {{else}}
+          <input
+            class="uk-input"
+            type="text"
+            value={{get @model.meta field.slug}}
+            disabled={{field.readOnly}}
+            {{on "input" (fn this.updateMetaField field @model)}}
+          >
+        {{/if}}
+      </EditForm::Element>
+    {{/if}}
+  {{/each}}
 </EditForm>
