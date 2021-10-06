@@ -2,6 +2,7 @@
   @modelName="user"
   @page={{this.page}}
   @search={{this.search}}
+  @sort="last_name"
   @updatePage={{fn this.updateQueryParam "page"}}
   @updateSearch={{fn this.updateQueryParam "search"}} as |table|
 >
@@ -12,7 +13,10 @@
       </th>
     {{/unless}}
     <th>
-      {{t "emeis.users.headings.fullName"}}
+      {{t "emeis.users.headings.lastName"}}
+    </th>
+    <th>
+      {{t "emeis.users.headings.firstName"}}
     </th>
     <th>
       {{t "emeis.users.headings.email"}}
@@ -22,21 +26,20 @@
     <body.row>
       {{#let body.model as |user|}}
         {{#if this.emailAsUsername}}
-          <td data-test-user-full-name={{user.id}}>
+          <td>
             <LinkTo @route="users.edit" @model={{user}} class="uk-link-text">
-              {{user.fullName}}
+              {{user.lastName}}
             </LinkTo>
           </td>
+          <td>{{user.firstName}}</td>
         {{else}}
           <td data-test-user-username={{user.id}}>
             <LinkTo @route="users.edit" @model={{user}} class="uk-link-text">
               {{user.username}}
             </LinkTo>
           </td>
-
-          <td data-test-user-full-name={{user.id}}>
-            {{user.fullName}}
-          </td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.firstName}}</td>
         {{/if}}
 
         <td data-test-user-email={{user.id}}>

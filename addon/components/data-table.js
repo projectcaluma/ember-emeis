@@ -68,6 +68,7 @@ export default class DataTableComponent extends Component {
         size: this.emeisOptions.pageSize,
       },
       filter: { search: this.search, ...(this.args.filter || {}) },
+      sort: this.args.sort,
       include: this.args.include || "",
     };
 

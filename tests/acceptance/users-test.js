@@ -28,7 +28,7 @@ module("Acceptance | users", function (hooks) {
   setupIntl(hooks, "en");
 
   test("list view /users", async function (assert) {
-    assert.expect(6);
+    assert.expect(5);
 
     const user = this.server.createList("user", 10)[0];
 
@@ -39,9 +39,6 @@ module("Acceptance | users", function (hooks) {
 
     assert.dom("[data-test-user-username]").exists({ count: 10 });
     assert.dom(`[data-test-user-username="${user.id}"]`).hasText(user.username);
-    assert
-      .dom(`[data-test-user-full-name="${user.id}"]`)
-      .hasText(`${user.firstName} ${user.lastName}`);
     assert.dom(`[data-test-user-email="${user.id}"]`).hasText(user.email);
     assert
       .dom(`[data-test-user-username="${user.id}"] a`)
