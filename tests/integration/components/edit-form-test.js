@@ -53,6 +53,8 @@ module("Integration | Component | edit-form", function (hooks) {
 
   test("delete", async function (assert) {
     assert.expect(3);
+
+    this.router.currentRoute.name = "ember-emeis.parent-route.edit.index";
     this.router.replaceWith = (route) => {
       assert.equal(route, "ember-emeis.parent-route.index");
     };

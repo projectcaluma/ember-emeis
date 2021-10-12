@@ -12,6 +12,10 @@ emeis:
       description: "Description"
       parent: "Parent Scope"
     new: "Add Scope"
+    edit:
+      edit-scope: "Edit scope"
+      acl:
+        title: "ACL"
 
   users:
     title: "Users"
@@ -71,7 +75,8 @@ emeis:
   acl-table:
     title: "ACL"
     headings:
-      user: "User"
+      name: "Name"
+      user: "Username"
       scope: "Scope"
       role: "Role"
       add-entry: "Add entry"

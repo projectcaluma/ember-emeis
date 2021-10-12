@@ -8,7 +8,9 @@ export default buildRoutes(function () {
     this.route("new");
   });
   this.route("scopes", function () {
-    this.route("edit", { path: "/:scope_id" });
+    this.route("edit", { path: "/:scope_id" }, function () {
+      this.route("acl");
+    });
     this.route("new");
   });
   this.route("permissions", function () {
