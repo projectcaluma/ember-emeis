@@ -8,6 +8,10 @@ export default class UsersEditIndexController extends Controller {
   @service intl;
   @service emeisOptions;
 
+  get metaFields() {
+    return this.emeisOptions.metaFields?.user;
+  }
+
   @action
   updateModel(model, formElements) {
     model.firstName = formElements.firstName.value;

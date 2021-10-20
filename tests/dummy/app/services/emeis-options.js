@@ -9,6 +9,18 @@ export default class EmeisOptionsService extends Service {
   // };
   // navigationEntries = ["users", "scopes"];
   metaFields = {
+    user: [
+      {
+        slug: "user-meta-example",
+        label: {
+          en: "Example for custom text field",
+          de: "Beispiel für benutzerdefiniertes Textfeld",
+        },
+        type: "text",
+        visible: true,
+        readOnly: false,
+      },
+    ],
     scope: [
       {
         slug: "meta-example",
