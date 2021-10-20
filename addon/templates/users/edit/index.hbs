@@ -125,6 +125,16 @@
     </EditForm::Element>
   {{/if}}
 
+  <EditForm::Element @label={{t "emeis.users.headings.function"}}>
+    <input
+      class="uk-input"
+      type="text"
+      placeholder="{{t "emeis.users.headings.function"}}..."
+      value={{get @model.meta "function"}}
+      {{on "input" (fn this.updateMetaField @model)}}
+    />
+  </EditForm::Element>
+
   <EditForm::Element @label={{t "emeis.users.headings.isActive"}}>
     <input
       class="uk-checkbox"

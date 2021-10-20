@@ -27,6 +27,7 @@ emeis:
       city: "Stadt"
       zip: "ZIP"
       isActive: "Aktiv"
+      function: "Funktion"
 
     edit:
       edit-user: "Benutzer Bearbeiten"

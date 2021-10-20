@@ -29,6 +29,12 @@ export default class UsersEditIndexController extends Controller {
     return model;
   }
 
+  @action
+  updateMetaField(model, event) {
+    const value = event.target.value;
+    model.meta = { ...model.meta, function: value };
+  }
+
   get emailAsUsername() {
     return this.emeisOptions.emailAsUsername;
   }
