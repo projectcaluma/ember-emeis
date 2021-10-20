@@ -13,6 +13,10 @@ export default class EditFormComponent extends Component {
     return this.router.currentRoute.parent.name;
   }
 
+  get topLevelRouteName() {
+    return this.router.currentRoute.name.split(".").shift();
+  }
+
   get relativeParentRouteName() {
     // Remove the top level route
     return this.router.currentRoute.parent.name.split(".").slice(1).join(".");
@@ -56,6 +60,9 @@ export default class EditFormComponent extends Component {
   *delete() {
     yield this.args.model.destroyRecord();
     this.notification.success(this.intl.t("emeis.form.delete-success"));
-    this.router.replaceWith(this.listViewRouteName);
+
+    this.router.replaceWith(
+      `${this.topLevelRouteName}.${this.relativeListViewRouteName}`
+    );
   }
 }

@@ -2,7 +2,7 @@ import Controller from "@ember/controller";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 
-export default class ScopesEditController extends Controller {
+export default class ScopesEditIndexController extends Controller {
   @service emeisOptions;
   @service intl;
 

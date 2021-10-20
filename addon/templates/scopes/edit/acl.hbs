@@ -1,0 +1,36 @@
+<DataTable
+  @modelName="acl"
+  @filter={{this.queryParamsfilter}}
+  @include="user,role,scope"
+  @page={{this.page}}
+  @search={{this.search}}
+  @updatePage={{fn this.updateQueryParam "page"}}
+  @updateSearch={{fn this.updateQueryParam "search"}} as |table|
+>
+  <table.head>
+    <th>
+      {{t "emeis.acl-table.headings.name"}}
+    </th>
+    <th>
+      {{t "emeis.acl-table.headings.user"}}
+    </th>
+    <th>
+      {{t "emeis.acl-table.headings.role"}}
+    </th>
+  </table.head>
+  <table.body as |body|>
+    <body.row>
+      {{#let body.model as |aclEntry|}}
+        <td data-test-acl-name={{aclEntry.id}}>
+          {{concat aclEntry.user.firstName " " aclEntry.user.lastName}}
+        </td>
+        <td data-test-acl-username={{aclEntry.id}}>
+          {{aclEntry.user.username}}
+        </td>
+        <td data-test-acl-role={{aclEntry.id}}>
+          {{aclEntry.role.name}}
+        </td>
+      {{/let}}
+    </body.row>
+  </table.body>
+</DataTable>

@@ -12,6 +12,10 @@ emeis:
       description: "Beschreibung"
       parent: "Übergeordneter Berechtigungsbereich"
     new: "Neuen Berechtigungsbereich erstellen"
+    edit:
+      edit-scope: "Berechtigungsbereich bearbeiten"
+      acl:
+        title: "ACL"
 
   users:
     title: "Benutzer"
@@ -71,7 +75,8 @@ emeis:
   acl-table:
     title: "ACL"
     headings:
-      user: "Benutzer"
+      name: "Name"
+      user: "Benutzername"
       scope: "Berechtigungsbereich"
       role: "Rolle"
       add-entry: "Eintrag hinzufügen"
