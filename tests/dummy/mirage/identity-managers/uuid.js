@@ -7,9 +7,9 @@ export default class {
 
   // Returns a new unused unique identifier.
   fetch() {
-    let uuid = faker.random.uuid();
+    let uuid = faker.datatype.uuid();
     while (this.ids.has(uuid)) {
-      uuid = faker.random.uuid();
+      uuid = faker.datatype.uuid();
     }
 
     this.ids.add(uuid);
