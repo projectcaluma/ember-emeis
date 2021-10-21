@@ -7,7 +7,7 @@ export default class ScopesEditIndexController extends Controller {
   @service intl;
 
   get metaFields() {
-    return this.emeisOptions.metaFields.scope;
+    return this.emeisOptions.metaFields?.scope;
   }
 
   @action
@@ -16,12 +16,5 @@ export default class ScopesEditIndexController extends Controller {
     model.description = formElements.description.value;
 
     return model;
-  }
-
-  @action
-  updateMetaField(field, model, optionOrEvent) {
-    const value = optionOrEvent.target?.value ?? optionOrEvent.value;
-    model.meta = { ...model.meta, [field.slug]: value };
-    model.notifyPropertyChange("meta");
   }
 }
