@@ -3,49 +3,12 @@ updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
+    day: "monday"
+    time: "00:00"
+    timezone: "Europe/Zurich"
   open-pull-requests-limit: 10
   reviewers:
-  - velrest
+    - velrest
   versioning-strategy: increase
-  ignore:
-  - dependency-name: eslint-plugin-ember
-    versions:
-    - 10.1.2
-    - 10.2.0
-    - 10.3.0
-    - 10.4.1
-  - dependency-name: sass
-    versions:
-    - 1.32.11
-    - 1.32.5
-    - 1.32.6
-    - 1.32.7
-    - 1.32.8
-  - dependency-name: ember-engines
-    versions:
-    - 0.8.11
-    - 0.8.12
-    - 0.8.13
-  - dependency-name: eslint
-    versions:
-    - 7.18.0
-    - 7.19.0
-    - 7.20.0
-    - 7.21.0
-    - 7.22.0
-    - 7.23.0
-    - 7.24.0
-  - dependency-name: ember-auto-import
-    versions:
-    - 1.10.1
-    - 1.11.0
-    - 1.11.1
-    - 1.11.2
-  - dependency-name: ember-data
-    versions:
-    - 3.24.0
-    - 3.25.0
-  - dependency-name: "@glimmer/component"
-    versions:
-    - 1.0.3
+
