@@ -84,11 +84,13 @@ module("Integration | Component | data-table", function (hooks) {
     assert.dom("tfoot li:last-child").doesNotHaveClass("uk-disabled");
 
     this.set("page", 2);
+    await click("[data-test-next-page] button");
 
     assert.dom("tfoot li:first-child").doesNotHaveClass("uk-disabled");
     assert.dom("tfoot li:last-child").doesNotHaveClass("uk-disabled");
 
     this.set("page", 3);
+    await click("[data-test-next-page] button");
 
     assert.dom("tfoot li:first-child").doesNotHaveClass("uk-disabled");
     assert.dom("tfoot li:last-child").hasClass("uk-disabled");
@@ -121,7 +123,7 @@ module("Integration | Component | data-table", function (hooks) {
   });
 
   test("external search", async function (assert) {
-    assert.expect(8);
+    assert.expect(7);
     this.setProperties({
       search: undefined,
     });

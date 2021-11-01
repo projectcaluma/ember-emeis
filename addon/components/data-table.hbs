@@ -23,7 +23,6 @@
 <table
   class="uk-animation-fade uk-table uk-table-divider"
   {{did-insert (perform this.fetchData)}}
-  {{did-update (perform this.fetchData) this.page this.search}}
   ...attributes
 >
   {{#if this.isLoading}}
@@ -59,7 +58,7 @@
               <button
                 type="button"
                 class="no-style-button"
-                {{on "click" (set this.page this.previousPage)}}
+                {{on "click" (fn this.updatePage this.previousPage)}}
               >
                 <span
                   class="uk-margin-small-right"
@@ -80,7 +79,7 @@
               <button
                 type="button"
                 class="no-style-button"
-                {{on "click" (set this.page this.nextPage)}}
+                {{on "click" (fn this.updatePage this.nextPage)}}
               >
                 {{t "emeis.pagination.next"}}
                 <span class="uk-margin-small-left" uk-pagination-next></span>
