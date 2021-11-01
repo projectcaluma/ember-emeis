@@ -18,17 +18,11 @@ export default class DataTableComponent extends Component {
   get page() {
     return this.args.page || this.internalPage;
   }
-  set page(page) {
-    if (this.args.updatePage) {
-      this.args.updatePage(page);
-    } else {
-      this.internalPage = page;
-    }
-  }
 
   get search() {
     return this.args.search || this.internalSearch;
   }
+
   set search(search) {
     if (this.args.updateSearch) {
       this.args.updateSearch(search);
@@ -84,5 +78,16 @@ export default class DataTableComponent extends Component {
     // Prevent reaload because of form submit
     submitEvent.preventDefault();
     this.search = submitEvent.target.elements.search.value;
+    this.fetchData.perform();
+  }
+
+  @action
+  updatePage(page) {
+    if (this.args.updatePage) {
+      this.args.updatePage(page);
+    } else {
+      this.internalPage = page;
+    }
+    this.fetchData.perform();
   }
 }
