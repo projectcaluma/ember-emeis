@@ -143,4 +143,35 @@ module("Acceptance | scopes", function (hooks) {
     assert.equal(currentURL(), `/scopes?page=1`);
     assert.dom("[data-test-scope-name]").doesNotExist();
   });
+
+  test("list view /scopes/:id/acl", async function (assert) {
+    assert.expect(8);
+
+    const acl = this.server.createList("acl", 3)[0];
+    const scope = this.server.create("scope");
+
+    await visit(`/scopes/${scope.id}`);
+    await settled();
+
+    assert.dom("[data-test-scopes-edit-index-link]").exists();
+    assert.dom("[data-test-scopes-edit-acl-link]").exists();
+
+    this.assertRequest("GET", `/api/v1/acls`, (request) => {
+      assert.equal(scope.id, request.queryParams["filter[scope]"]);
+    });
+    await click("[data-test-scopes-edit-acl-link]");
+    assert.equal(currentURL(), `/scopes/${scope.id}/acl`);
+
+    // For some reason the await click is not actually waiting for the fetch task to finish.
+    // Probably some runloop issue.
+    await waitUntil(() => this.element.querySelector("table thead"));
+
+    assert.dom("[data-test-acl-role]").exists({ count: 3 });
+
+    assert
+      .dom("[data-test-acl-name]")
+      .hasText(`${acl.user.firstName} ${acl.user.lastName}`);
+    assert.dom("[data-test-acl-username]").hasText(acl.user.username);
+    assert.dom("[data-test-acl-role]").hasText(acl.role.name.en);
+  });
 });

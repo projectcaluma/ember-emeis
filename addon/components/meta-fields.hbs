@@ -16,11 +16,12 @@
       {{/if}}
       {{#if (eq field.type "text")}}
         <input
-            class="uk-input"
-            type="text"
-            value={{get @model.meta field.slug}}
-            disabled={{field.readOnly}}
-            {{on "input" (fn this.updateMetaField field @model)}}
+          data-test-meta-field-text
+          class="uk-input"
+          type="text"
+          value={{get @model.meta field.slug}}
+          disabled={{field.readOnly}}
+          {{on "input" (fn this.updateMetaField field @model)}}
         >
       {{/if}}
     </EditForm::Element>
