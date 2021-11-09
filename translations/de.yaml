@@ -15,7 +15,7 @@ emeis:
     edit:
       edit-scope: "Berechtigungsbereich bearbeiten"
       acl:
-        title: "ACL"
+        title: "Berechtigung"
 
   users:
     title: "Benutzer"
@@ -34,7 +34,7 @@ emeis:
 
     edit:
       edit-user: "Benutzer Bearbeiten"
-      acl: "ACL"
+      acl: "Berechtigung"
     new: "Benutzer hinzufügen"
 
   permissions:
@@ -73,7 +73,7 @@ emeis:
     slug-hint: "Es sind nur Buchstaben, Nummern und Bindestriche erlaubt."
 
   acl-table:
-    title: "ACL"
+    title: "Berechtigung"
     headings:
       name: "Name"
       user: "Benutzername"
@@ -82,8 +82,8 @@ emeis:
       add-entry: "Eintrag hinzufügen"
 
   acl-wizzard:
-    add-entry: "ACL Eintrag hinzufügen"
-    duplicate: "Diese ACL Kombination existiert bereits. ACL Einträge sind eindeutig."
+    add-entry: "Berechtigung hinzufügen"
+    duplicate: "Diese Kombination von Berechtigungen existiert bereits."
     scope:
       select: "Klicken Sie hier um einen Berechtigungsbereich auszuwählen"
       select-different: "Anderen Berechtigungsbereich auswählen"
