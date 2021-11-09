@@ -1,3 +1,35 @@
+# [2.0.0](https://github.com/projectcaluma/ember-emeis/compare/v1.1.0...v2.0.0) (2021-11-09)
+
+
+### Bug Fixes
+
+* **translations:** use better naming for "ACL" ([#299](https://github.com/projectcaluma/ember-emeis/issues/299)) ([73bb397](https://github.com/projectcaluma/ember-emeis/commit/73bb397dc2726110ab0b3c7376766035923ba2d4))
+* add missing tests ([#293](https://github.com/projectcaluma/ember-emeis/issues/293)) ([bbb972b](https://github.com/projectcaluma/ember-emeis/commit/bbb972b53ed75138eac4f54dae95da394cac11fa))
+* allow to clear select in meta fields ([#294](https://github.com/projectcaluma/ember-emeis/issues/294)) ([6428909](https://github.com/projectcaluma/ember-emeis/commit/6428909b181e4f12e05eeef74af63d33201fcaa3))
+* data table paging ([#296](https://github.com/projectcaluma/ember-emeis/issues/296)) ([f8e8c63](https://github.com/projectcaluma/ember-emeis/commit/f8e8c63d36da99eb4f0ce1c18d92e49153e4a099))
+* redirect to /users on index ([#270](https://github.com/projectcaluma/ember-emeis/issues/270)) ([146d6f3](https://github.com/projectcaluma/ember-emeis/commit/146d6f39b2f5b9d3fcad5512f46042982fc5660c))
+* sort user list by last name ([#274](https://github.com/projectcaluma/ember-emeis/issues/274)) ([c72cb81](https://github.com/projectcaluma/ember-emeis/commit/c72cb811fa2e6364c23e670c8b34a652e86db79e))
+
+
+### chore
+
+* drop support for node 10 ([#295](https://github.com/projectcaluma/ember-emeis/issues/295)) ([96e5335](https://github.com/projectcaluma/ember-emeis/commit/96e533534dbfbe7d0338a12e0745a816107a152a))
+
+
+### Features
+
+* extract meta fields rendering into a component ([#277](https://github.com/projectcaluma/ember-emeis/issues/277)) ([2527ed5](https://github.com/projectcaluma/ember-emeis/commit/2527ed5787e9c73602003f7dcb8452eeb8d71e9a))
+* **scopes:** display corresponding ACLs ([#275](https://github.com/projectcaluma/ember-emeis/issues/275)) ([0daa8b0](https://github.com/projectcaluma/ember-emeis/commit/0daa8b0b231f433f888fad589203fadd50da4ab9))
+* **scopes:** introduce meta fields ([#272](https://github.com/projectcaluma/ember-emeis/issues/272)) ([af82ec2](https://github.com/projectcaluma/ember-emeis/commit/af82ec287f6433128d271645addf7a31817ea1b4))
+* make addon configurable via config service ([#269](https://github.com/projectcaluma/ember-emeis/issues/269)) ([3a56283](https://github.com/projectcaluma/ember-emeis/commit/3a562838886a3a609c62a103b88f6b4a64ea55f0))
+
+
+### BREAKING CHANGES
+
+* drop support for node 10 as it has reached EOL.
+
+Co-authored-by: Akanksh Saxena <akanksh.saxena@adfinis-sygroup.ch>
+
 # [1.1.0](https://github.com/projectcaluma/ember-emeis/compare/v1.0.0...v1.1.0) (2021-08-11)
 
 
