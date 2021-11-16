@@ -67,11 +67,13 @@
                 {{t "emeis.pagination.previous"}}
               </button>
             </li>
-            <li class="uk-active">
+            {{#if this.numPages}}
+              <li class="uk-active">
               <span data-test-page>
                 {{this.page}} / {{this.numPages}}
               </span>
-            </li>
+              </li>
+            {{/if}}
             <li
               class={{unless this.nextPage "uk-disabled"}}
               data-test-next-page
