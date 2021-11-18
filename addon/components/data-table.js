@@ -56,19 +56,25 @@ export default class DataTableComponent extends Component {
       typeof this.args.modelName === "string"
     );
 
-    const options = {
-      page: {
-        number: this.page,
-        size: this.emeisOptions.pageSize,
-      },
+    let options = {
       filter: { search: this.search, ...(this.args.filter || {}) },
       sort: this.args.sort,
       include: this.args.include || "",
     };
 
+    if (!this.search) {
+      options = {
+        ...options,
+        page: {
+          number: this.page,
+          size: this.emeisOptions.pageSize,
+        },
+      };
+    }
+
     const data = yield this.store.query(this.args.modelName, options);
 
-    this.numPages = data.meta.pagination.pages;
+    this.numPages = data.meta.pagination?.pages;
 
     return data;
   }
