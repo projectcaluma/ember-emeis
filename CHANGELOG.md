@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/projectcaluma/ember-emeis/compare/v2.0.0...v2.0.1) (2021-11-18)
+
+
+### Bug Fixes
+
+* **data-table:** do not include page query param when searching ([#302](https://github.com/projectcaluma/ember-emeis/issues/302)) ([07b027d](https://github.com/projectcaluma/ember-emeis/commit/07b027dd6a3ea7252ba01e905fd1af0df3ec46b6))
+
 # [2.0.0](https://github.com/projectcaluma/ember-emeis/compare/v1.1.0...v2.0.0) (2021-11-09)
 
 
