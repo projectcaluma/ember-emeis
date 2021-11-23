@@ -112,9 +112,9 @@ module("Integration | Component | acl-wizzard", function (hooks) {
     const user = this.server.createList("user", 2)[0];
 
     this.set("createAclEntry", (acl) => {
-      assert.equal(acl.role.id, role2.id);
-      assert.equal(acl.user.id, user.id);
-      assert.equal(acl.scope.id, scope.id);
+      assert.strictEqual(acl.role.id, role2.id);
+      assert.strictEqual(acl.user.id, user.id);
+      assert.strictEqual(acl.scope.id, scope.id);
     });
 
     await render(hbs`<AclWizzard @createAclEntry={{this.createAclEntry}} />`);

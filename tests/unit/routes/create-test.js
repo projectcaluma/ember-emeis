@@ -9,7 +9,7 @@ module("Unit | Route | create", function (hooks) {
     assert.ok(route);
 
     route.detailView = "test";
-    assert.equal(route.templateName, "test");
-    assert.equal(route.controllerName, "test");
+    assert.strictEqual(route.templateName, "test");
+    assert.strictEqual(route.controllerName, "test");
   });
 });

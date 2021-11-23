@@ -15,8 +15,8 @@ module("Unit | Controller | roles/edit", function (hooks) {
       description: { value: "desc" },
     });
 
-    assert.equal(model.slug, "slug");
-    assert.equal(model.name, "name");
-    assert.equal(model.description, "desc");
+    assert.strictEqual(model.slug, "slug");
+    assert.strictEqual(model.name, "name");
+    assert.strictEqual(model.description, "desc");
   });
 });

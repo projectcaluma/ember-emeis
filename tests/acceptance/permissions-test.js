@@ -25,7 +25,7 @@ module("Acceptance | permissions", function (hooks) {
 
     await visit("/permissions");
 
-    assert.equal(currentURL(), "/permissions");
+    assert.strictEqual(currentURL(), "/permissions");
     await settled();
 
     assert.dom("[data-test-permission-name]").exists({ count: 10 });
@@ -51,7 +51,7 @@ module("Acceptance | permissions", function (hooks) {
 
     await visit(`/permissions/${permission.id}`);
 
-    assert.equal(currentURL(), `/permissions/${permission.id}`);
+    assert.strictEqual(currentURL(), `/permissions/${permission.id}`);
 
     assert.dom('[name="slug"]').hasValue(permission.slug);
     assert.dom('[name="slug"]').hasAttribute("disabled");
@@ -74,15 +74,15 @@ module("Acceptance | permissions", function (hooks) {
           request.requestBody
         ).data;
 
-        assert.equal(attributes.name.en, name);
-        assert.equal(attributes.description.en, description);
-        assert.equal(relationships.roles.data[0].id, role.id);
+        assert.strictEqual(attributes.name.en, name);
+        assert.strictEqual(attributes.description.en, description);
+        assert.strictEqual(relationships.roles.data[0].id, role.id);
       }
     );
     await click("[data-test-save]");
 
     await click("[data-test-back]");
-    assert.equal(currentURL(), "/permissions");
+    assert.strictEqual(currentURL(), "/permissions");
   });
 
   test("create view /permissions/new", async function (assert) {
@@ -91,11 +91,11 @@ module("Acceptance | permissions", function (hooks) {
     const role = this.server.create("role");
 
     await visit("/permissions");
-    assert.equal(currentURL(), "/permissions");
+    assert.strictEqual(currentURL(), "/permissions");
     assert.dom("[data-test-permission-name]").doesNotExist();
 
     await click("[data-test-new]");
-    assert.equal(currentURL(), "/permissions/new");
+    assert.strictEqual(currentURL(), "/permissions/new");
 
     const name = "Permission 1",
       description = "The one and only",
@@ -111,10 +111,10 @@ module("Acceptance | permissions", function (hooks) {
         request.requestBody
       ).data;
 
-      assert.equal(attributes.slug, slug);
-      assert.equal(attributes.name.en, name);
-      assert.equal(attributes.description.en, description);
-      assert.equal(relationships.roles.data[0].id, role.id);
+      assert.strictEqual(attributes.slug, slug);
+      assert.strictEqual(attributes.name.en, name);
+      assert.strictEqual(attributes.description.en, description);
+      assert.strictEqual(relationships.roles.data[0].id, role.id);
     });
     await click("[data-test-save]");
 
@@ -123,7 +123,7 @@ module("Acceptance | permissions", function (hooks) {
     await waitUntil(() => currentURL() !== "/permissions/new");
 
     const permission = this.server.schema.permissions.first();
-    assert.equal(currentURL(), `/permissions/${permission.id}`);
+    assert.strictEqual(currentURL(), `/permissions/${permission.id}`);
 
     assert.dom('[name="slug"]').hasAttribute("disabled");
     assert.dom('[name="name"]').hasValue(permission.name.en);
@@ -143,10 +143,10 @@ module("Acceptance | permissions", function (hooks) {
     assert.dom("[data-test-permission-name]").exists({ count: 1 });
 
     await click("[data-test-permission-name] a");
-    assert.equal(currentURL(), `/permissions/${permission.id}`);
+    assert.strictEqual(currentURL(), `/permissions/${permission.id}`);
 
     this.assertRequest("DELETE", `/api/v1/permissions/:id`, (request) => {
-      assert.equal(permission.id, request.params.id);
+      assert.strictEqual(permission.id, request.params.id);
     });
     await click("[data-test-delete]");
 
@@ -154,7 +154,7 @@ module("Acceptance | permissions", function (hooks) {
     // Probably some runloop issue.
     await waitUntil(() => currentURL() !== `/permissions/${permission.id}`);
 
-    assert.equal(currentURL(), `/permissions?page=1`);
+    assert.strictEqual(currentURL(), `/permissions?page=1`);
     assert.dom("[data-test-permission-name]").doesNotExist();
   });
 });

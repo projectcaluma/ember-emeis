@@ -26,7 +26,7 @@ module("Acceptance | roles", function (hooks) {
     await visit("/roles");
     await settled();
 
-    assert.equal(currentURL(), "/roles");
+    assert.strictEqual(currentURL(), "/roles");
 
     assert.dom("[data-test-role-name]").exists({ count: 10 });
     assert.dom(`[data-test-role-name="${role.id}"]`).hasText(role.name.en);
@@ -46,7 +46,7 @@ module("Acceptance | roles", function (hooks) {
 
     await visit(`/roles/${role.id}`);
 
-    assert.equal(currentURL(), `/roles/${role.id}`);
+    assert.strictEqual(currentURL(), `/roles/${role.id}`);
 
     assert.dom('[name="slug"]').hasValue(role.slug);
     assert.dom('[name="slug"]').hasAttribute("disabled");
@@ -62,24 +62,24 @@ module("Acceptance | roles", function (hooks) {
     this.assertRequest("PATCH", `/api/v1/roles/${role.id}`, (request) => {
       const attributes = JSON.parse(request.requestBody).data.attributes;
 
-      assert.equal(attributes.name.en, name);
-      assert.equal(attributes.description.en, description);
+      assert.strictEqual(attributes.name.en, name);
+      assert.strictEqual(attributes.description.en, description);
     });
     await click("[data-test-save]");
 
     await click("[data-test-back]");
-    assert.equal(currentURL(), "/roles");
+    assert.strictEqual(currentURL(), "/roles");
   });
 
   test("create view /roles/new", async function (assert) {
     assert.expect(10);
 
     await visit("/roles");
-    assert.equal(currentURL(), "/roles");
+    assert.strictEqual(currentURL(), "/roles");
     assert.dom("[data-test-role-name]").doesNotExist();
 
     await click("[data-test-new]");
-    assert.equal(currentURL(), "/roles/new");
+    assert.strictEqual(currentURL(), "/roles/new");
 
     const name = "Role 1",
       description = "The one and only",
@@ -92,9 +92,9 @@ module("Acceptance | roles", function (hooks) {
     this.assertRequest("POST", `/api/v1/roles`, (request) => {
       const attributes = JSON.parse(request.requestBody).data.attributes;
 
-      assert.equal(attributes.slug, slug);
-      assert.equal(attributes.name.en, name);
-      assert.equal(attributes.description.en, description);
+      assert.strictEqual(attributes.slug, slug);
+      assert.strictEqual(attributes.name.en, name);
+      assert.strictEqual(attributes.description.en, description);
     });
     await click("[data-test-save]");
 
@@ -103,7 +103,7 @@ module("Acceptance | roles", function (hooks) {
     await waitUntil(() => currentURL() !== "/roles/new");
 
     const role = this.server.schema.roles.first();
-    assert.equal(currentURL(), `/roles/${role.id}`);
+    assert.strictEqual(currentURL(), `/roles/${role.id}`);
 
     assert.dom('[name="slug"]').hasAttribute("disabled");
     assert.dom('[name="name"]').hasValue(role.name.en);
@@ -123,10 +123,10 @@ module("Acceptance | roles", function (hooks) {
     assert.dom("[data-test-role-name]").exists({ count: 1 });
 
     await click("[data-test-role-name] a");
-    assert.equal(currentURL(), `/roles/${role.id}`);
+    assert.strictEqual(currentURL(), `/roles/${role.id}`);
 
     this.assertRequest("DELETE", `/api/v1/roles/:id`, (request) => {
-      assert.equal(role.id, request.params.id);
+      assert.strictEqual(role.id, request.params.id);
     });
     await click("[data-test-delete]");
 
@@ -134,7 +134,7 @@ module("Acceptance | roles", function (hooks) {
     // Probably some runloop issue.
     await waitUntil(() => currentURL() !== `/roles/${role.id}`);
 
-    assert.equal(currentURL(), `/roles?page=1`);
+    assert.strictEqual(currentURL(), `/roles?page=1`);
     assert.dom("[data-test-role-name]").doesNotExist();
   });
 
@@ -146,11 +146,11 @@ module("Acceptance | roles", function (hooks) {
     });
 
     this.assertRequest("GET", `/api/v1/permissions`, (request) => {
-      assert.equal(request.queryParams["filter[roles]"], role.id);
+      assert.strictEqual(request.queryParams["filter[roles]"], role.id);
     });
 
     await visit(`/roles/${role.id}`);
-    assert.equal(currentURL(), `/roles/${role.id}`);
+    assert.strictEqual(currentURL(), `/roles/${role.id}`);
 
     await settled();
     assert.dom("[data-test-permissions]").exists();
