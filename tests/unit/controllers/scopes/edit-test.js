@@ -14,7 +14,7 @@ module("Unit | Controller | scopes/edit", function (hooks) {
       description: { value: "desc" },
     });
 
-    assert.equal(model.name, "name");
-    assert.equal(model.description, "desc");
+    assert.strictEqual(model.name, "name");
+    assert.strictEqual(model.description, "desc");
   });
 });

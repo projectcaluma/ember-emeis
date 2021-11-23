@@ -22,15 +22,15 @@ module("Unit | Controller | users/edit/index", function (hooks) {
       isActive: { checked: true },
     });
 
-    assert.equal(model.username, "username");
-    assert.equal(model.firstName, "firstName");
-    assert.equal(model.lastName, "lastName");
-    assert.equal(model.email, "email");
-    assert.equal(model.phone, "phone");
-    assert.equal(model.language, "de");
-    assert.equal(model.address, "address");
-    assert.equal(model.city, "city");
-    assert.equal(model.zip, "zip");
+    assert.strictEqual(model.username, "username");
+    assert.strictEqual(model.firstName, "firstName");
+    assert.strictEqual(model.lastName, "lastName");
+    assert.strictEqual(model.email, "email");
+    assert.strictEqual(model.phone, "phone");
+    assert.strictEqual(model.language, "de");
+    assert.strictEqual(model.address, "address");
+    assert.strictEqual(model.city, "city");
+    assert.strictEqual(model.zip, "zip");
     assert.true(model.isActive);
   });
 });

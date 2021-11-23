@@ -12,22 +12,22 @@ module("Acceptance | nav", function (hooks) {
 
     await visit("/");
 
-    assert.equal(currentURL(), "/users");
+    assert.strictEqual(currentURL(), "/users");
     assert.dom("[data-test-nav-users]").exists();
     assert.dom("[data-test-nav-scopes]").exists();
     assert.dom("[data-test-nav-permissions]").exists();
     assert.dom("[data-test-nav-roles]").exists();
 
     await click("[data-test-nav-users] a");
-    assert.equal(currentURL(), "/users");
+    assert.strictEqual(currentURL(), "/users");
 
     await click("[data-test-nav-scopes] a");
-    assert.equal(currentURL(), "/scopes");
+    assert.strictEqual(currentURL(), "/scopes");
 
     await click("[data-test-nav-permissions] a");
-    assert.equal(currentURL(), "/permissions");
+    assert.strictEqual(currentURL(), "/permissions");
 
     await click("[data-test-nav-roles] a");
-    assert.equal(currentURL(), "/roles");
+    assert.strictEqual(currentURL(), "/roles");
   });
 });

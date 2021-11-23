@@ -14,26 +14,26 @@ module("Acceptance | data-table", function (hooks) {
     assert.expect(8);
 
     this.assertRequest("GET", "/api/v1/permissions", (request) => {
-      assert.equal(
+      assert.strictEqual(
         request.queryParams["page[number]"],
-        1,
+        "1",
         "Test if queryParam page[number] is 1"
       );
-      assert.equal(request.queryParams["page[size]"], 10),
+      assert.strictEqual(request.queryParams["page[size]"], "10"),
         "Test if queryParam page[size] is 10";
       assert.notOk(request.queryParams.search),
         "Test that queryParam search is not set";
     });
     await visit("/permissions");
 
-    assert.equal(
+    assert.strictEqual(
       currentURL(),
       "/permissions",
       "Test currentURL is /permissions"
     );
 
     this.assertRequest("GET", "/api/v1/permissions", (request) => {
-      assert.equal(
+      assert.strictEqual(
         request.queryParams["filter[search]"],
         "test",
         "Test queryParam filter[search] is 'test'"
@@ -41,7 +41,7 @@ module("Acceptance | data-table", function (hooks) {
     });
     await fillIn("[data-test-search-input]", "test");
     await click("[data-test-search-submit]");
-    assert.equal(
+    assert.strictEqual(
       currentURL(),
       "/permissions?search=test",
       "Test currentURL is /permissions?search=test"
@@ -55,7 +55,7 @@ module("Acceptance | data-table", function (hooks) {
     });
     await fillIn("[data-test-search-input]", "");
     await click("[data-test-search-submit]");
-    assert.equal(
+    assert.strictEqual(
       currentURL(),
       "/permissions",
       "Test currentURL is /permissions"
@@ -68,13 +68,13 @@ module("Acceptance | data-table", function (hooks) {
     this.server.createList("permission", 50);
 
     this.assertRequest("GET", "/api/v1/permissions", (request) => {
-      assert.equal(request.queryParams["page[number]"], 1);
-      assert.equal(request.queryParams["page[size]"], 10);
+      assert.strictEqual(request.queryParams["page[number]"], "1");
+      assert.strictEqual(request.queryParams["page[size]"], "10");
       assert.notOk(request.queryParams.search);
     });
     await visit("/permissions");
 
-    assert.equal(currentURL(), "/permissions");
+    assert.strictEqual(currentURL(), "/permissions");
 
     await settled();
     assert.dom("[data-test-page]").hasText("1 / 5");
@@ -83,11 +83,11 @@ module("Acceptance | data-table", function (hooks) {
     assert.dom("[data-test-previous-page]").hasClass("uk-disabled");
 
     this.assertRequest("GET", "/api/v1/permissions", (request) => {
-      assert.equal(request.queryParams["page[number]"], 2);
+      assert.strictEqual(request.queryParams["page[number]"], "2");
     });
     await click("[data-test-next-page] button");
     await settled();
-    assert.equal(currentURL(), "/permissions?page=2");
+    assert.strictEqual(currentURL(), "/permissions?page=2");
 
     await settled();
     assert.dom("[data-test-page]").hasText("2 / 5");
@@ -97,10 +97,10 @@ module("Acceptance | data-table", function (hooks) {
 
     await visit("/permissions?page=5");
     this.assertRequest("GET", "/api/v1/permissions", (request) => {
-      assert.equal(request.queryParams["page[number]"], 5);
+      assert.strictEqual(request.queryParams["page[number]"], 5);
     });
 
-    assert.equal(currentURL(), "/permissions?page=5");
+    assert.strictEqual(currentURL(), "/permissions?page=5");
     await settled();
     assert.dom("[data-test-page]").hasText("5 / 5");
 

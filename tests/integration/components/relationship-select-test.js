@@ -46,12 +46,12 @@ module("Integration | Component | relationship-select", function (hooks) {
     assert.dom("[data-test-name]").hasText(role.name.en);
 
     this.assertRequest("GET", "/api/v1/roles", (request) => {
-      assert.equal(request.queryParams["filter[search]"], "test");
+      assert.strictEqual(request.queryParams["filter[search]"], "test");
     });
     await typeInSearch("test");
 
     await selectChoose("", role.name.en);
-    assert.equal(this.selected.name, role.name.en);
+    assert.strictEqual(this.selected.name, role.name.en);
   });
 
   test("search not enabled with less than 5 entries", async function (assert) {
@@ -107,11 +107,11 @@ module("Integration | Component | relationship-select", function (hooks) {
     assert.dom("[data-test-name]").hasText(role.name.en);
 
     this.assertRequest("GET", "/api/v1/roles", (request) => {
-      assert.equal(request.queryParams["filter[search]"], "test");
+      assert.strictEqual(request.queryParams["filter[search]"], "test");
     });
     await typeInSearch("test");
 
     await selectChoose("", role.name.en);
-    assert.equal(this.selected[0].name, role.name.en);
+    assert.strictEqual(this.selected[0].name, role.name.en);
   });
 });

@@ -43,7 +43,7 @@ module("Integration | Component | edit-form", function (hooks) {
   test("back", async function (assert) {
     assert.expect(1);
     this.router.transitionTo = (route) => {
-      assert.equal(route, "parent-route.index");
+      assert.strictEqual(route, "parent-route.index");
     };
 
     await render(hbs`<EditForm />`);
@@ -56,7 +56,7 @@ module("Integration | Component | edit-form", function (hooks) {
 
     this.router.currentRoute.name = "ember-emeis.parent-route.edit.index";
     this.router.replaceWith = (route) => {
-      assert.equal(route, "ember-emeis.parent-route.index");
+      assert.strictEqual(route, "ember-emeis.parent-route.index");
     };
 
     this.set("model", {
@@ -74,7 +74,7 @@ module("Integration | Component | edit-form", function (hooks) {
   test("save", async function (assert) {
     assert.expect(7);
     this.router.replaceWith = (route) => {
-      assert.equal(route, "ember-emeis.parent-route.edit");
+      assert.strictEqual(route, "ember-emeis.parent-route.edit");
       assert.step("replaceWith");
     };
 

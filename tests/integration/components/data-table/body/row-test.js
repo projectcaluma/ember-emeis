@@ -12,7 +12,7 @@ module("Integration | Component | data-table/body/row", function (hooks) {
 
     await render(hbs`<DataTable::Body::Row />`);
 
-    assert.equal(this.element.textContent.trim(), "");
+    assert.strictEqual(this.element.textContent.trim(), "");
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module("Integration | Component | data-table/body/row", function (hooks) {
       </DataTable::Body::Row>
     `);
 
-    assert.equal(this.element.textContent.trim(), "template block text");
+    assert.strictEqual(this.element.textContent.trim(), "template block text");
   });
 });

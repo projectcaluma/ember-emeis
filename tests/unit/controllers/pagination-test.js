@@ -12,15 +12,15 @@ module("Unit | Controller | pagination", function (hooks) {
     const router = this.owner.lookup("service:router");
 
     assert.notOk(controller.search);
-    assert.equal(controller.page, 1);
+    assert.strictEqual(controller.page, 1);
 
     router.transitionTo = ({ queryParams }) => {
-      assert.equal(queryParams.search, "test");
+      assert.strictEqual(queryParams.search, "test");
     };
     controller.updateQueryParam("search", "test");
 
     router.transitionTo = ({ queryParams }) => {
-      assert.equal(queryParams.page, 10);
+      assert.strictEqual(queryParams.page, 10);
     };
     controller.updateQueryParam("page", 10);
   });

@@ -13,7 +13,7 @@ module("Integration | Component | data-table", function (hooks) {
 
     const store = this.owner.lookup("service:store");
     store.query = (modelName) => {
-      assert.equal(modelName, this.modelName);
+      assert.strictEqual(modelName, this.modelName);
 
       const data = [
         { name: "Role 1", slug: "role-1" },
@@ -66,8 +66,8 @@ module("Integration | Component | data-table", function (hooks) {
 
     const store = this.owner.lookup("service:store");
     store.query = (_, options) => {
-      assert.equal(options.page.number, this.page);
-      assert.equal(options.page.size, 10);
+      assert.strictEqual(options.page.number, this.page);
+      assert.strictEqual(options.page.size, 10);
       return { meta: { pagination: { pages: 3 } } };
     };
 
@@ -103,7 +103,7 @@ module("Integration | Component | data-table", function (hooks) {
     const store = this.owner.lookup("service:store");
     store.query = (_, options) => {
       const { search } = testState.shift();
-      assert.equal(options.filter.search, search);
+      assert.strictEqual(options.filter.search, search);
       return { meta: { pagination: { pages: 3 } } };
     };
 
@@ -130,7 +130,7 @@ module("Integration | Component | data-table", function (hooks) {
 
     const store = this.owner.lookup("service:store");
     store.query = (_, options) => {
-      assert.equal(options.filter.search, this.search);
+      assert.strictEqual(options.filter.search, this.search);
       return { meta: { pagination: { pages: 3 } } };
     };
 
@@ -153,6 +153,6 @@ module("Integration | Component | data-table", function (hooks) {
 
     await fillIn('form input[name="search"]', "test2");
     await click('form button[type="submit"]');
-    assert.equal(this.search, "test2");
+    assert.strictEqual(this.search, "test2");
   });
 });

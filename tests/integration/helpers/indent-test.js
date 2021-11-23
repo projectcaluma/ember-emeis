@@ -11,6 +11,6 @@ module("Integration | Helper | indent", function (hooks) {
 
     await render(hbs`{{indent inputValue}}`);
 
-    assert.equal(this.element.textContent, "\xa0".repeat(9));
+    assert.strictEqual(this.element.textContent, "\xa0".repeat(9));
   });
 });

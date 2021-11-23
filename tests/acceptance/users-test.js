@@ -35,7 +35,7 @@ module("Acceptance | users", function (hooks) {
     await visit("/users");
     await settled();
 
-    assert.equal(currentURL(), "/users");
+    assert.strictEqual(currentURL(), "/users");
 
     assert.dom("[data-test-user-username]").exists({ count: 10 });
     assert.dom(`[data-test-user-username="${user.id}"]`).hasText(user.username);
@@ -75,7 +75,7 @@ module("Acceptance | users", function (hooks) {
     await visit(`/users/${user.id}`);
     await settled();
 
-    assert.equal(currentURL(), `/users/${user.id}`);
+    assert.strictEqual(currentURL(), `/users/${user.id}`);
 
     assert.dom('[name="username"]').hasValue(user.username);
     assert.dom('[name="firstName"]').hasValue(user.firstName);
@@ -120,32 +120,32 @@ module("Acceptance | users", function (hooks) {
     this.assertRequest("PATCH", `/api/v1/users/${user.id}`, (request) => {
       const attributes = JSON.parse(request.requestBody).data.attributes;
 
-      assert.equal(attributes.username, username);
-      assert.equal(attributes["first-name"], firstName);
-      assert.equal(attributes["last-name"], lastName);
-      assert.equal(attributes.email, email);
-      assert.equal(attributes.phone, phone);
-      assert.equal(attributes.language, language);
-      assert.equal(attributes.address, address);
-      assert.equal(attributes.city.en, city);
-      assert.equal(attributes.zip, zip);
+      assert.strictEqual(attributes.username, username);
+      assert.strictEqual(attributes["first-name"], firstName);
+      assert.strictEqual(attributes["last-name"], lastName);
+      assert.strictEqual(attributes.email, email);
+      assert.strictEqual(attributes.phone, phone);
+      assert.strictEqual(attributes.language, language);
+      assert.strictEqual(attributes.address, address);
+      assert.strictEqual(attributes.city.en, city);
+      assert.strictEqual(attributes.zip, zip);
       assert.false(attributes["is-active"]);
     });
     await click("[data-test-save]");
 
     await click("[data-test-back]");
-    assert.equal(currentURL(), "/users");
+    assert.strictEqual(currentURL(), "/users");
   });
 
   test("create view /users/new", async function (assert) {
     assert.expect(28);
 
     await visit("/users");
-    assert.equal(currentURL(), "/users");
+    assert.strictEqual(currentURL(), "/users");
     assert.dom("[data-test-user-name]").doesNotExist();
 
     await click("[data-test-new]");
-    assert.equal(currentURL(), "/users/new");
+    assert.strictEqual(currentURL(), "/users/new");
 
     assert.dom("[data-test-edit-link]").doesNotExist();
     assert.dom("[data-test-acl-link]").doesNotExist();
@@ -175,15 +175,15 @@ module("Acceptance | users", function (hooks) {
     this.assertRequest("POST", "/api/v1/users", (request) => {
       const { attributes } = JSON.parse(request.requestBody).data;
 
-      assert.equal(attributes.username, username);
-      assert.equal(attributes["first-name"], firstName);
-      assert.equal(attributes["last-name"], lastName);
-      assert.equal(attributes.email, email);
-      assert.equal(attributes.phone, phone);
-      assert.equal(attributes.language, language);
-      assert.equal(attributes.address, address);
-      assert.equal(attributes.city.en, city);
-      assert.equal(attributes.zip, zip);
+      assert.strictEqual(attributes.username, username);
+      assert.strictEqual(attributes["first-name"], firstName);
+      assert.strictEqual(attributes["last-name"], lastName);
+      assert.strictEqual(attributes.email, email);
+      assert.strictEqual(attributes.phone, phone);
+      assert.strictEqual(attributes.language, language);
+      assert.strictEqual(attributes.address, address);
+      assert.strictEqual(attributes.city.en, city);
+      assert.strictEqual(attributes.zip, zip);
       assert.true(attributes["is-active"]);
     });
     await click("[data-test-save]");
@@ -193,7 +193,7 @@ module("Acceptance | users", function (hooks) {
     await waitUntil(() => currentURL() !== "/users/new");
 
     const user = this.server.schema.users.first();
-    assert.equal(currentURL(), `/users/${user.id}`);
+    assert.strictEqual(currentURL(), `/users/${user.id}`);
 
     assert.dom('[name="username"]').hasValue(user.username);
     assert.dom('[name="firstName"]').hasValue(user.firstName);
@@ -223,16 +223,16 @@ module("Acceptance | users", function (hooks) {
     assert.dom("[data-test-user-username]").exists({ count: 4 });
 
     await click("[data-test-user-username] a");
-    assert.equal(currentURL(), `/users/${user.id}`);
+    assert.strictEqual(currentURL(), `/users/${user.id}`);
 
     assert.dom("[data-test-edit-link]").exists();
     assert.dom("[data-test-acl-link]").exists();
 
     this.assertRequest("GET", `/api/v1/acls`, (request) => {
-      assert.equal(user.id, request.queryParams["filter[user]"]);
+      assert.strictEqual(user.id, request.queryParams["filter[user]"]);
     });
     await click("[data-test-acl-link]");
-    assert.equal(currentURL(), `/users/${user.id}/acl`);
+    assert.strictEqual(currentURL(), `/users/${user.id}/acl`);
 
     // For some reason the await click is not actually waiting for the fetch task to finish.
     // Probably some runloop issue.
@@ -245,7 +245,7 @@ module("Acceptance | users", function (hooks) {
     assert.dom("[data-test-acl-scope]").hasText(acl.scope.name.en);
 
     this.assertRequest("DELETE", `/api/v1/acls/:id`, (request) => {
-      assert.equal(request.params.id, acl.id);
+      assert.strictEqual(request.params.id, acl.id);
     });
     await click("[data-test-acl-delete] button");
     // For some reason the await click is not actually waiting for the delete task to finish.
@@ -264,7 +264,7 @@ module("Acceptance | users", function (hooks) {
 
     await visit(`/users/${user.id}/acl`);
     await settled();
-    assert.equal(currentURL(), `/users/${user.id}/acl`);
+    assert.strictEqual(currentURL(), `/users/${user.id}/acl`);
 
     assert.dom("[data-test-acl-role]").doesNotExist();
     assert.dom("[data-test-add-acl]").exists();

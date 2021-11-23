@@ -28,7 +28,7 @@ module("Acceptance | scopes", function (hooks) {
     await visit("/scopes");
     await settled();
 
-    assert.equal(currentURL(), "/scopes");
+    assert.strictEqual(currentURL(), "/scopes");
 
     assert.dom("[data-test-scope-name]").exists({ count: 10 });
     assert
@@ -47,7 +47,7 @@ module("Acceptance | scopes", function (hooks) {
 
     await visit(`/scopes/${scope.id}`);
 
-    assert.equal(currentURL(), `/scopes/${scope.id}`);
+    assert.strictEqual(currentURL(), `/scopes/${scope.id}`);
     // For some reason the await click is not actually waiting for the fetchModels task to finish.
     // Probably some runloop issue.
     await waitUntil(
@@ -72,25 +72,25 @@ module("Acceptance | scopes", function (hooks) {
         request.requestBody
       ).data;
 
-      assert.equal(attributes.name.en, name);
-      assert.equal(attributes.description.en, description);
-      assert.equal(relationships.parent.data.id, parent.id);
+      assert.strictEqual(attributes.name.en, name);
+      assert.strictEqual(attributes.description.en, description);
+      assert.strictEqual(relationships.parent.data.id, parent.id);
     });
     await click("[data-test-save]");
 
     await click("[data-test-back]");
-    assert.equal(currentURL(), "/scopes");
+    assert.strictEqual(currentURL(), "/scopes");
   });
 
   test("create view /scopes/new", async function (assert) {
     assert.expect(8);
 
     await visit("/scopes");
-    assert.equal(currentURL(), "/scopes");
+    assert.strictEqual(currentURL(), "/scopes");
     assert.dom("[data-test-scope-name]").doesNotExist();
 
     await click("[data-test-new]");
-    assert.equal(currentURL(), "/scopes/new");
+    assert.strictEqual(currentURL(), "/scopes/new");
 
     await fillIn('[name="name"]', "test");
     await fillIn('[name="description"]', "test");
@@ -99,8 +99,8 @@ module("Acceptance | scopes", function (hooks) {
       const { name, description } = JSON.parse(request.requestBody).data
         .attributes;
 
-      assert.equal(name.en, "test");
-      assert.equal(description.en, "test");
+      assert.strictEqual(name.en, "test");
+      assert.strictEqual(description.en, "test");
     });
     await click("[data-test-save]");
 
@@ -109,7 +109,7 @@ module("Acceptance | scopes", function (hooks) {
     await waitUntil(() => currentURL() !== "/scopes/new");
 
     const scope = this.server.schema.scopes.first();
-    assert.equal(currentURL(), `/scopes/${scope.id}`);
+    assert.strictEqual(currentURL(), `/scopes/${scope.id}`);
 
     assert.dom('[name="name"]').hasValue(scope.name.en);
     assert.dom('[name="description"]').hasValue(scope.description.en);
@@ -125,14 +125,14 @@ module("Acceptance | scopes", function (hooks) {
     assert.dom("[data-test-scope-name]").exists({ count: 1 });
 
     await click("[data-test-scope-name] a");
-    assert.equal(currentURL(), `/scopes/${scope.id}`);
+    assert.strictEqual(currentURL(), `/scopes/${scope.id}`);
     await waitUntil(
       () =>
         this.element.querySelector(".ember-power-select-placeholder")
           .innerText !== "Loading..."
     );
     this.assertRequest("DELETE", `/api/v1/scopes/:id`, (request) => {
-      assert.equal(scope.id, request.params.id);
+      assert.strictEqual(scope.id, request.params.id);
     });
     await click("[data-test-delete]");
 
@@ -140,7 +140,7 @@ module("Acceptance | scopes", function (hooks) {
     // Probably some runloop issue.
     await waitUntil(() => currentURL() !== `/scopes/${scope.id}`);
 
-    assert.equal(currentURL(), `/scopes?page=1`);
+    assert.strictEqual(currentURL(), `/scopes?page=1`);
     assert.dom("[data-test-scope-name]").doesNotExist();
   });
 
@@ -157,10 +157,10 @@ module("Acceptance | scopes", function (hooks) {
     assert.dom("[data-test-scopes-edit-acl-link]").exists();
 
     this.assertRequest("GET", `/api/v1/acls`, (request) => {
-      assert.equal(scope.id, request.queryParams["filter[scope]"]);
+      assert.strictEqual(scope.id, request.queryParams["filter[scope]"]);
     });
     await click("[data-test-scopes-edit-acl-link]");
-    assert.equal(currentURL(), `/scopes/${scope.id}/acl`);
+    assert.strictEqual(currentURL(), `/scopes/${scope.id}/acl`);
 
     // For some reason the await click is not actually waiting for the fetch task to finish.
     // Probably some runloop issue.
