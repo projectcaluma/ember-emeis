@@ -22,14 +22,14 @@ emeis:
     headings:
       username: "Benutzername"
       fullName: "Name"
-      firstName: "Name"
+      firstName: "Vorname"
       lastName: "Nachname"
       email: "E-Mail"
       phone: "Telefonnummer"
       language: "Sprache"
       address: "Adresse"
       city: "Stadt"
-      zip: "ZIP"
+      zip: "PLZ"
       isActive: "Aktiv"
 
     edit:
