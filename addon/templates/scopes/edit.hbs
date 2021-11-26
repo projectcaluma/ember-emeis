@@ -1,14 +1,84 @@
-<ul uk-tab class="uk-child-width-1-2">
-  <li>
-    <LinkTo @route="scopes.edit.index" @model={{this.model}} data-test-scopes-edit-index-link>
-      {{t "emeis.scopes.edit.edit-scope"}}
-    </LinkTo>
-  </li>
+<div uk-grid>
+  <div class="uk-width-1-2">
+    <EditForm
+      @model={{@model}}
+      @updateModel={{this.updateModel}}
+      @listViewRouteName="scopes.index"
+    >
+      <EditForm::Element @label={{t "emeis.scopes.headings.name"}}>
+        <input
+          class="uk-input"
+          type="text"
+          name="name"
+          placeholder="{{t "emeis.scopes.headings.name"}}..."
+          required
+          value={{@model.name}}
+        />
+      </EditForm::Element>
 
-  <li>
-    <LinkTo @route="scopes.edit.acl" @model={{this.model}} data-test-scopes-edit-acl-link>
-      {{t "emeis.scopes.edit.acl.title"}}
-    </LinkTo>
-  </li>
-</ul>
-{{outlet}}
+      <EditForm::Element @label={{t "emeis.scopes.headings.description"}}>
+        <textarea
+          class="uk-textarea"
+          rows="5"
+          name="description"
+          placeholder="{{t "emeis.scopes.headings.description"}}..."
+          value={{@model.description}}
+        ></textarea>
+      </EditForm::Element>
+
+      <EditForm::Element @label={{t "emeis.scopes.headings.parent"}}>
+        <RelationshipSelect
+          @modelName="scope"
+          @selected={{@model.parent}}
+          @placeholder="{{t "emeis.scopes.headings.parent"}}..."
+          @onChange={{set @model.parent}} as |scope|
+        >
+          {{scope.name}}
+        </RelationshipSelect>
+      </EditForm::Element>
+
+      <MetaFields
+        @model={{@model}}
+        @fields={{this.metaFields}}
+      />
+    </EditForm>
+  </div>
+
+  <div class="uk-width-1-2">
+    <DataTable
+      @modelName="acl"
+      @filter={{this.queryParamsfilter}}
+      @include="user,role,scope"
+      @page={{this.page}}
+      @search={{this.search}}
+      as |table|
+    >
+      <table.head>
+        <th>
+          {{t "emeis.acl-table.headings.name"}}
+        </th>
+        <th>
+          {{t "emeis.acl-table.headings.user"}}
+        </th>
+        <th>
+          {{t "emeis.acl-table.headings.role"}}
+        </th>
+      </table.head>
+      <table.body as |body|>
+        <body.row>
+          {{#let body.model as |aclEntry|}}
+            <td data-test-acl-name={{aclEntry.id}}>
+              {{concat aclEntry.user.firstName " " aclEntry.user.lastName}}
+            </td>
+            <td data-test-acl-username={{aclEntry.id}}>
+              {{aclEntry.user.username}}
+            </td>
+            <td data-test-acl-role={{aclEntry.id}}>
+              {{aclEntry.role.name}}
+            </td>
+          {{/let}}
+        </body.row>
+      </table.body>
+    </DataTable>
+  </div>
+</div>
