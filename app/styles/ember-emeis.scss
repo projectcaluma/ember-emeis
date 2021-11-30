@@ -34,3 +34,16 @@
 $ember-power-select-default-border-radius: 0;
 $ember-power-select-border-color: $global-border;
 @import "ember-power-select";
+
+.scope-tree,
+.scope-tree ul {
+  list-style-type: none;
+}
+
+.scope-tree {
+  padding-left: 0;
+}
+
+.scope-tree .active {
+  font-weight: bold;
+}

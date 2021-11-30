@@ -1,0 +1,17 @@
+<li>
+  {{#if @scope.children}}
+    <UkButton @color="link" {{on "click" this.toggle}}>
+      <UkIcon @icon={{if this.expanded "chevron-down" "chevron-right"}} />
+    </UkButton>
+  {{/if}}
+  <LinkTo @route="scopes.edit" @model={{@scope}} class="uk-link-text">
+    {{@scope.name}}
+  </LinkTo>
+  {{#if (and this.expanded @scope.children)}}
+    <ul>
+      {{#each @scope.children as |child|}}
+        <TreeNode @scope={{child}} />
+      {{/each}}
+    </ul>
+  {{/if}}
+</li>
