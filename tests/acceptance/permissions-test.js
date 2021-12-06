@@ -139,7 +139,7 @@ module("Acceptance | permissions", function (hooks) {
     });
 
     await visit(`/permissions`);
-    await settled();
+
     assert.dom("[data-test-permission-name]").exists({ count: 1 });
 
     await click("[data-test-permission-name] a");

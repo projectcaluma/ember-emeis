@@ -1,0 +1,26 @@
+<div ...attributes
+  {{did-insert (perform this.findAnchestors)}}
+  {{did-update (perform this.findAnchestors) @activeItem}}>
+  <div class="uk-inline uk-margin-small-bottom uk-width-1-1">
+    <span class="uk-form-icon" uk-icon="icon: search"></span>
+    <Input
+      class="uk-input tree-search"
+      aira-label="search"
+      id="search"
+      @type="search"
+      @value={{this.filterValue}}
+      placeholder={{t "emeis.search.placeholder"}}
+      {{on "input" (perform this.filter)}}
+    />
+  </div>
+  <ul class="tree">
+    {{#each (sort-by "name" this.items) as |item|}}
+      <TreeNode
+        @item={{item}}
+        @itemRoute={{@itemRoute}}
+        @activeItem={{@activeItem}}
+        @expandedItems={{this.expandedItems}}
+        @flat={{gt this.filterValue.length 0}}/>
+    {{/each}}
+  </ul>
+</div>

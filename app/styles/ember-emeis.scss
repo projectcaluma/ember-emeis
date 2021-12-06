@@ -35,15 +35,64 @@ $ember-power-select-default-border-radius: 0;
 $ember-power-select-border-color: $global-border;
 @import "ember-power-select";
 
-.scope-tree,
-.scope-tree ul {
-  list-style-type: none;
+$tree_indicator_width: .6em;
+$tree_indicator_height: .6em;
+
+.tree-wrapper {
+  border-right: solid 1px $global-border;
+  padding: 1em;
 }
 
-.scope-tree {
-  padding-left: 0;
+ul.tree,
+ul.tree ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.scope-tree .active {
+ul.tree .active {
   font-weight: bold;
+}
+
+ul.tree ul {
+  margin-left: $tree_indicator_width;
+}
+
+ul.tree li {
+  margin-left: calc($tree_indicator_width/2);
+  border-left: thin solid $global-border;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+ul.tree li:last-child {
+  border-left: none;
+}
+
+ul.tree li:before {
+  width: $tree_indicator_width - 0.15em;
+  height: $tree_indicator_height;
+  margin-right: 0.15em;
+  vertical-align: top;
+  border-bottom: thin solid $global-border;
+  content: "";
+  display: inline-block;
+}
+
+ul.tree li.childless:before {
+  width: calc($tree_indicator_width * 3 - 0.5em);
+  height: $tree_indicator_height;
+  vertical-align: top;
+  border-bottom: thin solid $global-border;
+  content: "";
+  display: inline-block;
+}
+
+ul.tree li:last-child:before {
+  border-left: thin solid $global-border;
+}
+
+ul.tree li button.tree-node-icon {
+  margin: 0 -.25em .25em -.25em;
 }

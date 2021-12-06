@@ -1,11 +1,14 @@
 <SectionTitle @model="scopes" />
 
 <div class="uk-grid">
-  <ul class="scope-tree uk-width-1-4 uk-first-column" {{did-insert (perform this.fetchData)}}>
-    {{#each this.rootScopes as |scope|}}
-      <TreeNode @scope={{scope}} @active={{this.activeScope}}></TreeNode>
-    {{/each}}
-  </ul>
+  <div class="uk-width-1-4 uk-first-column tree-wrapper" {{did-insert (perform this.fetchData)}}>
+    <Tree
+      class="uk-margin-small-left"
+      @items={{this.rootScopes}}
+      @itemRoute="scopes.edit"
+      @activeItem={{this.activeScope}}
+    />
+  </div>
   <div class="uk-width-3-4">
     {{outlet}}
   </div>

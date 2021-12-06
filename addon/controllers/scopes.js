@@ -1,16 +1,14 @@
 import Controller from "@ember/controller";
-import { task, lastValue } from "ember-concurrency";
 import { inject as service } from "@ember/service";
+import { task, lastValue } from "ember-concurrency";
 
 export default class ScopesController extends Controller {
-  @lastValue("fetchData") scopes;
   @service router;
+  @lastValue("fetchData") scopes;
 
   @task
   *fetchData() {
     const data = yield this.store.findAll("scope");
-
-    console.log(this.router);
     return data;
   }
 
@@ -19,6 +17,6 @@ export default class ScopesController extends Controller {
   }
 
   get rootScopes() {
-    return this.scopes?.filter((scope) => scope.level == 0);
+    return this.scopes?.filter((scope) => scope.level === 0);
   }
 }

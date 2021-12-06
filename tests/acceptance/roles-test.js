@@ -24,7 +24,6 @@ module("Acceptance | roles", function (hooks) {
     const role = this.server.createList("role", 10)[0];
 
     await visit("/roles");
-    await settled();
 
     assert.strictEqual(currentURL(), "/roles");
 
@@ -119,7 +118,7 @@ module("Acceptance | roles", function (hooks) {
     });
 
     await visit(`/roles`);
-    await settled();
+
     assert.dom("[data-test-role-name]").exists({ count: 1 });
 
     await click("[data-test-role-name] a");

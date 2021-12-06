@@ -4,7 +4,6 @@ import {
   fillIn,
   click,
   waitUntil,
-  settled,
 } from "@ember/test-helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl } from "ember-intl/test-support";
@@ -26,7 +25,6 @@ module("Acceptance | scopes", function (hooks) {
     const scope = this.server.createList("scope", 10)[0];
 
     await visit("/scopes");
-    await settled();
 
     assert.strictEqual(currentURL(), "/scopes");
 
@@ -121,7 +119,7 @@ module("Acceptance | scopes", function (hooks) {
     const scope = this.server.create("scope");
 
     await visit(`/scopes`);
-    await settled();
+
     assert.dom("[data-test-scope-name]").exists({ count: 1 });
 
     await click("[data-test-scope-name] a");
@@ -151,7 +149,6 @@ module("Acceptance | scopes", function (hooks) {
     const scope = this.server.create("scope");
 
     await visit(`/scopes/${scope.id}`);
-    await settled();
 
     assert.dom("[data-test-scopes-edit-index-link]").exists();
     assert.dom("[data-test-scopes-edit-acl-link]").exists();

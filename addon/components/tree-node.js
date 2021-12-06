@@ -8,14 +8,17 @@ export default class TreeNodeComponent extends Component {
 
   @action
   toggle() {
-    console.log(this.expandedByUser);
-    this.expandedByUser = !this.expandedByUser;
+    if (this.expandedByUser === null) {
+      this.expandedByUser = !this.expanded;
+    } else {
+      this.expandedByUser = !this.expandedByUser;
+    }
   }
 
   get expandedDefault() {
     return (
-      this.args.scope.level === 0 ||
-      this.args.activeScope?.id === this.args.scope.id
+      this.args.item.level === 0 ||
+      this.args.activeItem?.id === this.args.item.id
     );
   }
 
