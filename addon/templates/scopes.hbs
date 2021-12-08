@@ -1,7 +1,7 @@
 <SectionTitle @model="scopes" />
 
 <div class="uk-grid">
-  <div class="uk-width-1-4 uk-first-column tree-wrapper" {{did-insert (perform this.fetchData)}}>
+  <div class="uk-width-1-4 uk-first-column tree-wrapper">
     <Tree
       class="uk-margin-small-left"
       @items={{this.rootScopes}}

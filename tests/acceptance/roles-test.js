@@ -24,6 +24,7 @@ module("Acceptance | roles", function (hooks) {
     const role = this.server.createList("role", 10)[0];
 
     await visit("/roles");
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
 
     assert.strictEqual(currentURL(), "/roles");
@@ -119,6 +120,7 @@ module("Acceptance | roles", function (hooks) {
     });
 
     await visit(`/roles`);
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
     assert.dom("[data-test-role-name]").exists({ count: 1 });
 

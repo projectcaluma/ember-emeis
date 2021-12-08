@@ -20,23 +20,27 @@ module("Acceptance | scopes", function (hooks) {
   setupRequestAssertions(hooks);
   setupIntl(hooks, ["en"]);
 
-  test("list view /scopes", async function (assert) {
-    assert.expect(4);
+  test("tree view /scopes", async function (assert) {
+    assert.expect(3);
 
-    const scope = this.server.createList("scope", 10)[0];
+    const root = this.server.create("scope");
+    const level1 = this.server.createList("scope", 3, {
+      level: 1,
+      parent: root,
+    });
+    this.server.createList("scope", 2, { level: 2, parent: level1[0] });
 
     await visit("/scopes");
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
 
     assert.strictEqual(currentURL(), "/scopes");
 
-    assert.dom("[data-test-scope-name]").exists({ count: 10 });
+    // only root and first level is shown by default
+    assert.dom("[data-test-node-id]").exists({ count: 4 });
     assert
-      .dom(`[data-test-scope-desc="${scope.id}"]`)
-      .hasText(scope.description.en);
-    assert
-      .dom(`[data-test-scope-name="${scope.id}"] a`)
-      .hasAttribute("href", `/scopes/${scope.id}`);
+      .dom(`[data-test-node-id="${root.id}"]`)
+      .hasAttribute("href", `/scopes/${root.id}`);
   });
 
   test("detail view /scopes/:id", async function (assert) {
@@ -87,7 +91,7 @@ module("Acceptance | scopes", function (hooks) {
 
     await visit("/scopes");
     assert.strictEqual(currentURL(), "/scopes");
-    assert.dom("[data-test-scope-name]").doesNotExist();
+    assert.dom("[data-test-node-id]").doesNotExist();
 
     await click("[data-test-new]");
     assert.strictEqual(currentURL(), "/scopes/new");
@@ -121,10 +125,11 @@ module("Acceptance | scopes", function (hooks) {
     const scope = this.server.create("scope");
 
     await visit(`/scopes`);
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
-    assert.dom("[data-test-scope-name]").exists({ count: 1 });
+    assert.dom("[data-test-node-id]").exists({ count: 1 });
 
-    await click("[data-test-scope-name] a");
+    await click("[data-test-node-id]");
     assert.strictEqual(currentURL(), `/scopes/${scope.id}`);
     await waitUntil(
       () =>
@@ -140,8 +145,8 @@ module("Acceptance | scopes", function (hooks) {
     // Probably some runloop issue.
     await waitUntil(() => currentURL() !== `/scopes/${scope.id}`);
 
-    assert.strictEqual(currentURL(), `/scopes?page=1`);
-    assert.dom("[data-test-scope-name]").doesNotExist();
+    assert.strictEqual(currentURL(), "/scopes");
+    assert.dom("[data-test-node-id]").doesNotExist();
   });
 
   test("list view /scopes/:id/acl", async function (assert) {
@@ -151,6 +156,7 @@ module("Acceptance | scopes", function (hooks) {
     const scope = this.server.create("scope");
 
     await visit(`/scopes/${scope.id}`);
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
 
     assert.dom("[data-test-scopes-edit-index-link]").exists();

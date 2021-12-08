@@ -4,7 +4,7 @@
       <UkIcon @icon={{if (or (includes @item.id @expandedItems) this.expanded) "chevron-down" "chevron-right"}} />
     </UkButton>
   {{/if}}
-  <LinkTo @route={{@itemRoute}} @model={{@item}} class="uk-link-text">
+  <LinkTo @route={{@itemRoute}} @model={{@item}} class="uk-link-text" data-test-node-id={{@item.id}}>
     {{@item.name}}{{#if (gt @item.children.length 0)}} ({{@item.children.length}}){{/if}}
   </LinkTo>
   {{#if (and (not @flat) (or (includes @item.id @expandedItems) (and this.expanded @item.children)))}}

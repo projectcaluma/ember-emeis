@@ -6,10 +6,10 @@
     <Input
       class="uk-input tree-search"
       aira-label="search"
-      id="search"
       @type="search"
       @value={{this.filterValue}}
       placeholder={{t "emeis.search.placeholder"}}
+      data-test-tree-search
       {{on "input" (perform this.filter)}}
     />
   </div>
