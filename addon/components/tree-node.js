@@ -35,7 +35,7 @@ export default class TreeNodeComponent extends Component {
     return (
       !this.args.flat &&
       this.args.item.children &&
-      (this.args.expandedItems.find((item) => item.id === this.args.item.id) ||
+      (this.args.expandedItems?.find((item) => item.id === this.args.item.id) ||
         (this.expandedByUser !== null
           ? this.expandedByUser
           : this.expandedDefault))

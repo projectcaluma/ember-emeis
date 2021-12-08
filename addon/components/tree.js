@@ -21,7 +21,7 @@ export default class TreeComponent extends Component {
   }
 
   get expandedItems() {
-    return this.args.activeItem.findParents();
+    return this.args.activeItem?.findParents();
   }
 
   @action

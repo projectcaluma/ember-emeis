@@ -34,7 +34,7 @@ module("Acceptance | scopes", function (hooks) {
     // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
 
-    assert.strictEqual(currentURL(), "/scopes");
+    assert.strictEqual(currentURL(), `/scopes/${root.id}`);
 
     // only root and first level is shown by default
     assert.dom("[data-test-node-id]").exists({ count: 4 });
@@ -47,7 +47,7 @@ module("Acceptance | scopes", function (hooks) {
     assert.expect(7);
 
     const scope = this.server.create("scope");
-    const parent = this.server.create("scope");
+    const futureParent = this.server.create("scope");
 
     await visit(`/scopes/${scope.id}`);
 
@@ -69,7 +69,7 @@ module("Acceptance | scopes", function (hooks) {
     await fillIn('[name="name"]', name);
     await fillIn('[name="description"]', description);
 
-    await selectChoose(".ember-power-select-trigger", parent.name.en);
+    await selectChoose(".ember-power-select-trigger", futureParent.name.en);
 
     this.assertRequest("PATCH", `/api/v1/scopes/${scope.id}`, (request) => {
       const { attributes, relationships } = JSON.parse(
@@ -78,7 +78,7 @@ module("Acceptance | scopes", function (hooks) {
 
       assert.strictEqual(attributes.name.en, name);
       assert.strictEqual(attributes.description.en, description);
-      assert.strictEqual(relationships.parent.data.id, parent.id);
+      assert.strictEqual(relationships.parent.data.id, futureParent.id);
     });
     await click("[data-test-save]");
 
