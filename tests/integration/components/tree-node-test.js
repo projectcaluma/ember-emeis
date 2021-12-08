@@ -1,26 +1,51 @@
 import { render } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupRenderingTest } from "ember-qunit";
+import faker from "faker";
 import { module, test } from "qunit";
+
+const generateItems = (count) => {
+  const items = [];
+  let level = 0;
+  while (count > 0) {
+    const parent = items ? items[items.length - 1] : null;
+    const item = {
+      name: faker.company.companyName(),
+      id: Math.floor(Math.random() * 1000000),
+      level,
+      children: [],
+      parent,
+    };
+    items.push(item);
+    if (parent) parent.children.push(item);
+    level++;
+    count--;
+  }
+  return items;
+};
 
 module("Integration | Component | tree-node", function (hooks) {
   setupRenderingTest(hooks);
+  hooks.beforeEach(function () {
+    const items = generateItems(3);
+
+    this.set("items", items);
+    this.set("item", items[0]);
+    this.set("itemRoute", "/scope/edit");
+    this.set("activeItem", items[1]);
+    this.set("expandedItems", [items[1].id]);
+  });
 
   test("it renders", async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
-    await render(hbs`<TreeNode />`);
-
-    assert.dom(this.element).hasText("");
-
-    // Template block usage:
     await render(hbs`
-      <TreeNode>
-        template block text
-      </TreeNode>
-    `);
+      <TreeNode
+        @item={{this.item}}
+        @itemRoute={{this.itemRoute}}
+        @activeItem={{this.activeItem}}
+        @expandedItems={{[this.expandedItems]}}
+        @flat={{true}}
+      />`);
 
-    assert.dom(this.element).hasText("template block text");
+    assert.dom(this.element).hasText(`${this.items[0].name} (1)`);
   });
 });
