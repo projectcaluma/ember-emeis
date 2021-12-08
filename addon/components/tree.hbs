@@ -1,6 +1,4 @@
-<div ...attributes
-  {{did-insert (perform this.findAnchestors)}}
-  {{did-update (perform this.findAnchestors) @activeItem}}>
+<div ...attributes>
   <div class="uk-inline uk-margin-small-bottom uk-width-1-1">
     <span class="uk-form-icon" uk-icon="icon: search"></span>
     <Input
@@ -10,7 +8,7 @@
       @value={{this.filterValue}}
       placeholder={{t "emeis.search.placeholder"}}
       data-test-tree-search
-      {{on "input" (perform this.filter)}}
+      {{on "input" this.filter}}
     />
   </div>
   <ul class="tree">
@@ -20,7 +18,7 @@
         @itemRoute={{@itemRoute}}
         @activeItem={{@activeItem}}
         @expandedItems={{this.expandedItems}}
-        @flat={{gt this.filterValue.length 0}}/>
+        @flat={{this.hasFilter}}/>
     {{/each}}
   </ul>
 </div>

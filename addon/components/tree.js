@@ -1,67 +1,53 @@
+import { isArray } from "@ember/array";
+import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { lastValue, restartableTask } from "ember-concurrency";
 
 export default class TreeComponent extends Component {
   @service store;
 
-  @tracked
-  filterValue;
+  @tracked filterValue;
 
-  @lastValue("filter") filtered;
-  @lastValue("findAnchestors") expandedItems;
+  @tracked filtered;
 
   get items() {
     if (!this.filterValue) return this.args.items;
     return this.filtered;
   }
 
-  @restartableTask
-  *findAnchestors() {
-    return yield this.findParents(this.args.activeItem);
+  get hasFilter() {
+    return !!this.filterValue;
   }
 
-  async findParents(item) {
-    const reducer = async (anchestors, item) => {
-      if (item) {
-        const parent = await item.parent;
-        if (parent) {
-          anchestors.push(parent.id);
-          return await reducer(anchestors, parent);
-        }
-      }
-      return anchestors;
-    };
-    const res = await reducer([], item);
-    return res;
+  get expandedItems() {
+    return this.args.activeItem.findParents();
   }
 
-  @restartableTask
-  *filter(event) {
+  @action
+  filter(event) {
     const filterItems = (
       items,
-      value = this.filterValue,
-      includedKeys = ["name", "description"],
-      results = []
+      searchTerm = this.filterValue,
+      includedKeys = ["name", "description"]
     ) => {
-      if (value && items && items.filter && items.forEach) {
-        const ffn = (i) => {
-          for (const key of includedKeys) {
-            if (i[key] && i[key].toLowerCase().includes(value.toLowerCase())) {
-              return true;
-            }
-          }
-          return false;
-        };
-        items.filter(ffn).map((i) => results.push(i));
-        items.forEach((i) =>
-          filterItems(i.children, value, includedKeys, results)
-        );
+      if (!searchTerm || !items || !isArray(items)) {
+        return [];
       }
-      return results;
+      const ownMatches = items.filter((item) =>
+        includedKeys.find((key) =>
+          item[key]?.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+
+      const childMatches = items
+        .filter((item) => item.children)
+        .flatMap((item) =>
+          filterItems(item.children, searchTerm, includedKeys)
+        );
+      return [...ownMatches, ...childMatches];
     };
 
-    return yield filterItems(this.args.items, event.target.value);
+    this.filtered = filterItems(this.args.items, event.target.value);
   }
 }

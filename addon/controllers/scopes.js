@@ -5,6 +5,9 @@ export default class ScopesController extends Controller {
   @service router;
 
   get activeScope() {
+    if (this.router.currentRouteName !== "ember-emeis.scopes.edit.index") {
+      return null;
+    }
     return this.router.currentRoute.attributes;
   }
 

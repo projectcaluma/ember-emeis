@@ -12,4 +12,14 @@ export default class ScopeModel extends LocalizedModel {
   @belongsTo("scope", { inverse: "children", async: false }) parent;
   @hasMany("scope", { inverse: "parent", async: false }) children;
   @hasMany("acl") acls;
+
+  findParents() {
+    const anchestors = [];
+    let node = this;
+    while (node.parent) {
+      anchestors.push(node.parent);
+      node = node.parent;
+    }
+    return anchestors;
+  }
 }

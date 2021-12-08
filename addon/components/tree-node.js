@@ -1,10 +1,11 @@
 import { action } from "@ember/object";
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { inject as service } from "@ember/service";
 
 export default class TreeNodeComponent extends Component {
-  @tracked
-  expandedByUser = null;
+  @tracked expandedByUser = null;
+  @service router;
 
   @action
   toggle() {
@@ -12,6 +13,14 @@ export default class TreeNodeComponent extends Component {
       this.expandedByUser = !this.expanded;
     } else {
       this.expandedByUser = !this.expandedByUser;
+    }
+
+    if (
+      this.args.activeItem
+        ?.findParents()
+        .find((parent) => parent.id === this.args.item.id)
+    ) {
+      this.router.transitionTo("ember-emeis.scopes.edit", this.args.item.id);
     }
   }
 
@@ -23,8 +32,13 @@ export default class TreeNodeComponent extends Component {
   }
 
   get expanded() {
-    return this.expandedByUser !== null
-      ? this.expandedByUser
-      : this.expandedDefault;
+    return (
+      !this.args.flat &&
+      this.args.item.children &&
+      (this.args.expandedItems.find((item) => item.id === this.args.item.id) ||
+        (this.expandedByUser !== null
+          ? this.expandedByUser
+          : this.expandedDefault))
+    );
   }
 }
