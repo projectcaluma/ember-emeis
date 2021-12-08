@@ -86,7 +86,7 @@ module("Acceptance | data-table", function (hooks) {
       assert.strictEqual(request.queryParams["page[number]"], "2");
     });
     await click("[data-test-next-page] button");
-
+    await settled();
     assert.strictEqual(currentURL(), "/permissions?page=2");
 
     await settled();
