@@ -31,6 +31,28 @@
   font-size: 0;
 }
 
+.search-input-form {
+  button.search-reset-icon {
+    border-left: none;
+    right: 0;
+    left: unset;
+  }
+
+  input.uk-search-input {
+    padding: 0 40px;
+  }
+
+  input:focus ~ button.uk-search-icon  {
+    border-color: #1e87f0;
+    border-right-color: transparent;
+  }
+
+  input:focus ~ button.search-reset-icon  {
+    border-color: #1e87f0;
+    border-left-color: transparent;
+  }
+}
+
 $ember-power-select-default-border-radius: 0;
 $ember-power-select-border-color: $global-border;
 @import "ember-power-select";

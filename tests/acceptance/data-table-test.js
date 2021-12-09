@@ -47,12 +47,13 @@ module("Acceptance | data-table", function (hooks) {
       "Test currentURL is /permissions?search=test"
     );
 
-    this.assertRequest("GET", "/api/v1/permissions", (request) => {
-      assert.notOk(
-        request.queryParams.search,
-        "Test queryParam search is unset"
-      );
-    });
+    await click("[data-test-search-reset]");
+    assert.strictEqual(
+      currentURL(),
+      "/permissions",
+      "Test currentURL is reset to /permissions"
+    );
+
     await fillIn("[data-test-search-input]", "");
     await click("[data-test-search-submit]");
     assert.strictEqual(

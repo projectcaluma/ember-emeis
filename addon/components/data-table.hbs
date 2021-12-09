@@ -1,7 +1,8 @@
 <div class="uk-flex uk-flex-right uk-width-1">
   <form
-    class="uk-search uk-search-default uk-width-1-3"
+    class="uk-search uk-search-default uk-width-1-3 search-input-form"
     {{on "submit" this.updateSearch}}
+    {{on "reset" this.resetSearch}}
   >
     <input
       name="search"
@@ -10,13 +11,20 @@
       value={{this.search}}
       placeholder={{t "emeis.search.placeholder"}}
       data-test-search-input
-    />
+      />
     <button
       type="submit"
-      class="uk-search-icon-flip"
+      class="uk-search-icon"
       uk-search-icon
       data-test-search-submit
     ></button>
+    {{#if this.search}}
+      <button
+        type="reset"
+        class="uk-search-icon search-reset-icon" uk-icon="close"
+        data-test-search-reset
+      />
+    {{/if}}
   </form>
 </div>
 

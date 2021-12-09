@@ -96,6 +96,13 @@ export default class DataTableComponent extends Component {
   }
 
   @action
+  resetSearch(event) {
+    event.preventDefault();
+    this.search = "";
+    this.fetchData.perform();
+  }
+
+  @action
   updatePage(page) {
     if (this.args.updatePage) {
       this.args.updatePage(page);
