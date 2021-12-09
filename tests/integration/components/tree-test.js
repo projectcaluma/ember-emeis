@@ -20,6 +20,18 @@ module("Integration | Component | tree", function (hooks) {
       parent: level1[0],
     });
 
+    grandchildren.forEach((grandchild) => {
+      grandchild.findParents = () => {
+        const anchestors = [];
+        let node = grandchild;
+        while (node.parent) {
+          anchestors.push(node.parent);
+          node = node.parent;
+        }
+        return anchestors;
+      };
+    });
+
     const store = this.owner.lookup("service:store");
     const scopes = await store.findAll("scope");
     const rootScopes = scopes.filter((scope) => !scope.parent);

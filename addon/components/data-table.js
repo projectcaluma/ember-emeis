@@ -3,7 +3,8 @@ import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { task, lastValue } from "ember-concurrency";
+import { task } from "ember-concurrency";
+import { useFunction } from "ember-resources";
 
 export default class DataTableComponent extends Component {
   @service store;
@@ -13,7 +14,14 @@ export default class DataTableComponent extends Component {
   @tracked numPages;
   @tracked internalSearch;
   @tracked internalPage = 1;
-  @lastValue("fetchData") models;
+
+  // While using 'useTask' we ended up in an infinite loop.
+  // data = useTask(this, this.fetchData, () => [this.args.filter]);
+  data = useFunction(this, this.fetchData.perform, () => [
+    this.args.filter,
+    this.page,
+    this.search,
+  ]);
 
   get page() {
     return this.args.page || this.internalPage;
@@ -81,7 +89,7 @@ export default class DataTableComponent extends Component {
 
   @action
   updateSearch(submitEvent) {
-    // Prevent reaload because of form submit
+    // Prevent reload because of form submit
     submitEvent.preventDefault();
     this.search = submitEvent.target.elements.search.value;
     this.fetchData.perform();

@@ -59,7 +59,7 @@ module("Integration | Component | data-table", function (hooks) {
   });
 
   test("pagination", async function (assert) {
-    assert.expect(15);
+    assert.expect(19);
 
     this.set("modelName", "role");
     this.set("page", 1);
@@ -72,9 +72,25 @@ module("Integration | Component | data-table", function (hooks) {
     };
 
     await render(hbs`
-      <DataTable @modelName={{this.modelName}} @page={{this.page}}/>
+      <DataTable
+        @modelName={{this.modelName}}
+        @page={{this.page}}
+        as |table|>
+          <table.head as |role|>
+            <td>Heading 1</td>
+            <td>Heading 2</td>
+          </table.head>
+          <table.body as |body|>
+            <body.row>
+              {{#let body.model as |role|}}
+                <td>{{role.name}}</td>
+                <td>{{role.slug}}</td>
+              {{/let}}
+            </body.row>
+          </table.body>
+      </DataTable>
     `);
-    9;
+
     assert.dom("tfoot tr").exists();
 
     assert.dom("tfoot span[uk-pagination-previous]").exists();
@@ -97,12 +113,11 @@ module("Integration | Component | data-table", function (hooks) {
   });
 
   test("search", async function (assert) {
-    assert.expect(5);
-    const testState = [{ search: undefined }, { search: "test" }];
+    assert.expect(4);
+    const search = "test";
 
     const store = this.owner.lookup("service:store");
     store.query = (_, options) => {
-      const { search } = testState.shift();
       assert.strictEqual(options.filter.search, search);
       return { meta: { pagination: { pages: 3 } } };
     };
@@ -112,18 +127,17 @@ module("Integration | Component | data-table", function (hooks) {
         @modelName="role"
       />
     `);
-    9;
 
     assert.dom('form input[name="search"]').exists();
     assert.dom('form button[type="submit"]').exists();
     assert.dom('form input[name="search"]').hasValue("");
 
-    await fillIn('form input[name="search"]', "test");
+    await fillIn('form input[name="search"]', search);
     await click('form button[type="submit"]');
   });
 
   test("external search", async function (assert) {
-    assert.expect(7);
+    assert.expect(6);
     this.setProperties({
       search: undefined,
     });
@@ -141,7 +155,6 @@ module("Integration | Component | data-table", function (hooks) {
         @updateSearch={{set this.search}}
       />
     `);
-    9;
 
     assert.dom('form input[name="search"]').exists();
     assert.dom('form button[type="submit"]').exists();

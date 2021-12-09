@@ -152,8 +152,8 @@ module("Acceptance | scopes", function (hooks) {
   test("list view /scopes/:id/acl", async function (assert) {
     assert.expect(8);
 
-    const acl = this.server.createList("acl", 3)[0];
     const scope = this.server.create("scope");
+    const acl = this.server.createList("acl", 3, { scope })[0];
 
     await visit(`/scopes/${scope.id}`);
     // eslint-disable-next-line ember/no-settled-after-test-helper
