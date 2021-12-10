@@ -10,7 +10,10 @@ export default class ScopesRoute extends Route {
   }
 
   redirect(scopes, transition) {
-    if (transition.targetName === "ember-emeis.scopes.index") {
+    if (
+      transition.targetName === "ember-emeis.scopes.index" &&
+      scopes.firstObject
+    ) {
       this.router.replaceWith("ember-emeis.scopes.edit", scopes.firstObject);
     }
   }
