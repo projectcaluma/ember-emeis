@@ -1,4 +1,11 @@
-import { visit, currentURL, click, fillIn, settled } from "@ember/test-helpers";
+import {
+  visit,
+  currentURL,
+  click,
+  fillIn,
+  settled,
+  waitFor,
+} from "@ember/test-helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupApplicationTest } from "ember-qunit";
 import { module, test } from "qunit";
@@ -47,12 +54,13 @@ module("Acceptance | data-table", function (hooks) {
       "Test currentURL is /permissions?search=test"
     );
 
-    this.assertRequest("GET", "/api/v1/permissions", (request) => {
-      assert.notOk(
-        request.queryParams.search,
-        "Test queryParam search is unset"
-      );
-    });
+    await click("[data-test-search-reset]");
+    assert.strictEqual(
+      currentURL(),
+      "/permissions",
+      "Test currentURL is reset to /permissions"
+    );
+
     await fillIn("[data-test-search-input]", "");
     await click("[data-test-search-submit]");
     assert.strictEqual(
@@ -85,11 +93,10 @@ module("Acceptance | data-table", function (hooks) {
       assert.strictEqual(request.queryParams["page[number]"], "2");
     });
     await click("[data-test-next-page] button");
-    // eslint-disable-next-line ember/no-settled-after-test-helper
-    await settled();
-    assert.strictEqual(currentURL(), "/permissions?page=2");
+    // TODO find out why settled is not working here
+    await waitFor("[data-test-page]", { timeout: 2000 });
 
-    await settled();
+    assert.strictEqual(currentURL(), "/permissions?page=2");
     assert.dom("[data-test-page]").hasText("2 / 5");
 
     assert.dom("[data-test-next-page]").doesNotHaveClass("uk-disabled");
