@@ -87,8 +87,33 @@ export default class EmeisOptionsService extends Service {
 
   // show only a subset of the main navigation entries
   navigationEntries = ["users", "scopes"];
+
+  // define custom fields for a given context (user, scope, rule or permission)
+  metaFields = {
+    user: [],
+    scope: [
+      {
+        slug: "test-input",
+        label: "translation key",
+        type: "text",
+        visible: true,
+        readOnly: false
+      }
+    ]
+  }
 }
 ```
+
+*Watch out* - the translation key has to be present in your local translation files.
+
+There are special options available for `type` and `visible`.
+
+#### **type** - meta field
+Can either be a *text* or a *choice*.
+
+#### **visible** meta field
+Accepts a boolean value for static visibility or a function which evaluates to a boolean value.
+Submitted functions will evaluate while rendering. So keep in mind to provide necessary context.
 
 ### Emeis store
 

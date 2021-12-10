@@ -94,3 +94,14 @@ emeis:
       select: "Klicken Sie hier um einen Benutzer auszuwählen"
       select-different: "Anderen Benutzer auswählen"
 
+  options:
+    meta:
+      user:
+        example: "Beispiel für benutzerdefiniertes Textfeld"
+      scope:
+        meta-example: "Beispiel für benutzerdefiniertes Dropdown-Feld"
+        options:
+          label-1: "Schinken"
+          label-2: "Käse"
+          label-3: "Zwiebeln"
+        meta-example-2: "Beispiel für benutzerdefiniertes Textfeld"

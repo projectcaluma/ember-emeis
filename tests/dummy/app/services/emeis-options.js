@@ -1,6 +1,8 @@
-import Service from "@ember/service";
+import Service, { inject as service } from "@ember/service";
 
 export default class EmeisOptionsService extends Service {
+  @service intl;
+
   emailAsUsername = false;
   pageSize = 10;
   // additionalUserFields = {
@@ -12,10 +14,7 @@ export default class EmeisOptionsService extends Service {
     user: [
       {
         slug: "user-meta-example",
-        label: {
-          en: "Example for custom text field",
-          de: "Beispiel für benutzerdefiniertes Textfeld",
-        },
+        label: "emeis.options.meta.user.example", // ember-intl translation key
         type: "text",
         visible: true,
         readOnly: false,
@@ -24,46 +23,31 @@ export default class EmeisOptionsService extends Service {
     scope: [
       {
         slug: "meta-example",
-        label: {
-          en: "Example for custom choice field",
-          de: "Beispiel für benutzerdefiniertes Dropdown-Feld",
-        },
+        label: "emeis.options.meta.scope.meta-example",
         type: "choice", // initially supported: "text", "choice"
         options: [
           {
-            value: "option-1",
-            label: {
-              en: "Ham",
-              de: "Schinken",
-            },
+            value: "Option 1",
+            label: "emeis.options.meta.scope.options.label-1", // again a ember-intl translation key
           },
           {
             value: "Option 2",
-            label: {
-              en: "Cheese",
-              de: "Käse",
-            },
+            label: "emeis.options.meta.scope.options.label-2",
           },
           {
             value: "Option 3",
-            label: {
-              en: "Onion",
-              de: "Zwiebel",
-            },
+            label: "emeis.options.meta.scope.options.label-3",
           },
         ],
-        visible: true,
+        visible: () => true, // boolean or function which evaluates to a boolean value
         readOnly: false,
       },
       {
         slug: "meta-example-2",
-        label: {
-          en: "Example for custom text field",
-          de: "Beispiel für benutzerdefiniertes Textfeld",
-        },
+        label: "emeis.options.meta.scope.meta-example-2",
         type: "text",
-        visible: true,
-        readOnly: false,
+        visible: () => 4 > 2,
+        readOnly: true,
       },
     ],
   };
