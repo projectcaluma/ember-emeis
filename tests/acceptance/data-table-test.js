@@ -93,12 +93,10 @@ module("Acceptance | data-table", function (hooks) {
       assert.strictEqual(request.queryParams["page[number]"], "2");
     });
     await click("[data-test-next-page] button");
-    // eslint-disable-next-line ember/no-settled-after-test-helper
-    await settled();
-    assert.strictEqual(currentURL(), "/permissions?page=2");
-
     // TODO find out why settled is not working here
     await waitFor("[data-test-page]", { timeout: 2000 });
+
+    assert.strictEqual(currentURL(), "/permissions?page=2");
     assert.dom("[data-test-page]").hasText("2 / 5");
 
     assert.dom("[data-test-next-page]").doesNotHaveClass("uk-disabled");
