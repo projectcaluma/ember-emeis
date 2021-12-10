@@ -61,12 +61,24 @@ $ember-power-select-default-border-radius: 0;
 $ember-power-select-border-color: $global-border;
 @import "ember-power-select";
 
+.emeis-border-right {
+  border-right: solid 1px $global-border;
+}
+
 $tree_indicator_width: 0.6em;
 $tree_indicator_height: 0.6em;
 
 .tree-wrapper {
-  border-right: solid 1px $global-border;
-  padding: 1em;
+  display: flex;
+  flex-direction: column;
+
+  padding-right: $tree_indicator_width;
+  position: relative;
+  max-height: 100%;
+
+  .tree {
+    overflow-y: auto;
+  }
 }
 
 ul.tree,
