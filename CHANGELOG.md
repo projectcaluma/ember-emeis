@@ -1,3 +1,16 @@
+# [2.1.0](https://github.com/projectcaluma/ember-emeis/compare/v2.0.1...v2.1.0) (2021-12-10)
+
+
+### Bug Fixes
+
+* german translation ([#310](https://github.com/projectcaluma/ember-emeis/issues/310)) ([7eac49f](https://github.com/projectcaluma/ember-emeis/commit/7eac49fbc08662d21e1e48c3d1c62282dd72aee5))
+
+
+### Features
+
+* adds reset-search button to search bar ([#333](https://github.com/projectcaluma/ember-emeis/issues/333)) ([520269e](https://github.com/projectcaluma/ember-emeis/commit/520269e894fdfdfdd20617861818a0d0438a7811))
+* tree view for scopes ([#328](https://github.com/projectcaluma/ember-emeis/issues/328)) ([36e5976](https://github.com/projectcaluma/ember-emeis/commit/36e59769b60b832370cd12c1381f1e30429c9de6))
+
 ## [2.0.1](https://github.com/projectcaluma/ember-emeis/compare/v2.0.0...v2.0.1) (2021-11-18)
 
 
