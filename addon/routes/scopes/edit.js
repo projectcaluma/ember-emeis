@@ -10,6 +10,6 @@ export default class ScopesEditRoute extends Route {
 
   @handleModelErrors({ routeFor404: "scopes.index" })
   model({ scope_id: id }) {
-    return this.store.findRecord("scope", id);
+    return this.store.peekRecord("scope", id);
   }
 }

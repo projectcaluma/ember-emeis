@@ -18,6 +18,9 @@ export default class RelationshipSelectComponent extends Component {
   @restartableTask
   @handleModelErrors
   *fetchModels(search) {
+    if (this.args.model) {
+      return this.args.model;
+    }
     if (typeof search === "string") {
       yield timeout(500);
       return yield this.store.query(this.args.modelName, {

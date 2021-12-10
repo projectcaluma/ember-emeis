@@ -139,6 +139,7 @@ module("Acceptance | permissions", function (hooks) {
     });
 
     await visit(`/permissions`);
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
     assert.dom("[data-test-permission-name]").exists({ count: 1 });
 

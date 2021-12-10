@@ -1356,6 +1356,15 @@
     ember-cli-version-checker "^5.1.2"
     semver "^7.3.5"
 
+"@embroider/addon-shim@^0.47.0":
+  version "0.47.2"
+  resolved "https://registry.yarnpkg.com/@embroider/addon-shim/-/addon-shim-0.47.2.tgz#a1dc77e8cf00d2c797f6551cba9a6868d8166fec"
+  integrity sha512-5M/q5CdrTyInczKlH+f54vpoMROz/DrbMTWSHHauFx5grCyLROkgY8iVcmZEF8H0h7LFO74RpB42fo2w6NcgdA==
+  dependencies:
+    "@embroider/shared-internals" "^0.47.2"
+    ember-auto-import "^2.2.0"
+    semver "^7.3.5"
+
 "@embroider/core@0.29.0":
   version "0.29.0"
   resolved "https://registry.yarnpkg.com/@embroider/core/-/core-0.29.0.tgz#51421fbb2bcee607dc6e162400e3502a121230d2"
@@ -1548,7 +1557,7 @@
     semver "^7.3.5"
     typescript-memoize "^1.0.1"
 
-"@embroider/shared-internals@0.47.2":
+"@embroider/shared-internals@0.47.2", "@embroider/shared-internals@^0.47.2":
   version "0.47.2"
   resolved "https://registry.yarnpkg.com/@embroider/shared-internals/-/shared-internals-0.47.2.tgz#24e9fa0dd9c529d5c996ee1325729ea08d1fa19f"
   integrity sha512-SxdZYjAE0fiM5zGDz+12euWIsQZ1tsfR1k+NKmiWMyLhA5T3pNgbR2/Djvx/cVIxOtEavGGSllYbzRKBtV4xMg==
@@ -5793,7 +5802,7 @@ ember-assign-helper@^0.3.0:
     ember-cli-babel "^7.19.0"
     ember-cli-htmlbars "^4.3.1"
 
-ember-auto-import@2.2.4:
+ember-auto-import@2.2.4, ember-auto-import@^2.2.0:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/ember-auto-import/-/ember-auto-import-2.2.4.tgz#68c08cb0b7533293024c97387fc449b00561185a"
   integrity sha512-iXHH+bSMP/uWvJmIhjt+PZz4ymqOLccIxZUouVcUFLKA5EAWE7gamlA684m0pIbSE/V9zKpOul4OfIgKXFprBg==
@@ -6664,6 +6673,13 @@ ember-resolver@8.0.3:
     ember-cli-babel "^7.26.6"
     ember-cli-version-checker "^5.1.2"
     resolve "^1.20.0"
+
+ember-resources@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/ember-resources/-/ember-resources-4.1.2.tgz#cce86d19fc8cba4dc553ef7e087efc716f698cc4"
+  integrity sha512-Jg1mSy2yF2KvXyopeym5Ey986+Cwvs3VM8MYsShPkcm5YaZDzyzqW5iA/6eqkNY0pWyOiVGrGopo6asQiHse4A==
+  dependencies:
+    "@embroider/addon-shim" "^0.47.0"
 
 ember-rfc176-data@^0.3.15, ember-rfc176-data@^0.3.17:
   version "0.3.17"

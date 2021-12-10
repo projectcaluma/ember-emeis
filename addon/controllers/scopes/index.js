@@ -1,3 +1,0 @@
-import PaginationController from "ember-emeis/-private/controllers/pagination";
-
-export default class ScopesIndexController extends PaginationController {}

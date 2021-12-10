@@ -33,6 +33,7 @@ module("Acceptance | users", function (hooks) {
     const user = this.server.createList("user", 10)[0];
 
     await visit("/users");
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
 
     assert.strictEqual(currentURL(), "/users");
@@ -54,6 +55,7 @@ module("Acceptance | users", function (hooks) {
     this.intl.locale = ["en", "de"];
 
     await visit(`/users/${user.id}`);
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
 
     assert.dom('[name="address"]').doesNotExist();
@@ -73,6 +75,7 @@ module("Acceptance | users", function (hooks) {
     this.intl.locale = ["en", "de"];
 
     await visit(`/users/${user.id}`);
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
 
     assert.strictEqual(currentURL(), `/users/${user.id}`);
@@ -218,6 +221,7 @@ module("Acceptance | users", function (hooks) {
     const acl = this.server.createList("acl", 3)[0];
 
     await visit(`/users`);
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
     // Each acl also creates a user
     assert.dom("[data-test-user-username]").exists({ count: 4 });
@@ -248,8 +252,7 @@ module("Acceptance | users", function (hooks) {
       assert.strictEqual(request.params.id, acl.id);
     });
     await click("[data-test-acl-delete] button");
-    // For some reason the await click is not actually waiting for the delete task to finish.
-    // Probably some runloop issue.
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
     await waitUntil(() => this.element.querySelector("table thead"));
     assert.dom("[data-test-acl-role]").exists({ count: 2 });
@@ -263,6 +266,7 @@ module("Acceptance | users", function (hooks) {
     const scope = this.server.createList("scope", 2)[0];
 
     await visit(`/users/${user.id}/acl`);
+    // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
     assert.strictEqual(currentURL(), `/users/${user.id}/acl`);
 

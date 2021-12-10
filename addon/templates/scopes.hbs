@@ -1,3 +1,15 @@
 <SectionTitle @model="scopes" />
 
-{{outlet}}
+<div class="uk-grid">
+  <div class="uk-width-1-4 uk-first-column tree-wrapper">
+    <Tree
+      class="uk-margin-small-left"
+      @items={{this.rootScopes}}
+      @itemRoute="scopes.edit"
+      @activeItem={{this.activeScope}}
+    />
+  </div>
+  <div class="uk-width-3-4">
+    {{outlet}}
+  </div>
+</div>
