@@ -1,11 +1,11 @@
 <SectionTitle @model="scopes" />
 
 <div class="uk-grid">
-  <div class="uk-width-1-4 uk-first-column tree-wrapper">
+  <div class="uk-width-1-4 uk-first-column emeis-border-right">
     <Tree
       class="uk-margin-small-left"
       @items={{this.rootScopes}}
-      @itemRoute="scopes.edit"
+      @itemRoute={{this.itemRoute}}
       @activeItem={{this.activeScope}}
     />
   </div>

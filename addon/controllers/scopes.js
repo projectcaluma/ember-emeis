@@ -14,4 +14,11 @@ export default class ScopesController extends Controller {
   get rootScopes() {
     return this.model?.filter((scope) => !scope.parent);
   }
+
+  get itemRoute() {
+    if (this.router.currentRouteName.includes("acl")) {
+      return "scopes.edit.acl";
+    }
+    return "scopes.edit";
+  }
 }
