@@ -16,7 +16,7 @@
       {{/if}}
       {{#if (eq field.type "text")}}
         <input
-          data-test-meta-field-text
+          data-test-meta-field-text={{field.slug}}
           class="uk-input"
           type="text"
           value={{get @model.meta field.slug}}
