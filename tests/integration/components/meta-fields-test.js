@@ -14,6 +14,7 @@ const translations = {
     metaExample2: "Example for custom text field",
     dynamicVisibility: "field with dynamic visibility (visible)",
     dynamicVisibility2: "field with dynamic visibility (unvisible)",
+    dynamicReadOnly: "field with dynamic readOnly state",
   },
 };
 class EmeisOptionsStub extends Service {
@@ -57,6 +58,13 @@ class EmeisOptionsStub extends Service {
         visible: () => 1 > 2,
         readOnly: false,
       },
+      {
+        slug: "dynamic-readOnly",
+        label: "scope.dynamicReadOnly",
+        type: "text",
+        visible: (model) => model.name === "readOnly",
+        readOnly: (model) => model.name === "readOnly",
+      },
     ],
   };
 }
@@ -82,7 +90,7 @@ module("Integration | Component | meta-fields", function (hooks) {
   });
 
   test("it renders meta field of type select and text", async function (assert) {
-    assert.expect(4);
+    assert.expect(6);
 
     await render(hbs`
       <MetaFields
@@ -93,6 +101,9 @@ module("Integration | Component | meta-fields", function (hooks) {
 
     assert.dom(".ember-power-select-trigger").exists();
     assert.dom("[data-test-meta-field-text]").exists({ count: 2 });
+
+    assert.dom(this.element).containsText(translations.scope.metaExample);
+    assert.dom(this.element).containsText(translations.scope.metaExample2);
 
     await selectChoose(".ember-power-select-trigger", "Ham");
     assert.deepEqual(this.model.meta, {
@@ -162,6 +173,27 @@ module("Integration | Component | meta-fields", function (hooks) {
     assert.dom(".ember-power-select-trigger").hasAttribute("aria-disabled");
     assert
       .dom("[data-test-meta-field-text='dynamic-visibility']")
+      .hasAttribute("disabled");
+  });
+
+  test("it renders dynamically disabled meta fields", async function (assert) {
+    assert.expect(2);
+
+    this.model.name = "readOnly";
+
+    await render(hbs`
+      <MetaFields
+        @model={{this.model}}
+        @fields={{this.emeisOptions.metaFields.scope}}
+      />
+    `);
+
+    assert
+      .dom("[data-test-meta-field-text='dynamic-readOnly']")
+      .exists({ count: 1 });
+
+    assert
+      .dom("[data-test-meta-field-text='dynamic-readOnly']")
       .hasAttribute("disabled");
   });
 });

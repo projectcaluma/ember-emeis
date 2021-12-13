@@ -1,9 +1,9 @@
 {{#each @fields as |field|}}
-  {{#if (eval-meta field.visible)}}
+  {{#if (eval-meta field.visible @model)}}
     <EditForm::Element @label={{t field.label}}>
       {{#if (eq field.type "choice")}}
         <PowerSelect
-          @disabled={{field.readOnly}}
+          @disabled={{eval-meta field.readOnly @model}}
           @options={{field.options}}
           @selected={{find-by "value" (get @model.meta field.slug) field.options}}
           @onChange={{fn this.updateMetaField field @model}}
@@ -20,7 +20,7 @@
           class="uk-input"
           type="text"
           value={{get @model.meta field.slug}}
-          disabled={{field.readOnly}}
+          disabled={{eval-meta field.readOnly @model}}
           {{on "input" (fn this.updateMetaField field @model)}}
         >
       {{/if}}
