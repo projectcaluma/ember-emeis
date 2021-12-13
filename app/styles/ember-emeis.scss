@@ -10,6 +10,15 @@
   border: solid 1px $global-border;
 }
 
+[class*="search-reset-icon"] {
+  &:focus,
+  &:hover {
+    background: $global-muted-background;
+  }
+  border: solid 1px $global-border;
+  border-left-color: transparent;
+}
+
 .no-style-button {
   background: none;
   border: none;
@@ -38,21 +47,18 @@
     left: unset;
   }
 
-  button.uk-search-icon {
+  input.uk-search-input {
+    padding: 0 40px;
     border-right-color: transparent;
   }
 
-  input.uk-search-input {
-    padding: 0 40px;
-  }
-
   input:focus ~ button.uk-search-icon {
-    border-color: #1e87f0;
+    border-color: $global-primary-background;
     border-right-color: transparent;
   }
 
   input:focus ~ button.search-reset-icon {
-    border-color: #1e87f0;
+    border-color: $global-primary-background;
     border-left-color: transparent;
   }
 }
