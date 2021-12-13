@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/projectcaluma/ember-emeis/compare/v2.1.0...v2.1.1) (2021-12-13)
+
+
+### Bug Fixes
+
+* tree-node selection in acl tab, tree scroll container ([#335](https://github.com/projectcaluma/ember-emeis/issues/335)) ([a50623e](https://github.com/projectcaluma/ember-emeis/commit/a50623ed668339a664736d0f48bfdaf09a6e5f91))
+
 # [2.1.0](https://github.com/projectcaluma/ember-emeis/compare/v2.0.1...v2.1.0) (2021-12-10)
 
 
