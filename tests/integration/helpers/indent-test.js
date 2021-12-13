@@ -9,7 +9,7 @@ module("Integration | Helper | indent", function (hooks) {
   test("it renders", async function (assert) {
     this.set("inputValue", 3);
 
-    await render(hbs`{{indent inputValue}}`);
+    await render(hbs`{{indent this.inputValue}}`);
 
     assert.strictEqual(this.element.textContent, "\xa0".repeat(9));
   });

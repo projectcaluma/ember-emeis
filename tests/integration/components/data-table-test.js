@@ -1,10 +1,12 @@
 import { render, click, fillIn } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
+import { setupIntl } from "ember-intl/test-support";
 import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 module("Integration | Component | data-table", function (hooks) {
   setupRenderingTest(hooks);
+  setupIntl(hooks);
 
   test("fetch and display correct data", async function (assert) {
     assert.expect(11);
