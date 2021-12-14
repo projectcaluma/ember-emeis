@@ -50,7 +50,7 @@
     {{yield
       (hash
         body=(component "data-table/body" models=this.data.value)
-        head=(component "data-table/head")
+        head=(component "data-table/head" sortedBy=this.sort update=this.updateSort)
         refresh=(perform this.fetchData)
       )
     }}

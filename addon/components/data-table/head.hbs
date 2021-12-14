@@ -1,5 +1,5 @@
 <thead>
   <tr>
-    {{yield}}
+    {{yield (hash sorthead=(component "data-table/head/sortable-th" update=@update sortedBy=@sortedBy))}}
   </tr>
 </thead>

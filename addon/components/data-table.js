@@ -14,14 +14,20 @@ export default class DataTableComponent extends Component {
   @tracked numPages;
   @tracked internalSearch;
   @tracked internalPage = 1;
+  @tracked internalSort;
 
   // While using 'useTask' we ended up in an infinite loop.
   // data = useTask(this, this.fetchData, () => [this.args.filter]);
   data = useFunction(this, this.fetchData.perform, () => [
     this.args.filter,
-    this.page,
     this.search,
+    this.sort,
+    this.page,
   ]);
+
+  get sort() {
+    return this.internalSort || this.args.sort;
+  }
 
   get page() {
     return this.args.page || this.internalPage;
@@ -31,11 +37,27 @@ export default class DataTableComponent extends Component {
     return this.args.search || this.internalSearch;
   }
 
+  set sort(sort) {
+    if (this.args.updateSort) {
+      this.args.updateSort(sort);
+    } else {
+      this.internalSort = sort;
+    }
+  }
+
   set search(search) {
     if (this.args.updateSearch) {
       this.args.updateSearch(search);
     } else {
       this.internalSearch = search;
+    }
+  }
+
+  set page(page) {
+    if (this.args.updatePage) {
+      this.args.updatePage(page);
+    } else {
+      this.internalPage = page;
     }
   }
 
@@ -66,7 +88,7 @@ export default class DataTableComponent extends Component {
 
     let options = {
       filter: { search: this.search, ...(this.args.filter || {}) },
-      sort: this.args.sort,
+      sort: this.sort,
       include: this.args.include || "",
     };
 
@@ -88,27 +110,42 @@ export default class DataTableComponent extends Component {
   }
 
   @action
+  updateSort(sortLabel) {
+    if (this.args.updateSort) {
+      this.args.updateSort(sortLabel);
+    }
+
+    const invers = this.sort[0] === "-";
+
+    if (
+      this.sort === sortLabel ||
+      (invers && this.sort.slice(1) === sortLabel)
+    ) {
+      if (invers) {
+        this.internalSort = undefined;
+      } else {
+        this.internalSort = `-${sortLabel}`;
+      }
+    } else {
+      this.internalSort = sortLabel;
+    }
+  }
+
+  @action
   updateSearch(submitEvent) {
     // Prevent reload because of form submit
     submitEvent.preventDefault();
     this.search = submitEvent.target.elements.search.value;
-    this.fetchData.perform();
   }
 
   @action
   resetSearch(event) {
     event.preventDefault();
     this.search = "";
-    this.fetchData.perform();
   }
 
   @action
   updatePage(page) {
-    if (this.args.updatePage) {
-      this.args.updatePage(page);
-    } else {
-      this.internalPage = page;
-    }
-    this.fetchData.perform();
+    this.page = page;
   }
 }
