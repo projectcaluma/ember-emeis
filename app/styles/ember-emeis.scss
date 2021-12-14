@@ -1,6 +1,14 @@
 @import "ember-uikit/variables-theme";
-
 // you can use the uikit SCSS variables here
+
+$ember-power-select-default-border-radius: 0;
+$ember-power-select-border-color: $global-border;
+@import "ember-power-select";
+
+/* GENERAL INPUTS */
+[class*="uk-width-"] {
+  transition: width 0.3s ease-out;
+}
 
 [class*="uk-search-icon"] {
   &:focus,
@@ -49,7 +57,6 @@
 
   input.uk-search-input {
     padding: 0 40px;
-    border-right-color: transparent;
   }
 
   input:focus ~ button.uk-search-icon {
@@ -62,28 +69,34 @@
     border-left-color: transparent;
   }
 }
+/* END GENERAL INPUTS*/
 
-$ember-power-select-default-border-radius: 0;
-$ember-power-select-border-color: $global-border;
-@import "ember-power-select";
-
-.emeis-border-right {
-  border-right: solid 1px $global-border;
+/* TREE VIEW */
+@media screen and (min-width: 640px) {
+  .tree-border-right {
+    border-right: solid 1px $global-border;
+  }
 }
 
+$tree_node_height: 1.9em;
 $tree_indicator_width: 0.6em;
-$tree_indicator_height: 0.6em;
+$tree_indicator_height: $tree_node_height/2;
+$tree_node_icon_margin: $tree_indicator_height/2;
 
 .tree-wrapper {
   display: flex;
   flex-direction: column;
 
-  padding-right: $tree_indicator_width;
+  padding-right: $tree_node_icon_margin;
   position: relative;
   max-height: 100%;
 
   .tree {
     overflow-y: auto;
+
+    a {
+      line-height: $tree_node_height;
+    }
   }
 }
 
@@ -140,3 +153,4 @@ ul.tree li:last-child:before {
 ul.tree li button.tree-node-icon {
   margin: 0 -0.25em 0.25em -0.25em;
 }
+/* END TREE VIEW */

@@ -11,14 +11,16 @@
       {{on "input" this.filter}}
     />
   </div>
-  <ul class="tree">
-    {{#each (sort-by "name" this.items) as |item|}}
-      <TreeNode
-        @item={{item}}
-        @itemRoute={{@itemRoute}}
-        @activeItem={{@activeItem}}
-        @expandedItems={{this.expandedItems}}
-        @flat={{this.hasFilter}}/>
-    {{/each}}
-  </ul>
+  {{#if this.items}}
+    <ul class="tree">
+      {{#each (sort-by "name" this.items) as |item|}}
+        <TreeNode
+          @item={{item}}
+          @itemRoute={{@itemRoute}}
+          @activeItem={{@activeItem}}
+          @expandedItems={{this.expandedItems}}
+          @flat={{this.hasFilter}}/>
+      {{/each}}
+    </ul>
+  {{/if}}
 </div>
