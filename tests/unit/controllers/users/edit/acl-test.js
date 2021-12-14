@@ -1,10 +1,12 @@
 import { setupMirage } from "ember-cli-mirage/test-support";
+import { setupIntl } from "ember-intl/test-support";
 import { setupTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../../../../helpers/assert-request";
 module("Unit | Controller | users/edit/acl", function (hooks) {
   setupTest(hooks);
+  setupIntl(hooks);
   setupMirage(hooks);
   setupRequestAssertions(hooks);
 

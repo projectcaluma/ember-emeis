@@ -33,7 +33,7 @@ export default class App extends Application {
   // ...
 
   this.engines = {
-    emberEmeis: {
+    "ember-emeis": {
       dependencies: {
         services: ["store", "intl", "notification", "router"],
       },
@@ -54,7 +54,7 @@ export default class App extends Application {
   // ...
 
   this.engines = {
-    emberEmeis: {
+    "ember-emeis": {
       dependencies: {
         services: ["store", "intl", "notification", "router", "emeis-options"],
       },

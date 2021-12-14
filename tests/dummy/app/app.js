@@ -13,7 +13,7 @@ export default class App extends Application {
     super(...args);
 
     this.engines = {
-      emberEmeis: {
+      "ember-emeis": {
         dependencies: {
           services: [
             "store",
