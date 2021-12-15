@@ -62,8 +62,6 @@ module("Integration | Component | data-table", function (hooks) {
 
   test("pagination", async function (assert) {
     assert.expect(15);
-    // TODO: reactivate those tests while having 'useFunction'
-    // the number of test should be 19!
 
     this.set("modelName", "role");
     this.set("page", 1);
@@ -121,19 +119,29 @@ module("Integration | Component | data-table", function (hooks) {
   });
 
   test("search", async function (assert) {
-    assert.expect(3);
+    assert.expect(5);
     const search = "test";
 
     const store = this.owner.lookup("service:store");
+    const expectedSearch = [undefined, search];
     store.query = (_, options) => {
-      assert.strictEqual(options.filter.search, search);
+      assert.strictEqual(options.filter.search, expectedSearch.shift());
       return { meta: { pagination: { pages: 3 } } };
     };
 
     await render(hbs`
       <DataTable
         @modelName="role"
-      />
+        as |table|>
+          <table.body as |body|>
+            <body.row>
+              {{#let body.model as |role|}}
+                <td>{{role.name}}</td>
+                <td>{{role.slug}}</td>
+              {{/let}}
+            </body.row>
+          </table.body>
+      </DataTable>
     `);
 
     assert.dom('form input[name="search"]').exists();
@@ -145,7 +153,7 @@ module("Integration | Component | data-table", function (hooks) {
   });
 
   test("external search", async function (assert) {
-    assert.expect(5);
+    assert.expect(8);
     this.setProperties({
       search: undefined,
     });
@@ -161,7 +169,16 @@ module("Integration | Component | data-table", function (hooks) {
         @modelName="role"
         @search={{this.search}}
         @updateSearch={{set this.search}}
-      />
+        as |table|>
+          <table.body as |body|>
+            <body.row>
+              {{#let body.model as |role|}}
+                <td>{{role.name}}</td>
+                <td>{{role.slug}}</td>
+              {{/let}}
+            </body.row>
+          </table.body>
+      </DataTable>
     `);
 
     assert.dom('form input[name="search"]').exists();
