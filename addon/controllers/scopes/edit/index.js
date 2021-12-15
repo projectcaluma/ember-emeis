@@ -23,4 +23,9 @@ export default class ScopesEditIndexController extends Controller {
 
     return model;
   }
+
+  @action
+  setParent(scope) {
+    this.model.parent = scope;
+  }
 }
