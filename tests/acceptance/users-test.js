@@ -254,7 +254,9 @@ module("Acceptance | users", function (hooks) {
     await click("[data-test-acl-delete] button");
     // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
-    await waitUntil(() => this.element.querySelector("table thead"));
+    await waitUntil(() =>
+      this.element.querySelector("table tbody:not([data-test-loading])")
+    );
     assert.dom("[data-test-acl-role]").exists({ count: 2 });
   });
 
@@ -313,7 +315,9 @@ module("Acceptance | users", function (hooks) {
     await click("[data-test-create-acl]");
     // For some reason the await click is not actually waiting for the fetch task to finish.
     // Probably some runloop issue.
-    await waitUntil(() => this.element.querySelector("table tr"));
+    await waitUntil(() =>
+      this.element.querySelector("table tbody:not([data-test-loading])")
+    );
     assert.dom("[data-test-back]").doesNotExist();
     assert.dom("[data-test-acl-scope]").hasText(scope.name.en);
     assert.dom("[data-test-acl-role]").hasText(role.name.en);

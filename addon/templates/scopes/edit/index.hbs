@@ -29,7 +29,7 @@
       @model={{this.allScopes}}
       @selected={{@model.parent}}
       @placeholder="{{t "emeis.scopes.headings.parent"}}..."
-      @onChange={{set @model.parent}} as |scope|
+      @onChange={{this.setParent}} as |scope|
     >
       {{scope.name}}
     </RelationshipSelect>

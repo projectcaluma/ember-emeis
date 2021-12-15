@@ -28,13 +28,14 @@ export default function (...args) {
           this.notification.danger(this.intl.t(notFoundErrorMessage));
           this.replaceWith(routeFor404);
         } else {
+          console.error(exception);
           this.notification.danger(this.intl.t(errorMessage));
         }
       };
 
       try {
         const result = originalDescriptor.apply(this, args);
-        return result.then ? result.catch(catchErrors) : result;
+        return result?.then ? result.catch(catchErrors) : result;
       } catch (exception) {
         catchErrors(exception);
       }

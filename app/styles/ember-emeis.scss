@@ -69,6 +69,14 @@ $ember-power-select-border-color: $global-border;
     border-left-color: transparent;
   }
 }
+
+.sortable-th {
+  cursor: pointer;
+
+  :hover {
+    text-decoration: underline;
+  }
+}
 /* END GENERAL INPUTS*/
 
 /* TREE VIEW */
