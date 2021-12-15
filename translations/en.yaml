@@ -94,3 +94,14 @@ emeis:
       select: "Click here to select a user"
       select-different: "Select a different User"
 
+  options:
+    meta:
+      user:
+        example: "Example for custom text field"
+      scope:
+        meta-example: "Example for custom choice field"
+        options:
+          label-1: "Ham"
+          label-2: "Cheese"
+          label-3: "Onions"
+        meta-example-2: "Example for custom text field"

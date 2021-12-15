@@ -87,8 +87,52 @@ export default class EmeisOptionsService extends Service {
 
   // show only a subset of the main navigation entries
   navigationEntries = ["users", "scopes"];
+
+  // define custom fields for a given context (user, scope, role or permission)
+  metaFields = {
+    user: [],
+    scope: [
+      {
+        slug: "test-input",
+        label: "translation.key",
+        type: "text",
+        visible: true,
+        readOnly: false
+      },
+      {
+        slug: "test-input-2",
+        label: "translation.key-2",
+        type: "choice",
+        visible: () => true,
+        readOnly: false
+      }
+    ]
+  }
 }
 ```
+
+*Watch out* - the translation key has to be present in your local translation files.
+
+There are special options available for `type` and `visible` properties.
+
+#### **type** - meta field
+Defines the type of the output component and can either be a *text* or a *choice*.
+
+#### **visible** & **readOnly** meta field
+Accepts a boolean value for static visibility or a function which evaluates to a boolean value. Submitted functions will evaluate live while rendering.
+
+The evaluation function will receive the current model as argument. For instance if you are on the scope route, you will receive the [scope model](addon/models/scope.js) as first argument. Same for [user](addon/models/user.js) | [role](addon/models/role.js) | [permission](addon/models/permission.js)
+
+So the function signature looks like this for `visible` and `readOnly`.
+```ts
+  type visible = (model:scope|user|role|permission) => boolean;
+```
+And an actual implementation example, which makes use of the `mode.name` property:
+```js
+  visible: (model) => model.name === "test-scope"
+```
+
+For a complete `emeis-options` configuration open the [test config](tests/dummy/app/services/emeis-options.js).
 
 ### Emeis store
 

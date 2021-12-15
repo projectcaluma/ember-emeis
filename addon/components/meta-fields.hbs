@@ -1,26 +1,26 @@
 {{#each @fields as |field|}}
-  {{#if field.visible}}
-    <EditForm::Element @label={{get field.label this.intl.primaryLocale}}>
+  {{#if (eval-meta field.visible @model)}}
+    <EditForm::Element @label={{t field.label}}>
       {{#if (eq field.type "choice")}}
         <PowerSelect
-          @disabled={{field.readOnly}}
+          @disabled={{eval-meta field.readOnly @model}}
           @options={{field.options}}
           @selected={{find-by "value" (get @model.meta field.slug) field.options}}
           @onChange={{fn this.updateMetaField field @model}}
-          @placeholder={{concat (get field.label this.intl.primaryLocale) "..."}}
+          @placeholder={{t field.label}}
           @allowClear={{true}}
           as |option|
         >
-          {{get option.label this.intl.primaryLocale}}
+          {{t option.label}}
         </PowerSelect>
       {{/if}}
       {{#if (eq field.type "text")}}
         <input
-          data-test-meta-field-text
+          data-test-meta-field-text={{field.slug}}
           class="uk-input"
           type="text"
           value={{get @model.meta field.slug}}
-          disabled={{field.readOnly}}
+          disabled={{eval-meta field.readOnly @model}}
           {{on "input" (fn this.updateMetaField field @model)}}
         >
       {{/if}}

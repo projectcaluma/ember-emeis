@@ -1,38 +1,37 @@
 import Service from "@ember/service";
 import { fillIn, render } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
+import { setupIntl } from "ember-intl/test-support";
 import { selectChoose } from "ember-power-select/test-support";
 import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
 
-class IntlStub extends Service {
-  primaryLocale = "en";
-}
-
+const translations = {
+  scope: {
+    metaExample: "Example for custom choice field",
+    option1: "Ham",
+    option2: "Cheese",
+    metaExample2: "Example for custom text field",
+    dynamicVisibility: "field with dynamic visibility (visible)",
+    dynamicVisibility2: "field with dynamic visibility (unvisible)",
+    dynamicReadOnly: "field with dynamic readOnly state",
+  },
+};
 class EmeisOptionsStub extends Service {
   metaFields = {
     scope: [
       {
         slug: "meta-example",
-        label: {
-          en: "Example for custom choice field",
-          de: "Beispiel für benutzerdefiniertes Dropdown-Feld",
-        },
+        label: "scope.metaExample",
         type: "choice",
         options: [
           {
             value: "option-1",
-            label: {
-              en: "Ham",
-              de: "Schinken",
-            },
+            label: "scope.option1",
           },
           {
             value: "Option 2",
-            label: {
-              en: "Cheese",
-              de: "Käse",
-            },
+            label: "scope.option2",
           },
         ],
         visible: true,
@@ -40,13 +39,31 @@ class EmeisOptionsStub extends Service {
       },
       {
         slug: "meta-example-2",
-        label: {
-          en: "Example for custom text field",
-          de: "Beispiel für benutzerdefiniertes Textfeld",
-        },
+        label: "scope.metaExample2",
         type: "text",
         visible: true,
         readOnly: false,
+      },
+      {
+        slug: "dynamic-visibility",
+        label: "scope.dynamicVisibility",
+        type: "text",
+        visible: () => true,
+        readOnly: true,
+      },
+      {
+        slug: "dynamic-visibility-2",
+        label: "scope.dynamicVisibility2",
+        type: "text",
+        visible: () => 1 > 2,
+        readOnly: false,
+      },
+      {
+        slug: "dynamic-readOnly",
+        label: "scope.dynamicReadOnly",
+        type: "text",
+        visible: (model) => model.name === "readOnly",
+        readOnly: (model) => model.name === "readOnly",
       },
     ],
   };
@@ -54,24 +71,13 @@ class EmeisOptionsStub extends Service {
 
 module("Integration | Component | meta-fields", function (hooks) {
   setupRenderingTest(hooks);
+  setupIntl(hooks, ["en"], translations);
 
   hooks.beforeEach(function () {
-    this.owner.register("service:intl", IntlStub);
     this.owner.register("service:emeisOptions", EmeisOptionsStub);
-
-    this.intl = this.owner.lookup("service:intl");
     this.emeisOptions = this.owner.lookup("service:emeisOptions");
 
     this.model = {
-      name: {
-        de: "Hase",
-        en: "Rabbit",
-      },
-      description: {
-        de: "Ich bin ein Hase",
-        en: "I am a rabbit",
-      },
-      level: 1,
       meta: {},
       notifyPropertyChange: () => {},
     };
@@ -84,7 +90,7 @@ module("Integration | Component | meta-fields", function (hooks) {
   });
 
   test("it renders meta field of type select and text", async function (assert) {
-    assert.expect(4);
+    assert.expect(6);
 
     await render(hbs`
       <MetaFields
@@ -94,7 +100,10 @@ module("Integration | Component | meta-fields", function (hooks) {
     `);
 
     assert.dom(".ember-power-select-trigger").exists();
-    assert.dom("[data-test-meta-field-text]").exists();
+    assert.dom("[data-test-meta-field-text]").exists({ count: 2 });
+
+    assert.dom(this.element).containsText(translations.scope.metaExample);
+    assert.dom(this.element).containsText(translations.scope.metaExample2);
 
     await selectChoose(".ember-power-select-trigger", "Ham");
     assert.deepEqual(this.model.meta, {
@@ -108,7 +117,7 @@ module("Integration | Component | meta-fields", function (hooks) {
     });
   });
 
-  test("it does not render meta fields", async function (assert) {
+  test("it does not render invisible meta fields", async function (assert) {
     assert.expect(2);
 
     // Set visibility to `false` for each field
@@ -127,6 +136,22 @@ module("Integration | Component | meta-fields", function (hooks) {
     assert.dom("[data-test-meta-field-text]").doesNotExist();
   });
 
+  test("it renders fields with dynamically evaluated visibility", async function (assert) {
+    assert.expect(2);
+
+    await render(hbs`
+      <MetaFields
+        @model={{this.model}}
+        @fields={{this.emeisOptions.metaFields.scope}}
+      />
+    `);
+
+    assert.dom("[data-test-meta-field-text='dynamic-visibility']").exists();
+    assert
+      .dom("[data-test-meta-field-text='dynamic-visibility-2']")
+      .doesNotExist();
+  });
+
   test("it renders disabled meta fields", async function (assert) {
     assert.expect(4);
 
@@ -143,9 +168,32 @@ module("Integration | Component | meta-fields", function (hooks) {
     `);
 
     assert.dom(".ember-power-select-trigger").exists();
-    assert.dom("[data-test-meta-field-text]").exists();
+    assert.dom("[data-test-meta-field-text]").exists({ count: 2 });
 
     assert.dom(".ember-power-select-trigger").hasAttribute("aria-disabled");
-    assert.dom("[data-test-meta-field-text]").hasAttribute("disabled");
+    assert
+      .dom("[data-test-meta-field-text='dynamic-visibility']")
+      .hasAttribute("disabled");
+  });
+
+  test("it renders dynamically disabled meta fields", async function (assert) {
+    assert.expect(2);
+
+    this.model.name = "readOnly";
+
+    await render(hbs`
+      <MetaFields
+        @model={{this.model}}
+        @fields={{this.emeisOptions.metaFields.scope}}
+      />
+    `);
+
+    assert
+      .dom("[data-test-meta-field-text='dynamic-readOnly']")
+      .exists({ count: 1 });
+
+    assert
+      .dom("[data-test-meta-field-text='dynamic-readOnly']")
+      .hasAttribute("disabled");
   });
 });
