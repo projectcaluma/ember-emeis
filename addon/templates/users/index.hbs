@@ -2,25 +2,28 @@
   @modelName="user"
   @page={{this.page}}
   @search={{this.search}}
-  @sort="last_name"
+  @defaultSort="last_name"
   @updatePage={{fn this.updateQueryParam "page"}}
-  @updateSearch={{fn this.updateQueryParam "search"}} as |table|
+  @updateSearch={{fn this.updateQueryParam "search"}}
+  @updateSort={{fn this.updateQueryParam "sort"}}
+  @include={{"acls.role"}}
+  as |table|
 >
-  <table.head>
+  <table.head as |head|>
     {{#unless this.emailAsUsername}}
-      <th>
+      <head.sorthead @sort="username">
         {{t "emeis.users.headings.username"}}
-      </th>
-    {{/unless}}
-    <th>
+      </head.sorthead>
+      {{/unless}}
+    <head.sorthead @sort="last_name">
       {{t "emeis.users.headings.lastName"}}
-    </th>
-    <th>
+    </head.sorthead>
+    <head.sorthead @sort="first_name">
       {{t "emeis.users.headings.firstName"}}
-    </th>
-    <th>
+    </head.sorthead>
+    <head.sorthead @sort="email">
       {{t "emeis.users.headings.email"}}
-    </th>
+    </head.sorthead>
   </table.head>
   <table.body as |body|>
     <body.row>
