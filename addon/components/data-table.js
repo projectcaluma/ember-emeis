@@ -26,7 +26,7 @@ export default class DataTableComponent extends Component {
   ]);
 
   get sort() {
-    return this.internalSort || this.args.sort;
+    return this.internalSort || this.args.defaultSort;
   }
 
   get page() {
@@ -40,9 +40,8 @@ export default class DataTableComponent extends Component {
   set sort(sort) {
     if (this.args.updateSort) {
       this.args.updateSort(sort);
-    } else {
-      this.internalSort = sort;
     }
+    this.internalSort = sort;
   }
 
   set search(search) {

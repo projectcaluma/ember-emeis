@@ -29,22 +29,21 @@
 </div>
 
 <table
-  class="uk-table uk-table-divider"
+  class="uk-table uk-table-striped"
   ...attributes
 >
 
   {{#if this.isLoading}}
-    <tbody>
-      <td colspan="99" class="uk-padding-large uk-animation-fade">
-        <UkFlex
-          @direction="column"
-          @horizontal="center"
-          @vertical="middle"
-          class="uk-height-large"
-        >
-          <UkSpinner @ratio="3" />
-        </UkFlex>
-      </td>
+    {{yield (hash
+        head=(component "data-table/head" sortedBy=this.sort update=this.updateSort)
+      )
+    }}
+    <tbody data-test-loading>
+      <tr>
+        <td colspan="99" class="uk-padding-large uk-animation-fade uk-text-center">
+          <UkSpinner @ratio="1" />
+        </td>
+      </tr>
     </tbody>
   {{else}}
     {{yield
