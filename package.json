@@ -51,7 +51,7 @@
     "ember-data": "^3.28.3",
     "ember-intl": "^5.5.0",
     "ember-modifier": "^3.0.0",
-    "ember-power-select": "^4.0.6",
+    "ember-power-select": "5.0.2",
     "ember-resources": "^4.1.2",
     "ember-simple-set-helper": "^0.1.2",
     "ember-test-selectors": "^6.0.0",
