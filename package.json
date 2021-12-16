@@ -48,7 +48,7 @@
     "ember-cli-htmlbars": "^6.0.0",
     "ember-composable-helpers": "^4.5.0",
     "ember-concurrency": "^2.1.2",
-    "ember-data": "^3.28.3",
+    "ember-data": "^4.0.2",
     "ember-intl": "^5.5.0",
     "ember-modifier": "^3.0.0",
     "ember-power-select": "5.0.3",
