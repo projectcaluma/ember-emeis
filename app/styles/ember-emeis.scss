@@ -88,8 +88,8 @@ $ember-power-select-border-color: $global-border;
 
 $tree_node_height: 1.9em;
 $tree_indicator_width: 0.6em;
-$tree_indicator_height: $tree_node_height/2;
-$tree_node_icon_margin: $tree_indicator_height/2;
+$tree_indicator_height: calc($tree_node_height/2);
+$tree_node_icon_margin: calc($tree_indicator_height/2);
 
 .tree-wrapper {
   display: flex;
