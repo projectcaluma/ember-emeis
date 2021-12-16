@@ -35,7 +35,7 @@
 
   {{#if this.isLoading}}
     {{yield (hash
-        head=(component "data-table/head" sortedBy=this.sort update=this.updateSort)
+        head=(component "data-table/head" sortedBy=this.sort update=this.updateSort includes=this.included)
       )
     }}
     <tbody data-test-loading>
@@ -48,8 +48,8 @@
   {{else}}
     {{yield
       (hash
-        body=(component "data-table/body" models=this.data.value)
-        head=(component "data-table/head" sortedBy=this.sort update=this.updateSort)
+        body=(component "data-table/body" models=this.data.value includes=this.included)
+        head=(component "data-table/head" sortedBy=this.sort update=this.updateSort includes=this.included)
         refresh=(perform this.fetchData)
       )
     }}

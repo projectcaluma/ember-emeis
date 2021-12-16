@@ -79,12 +79,12 @@ module("Integration | Component | data-table", function (hooks) {
         @page={{this.page}}
         as |table|>
           <table.head as |role|>
-            <role.sorthead @sort="one">
+            <role.sortable @sort="one">
               Heading One
-            </role.sorthead>
-            <role.sorthead @sort="two">
+            </role.sortable>
+            <role.nonsortable>
               Heading One
-            </role.sorthead>
+            </role.nonsortable>
           </table.head>
           <table.body as |body|>
             <body.row>
@@ -116,6 +116,161 @@ module("Integration | Component | data-table", function (hooks) {
 
     assert.dom("tfoot li:first-child").doesNotHaveClass("uk-disabled");
     assert.dom("tfoot li:last-child").hasClass("uk-disabled");
+  });
+
+  test("fetches include string", async function (assert) {
+    assert.expect(5);
+
+    this.set("modelName", "user");
+
+    const store = this.owner.lookup("service:store");
+    store.query = (_, options) => {
+      assert.strictEqual(options.include, "acls.role");
+
+      const data = [
+        {
+          name: "User 1",
+          acls: {
+            role: {
+              id: "role-1",
+            },
+          },
+        },
+        {
+          name: "User 2",
+          acls: {
+            role: {
+              id: "role-2",
+            },
+          },
+        },
+      ];
+
+      data.meta = { pagination: { pages: 1 } };
+      return data;
+    };
+
+    await render(hbs`
+      <DataTable
+        @modelName={{this.modelName}}
+        @include={{"acls.role"}}
+        as |table|>
+          <table.head as |head|>
+            <head.sortable @sort="one">
+              Heading One
+            </head.sortable>
+            {{#with head.includes as |includes|}}
+              {{#if includes.roles}}
+                <head.nonsortable>
+                  Roles
+                </head.nonsortable>
+              {{/if}}
+            {{/with}}
+          </table.head>
+          <table.body as |body|>
+            <body.row>
+              {{#let body.model as |user|}}
+                <td>{{user.name}}</td>
+                {{#with body.includes as |includes|}}
+                  {{#let user.acls as |acls|}}
+                    <td>{{acls.role.id}}</td>
+                  {{/let}}
+                {{/with}}
+              {{/let}}
+            </body.row>
+          </table.body>
+      </DataTable>
+    `);
+
+    assert.dom("thead tr th:first-child").hasText("Heading One");
+    assert.dom("thead tr th:last-child").hasText("Roles");
+
+    assert.dom("tbody tr td:first-child").hasText("User 1");
+    assert.dom("tbody tr:first-child td:nth-child(2)").hasText("role-1");
+  });
+
+  test("fetches includes array", async function (assert) {
+    assert.expect(6);
+
+    this.set("modelName", "user");
+
+    const store = this.owner.lookup("service:store");
+    store.query = (_, options) => {
+      assert.strictEqual(options.include, "acls.role,acls.scope");
+
+      const data = [
+        {
+          name: "User 1",
+          acls: {
+            role: {
+              id: "role-1",
+            },
+            scope: {
+              name: "scope1",
+            },
+          },
+        },
+        {
+          name: "User 2",
+          acls: {
+            role: {
+              id: "role-2",
+            },
+            scope: {
+              name: "scope2",
+            },
+          },
+        },
+      ];
+
+      data.meta = { pagination: { pages: 1 } };
+      return data;
+    };
+
+    await render(hbs`
+      <DataTable
+        @modelName={{this.modelName}}
+        @include={{array "acls.role" "acls.scope"}}
+        as |table|>
+          <table.head as |head|>
+            <head.sortable @sort="one">
+              Heading One
+            </head.sortable>
+            {{#with head.includes as |includes|}}
+              {{#if includes.roles}}
+                <head.nonsortable>
+                  Roles
+                </head.nonsortable>
+              {{/if}}
+              {{#if includes.scopes}}
+                <head.nonsortable>
+                  Scopes
+                </head.nonsortable>
+              {{/if}}
+            {{/with}}
+          </table.head>
+          <table.body as |body|>
+            <body.row>
+              {{#let body.model as |user|}}
+                <td>{{user.name}}</td>
+                {{#with body.includes as |includes|}}
+                  {{#let user.acls as |acls|}}
+                    <td>{{acls.role.id}}</td>
+                    <td>{{acls.scope.name}}</td>
+                  {{/let}}
+                {{/with}}
+              {{/let}}
+            </body.row>
+          </table.body>
+      </DataTable>
+    `);
+
+    assert.dom("thead tr th:first-child").hasText("Heading One");
+    assert.dom("thead tr th:last-child").hasText("Scopes");
+
+    assert.dom("tbody tr td:first-child").hasText("User 1");
+    assert.dom("tbody tr:last-child td:nth-child(2)").hasText("role-2");
+    assert.dom("tbody tr:last-child td:nth-child(3)").hasText("scope2");
   });
 
   test("search", async function (assert) {

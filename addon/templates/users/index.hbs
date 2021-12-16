@@ -6,24 +6,36 @@
   @updatePage={{fn this.updateQueryParam "page"}}
   @updateSearch={{fn this.updateQueryParam "search"}}
   @updateSort={{fn this.updateQueryParam "sort"}}
-  @include={{"acls.role"}}
+  @include={{array "acls.role" "acls.scope"}}
   as |table|
 >
   <table.head as |head|>
     {{#unless this.emailAsUsername}}
-      <head.sorthead @sort="username">
+      <head.sortable @sort="username">
         {{t "emeis.users.headings.username"}}
-      </head.sorthead>
+      </head.sortable>
       {{/unless}}
-    <head.sorthead @sort="last_name">
+    <head.sortable @sort="last_name">
       {{t "emeis.users.headings.lastName"}}
-    </head.sorthead>
-    <head.sorthead @sort="first_name">
+    </head.sortable>
+    <head.sortable @sort="first_name">
       {{t "emeis.users.headings.firstName"}}
-    </head.sorthead>
-    <head.sorthead @sort="email">
+    </head.sortable>
+    <head.sortable @sort="email">
       {{t "emeis.users.headings.email"}}
-    </head.sorthead>
+    </head.sortable>
+    {{#with head.includes as |includes|}}
+      {{#if includes.roles}}
+        <head.nonsortable>
+          {{t "emeis.roles.title"}}
+        </head.nonsortable>
+      {{/if}}
+      {{#if includes.scopes}}
+        <head.nonsortable>
+          {{t "emeis.scopes.title"}}
+        </head.nonsortable>
+      {{/if}}
+    {{/with}}
   </table.head>
   <table.body as |body|>
     <body.row>
@@ -48,6 +60,50 @@
         <td data-test-user-email={{user.id}}>
           {{user.email}}
         </td>
+        {{#with body.includes as |includes|}}
+          {{#let user.acls as |acls|}}
+            {{!-- ROLES --}}
+            {{#with includes.roles as |roles|}}
+              <td>
+                <ul class="uk-list uk-list-divider">
+                  {{#each acls as |acl|}}
+                    <li>
+                      {{#if roles.link}}
+                        <LinkTo @route="roles.edit" @model={{acl.role}} class="uk-link-text">
+                          {{acl.role.id}}
+                        </LinkTo>
+                      {{else}}
+                        {{acl.role.id}}
+                      {{/if}}
+                    </li>
+                  {{else}}
+                  -
+                  {{/each}}
+                </ul>
+              </td>
+            {{/with}}
+            {{!-- SCOPES --}}
+            {{#with includes.scopes as |scopes|}}
+              <td>
+                <ul class="uk-list uk-list-divider">
+                  {{#each acls as |acl|}}
+                    <li>
+                      {{#if scopes.link}}
+                        <LinkTo @route="scopes.edit" @model={{acl.scope}} class="uk-link-text">
+                          {{acl.scope.name}}
+                        </LinkTo>
+                      {{else}}
+                          {{acl.scope.name}}
+                      {{/if}}
+                    </li>
+                  {{else}}
+                  -
+                  {{/each}}
+                </ul>
+              </td>
+            {{/with}}
+          {{/let}}
+        {{/with}}
       {{/let}}
     </body.row>
   </table.body>

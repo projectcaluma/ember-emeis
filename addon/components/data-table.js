@@ -78,6 +78,38 @@ export default class DataTableComponent extends Component {
     return null;
   }
 
+  get included() {
+    if (!this.args.include) {
+      return null;
+    }
+
+    const included = {};
+    const argumentIncludes = (fragment) => {
+      return Array.isArray(this.args.include)
+        ? this.args.include.find((entry) => entry.startsWith(fragment))
+        : this.args.include.startsWith(fragment);
+    };
+
+    if (argumentIncludes("acls")) {
+      included.acls = true;
+    }
+    if (argumentIncludes("acls.role")) {
+      // if no 'navigationEntries' are specified, all the routes are available
+      included.roles = { link: !this.emeisOptions.navigationEntries };
+      if (this.emeisOptions.navigationEntries?.includes("roles")) {
+        included.roles.link = true;
+      }
+    }
+    if (argumentIncludes("acls.scope")) {
+      // if no 'navigationEntries' are specified, all the routes are available
+      included.scopes = { link: !this.emeisOptions.navigationEntries };
+      if (this.emeisOptions.navigationEntries?.includes("scopes")) {
+        included.scopes.link = true;
+      }
+    }
+    return included;
+  }
+
   @task
   *fetchData() {
     assert(
@@ -85,27 +117,38 @@ export default class DataTableComponent extends Component {
       typeof this.args.modelName === "string"
     );
 
-    let options = {
-      filter: { search: this.search, ...(this.args.filter || {}) },
-      sort: this.sort,
-      include: this.args.include || "",
-    };
+    try {
+      let includes = this.args.include;
+      if (this.args.include && Array.isArray(this.args.include)) {
+        includes = this.args.include.join(",");
+      }
 
-    if (!this.search) {
-      options = {
-        ...options,
-        page: {
-          number: this.page,
-          size: this.emeisOptions.pageSize,
-        },
+      let options = {
+        filter: { search: this.search, ...(this.args.filter || {}) },
+        sort: this.sort,
+        include: includes,
       };
+
+      if (!this.search) {
+        options = {
+          ...options,
+          page: {
+            number: this.page,
+            size: this.emeisOptions.pageSize,
+          },
+        };
+      }
+
+      const data = yield this.store.query(this.args.modelName, options);
+      this.numPages = data.meta.pagination?.pages;
+
+      return data;
+    } catch (error) {
+      console.error(
+        "Non-standard JSON:API response while fetching table data.",
+        error
+      );
     }
-
-    const data = yield this.store.query(this.args.modelName, options);
-
-    this.numPages = data.meta.pagination?.pages;
-
-    return data;
   }
 
   @action
