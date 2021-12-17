@@ -71,6 +71,7 @@ emeis:
     delete-error: "A problem occurred while deleting. Please check if the entry still exists and try again."
     phone-hint: "Letters are not allowed in phone numbers."
     slug-hint: "Only letters, numbers and hyphens are allowed."
+    custom-button-action-error: "The submitted custom button action is not a valid function."
 
   acl-table:
     title: "ACL"

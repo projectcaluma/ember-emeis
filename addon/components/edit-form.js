@@ -1,3 +1,4 @@
+import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
 import { task } from "ember-concurrency";
@@ -8,6 +9,7 @@ export default class EditFormComponent extends Component {
   @service intl;
   @service notification;
   @service router;
+  @service emeisOptions;
 
   get parentRouteName() {
     return this.router.currentRoute.parent.name;
@@ -36,6 +38,34 @@ export default class EditFormComponent extends Component {
     return (
       this.args.listViewRouteName || `${this.relativeParentRouteName}.index`
     );
+  }
+
+  get modelName() {
+    return this.relativeParentRouteName.split(".")[0];
+  }
+
+  get hasCustomButton() {
+    return this.emeisOptions.customButtons?.[this.modelName];
+  }
+
+  get customButtonLabel() {
+    return (
+      this.emeisOptions.customButtons?.[this.modelName]?.label ||
+      "custom button"
+    );
+  }
+
+  @action
+  customAction() {
+    if (
+      typeof this.emeisOptions.customButtons?.[this.modelName].callback !==
+      "function"
+    ) {
+      this.notification.danger(
+        this.intl.t("emeis.form.custom-button-action-error")
+      );
+    }
+    this.emeisOptions.customButtons?.[this.modelName]?.callback();
   }
 
   @task

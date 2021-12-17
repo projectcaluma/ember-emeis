@@ -1,8 +1,22 @@
+import Service from "@ember/service";
 import { render, click } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupIntl } from "ember-intl/test-support";
 import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
+
+class EmeisOptionsStub extends Service {
+  customButtons = {
+    users: {
+      label: "This is a custom button",
+      callback: () => {
+        document
+          .querySelector("[data-test-custom-button]")
+          .setAttribute("data-test-action-triggered", true);
+      },
+    },
+  };
+}
 
 module("Integration | Component | edit-form", function (hooks) {
   setupRenderingTest(hooks);
@@ -27,6 +41,7 @@ module("Integration | Component | edit-form", function (hooks) {
       instantiate: false,
     });
     this.owner.register("router:main", this.router, { instantiate: false });
+    this.owner.register("service:emeis-options", EmeisOptionsStub);
   });
 
   hooks.afterEach(function () {
@@ -104,5 +119,25 @@ module("Integration | Component | edit-form", function (hooks) {
 
     await click("[data-test-save]");
     assert.verifySteps(["updateModel", "save", "replaceWith"]);
+  });
+
+  test("custom action", async function (assert) {
+    assert.expect(3);
+    this.router.currentRoute.parent.name = "ember-emeis.users.edit";
+
+    await render(hbs`
+      <EditForm></EditForm>
+    `);
+
+    assert.dom("[data-test-custom-button]").exists();
+    assert
+      .dom("[data-test-custom-button]")
+      .hasNoAttribute("data-test-action-triggered");
+
+    await click("[data-test-custom-button]");
+
+    assert
+      .dom("[data-test-custom-button]")
+      .hasAttribute("data-test-action-triggered");
   });
 });
