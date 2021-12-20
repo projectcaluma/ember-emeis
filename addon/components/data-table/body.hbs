@@ -1,6 +1,7 @@
 <tbody ...attributes>
   {{#each @models as |model|}}
-    {{yield (hash model=model includes=@includes row=(component "data-table/body/row"))}}
+    {{log "yielding" model}}
+    {{yield (hash model=model row=(component "data-table/body/row"))}}
   {{else}}
     <td colspan="99" class="uk-padding-large uk-animation-fade">
       <UkFlex

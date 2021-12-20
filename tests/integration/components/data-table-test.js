@@ -1,11 +1,13 @@
-import { render, click, fillIn } from "@ember/test-helpers";
+import { render, click, fillIn, settled } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
+import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl } from "ember-intl/test-support";
 import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 module("Integration | Component | data-table", function (hooks) {
   setupRenderingTest(hooks);
+  setupMirage(hooks);
   setupIntl(hooks);
 
   test("fetch and display correct data", async function (assert) {
@@ -121,34 +123,35 @@ module("Integration | Component | data-table", function (hooks) {
   test("fetches include string", async function (assert) {
     assert.expect(5);
 
-    this.set("modelName", "user");
+    const users = this.set("modelName", "user");
+    this.server.createList("user", 4);
 
-    const store = this.owner.lookup("service:store");
-    store.query = (_, options) => {
-      assert.strictEqual(options.include, "acls.role");
+    // const store = this.owner.lookup("service:store");
+    // store.query = (_, options) => {
+    //   assert.strictEqual(options.include, "acls.role");
 
-      const data = [
-        {
-          name: "User 1",
-          acls: {
-            role: {
-              id: "role-1",
-            },
-          },
-        },
-        {
-          name: "User 2",
-          acls: {
-            role: {
-              id: "role-2",
-            },
-          },
-        },
-      ];
+    //   const data = [
+    //     {
+    //       name: "User 1",
+    //       acls: {
+    //         role: {
+    //           id: "role-1",
+    //         },
+    //       },
+    //     },
+    //     {
+    //       name: "User 2",
+    //       acls: {
+    //         role: {
+    //           id: "role-2",
+    //         },
+    //       },
+    //     },
+    //   ];
 
-      data.meta = { pagination: { pages: 1 } };
-      return data;
-    };
+    //   data.meta = { pagination: { pages: 1 } };
+    //   return data;
+    // };
 
     await render(hbs`
       <DataTable
@@ -159,28 +162,21 @@ module("Integration | Component | data-table", function (hooks) {
             <head.sortable @sort="one">
               Heading One
             </head.sortable>
-            {{#with head.includes as |includes|}}
-              {{#if includes.roles}}
-                <head.nonsortable>
-                  Roles
-                </head.nonsortable>
-              {{/if}}
-            {{/with}}
+            <head.nonsortable>
+              Roles
+            </head.nonsortable>
           </table.head>
           <table.body as |body|>
             <body.row>
               {{#let body.model as |user|}}
-                <td>{{user.name}}</td>
-                {{#with body.includes as |includes|}}
-                  {{#let user.acls as |acls|}}
-                    <td>{{acls.role.id}}</td>
-                  {{/let}}
-                {{/with}}
+                <td>{{user.firstName}}</td>
+                <td>{{user.acls.role.name}}</td>
               {{/let}}
             </body.row>
           </table.body>
       </DataTable>
     `);
+    await settled();
 
     assert.dom("thead tr th:first-child").hasText("Heading One");
     assert.dom("thead tr th:last-child").hasText("Roles");
@@ -204,6 +200,7 @@ module("Integration | Component | data-table", function (hooks) {
           acls: {
             role: {
               id: "role-1",
+              name: "Role 1",
             },
             scope: {
               name: "scope1",
@@ -215,6 +212,7 @@ module("Integration | Component | data-table", function (hooks) {
           acls: {
             role: {
               id: "role-2",
+              name: "Role 2",
             },
             scope: {
               name: "scope2",
@@ -236,29 +234,19 @@ module("Integration | Component | data-table", function (hooks) {
             <head.sortable @sort="one">
               Heading One
             </head.sortable>
-            {{#with head.includes as |includes|}}
-              {{#if includes.roles}}
-                <head.nonsortable>
-                  Roles
-                </head.nonsortable>
-              {{/if}}
-              {{#if includes.scopes}}
-                <head.nonsortable>
-                  Scopes
-                </head.nonsortable>
-              {{/if}}
-            {{/with}}
+            <head.nonsortable>
+              Roles
+            </head.nonsortable>
+            <head.nonsortable>
+              Scopes
+            </head.nonsortable>
           </table.head>
           <table.body as |body|>
             <body.row>
               {{#let body.model as |user|}}
                 <td>{{user.name}}</td>
-                {{#with body.includes as |includes|}}
-                  {{#let user.acls as |acls|}}
-                    <td>{{acls.role.id}}</td>
-                    <td>{{acls.scope.name}}</td>
-                  {{/let}}
-                {{/with}}
+                <td>{{user.acls.role.name}}</td>
+                <td>{{user.acls.scope.name}}</td>
               {{/let}}
             </body.row>
           </table.body>

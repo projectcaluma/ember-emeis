@@ -1,7 +1,6 @@
 <thead>
   <tr>
     {{yield (hash
-      includes=@includes
       sortable=(component "data-table/head/sortable" update=@update sortedBy=@sortedBy)
       nonsortable=(component "data-table/head/nonsortable")
     )}}

@@ -78,38 +78,6 @@ export default class DataTableComponent extends Component {
     return null;
   }
 
-  get included() {
-    if (!this.args.include) {
-      return null;
-    }
-
-    const included = {};
-    const argumentIncludes = (fragment) => {
-      return Array.isArray(this.args.include)
-        ? this.args.include.find((entry) => entry.startsWith(fragment))
-        : this.args.include.startsWith(fragment);
-    };
-
-    if (argumentIncludes("acls")) {
-      included.acls = true;
-    }
-    if (argumentIncludes("acls.role")) {
-      // if no 'navigationEntries' are specified, all the routes are available
-      included.roles = { link: !this.emeisOptions.navigationEntries };
-      if (this.emeisOptions.navigationEntries?.includes("roles")) {
-        included.roles.link = true;
-      }
-    }
-    if (argumentIncludes("acls.scope")) {
-      // if no 'navigationEntries' are specified, all the routes are available
-      included.scopes = { link: !this.emeisOptions.navigationEntries };
-      if (this.emeisOptions.navigationEntries?.includes("scopes")) {
-        included.scopes.link = true;
-      }
-    }
-    return included;
-  }
-
   @task
   *fetchData() {
     assert(
