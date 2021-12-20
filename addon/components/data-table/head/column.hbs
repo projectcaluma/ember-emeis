@@ -1,0 +1,19 @@
+<th>
+  {{#if @sort}}
+    <span
+      data-test-sortable-th={{@sort}}
+      class="sortable-th"
+      role="button"
+      {{on "click" (fn @update @sort)}}
+    >
+      {{yield}}
+      {{#if (eq @sortedBy @sort)}}
+        <UkIcon @icon="chevron-down"/>
+      {{else if (eq @sortedBy (concat "-" @sort))}}
+        <UkIcon @icon="chevron-up"/>
+      {{/if}}
+    </span>
+  {{else}}
+    {{yield}}
+  {{/if}}
+</th>

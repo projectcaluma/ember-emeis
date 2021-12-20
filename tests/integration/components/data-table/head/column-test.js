@@ -3,7 +3,7 @@ import { hbs } from "ember-cli-htmlbars";
 import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
 
-module("Integration | Component | data-table/head/sortable", function (hooks) {
+module("Integration | Component | data-table/head/column", function (hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function (assert) {
@@ -16,10 +16,10 @@ module("Integration | Component | data-table/head/sortable", function (hooks) {
 
   test("it renders", async function (assert) {
     await render(hbs`
-        <DataTable::Head @sortedBy={{this.sort}} @update={{this.update}} as |head|>
-          <head.sortable @sort={{this.sort}}>
+        <DataTable::Head @sortedBy={{this.sort}} @update={{this.update}} as |Column|>
+          <Column @sort={{this.sort}}>
             test
-          </head.sortable>
+          </Column>
         </DataTable::Head>
       `);
 
@@ -29,9 +29,9 @@ module("Integration | Component | data-table/head/sortable", function (hooks) {
 
   test("it renders as block", async function (assert) {
     await render(hbs`
-      <DataTable::Head::Sortable @update={{this.update}}>
+      <DataTable::Head::Column @update={{this.update}}>
         template block text
-      </DataTable::Head::Sortable>
+      </DataTable::Head::Column>
     `);
 
     assert.dom(this.element).hasText("template block text");
@@ -39,13 +39,13 @@ module("Integration | Component | data-table/head/sortable", function (hooks) {
 
   test("it toggles sort state", async function (assert) {
     await render(hbs`
-        <DataTable::Head @sortedBy={{this.sort}} @update={{this.update}} as |head|>
-          <head.sortable @sort={{"last_name"}}>
+        <DataTable::Head @sortedBy={{this.sort}} @update={{this.update}} as |Column|>
+          <Column @sort={{"last_name"}}>
             one
-          </head.sortable>
-          <head.sortable @sort={{"first_name"}}>
+          </Column>
+          <Column @sort={{"first_name"}}>
             two
-          </head.sortable>
+          </Column>
         </DataTable::Head>
       `);
 

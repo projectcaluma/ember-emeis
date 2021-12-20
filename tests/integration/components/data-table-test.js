@@ -18,9 +18,9 @@ module("Integration | Component | data-table", function (hooks) {
 
     await render(hbs`
       <DataTable @modelName={{this.modelName}} as |table|>
-        <table.head as |role|>
-          <td>Heading 1</td>
-          <td>Heading 2</td>
+        <table.head as |Column|>
+          <Column>Heading 1</Column>
+          <Column>Heading 2</Column>
         </table.head>
         <table.body as |body|>
           <body.row>
@@ -38,8 +38,8 @@ module("Integration | Component | data-table", function (hooks) {
     assert.dom('form button[type="submit"]').exists();
 
     assert.dom("thead tr").exists({ count: 1 });
-    assert.dom("thead tr td:first-child").hasText("Heading 1");
-    assert.dom("thead tr td:last-child").hasText("Heading 2");
+    assert.dom("thead tr th:first-child").hasText("Heading 1");
+    assert.dom("thead tr th:last-child").hasText("Heading 2");
 
     assert.dom("tbody tr").exists({ count: 10 });
     assert
@@ -65,13 +65,13 @@ module("Integration | Component | data-table", function (hooks) {
         @modelName={{this.modelName}}
         @page={{this.page}}
         as |table|>
-          <table.head as |role|>
-            <role.sortable @sort="one">
+          <table.head as |Column|>
+            <Column @sort="one">
               Heading One
-            </role.sortable>
-            <role.nonsortable>
+            </Column>
+            <Column>
               Heading One
-            </role.nonsortable>
+            </Column>
           </table.head>
           <table.body as |body|>
             <body.row>
@@ -150,16 +150,16 @@ module("Integration | Component | data-table", function (hooks) {
         @modelName={{this.modelName}}
         @include={{array "acls.role" "acls.scope"}}
         as |table|>
-          <table.head as |head|>
-            <head.sortable @sort="one">
+          <table.head as |Column|>
+            <Column @sort="one">
               Heading One
-            </head.sortable>
-            <head.nonsortable>
+            </Column>
+            <Column>
               Roles
-            </head.nonsortable>
-            <head.nonsortable>
+            </Column>
+            <Column>
               Scopes
-            </head.nonsortable>
+            </Column>
           </table.head>
           <table.body as |body|>
             <body.row>

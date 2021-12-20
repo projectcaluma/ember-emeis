@@ -9,27 +9,27 @@
   @include={{array "acls.role" "acls.scope"}}
   as |table|
 >
-  <table.head as |head|>
+  <table.head as |Column|>
     {{#unless this.emailAsUsername}}
-      <head.sortable @sort="username">
+      <Column @sort="username">
         {{t "emeis.users.headings.username"}}
-      </head.sortable>
+      </Column>
       {{/unless}}
-    <head.sortable @sort="last_name">
+    <Column @sort="last_name">
       {{t "emeis.users.headings.lastName"}}
-    </head.sortable>
-    <head.sortable @sort="first_name">
+    </Column>
+    <Column @sort="first_name">
       {{t "emeis.users.headings.firstName"}}
-    </head.sortable>
-    <head.sortable @sort="email">
+    </Column>
+    <Column @sort="email">
       {{t "emeis.users.headings.email"}}
-    </head.sortable>
-    <head.nonsortable>
+    </Column>
+    <Column>
       {{t "emeis.roles.title"}}
-    </head.nonsortable>
-    <head.nonsortable>
+    </Column>
+    <Column>
       {{t "emeis.scopes.title"}}
-    </head.nonsortable>
+    </Column>
   </table.head>
   <table.body as |body|>
     <body.row>
