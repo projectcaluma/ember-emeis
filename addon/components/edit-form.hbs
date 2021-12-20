@@ -9,9 +9,10 @@
     {{#if this.hasCustomButton}}
       <UkButton
         @type="button"
+        @label={{optional-translate this.customButtonLabel}}
         {{on "click" this.customAction}}
         data-test-custom-button
-      >{{this.customButtonLabel}}</UkButton>
+      />
     {{/if}}
   </div>
 

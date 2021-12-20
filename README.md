@@ -91,7 +91,7 @@ export default class EmeisOptionsService extends Service {
   //  integrate a custom button into any edit view. On each edit view (e.g. users) you can define a label and a callback function for the button.
   customButtons = {
     users: {
-      label: "place.translation.key.here",
+      label: "My Button", // this could also be an ember-intl translation key
       callback: () => window.alert("test"),
     }
   };
@@ -102,14 +102,14 @@ export default class EmeisOptionsService extends Service {
     scope: [
       {
         slug: "test-input",
-        label: "translation.key",
+        label: "My Input", // this could also be an ember-intl translation key
         type: "text",
         visible: true,
         readOnly: false
       },
       {
         slug: "test-input-2",
-        label: "translation.key-2",
+        label: "some.translation.key",
         type: "choice",
         visible: () => true,
         readOnly: false
@@ -139,10 +139,14 @@ So the function signature looks like this for `visible` and `readOnly`.
 type visible = (model: scope | user | role | permission) => boolean;
 ```
 
-And an actual implementation example, which makes use of the `mode.name` property:
+And an actual implementation example, which makes use of the `model.name` property:
 
 ```js
-visible: (model) => model.name === "test-scope";
+{
+  // ...
+  visible: (model) => model.name === "test-scope",
+  // ...
+}
 ```
 
 For a complete `emeis-options` configuration open the [test config](tests/dummy/app/services/emeis-options.js).

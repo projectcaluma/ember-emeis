@@ -1,6 +1,6 @@
 {{#each @fields as |field|}}
   {{#if (eval-meta field.visible @model)}}
-    <EditForm::Element @label={{t field.label}}>
+    <EditForm::Element @label={{optional-translate field.label}}>
       {{#if (eq field.type "choice")}}
         <PowerSelect
           @disabled={{eval-meta field.readOnly @model}}
@@ -11,7 +11,7 @@
           @allowClear={{true}}
           as |option|
         >
-          {{t option.label}}
+          {{optional-translate option.label}}
         </PowerSelect>
       {{/if}}
       {{#if (eq field.type "text")}}
