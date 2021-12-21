@@ -9,9 +9,9 @@ The frontend for the [emeis](https://github.com/projectcaluma/emeis) user manage
 
 ## Compatibility
 
-* Ember.js v3.20 or above
-* Ember CLI v3.20 or above
-* Node.js v10 or above
+- Ember.js v3.20 or above
+- Ember CLI v3.20 or above
+- Node.js v10 or above
 
 ## Installation
 
@@ -88,20 +88,35 @@ export default class EmeisOptionsService extends Service {
   // show only a subset of the main navigation entries
   navigationEntries = ["users", "scopes"];
 
+  // On each model edit view (e.g. users) you can define a list of custom buttons. Each button needs a label and a callback function. Optionally you can highlight the button with the 'type' attribute.
+  customButtons = {
+    users: [
+      {
+        label: "My Button", // this could also be an ember-intl translation key
+        callback: () => window.alert("test"),
+        type: "danger" // leave blank or choose between primary, danger
+      },
+      {
+        label: "A second Button",
+        callback: () => window.alert("test"),
+      }
+    ]
+  };
+
   // define custom fields for a given context (user, scope, role or permission)
   metaFields = {
     user: [],
     scope: [
       {
         slug: "test-input",
-        label: "translation.key",
+        label: "My Input", // this could also be an ember-intl translation key
         type: "text",
         visible: true,
         readOnly: false
       },
       {
         slug: "test-input-2",
-        label: "translation.key-2",
+        label: "some.translation.key",
         type: "choice",
         visible: () => true,
         readOnly: false
@@ -111,25 +126,34 @@ export default class EmeisOptionsService extends Service {
 }
 ```
 
-*Watch out* - the translation key has to be present in your local translation files.
+_Watch out_ - the translation key has to be present in your local translation files.
 
 There are special options available for `type` and `visible` properties.
 
 #### **type** - meta field
-Defines the type of the output component and can either be a *text* or a *choice*.
+
+Defines the type of the output component and can either be a _text_ or a _choice_.
 
 #### **visible** & **readOnly** meta field
+
 Accepts a boolean value for static visibility or a function which evaluates to a boolean value. Submitted functions will evaluate live while rendering.
 
 The evaluation function will receive the current model as argument. For instance if you are on the scope route, you will receive the [scope model](addon/models/scope.js) as first argument. Same for [user](addon/models/user.js) | [role](addon/models/role.js) | [permission](addon/models/permission.js)
 
 So the function signature looks like this for `visible` and `readOnly`.
+
 ```ts
-  type visible = (model:scope|user|role|permission) => boolean;
+type visible = (model: scope | user | role | permission) => boolean;
 ```
-And an actual implementation example, which makes use of the `mode.name` property:
+
+And an actual implementation example, which makes use of the `model.name` property:
+
 ```js
-  visible: (model) => model.name === "test-scope"
+{
+  // ...
+  visible: (model) => model.name === "test-scope",
+  // ...
+}
 ```
 
 For a complete `emeis-options` configuration open the [test config](tests/dummy/app/services/emeis-options.js).
@@ -140,7 +164,7 @@ If you need to customize your store service passed to emeis, use:
 `ember g emeis-store <your_name>`
 
 This will generate a store service and an adapter for you. In those two files
- you can then configure custom api endpoints or hosts and/or custom
+you can then configure custom api endpoints or hosts and/or custom
 authentication.
 
 ## Contributing

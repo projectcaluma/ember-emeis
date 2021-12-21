@@ -12,27 +12,6 @@ export default class UsersEditIndexController extends Controller {
     return this.emeisOptions.metaFields?.user;
   }
 
-  @action
-  updateModel(model, formElements) {
-    model.firstName = formElements.firstName.value;
-    model.lastName = formElements.lastName.value;
-    model.email = formElements.email.value;
-    model.isActive = formElements.isActive.checked;
-
-    // additional fields might not be present
-    model.phone = formElements.phone?.value;
-    model.language = formElements.language?.selectedOptions[0].value;
-    model.address = formElements.address?.value;
-    model.city = formElements.city?.value;
-    model.zip = formElements.zip?.value;
-
-    model.username = this.emailAsUsername
-      ? formElements.email.value
-      : formElements.username.value;
-
-    return model;
-  }
-
   get emailAsUsername() {
     return this.emeisOptions.emailAsUsername;
   }
@@ -52,5 +31,26 @@ export default class UsersEditIndexController extends Controller {
     return Object.entries(this.emeisOptions.additionalUserFields, {})
       .filter(([, value]) => value === "required")
       .map(([key]) => key);
+  }
+
+  @action
+  updateModel(model, formElements) {
+    model.firstName = formElements.firstName.value;
+    model.lastName = formElements.lastName.value;
+    model.email = formElements.email.value;
+    model.isActive = formElements.isActive.checked;
+
+    // additional fields might not be present
+    model.phone = formElements.phone?.value;
+    model.language = formElements.language?.selectedOptions[0].value;
+    model.address = formElements.address?.value;
+    model.city = formElements.city?.value;
+    model.zip = formElements.zip?.value;
+
+    model.username = this.emailAsUsername
+      ? formElements.email.value
+      : formElements.username.value;
+
+    return model;
   }
 }

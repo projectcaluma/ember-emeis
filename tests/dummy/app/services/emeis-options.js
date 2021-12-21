@@ -1,8 +1,6 @@
-import Service, { inject as service } from "@ember/service";
+import Service from "@ember/service";
 
 export default class EmeisOptionsService extends Service {
-  @service intl;
-
   emailAsUsername = false;
   pageSize = 10;
   // additionalUserFields = {
@@ -10,6 +8,19 @@ export default class EmeisOptionsService extends Service {
   //   language: "optional",
   // };
   // navigationEntries = ["users", "scopes"];
+  customButtons = {
+    users: [
+      {
+        label: "This is a custom button",
+        callback: () => console.warn("test"),
+        type: "primary",
+      },
+      {
+        label: "Second Button",
+        callback: () => console.warn("test"),
+      },
+    ],
+  };
   metaFields = {
     user: [
       {

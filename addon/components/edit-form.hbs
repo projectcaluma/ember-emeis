@@ -5,6 +5,20 @@
 >
   {{yield}}
 
+  <div class="uk-flex uk-flex-left uk-margin">
+    {{#if this.customButtons}}
+      {{#each this.customButtons as |button|}}
+        <UkButton
+          @type="button"
+          @label={{optional-translate button.label}}
+          class="uk-margin-right {{if button.type (concat 'uk-button-' button.type) ''}}"
+          {{on "click" (fn this.customAction button)}}
+          data-test-custom-button
+        />
+      {{/each}}
+    {{/if}}
+  </div>
+
   <div class="uk-flex uk-flex-right uk-margin">
     {{! without quotes on the @route the LinkTo component tries to set the property listViewRouteName which has no setter}}
     <LinkTo
