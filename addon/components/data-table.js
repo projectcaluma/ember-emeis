@@ -85,27 +85,38 @@ export default class DataTableComponent extends Component {
       typeof this.args.modelName === "string"
     );
 
-    let options = {
-      filter: { search: this.search, ...(this.args.filter || {}) },
-      sort: this.sort,
-      include: this.args.include || "",
-    };
+    try {
+      let includes = this.args.include;
+      if (this.args.include && Array.isArray(this.args.include)) {
+        includes = this.args.include.join(",");
+      }
 
-    if (!this.search) {
-      options = {
-        ...options,
-        page: {
-          number: this.page,
-          size: this.emeisOptions.pageSize,
-        },
+      let options = {
+        filter: { search: this.search, ...(this.args.filter || {}) },
+        sort: this.sort,
+        include: includes,
       };
+
+      if (!this.search) {
+        options = {
+          ...options,
+          page: {
+            number: this.page,
+            size: this.emeisOptions.pageSize,
+          },
+        };
+      }
+
+      const data = yield this.store.query(this.args.modelName, options);
+      this.numPages = data.meta.pagination?.pages;
+
+      return data;
+    } catch (error) {
+      console.error(
+        "Non-standard JSON:API response while fetching table data.",
+        error
+      );
     }
-
-    const data = yield this.store.query(this.args.modelName, options);
-
-    this.numPages = data.meta.pagination?.pages;
-
-    return data;
   }
 
   @action

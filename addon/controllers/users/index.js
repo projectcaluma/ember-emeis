@@ -8,4 +8,12 @@ export default class UsersIndexController extends PaginationController {
   get emailAsUsername() {
     return this.emeisOptions.emailAsUsername;
   }
+
+  get linkToRole() {
+    return this.emeisOptions.navigationEntries?.includes("roles");
+  }
+
+  get linkToScope() {
+    return this.emeisOptions.navigationEntries?.includes("scopes");
+  }
 }
