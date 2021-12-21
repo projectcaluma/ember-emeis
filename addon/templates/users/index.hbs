@@ -6,24 +6,30 @@
   @updatePage={{fn this.updateQueryParam "page"}}
   @updateSearch={{fn this.updateQueryParam "search"}}
   @updateSort={{fn this.updateQueryParam "sort"}}
-  @include={{"acls.role"}}
+  @include={{array "acls.role" "acls.scope"}}
   as |table|
 >
-  <table.head as |head|>
+  <table.head as |Column|>
     {{#unless this.emailAsUsername}}
-      <head.sorthead @sort="username">
+      <Column @sort="username">
         {{t "emeis.users.headings.username"}}
-      </head.sorthead>
+      </Column>
       {{/unless}}
-    <head.sorthead @sort="last_name">
+    <Column @sort="last_name">
       {{t "emeis.users.headings.lastName"}}
-    </head.sorthead>
-    <head.sorthead @sort="first_name">
+    </Column>
+    <Column @sort="first_name">
       {{t "emeis.users.headings.firstName"}}
-    </head.sorthead>
-    <head.sorthead @sort="email">
+    </Column>
+    <Column @sort="email">
       {{t "emeis.users.headings.email"}}
-    </head.sorthead>
+    </Column>
+    <Column>
+      {{t "emeis.roles.title"}}
+    </Column>
+    <Column>
+      {{t "emeis.scopes.title"}}
+    </Column>
   </table.head>
   <table.body as |body|>
     <body.row>
@@ -47,6 +53,41 @@
 
         <td data-test-user-email={{user.id}}>
           {{user.email}}
+        </td>
+        <td>
+          <ul class="uk-list uk-list-divider">
+            {{#each user.acls as |acl|}}
+              <li>
+                {{#if this.linkToRole}}
+                  <LinkTo @route="roles.edit" @model={{acl.role}} class="uk-link-text">
+                    {{acl.role.name}}
+                  </LinkTo>
+                {{else}}
+                  {{acl.role.name}}
+                {{/if}}
+              </li>
+            {{else}}
+            -
+            {{/each}}
+          </ul>
+        </td>
+        {{!-- SCOPES --}}
+        <td>
+          <ul class="uk-list uk-list-divider">
+            {{#each user.acls as |acl|}}
+              <li>
+                {{#if this.linkToScope}}
+                  <LinkTo @route="scopes.edit" @model={{acl.scope}} class="uk-link-text">
+                    {{acl.scope.name}}
+                  </LinkTo>
+                {{else}}
+                    {{acl.scope.name}}
+                {{/if}}
+              </li>
+            {{else}}
+            -
+            {{/each}}
+          </ul>
         </td>
       {{/let}}
     </body.row>
