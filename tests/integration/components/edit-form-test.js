@@ -7,14 +7,17 @@ import { module, test } from "qunit";
 
 class EmeisOptionsStub extends Service {
   customButtons = {
-    users: {
-      label: "This is a custom button",
-      callback: () => {
-        document
-          .querySelector("[data-test-custom-button]")
-          .setAttribute("data-test-action-triggered", true);
+    users: [
+      {
+        label: "This is a custom button",
+        callback: () => {
+          document
+            .querySelector("[data-test-custom-button]")
+            .setAttribute("data-test-action-triggered", true);
+        },
+        type: "danger",
       },
-    },
+    ],
   };
 }
 
@@ -122,7 +125,7 @@ module("Integration | Component | edit-form", function (hooks) {
   });
 
   test("custom action", async function (assert) {
-    assert.expect(3);
+    assert.expect(4);
     this.router.currentRoute.parent.name = "ember-emeis.users.edit";
 
     await render(hbs`
@@ -130,6 +133,7 @@ module("Integration | Component | edit-form", function (hooks) {
     `);
 
     assert.dom("[data-test-custom-button]").exists();
+    assert.dom("[data-test-custom-button].uk-button-danger").exists();
     assert
       .dom("[data-test-custom-button]")
       .hasNoAttribute("data-test-action-triggered");

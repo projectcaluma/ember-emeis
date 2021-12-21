@@ -44,28 +44,18 @@ export default class EditFormComponent extends Component {
     return this.relativeParentRouteName.split(".")[0];
   }
 
-  get hasCustomButton() {
+  get customButtons() {
     return this.emeisOptions.customButtons?.[this.modelName];
   }
 
-  get customButtonLabel() {
-    return (
-      this.emeisOptions.customButtons?.[this.modelName]?.label ||
-      "custom button"
-    );
-  }
-
   @action
-  customAction() {
-    if (
-      typeof this.emeisOptions.customButtons?.[this.modelName].callback !==
-      "function"
-    ) {
+  customAction(button) {
+    if (typeof button.callback !== "function") {
       this.notification.danger(
         this.intl.t("emeis.form.custom-button-action-error")
       );
     }
-    this.emeisOptions.customButtons?.[this.modelName]?.callback();
+    button.callback();
   }
 
   @task

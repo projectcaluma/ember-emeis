@@ -88,12 +88,19 @@ export default class EmeisOptionsService extends Service {
   // show only a subset of the main navigation entries
   navigationEntries = ["users", "scopes"];
 
-  //  integrate a custom button into any edit view. On each edit view (e.g. users) you can define a label and a callback function for the button.
+  // On each model edit view (e.g. users) you can define a list of custom buttons. Each button needs a label and a callback function. Optionally you can highlight the button with the 'type' attribute.
   customButtons = {
-    users: {
-      label: "My Button", // this could also be an ember-intl translation key
-      callback: () => window.alert("test"),
-    }
+    users: [
+      {
+        label: "My Button", // this could also be an ember-intl translation key
+        callback: () => window.alert("test"),
+        type: "danger" // leave blank or choose between primary, danger
+      },
+      {
+        label: "A second Button",
+        callback: () => window.alert("test"),
+      }
+    ]
   };
 
   // define custom fields for a given context (user, scope, role or permission)

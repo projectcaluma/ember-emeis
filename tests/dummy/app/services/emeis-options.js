@@ -9,10 +9,17 @@ export default class EmeisOptionsService extends Service {
   // };
   // navigationEntries = ["users", "scopes"];
   customButtons = {
-    users: {
-      label: "This is a custom button",
-      callback: () => console.warn("test"),
-    },
+    users: [
+      {
+        label: "This is a custom button",
+        callback: () => console.warn("test"),
+        type: "primary",
+      },
+      {
+        label: "Second Button",
+        callback: () => console.warn("test"),
+      },
+    ],
   };
   metaFields = {
     user: [
