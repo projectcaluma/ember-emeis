@@ -1,6 +1,6 @@
 {
   "name": "ember-emeis",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "The frontend for the emeis user management service",
   "keywords": [
     "ember-addon",
