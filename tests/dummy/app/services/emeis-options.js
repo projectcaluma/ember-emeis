@@ -57,8 +57,8 @@ export default class EmeisOptionsService extends Service {
         slug: "meta-example-2",
         label: "emeis.options.meta.scope.meta-example-2",
         type: "text",
-        visible: (model) => model.name === "First Level Scope",
-        readOnly: (model) => model.level === 0,
+        visible: (model) => model?.name === "First Level Scope",
+        readOnly: (model) => model?.level === 0,
       },
     ],
   };

@@ -137,11 +137,12 @@ module("Acceptance | users", function (hooks) {
     await click("[data-test-save]");
 
     await click("[data-test-back]");
-    assert.strictEqual(currentURL(), "/users");
+
+    assert.strictEqual(currentURL(), `/users`);
   });
 
   test("create view /users/new", async function (assert) {
-    assert.expect(28);
+    assert.expect(25);
 
     await visit("/users");
     assert.strictEqual(currentURL(), "/users");
@@ -149,9 +150,6 @@ module("Acceptance | users", function (hooks) {
 
     await click("[data-test-new]");
     assert.strictEqual(currentURL(), "/users/new");
-
-    assert.dom("[data-test-edit-link]").doesNotExist();
-    assert.dom("[data-test-acl-link]").doesNotExist();
 
     const username = "newusername",
       firstName = "John",
@@ -196,7 +194,7 @@ module("Acceptance | users", function (hooks) {
     await waitUntil(() => currentURL() !== "/users/new");
 
     const user = this.server.schema.users.first();
-    assert.strictEqual(currentURL(), `/users/${user.id}`);
+    assert.strictEqual(currentURL(), `/users/${user.id}?page=1`);
 
     assert.dom('[name="username"]').hasValue(user.username);
     assert.dom('[name="firstName"]').hasValue(user.firstName);
@@ -210,12 +208,11 @@ module("Acceptance | users", function (hooks) {
 
     assert.dom('[name="isActive"]').isChecked();
 
-    assert.dom("[data-test-edit-link]").exists();
-    assert.dom("[data-test-acl-link]").exists();
+    assert.dom("[data-test-user-back-link]").exists();
   });
 
   test("list view /users/:id/acl", async function (assert) {
-    assert.expect(12);
+    assert.expect(9);
 
     const user = this.server.create("user");
     const acl = this.server.createList("acl", 3)[0];
@@ -229,14 +226,9 @@ module("Acceptance | users", function (hooks) {
     await click("[data-test-user-username] a");
     assert.strictEqual(currentURL(), `/users/${user.id}`);
 
-    assert.dom("[data-test-edit-link]").exists();
-    assert.dom("[data-test-acl-link]").exists();
-
     this.assertRequest("GET", `/api/v1/acls`, (request) => {
       assert.strictEqual(user.id, request.queryParams["filter[user]"]);
     });
-    await click("[data-test-acl-link]");
-    assert.strictEqual(currentURL(), `/users/${user.id}/acl`);
 
     // For some reason the await click is not actually waiting for the fetch task to finish.
     // Probably some runloop issue.
@@ -260,17 +252,17 @@ module("Acceptance | users", function (hooks) {
     assert.dom("[data-test-acl-role]").exists({ count: 2 });
   });
 
-  test("create view /users/:id/acl", async function (assert) {
+  test("create view /users/:id for acl", async function (assert) {
     assert.expect(17);
 
     const user = this.server.create("user");
     const role = this.server.createList("role", 2)[0];
     const scope = this.server.createList("scope", 2)[0];
 
-    await visit(`/users/${user.id}/acl`);
+    await visit(`/users/${user.id}`);
     // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
-    assert.strictEqual(currentURL(), `/users/${user.id}/acl`);
+    assert.strictEqual(currentURL(), `/users/${user.id}`);
 
     assert.dom("[data-test-acl-role]").doesNotExist();
     assert.dom("[data-test-add-acl]").exists();
@@ -278,15 +270,12 @@ module("Acceptance | users", function (hooks) {
 
     await click("[data-test-add-acl]");
     assert.dom("table").doesNotExist();
-    assert.dom("[data-test-back]").exists();
+    assert.dom("[data-test-acl-back]").exists();
 
     // Test back button
-    await click("[data-test-back]");
+    await click("[data-test-acl-back]");
     assert.dom("[data-test-acl-role]").doesNotExist();
-    assert.dom("[data-test-back]").doesNotExist();
-    // For some reason the await click is not actually waiting for the fetch task to finish.
-    // Probably some runloop issue.
-    await waitUntil(() => this.element.querySelector("table thead"));
+    assert.dom("[data-test-acl-back]").doesNotExist();
     assert.dom("[data-test-add-acl]").exists();
     assert.dom("table").exists();
 
@@ -318,7 +307,7 @@ module("Acceptance | users", function (hooks) {
     await waitUntil(() =>
       this.element.querySelector("table tbody:not([data-test-loading])")
     );
-    assert.dom("[data-test-back]").doesNotExist();
+    assert.dom("[data-test-acl-back]").doesNotExist();
     assert.dom("[data-test-acl-scope]").hasText(scope.name.en);
     assert.dom("[data-test-acl-role]").hasText(role.name.en);
   });
