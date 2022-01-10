@@ -12,7 +12,7 @@
           @type="button"
           @label={{optional-translate button.label}}
           class="uk-margin-right {{if button.type (concat 'uk-button-' button.type) ''}}"
-          {{on "click" (fn this.customAction button)}}
+          {{on "click" (fn this.customAction button @model)}}
           data-test-custom-button
         />
       {{/each}}
