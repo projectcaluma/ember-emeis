@@ -88,7 +88,7 @@ export default class EmeisOptionsService extends Service {
   // show only a subset of the main navigation entries
   navigationEntries = ["users", "scopes"];
 
-  // On each model edit view (e.g. users) you can define a list of custom buttons. Each button needs a label and a callback function. Optionally you can highlight the button with the 'type' attribute.
+  // On each model edit view (e.g. users) you can define a list of custom buttons. Each button needs a label and a callback function. The callback function gets the current active model as first argument. Optionally you can highlight the button with the 'type' attribute.
   customButtons = {
     users: [
       {
@@ -98,7 +98,7 @@ export default class EmeisOptionsService extends Service {
       },
       {
         label: "A second Button",
-        callback: () => window.alert("test"),
+        callback: (model) => console.log(model),
       }
     ]
   };

@@ -49,13 +49,13 @@ export default class EditFormComponent extends Component {
   }
 
   @action
-  customAction(button) {
+  customAction(button, model) {
     if (typeof button.callback !== "function") {
       this.notification.danger(
         this.intl.t("emeis.form.custom-button-action-error")
       );
     }
-    button.callback();
+    button.callback(model);
   }
 
   @task
