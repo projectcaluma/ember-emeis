@@ -2,7 +2,7 @@
   {{#if @heading}}<h3 class="uk-align-left uk-margin-remove-bottom">{{@heading}}</h3>{{/if}}
   <span class="uk-align-right uk-flex uk-flex-right uk-width-1 uk-margin-remove-bottom">
     <form
-      class="uk-search uk-search-default {{if @heading 'uk-width-1-2@m' 'uk-width-1-3@m'}} uk-width-2-3@s search-input-form"
+      class="uk-search uk-search-default {{if @heading 'uk-width-medium@l' 'uk-width-large@l'}} uk-width-1@m search-input-form"
       {{on "submit" this.updateSearch}}
       {{on "reset" this.resetSearch}}
     >
