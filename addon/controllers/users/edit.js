@@ -1,12 +1,20 @@
-import Controller from "@ember/controller";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
+import { tracked } from "@glimmer/tracking";
+import { dropTask } from "ember-concurrency";
 
 const ALL_ADDITIONAL_FIELDS = ["phone", "language", "address", "city", "zip"];
 
-export default class UsersEditIndexController extends Controller {
+import PaginationController from "ember-emeis/-private/controllers/pagination";
+import handleModelErrors from "ember-emeis/decorators/handle-model-errors";
+
+export default class UsersEditController extends PaginationController {
   @service intl;
   @service emeisOptions;
+  @service notification;
+  @service store;
+
+  @tracked showAclWizzard = false;
 
   get metaFields() {
     return this.emeisOptions.metaFields?.user;
@@ -33,6 +41,10 @@ export default class UsersEditIndexController extends Controller {
       .map(([key]) => key);
   }
 
+  get queryParamsfilter() {
+    return { user: this.model.id };
+  }
+
   @action
   updateModel(model, formElements) {
     model.firstName = formElements.firstName.value;
@@ -52,5 +64,35 @@ export default class UsersEditIndexController extends Controller {
       : formElements.username.value;
 
     return model;
+  }
+
+  @dropTask
+  @handleModelErrors({ errorMessage: "emeis.form.save-error" })
+  *createAclEntry(aclProperties) {
+    const aclEntry = this.store.createRecord("acl", { ...aclProperties });
+
+    try {
+      yield aclEntry.save();
+      this.notification.success(this.intl.t("emeis.form.save-success"));
+      this.showAclWizzard = false;
+    } catch (exception) {
+      if (
+        exception.isAdapterError &&
+        exception.errors[0].status === "400" &&
+        exception.errors[0].code === "unique"
+      ) {
+        this.notification.danger(this.intl.t("emeis.acl-wizzard.duplicate"));
+      } else {
+        throw exception;
+      }
+    }
+  }
+
+  @dropTask
+  @handleModelErrors({ errorMessage: "emeis.form.delete-error" })
+  *deleteAclEntry(aclEntry, refreshDataTable) {
+    yield aclEntry.destroyRecord();
+    this.notification.success(this.intl.t("emeis.form.delete-success"));
+    refreshDataTable();
   }
 }

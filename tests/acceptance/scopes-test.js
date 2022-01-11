@@ -34,7 +34,7 @@ module("Acceptance | scopes", function (hooks) {
     // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
 
-    assert.strictEqual(currentURL(), `/scopes/${root.id}`);
+    assert.strictEqual(currentURL(), `/scopes/${root.id}?page=1`);
 
     // only root and first level is shown by default
     assert.dom("[data-test-node-id]").exists({ count: 4 });
@@ -113,7 +113,7 @@ module("Acceptance | scopes", function (hooks) {
     await waitUntil(() => currentURL() !== "/scopes/new");
 
     const scope = this.server.schema.scopes.first();
-    assert.strictEqual(currentURL(), `/scopes/${scope.id}`);
+    assert.strictEqual(currentURL(), `/scopes/${scope.id}?page=1`);
 
     assert.dom('[name="name"]').hasValue(scope.name.en);
     assert.dom('[name="description"]').hasValue(scope.description.en);
@@ -149,28 +149,17 @@ module("Acceptance | scopes", function (hooks) {
     assert.dom("[data-test-node-id]").doesNotExist();
   });
 
-  test("list view /scopes/:id/acl", async function (assert) {
-    assert.expect(8);
+  test("list view /scopes/:id/ shows acl info", async function (assert) {
+    assert.expect(5);
 
     const scope = this.server.create("scope");
     const acl = this.server.createList("acl", 3, { scope })[0];
 
-    await visit(`/scopes/${scope.id}`);
-    // eslint-disable-next-line ember/no-settled-after-test-helper
-    await settled();
-
-    assert.dom("[data-test-scopes-edit-index-link]").exists();
-    assert.dom("[data-test-scopes-edit-acl-link]").exists();
-
     this.assertRequest("GET", `/api/v1/acls`, (request) => {
       assert.strictEqual(scope.id, request.queryParams["filter[scope]"]);
     });
-    await click("[data-test-scopes-edit-acl-link]");
-    assert.strictEqual(currentURL(), `/scopes/${scope.id}/acl`);
 
-    // For some reason the await click is not actually waiting for the fetch task to finish.
-    // Probably some runloop issue.
-    await waitUntil(() => this.element.querySelector("table thead"));
+    await visit(`/scopes/${scope.id}`);
 
     assert.dom("[data-test-acl-role]").exists({ count: 3 });
 

@@ -1,12 +1,17 @@
-import Controller from "@ember/controller";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 
-export default class ScopesEditIndexController extends Controller {
+import PaginationController from "ember-emeis/-private/controllers/pagination";
+
+export default class ScopesEditIndexController extends PaginationController {
   @service emeisOptions;
   @service intl;
   @service router;
   @service store;
+
+  get queryParamsfilter() {
+    return { scope: this.model?.id };
+  }
 
   get metaFields() {
     return this.emeisOptions.metaFields?.scope;

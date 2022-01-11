@@ -1,31 +1,34 @@
-<div class="uk-flex uk-flex-right uk-width-1">
-  <form
-    class="uk-search uk-search-default uk-width-1-3@m uk-width-2-3@s search-input-form"
-    {{on "submit" this.updateSearch}}
-    {{on "reset" this.resetSearch}}
-  >
-    <input
-      name="search"
-      class="uk-search-input"
-      type="search"
-      value={{this.search}}
-      placeholder={{t "emeis.search.placeholder"}}
-      data-test-search-input
-      />
-    <button
-      type="submit"
-      class="uk-search-icon"
-      uk-search-icon
-      data-test-search-submit
-    ></button>
-    {{#if this.search}}
+<div class="uk-flex">
+  {{#if @heading}}<h3 class="uk-align-left uk-margin-remove-bottom">{{@heading}}</h3>{{/if}}
+  <span class="uk-align-right uk-flex uk-flex-right uk-width-1 uk-margin-remove-bottom">
+    <form
+      class="uk-search uk-search-default {{if @heading 'uk-width-medium@l' 'uk-width-large@l'}} uk-width-1@m search-input-form"
+      {{on "submit" this.updateSearch}}
+      {{on "reset" this.resetSearch}}
+    >
+      <input
+        name="search"
+        class="uk-search-input"
+        type="search"
+        value={{this.search}}
+        placeholder={{t "emeis.search.placeholder"}}
+        data-test-search-input
+        />
       <button
-        type="reset"
-        class="uk-search-icon search-reset-icon" uk-icon="close"
-        data-test-search-reset
-      />
-    {{/if}}
-  </form>
+        type="submit"
+        class="uk-search-icon"
+        uk-search-icon
+        data-test-search-submit
+      ></button>
+      {{#if this.search}}
+        <button
+          type="reset"
+          class="uk-search-icon search-reset-icon" uk-icon="close"
+          data-test-search-reset
+        />
+      {{/if}}
+    </form>
+  </span>
 </div>
 
 <table
