@@ -10,6 +10,20 @@ $ember-power-select-border-color: $global-border;
   transition: width 0.3s ease-out;
 }
 
+// fixes the negative margin overlapp of uk-grid
+.uk-grid-divider-fix {
+  margin-left: 0;
+
+  .uk-first-column {
+    padding-left: 0;
+  }
+}
+
+div.uk-grid-divider-fix.uk-grid-stack > .uk-grid-margin::before {
+  left: 0px;
+}
+// end fix
+
 [class*="uk-search-icon"] {
   &:focus,
   &:hover {
@@ -96,11 +110,11 @@ $tree_node_icon_margin: calc($tree_indicator_height/2);
   flex-direction: column;
 
   padding-right: $tree_node_icon_margin;
-  position: relative;
   max-height: 100%;
 
   .tree {
     overflow-y: auto;
+    max-height: 60vh;
 
     a {
       line-height: $tree_node_height;
