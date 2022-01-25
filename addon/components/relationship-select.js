@@ -2,7 +2,7 @@ import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
 import { restartableTask, lastValue, timeout } from "ember-concurrency";
 
-import handleModelErrors from "ember-emeis/decorators/handle-model-errors";
+import { handleTaskErrors } from "ember-emeis/-private/decorators";
 
 export default class RelationshipSelectComponent extends Component {
   @service notification;
@@ -16,7 +16,7 @@ export default class RelationshipSelectComponent extends Component {
   }
 
   @restartableTask
-  @handleModelErrors
+  @handleTaskErrors
   *fetchModels(search) {
     if (this.args.model) {
       return this.args.model;

@@ -3,7 +3,7 @@ import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
 import { task } from "ember-concurrency";
 
-import handleModelErrors from "ember-emeis/decorators/handle-model-errors";
+import { handleTaskErrors } from "ember-emeis/-private/decorators";
 
 export default class EditFormComponent extends Component {
   @service intl;
@@ -59,7 +59,7 @@ export default class EditFormComponent extends Component {
   }
 
   @task
-  @handleModelErrors({ errorMessage: "emeis.form.save-error" })
+  @handleTaskErrors({ errorMessage: "emeis.form.save-error" })
   *save(event) {
     event.preventDefault();
 
@@ -76,7 +76,7 @@ export default class EditFormComponent extends Component {
   }
 
   @task
-  @handleModelErrors({ errorMessage: "emeis.form.delete-error" })
+  @handleTaskErrors({ errorMessage: "emeis.form.delete-error" })
   *delete() {
     yield this.args.model.destroyRecord();
     this.notification.success(this.intl.t("emeis.form.delete-success"));

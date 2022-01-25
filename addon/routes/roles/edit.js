@@ -1,7 +1,7 @@
 import Route from "@ember/routing/route";
 import { inject as service } from "@ember/service";
 
-import handleModelErrors from "ember-emeis/decorators/handle-model-errors";
+import { handleModelErrors } from "ember-emeis/-private/decorators";
 
 export default class RolesEditRoute extends Route {
   @service notification;

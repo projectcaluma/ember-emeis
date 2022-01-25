@@ -6,7 +6,7 @@ import { dropTask } from "ember-concurrency";
 const ALL_ADDITIONAL_FIELDS = ["phone", "language", "address", "city", "zip"];
 
 import PaginationController from "ember-emeis/-private/controllers/pagination";
-import handleModelErrors from "ember-emeis/decorators/handle-model-errors";
+import { handleTaskErrors } from "ember-emeis/-private/decorators";
 
 export default class UsersEditController extends PaginationController {
   @service intl;
@@ -67,7 +67,7 @@ export default class UsersEditController extends PaginationController {
   }
 
   @dropTask
-  @handleModelErrors({ errorMessage: "emeis.form.save-error" })
+  @handleTaskErrors({ errorMessage: "emeis.form.save-error" })
   *createAclEntry(aclProperties) {
     const aclEntry = this.store.createRecord("acl", { ...aclProperties });
 
@@ -89,7 +89,7 @@ export default class UsersEditController extends PaginationController {
   }
 
   @dropTask
-  @handleModelErrors({ errorMessage: "emeis.form.delete-error" })
+  @handleTaskErrors({ errorMessage: "emeis.form.delete-error" })
   *deleteAclEntry(aclEntry, refreshDataTable) {
     yield aclEntry.destroyRecord();
     this.notification.success(this.intl.t("emeis.form.delete-success"));
