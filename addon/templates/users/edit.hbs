@@ -178,40 +178,50 @@
               {{t "emeis.acl-table.headings.scope"}}
             </th>
             <th class="uk-table-shrink uk-text-nowrap">
-              <UkButton
-                data-test-add-acl
-                @color="primary"
-                {{on "click" (fn (set this.showAclWizzard true))}}
-              >
-                {{t "emeis.acl-table.headings.add-entry"}}
-              </UkButton>
+              {{#unless @model.isNew}}
+                <UkButton
+                  data-test-add-acl
+                  @color="primary"
+                  {{on "click" (fn (set this.showAclWizzard true))}}
+                >
+                  {{t "emeis.acl-table.headings.add-entry"}}
+                </UkButton>
+              {{/unless}}
             </th>
           </table.head>
-          <table.body as |body|>
-            <body.row>
-              {{#let body.model as |aclEntry|}}
-                <td data-test-acl-role={{aclEntry.id}}>
-                  {{aclEntry.role.name}}
-                </td>
+          {{#if @model.isNew}}
+            <tbody>
+              <tr>
+                <td colspan="99" class="uk-text-center">You can add ACLs once the new user has been saved.</td>
+              </tr>
+            </tbody>
+          {{else}}
+            <table.body as |body|>
+              <body.row>
+                {{#let body.model as |aclEntry|}}
+                  <td data-test-acl-role={{aclEntry.id}}>
+                    {{aclEntry.role.name}}
+                  </td>
 
-                <td data-test-acl-scope={{aclEntry.id}}>
-                  {{aclEntry.scope.name}}
-                </td>
+                  <td data-test-acl-scope={{aclEntry.id}}>
+                    {{aclEntry.scope.name}}
+                  </td>
 
-                <td data-test-acl-delete={{aclEntry.id}}>
-                  <span class="uk-flex uk-flex-center">
-                    <button
-                      type="button"
-                      class="uk-icon-button uk-margin-small-right"
-                      uk-icon="trash"
-                      tooltip="hey there"
-                      {{on "click" (perform this.deleteAclEntry aclEntry table.refresh)}}
-                    ></button>
-                  </span>
-                </td>
-              {{/let}}
-            </body.row>
-          </table.body>
+                  <td data-test-acl-delete={{aclEntry.id}}>
+                    <span class="uk-flex uk-flex-center">
+                      <button
+                        type="button"
+                        class="uk-icon-button uk-margin-small-right"
+                        uk-icon="trash"
+                        tooltip="hey there"
+                        {{on "click" (perform this.deleteAclEntry aclEntry table.refresh)}}
+                      ></button>
+                    </span>
+                  </td>
+                {{/let}}
+              </body.row>
+            </table.body>
+          {{/if}}
         </DataTable>
       {{/if}}
     </div>

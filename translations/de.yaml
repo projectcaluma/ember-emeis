@@ -81,6 +81,7 @@ emeis:
       scope: "Berechtigungsbereich"
       role: "Rolle"
       add-entry: "Eintrag hinzufügen"
+    new-user-hint: "Berechtigungen können erst hinzugefügt werden, sobald der neue Benutzer gespeichert wurde."
 
   acl-wizzard:
     add-entry: "Berechtigung hinzufügen"

@@ -81,6 +81,7 @@ emeis:
       scope: "Scope"
       role: "Role"
       add-entry: "Add entry"
+    new-user-hint: "You can add ACLs once the new user has been saved."
 
   acl-wizzard:
     add-entry: "Add ACL Entry"
