@@ -24,23 +24,6 @@ div.uk-grid-divider-fix.uk-grid-stack > .uk-grid-margin::before {
 }
 // end fix
 
-[class*="uk-search-icon"] {
-  &:focus,
-  &:hover {
-    background: $global-muted-background;
-  }
-  border: solid 1px $global-border;
-}
-
-[class*="search-reset-icon"] {
-  &:focus,
-  &:hover {
-    background: $global-muted-background;
-  }
-  border: solid 1px $global-border;
-  border-left-color: transparent;
-}
-
 .no-style-button {
   background: none;
   border: none;

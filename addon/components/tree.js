@@ -3,6 +3,7 @@ import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { timeout, restartableTask } from "ember-concurrency";
 
 export default class TreeComponent extends Component {
   @service store;
@@ -35,8 +36,10 @@ export default class TreeComponent extends Component {
       : [];
   }
 
-  @action
-  filter(event) {
+  @restartableTask
+  *filter(event) {
+    yield timeout(100);
+
     const filterItems = (
       items,
       searchTerm = this.filterValue,
