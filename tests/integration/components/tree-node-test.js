@@ -1,7 +1,7 @@
 import { render } from "@ember/test-helpers";
+import faker from "@faker-js/faker";
 import { hbs } from "ember-cli-htmlbars";
 import { setupRenderingTest } from "ember-qunit";
-import faker from "faker";
 import { module, test } from "qunit";
 
 const generateItems = (count) => {
