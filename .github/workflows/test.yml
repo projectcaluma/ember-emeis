@@ -22,6 +22,14 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            yarn-${{ hashFiles('yarn.lock') }}
+            yarn-
+
       - name: Install Dependencies
         run: yarn install
 
@@ -38,6 +46,14 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
+
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            yarn-${{ hashFiles('yarn.lock') }}
+            yarn-
 
       - name: Install dependencies (no lockfile)
         run: yarn install --no-lockfile
@@ -68,8 +84,28 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            yarn-${{ hashFiles('yarn.lock') }}
+            yarn-
+
       - name: Install dependencies
         run: yarn install
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            yarn
+            package
+            yarn.lock
+          key: yarn-${{ matrix.scenario }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('config/ember-try.js') }}
+          restore-keys: |
+            yarn-${{ matrix.scenario }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('config/ember-try.js') }}
+            yarn-${{ matrix.scenario }}-
+            yarn-
 
       - name: Run tests
         run: yarn ember try:one ${{ matrix.scenario }}

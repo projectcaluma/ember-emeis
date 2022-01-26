@@ -18,6 +18,7 @@
       if this.fetchModels.isRunning (t "emeis.loading") @placeholder
     }}
     @noMatchesMessage={{t "emeis.empty"}}
+    @renderInPlace={{true}}
     @onChange={{@onChange}} as |model|
   >
     {{yield model}}
