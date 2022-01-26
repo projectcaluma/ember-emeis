@@ -20,7 +20,10 @@ export default class TreeNodeComponent extends Component {
         ?.findParents()
         .find((parent) => parent.id === this.args.item.id)
     ) {
-      this.router.transitionTo(this.args.itemRoute, this.args.item.id);
+      this.router.transitionTo(
+        this.router.currentRoute.name,
+        this.args.item.id
+      );
     }
   }
 
@@ -33,12 +36,26 @@ export default class TreeNodeComponent extends Component {
 
   get expanded() {
     return (
-      !this.args.flat &&
-      this.args.item.children &&
-      (this.args.expandedItems?.find((item) => item.id === this.args.item.id) ||
-        (this.expandedByUser !== null
-          ? this.expandedByUser
-          : this.expandedDefault))
+      this.args.filteredItems?.includes(this.args.item.id) ||
+      (this.args.item.children &&
+        (this.args.expandedItems?.includes(this.args.item.id) ||
+          (this.expandedByUser !== null
+            ? this.expandedByUser
+            : this.expandedDefault)))
     );
+  }
+
+  get children() {
+    const item = this.args.item;
+    if (
+      this.args.filteredItems &&
+      !this.args.filteredItems?.includes(item.id) &&
+      this.args.expandedItems?.includes(item.id)
+    ) {
+      return item.children.filter((child) =>
+        this.args.expandedItems.includes(child.id)
+      );
+    }
+    return item.children;
   }
 }

@@ -43,9 +43,13 @@ module("Integration | Component | tree-node", function (hooks) {
         @itemRoute={{this.itemRoute}}
         @activeItem={{this.activeItem}}
         @expandedItems={{[this.expandedItems]}}
-        @flat={{true}}
       />`);
 
-    assert.dom(this.element).hasText(`${this.items[0].name} (1)`);
+    const item = this.items[0];
+    assert
+      .dom(this.element)
+      .hasText(
+        `${item.name} (1) ${item.children[0].name} (1) ${item.children[0].children[0].name}`
+      );
   });
 });

@@ -8,21 +8,30 @@ export default class TreeComponent extends Component {
   @service store;
 
   @tracked filterValue;
-
   @tracked filtered;
-
-  get items() {
-    if (!this.filterValue) return this.args.items;
-    return this.filtered;
-  }
 
   get hasFilter() {
     return !!this.filterValue;
   }
 
   get expandedItems() {
+    if (this.filterValue && this.filtered) {
+      const expanded = [...this.filtered];
+      this.filtered.forEach((item) => {
+        if (item.findParents) {
+          item.findParents().forEach((item) => {
+            if (!expanded.find((existing) => existing.id === item.id)) {
+              expanded.push(item);
+            }
+          });
+        }
+        // we need the children in the list of expanded items, so we can expand the "searched" items.
+        item.children.forEach((child) => expanded.push(child));
+      });
+      return expanded.map((item) => item.id);
+    }
     return this.args.activeItem?.findParents
-      ? this.args.activeItem?.findParents()
+      ? this.args.activeItem?.findParents().map((item) => item.id)
       : [];
   }
 
@@ -31,7 +40,7 @@ export default class TreeComponent extends Component {
     const filterItems = (
       items,
       searchTerm = this.filterValue,
-      includedKeys = ["name", "description"]
+      includedKeys = ["name"]
     ) => {
       if (!searchTerm || !items || !isArray(items)) {
         return [];
@@ -51,5 +60,10 @@ export default class TreeComponent extends Component {
     };
 
     this.filtered = filterItems(this.args.items, event.target.value);
+  }
+
+  @action
+  filterItemList(id) {
+    return this.expandedItems.includes(id);
   }
 }

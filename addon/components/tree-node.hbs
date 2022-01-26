@@ -1,5 +1,5 @@
-<li class="{{if (and (not @flat) (lt @item.children.length 1)) 'childless'}}">
-  {{#if (and (not @flat) @item.children)}}
+<li class="{{if (lt @item.children.length 1) 'childless'}}">
+  {{#if @item.children}}
     <UkButton class="tree-node-icon" @color="link" {{on "click" this.toggle}}>
       <UkIcon @icon={{if this.expanded "chevron-down" "chevron-right"}} />
     </UkButton>
@@ -9,12 +9,14 @@
   </LinkTo>
   {{#if this.expanded}}
     <ul class="tree">
-      {{#each (sort-by "name" @item.children) as |child|}}
+      {{#each (sort-by "name" this.children) as |child|}}
         <TreeNode
           @item={{child}}
           @itemRoute={{@itemRoute}}
           @activeItem={{@activeItem}}
-          @expandedItems={{@expandedItems}}/>
+          @expandedItems={{@expandedItems}}
+          @filteredItems={{@filteredItems}}
+        />
       {{/each}}
     </ul>
   {{/if}}
