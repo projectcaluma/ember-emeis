@@ -1,5 +1,5 @@
 import { render } from "@ember/test-helpers";
-import faker from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 import { hbs } from "ember-cli-htmlbars";
 import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
