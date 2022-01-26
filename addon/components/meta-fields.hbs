@@ -9,6 +9,7 @@
           @onChange={{fn this.updateMetaField field @model}}
           @placeholder={{t field.label}}
           @allowClear={{true}}
+          @renderInPlace={{true}}
           as |option|
         >
           {{optional-translate option.label}}

@@ -1,4 +1,4 @@
-import { JSONAPISerializer } from "ember-cli-mirage";
+import { JSONAPISerializer } from "miragejs";
 const { ceil } = Math;
 
 export default class PaginationSerializer extends JSONAPISerializer {
