@@ -31,6 +31,7 @@ emeis:
       city: "City"
       zip: "ZIP"
       isActive: "Active"
+    aclHint: "You can add ACLs once the new user has been saved."
 
     edit:
       edit-user: "Edit User"
