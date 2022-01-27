@@ -69,10 +69,7 @@ module("Acceptance | scopes", function (hooks) {
     await fillIn('[name="name"]', name);
     await fillIn('[name="description"]', description);
 
-    await selectChoose(
-      ".ember-power-select-trigger",
-      futureParent["full-name"].en
-    );
+    await selectChoose(".ember-power-select-trigger", futureParent.fullName.en);
 
     this.assertRequest("PATCH", `/api/v1/scopes/${scope.id}`, (request) => {
       const { attributes, relationships } = JSON.parse(
