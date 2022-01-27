@@ -1,3 +1,14 @@
+## [3.1.1](https://github.com/projectcaluma/ember-emeis/compare/v3.1.0...v3.1.1) (2022-01-27)
+
+
+### Bug Fixes
+
+* don't fetch ACLs when user doesn't exist yet ([#385](https://github.com/projectcaluma/ember-emeis/issues/385)) ([b407b5e](https://github.com/projectcaluma/ember-emeis/commit/b407b5e1f5248ad21c14472492ed4de18c22cf5f))
+* error handling decorator for ember-concurrency tasks ([#386](https://github.com/projectcaluma/ember-emeis/issues/386)) ([63b8704](https://github.com/projectcaluma/ember-emeis/commit/63b8704039985c2f45edf7cc2b356448d4198bcf))
+* tree control search and expansion ([#387](https://github.com/projectcaluma/ember-emeis/issues/387)) ([98adf1c](https://github.com/projectcaluma/ember-emeis/commit/98adf1c094bc23b4de866979517651dc342eed66))
+* use full-name in parent scope selection ([#389](https://github.com/projectcaluma/ember-emeis/issues/389)) ([f54d27a](https://github.com/projectcaluma/ember-emeis/commit/f54d27ac5af790ac1db144ee620c44f2c55c7f6e))
+* use intl translation ([#394](https://github.com/projectcaluma/ember-emeis/issues/394)) ([2bb4942](https://github.com/projectcaluma/ember-emeis/commit/2bb49428255a760241df511e601eebe61a434535))
+
 ## [2.1.1](https://github.com/projectcaluma/ember-emeis/compare/v2.1.0...v2.1.1) (2021-12-13)
 
 
