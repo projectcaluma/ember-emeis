@@ -1,18 +1,3 @@
-{{!-- <ul uk-tab class="uk-child-width-1-2">
-  <li>
-    <LinkTo @route="scopes.edit.index" @model={{this.model}} data-test-scopes-edit-index-link>
-      {{t "emeis.scopes.edit.edit-scope"}}
-    </LinkTo>
-  </li>
-
-  <li>
-    <LinkTo @route="scopes.edit.acl" @model={{this.model}} data-test-scopes-edit-acl-link>
-      {{t "emeis.scopes.edit.acl.title"}}
-    </LinkTo>
-  </li>
-</ul>
-{{outlet}} --}}
-
 <div uk-grid class="uk-grid-divider">
     <div class="uk-width-1-2@xl">
       <h3>{{t "emeis.scopes.edit.edit-scope"}}</h3>
@@ -49,7 +34,7 @@
             @placeholder="{{t "emeis.scopes.headings.parent"}}..."
             @onChange={{this.setParent}} as |scope|
           >
-            {{scope.name}}
+            {{scope.fullName}}
           </RelationshipSelect>
         </EditForm::Element>
 

@@ -5,6 +5,7 @@ import LocalizedModel from "ember-emeis/models/localized";
 
 export default class ScopeModel extends LocalizedModel {
   @localizedAttr name;
+  @localizedAttr fullName;
   @localizedAttr description;
   @attr level;
   @attr meta;
