@@ -171,8 +171,6 @@ module("Acceptance | users", function (hooks) {
     await fillIn('[name="city"]', city);
     await fillIn('[name="zip"]', zip);
 
-    await click('[name="isActive"]');
-
     this.assertRequest("POST", "/api/v1/users", (request) => {
       const { attributes } = JSON.parse(request.requestBody).data;
 
