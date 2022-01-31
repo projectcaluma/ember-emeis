@@ -4,6 +4,6 @@ export default class UsersNewRoute extends CreateRoute {
   detailView = "users.edit";
 
   model() {
-    return this.store.createRecord("user");
+    return this.store.createRecord("user", { isActive: true });
   }
 }
