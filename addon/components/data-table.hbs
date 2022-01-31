@@ -51,7 +51,7 @@
   {{else}}
     {{yield
       (hash
-        body=(component "data-table/body" models=this.data.value)
+        body=(component "data-table/body" models=this.data.value emptyWarning=@emptyWarning emptyIcon=@emptyIcon emptyIconColor=@emptyIconColor)
         head=(component "data-table/head" sortedBy=this.sort update=this.updateSort)
         refresh=(perform this.fetchData)
       )
