@@ -66,21 +66,29 @@
             {{t "emeis.acl-table.headings.role"}}
           </th>
         </table.head>
-        <table.body as |body|>
-          <body.row>
-            {{#let body.model as |aclEntry|}}
-              <td data-test-acl-name={{aclEntry.id}}>
-                {{concat aclEntry.user.firstName " " aclEntry.user.lastName}}
-              </td>
-              <td data-test-acl-username={{aclEntry.id}}>
-                {{aclEntry.user.username}}
-              </td>
-              <td data-test-acl-role={{aclEntry.id}}>
-                {{aclEntry.role.name}}
-              </td>
-            {{/let}}
-          </body.row>
-        </table.body>
+        {{#if @model.isNew}}
+          <tbody>
+            <tr>
+              <td colspan="99" class="uk-text-center">{{t "emeis.scopes.aclHint"}}</td>
+            </tr>
+          </tbody>
+        {{else}}
+          <table.body as |body|>
+            <body.row>
+              {{#let body.model as |aclEntry|}}
+                <td data-test-acl-name={{aclEntry.id}}>
+                  {{concat aclEntry.user.firstName " " aclEntry.user.lastName}}
+                </td>
+                <td data-test-acl-username={{aclEntry.id}}>
+                  {{aclEntry.user.username}}
+                </td>
+                <td data-test-acl-role={{aclEntry.id}}>
+                  {{aclEntry.role.name}}
+                </td>
+              {{/let}}
+            </body.row>
+          </table.body>
+        {{/if}}
       </DataTable>
     </div>
 </div>

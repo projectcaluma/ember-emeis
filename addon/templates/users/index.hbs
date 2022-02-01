@@ -78,10 +78,10 @@
               <li>
                 {{#if this.linkToScope}}
                   <LinkTo @route="scopes.edit" @model={{acl.scope}} class="uk-link-text">
-                    {{acl.scope.name}}
+                    {{acl.scope.fullName}}
                   </LinkTo>
                 {{else}}
-                    {{acl.scope.name}}
+                    {{acl.scope.fullName}}
                 {{/if}}
               </li>
             {{else}}

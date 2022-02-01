@@ -16,6 +16,7 @@ emeis:
       edit-scope: "Berechtigungsbereich bearbeiten"
       acl:
         title: "Berechtigung"
+    aclHint: "Berechtigungen können erst hinzugefügt werden, sobald die Organisation gespeichert wurde."
 
   users:
     title: "Benutzer"
