@@ -31,7 +31,6 @@
       {{t "emeis.scopes.title"}}
     </Column>
     <Column>
-      {{t "emeis.actions"}}
     </Column>
   </table.head>
   <table.body as |body|>
@@ -92,7 +91,7 @@
             {{/each}}
           </ul>
         </td>
-        <td>
+        <td class="uk-text-right small-padding-right">
           <LinkTo @route="users.edit" @model={{user}} class="uk-link-reset uk-margin-small-right">
             <UkIcon @icon="pencil"/>
           </LinkTo>

@@ -3,6 +3,7 @@ import {
   currentURL,
   fillIn,
   click,
+  waitFor,
   waitUntil,
   settled,
 } from "@ember/test-helpers";
@@ -140,6 +141,8 @@ module("Acceptance | scopes", function (hooks) {
       assert.strictEqual(scope.id, request.params.id);
     });
     await click("[data-test-delete]");
+    await waitFor(".uk-modal.uk-open");
+    await click(".uk-modal .uk-button-primary");
 
     // For some reason the await click is not actually waiting for the delete task to finish.
     // Probably some runloop issue.
