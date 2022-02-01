@@ -30,6 +30,9 @@
     <Column>
       {{t "emeis.scopes.title"}}
     </Column>
+    <Column>
+      {{t "emeis.actions"}}
+    </Column>
   </table.head>
   <table.body as |body|>
     <body.row>
@@ -88,6 +91,14 @@
             -
             {{/each}}
           </ul>
+        </td>
+        <td>
+          <LinkTo @route="users.edit" @model={{user}} class="uk-link-reset uk-margin-small-right">
+            <UkIcon @icon="pencil"/>
+          </LinkTo>
+          <UkButton @color="link" {{on "click" (perform this.delete user)}}>
+            <UkIcon @icon="trash" />
+          </UkButton>
         </td>
       {{/let}}
     </body.row>
