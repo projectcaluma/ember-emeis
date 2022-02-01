@@ -4,6 +4,7 @@ emeis:
   empty: "Keine Einträge gefunden..."
   loading: "Laden..."
   general-error: "Ein Problem ist aufgetretten. Bitte versuchen Sie es erneut."
+  actions: "Aktionen"
 
   scopes:
     title: "Berechtigungsbereiche"
@@ -66,10 +67,15 @@ emeis:
   form:
     save: "Speichern"
     back: "Zurück"
-    save-success: "Erfolgreich gespeichert."
-    save-error: "Während dem Speichern ist ein Fehler aufgetretten. Bitte versuchen Sie es erneut."
     delete: "Löschen"
+    ok: "OK"
+    cancel: "Abbrechen"
+    confirmText: "Sind Sie sich sicher, dass Sie diese Aktion fortfahren wollen?"
+    confirmEntryDelete: "Sind Sie sich sicher, dass Sie diesen Eintrag löschen wollen?"
+    confirmUserDelete: "Sind Sie sich sicher, dass Sie diesen Benutzer löschen wollen?"
+    save-success: "Erfolgreich gespeichert."
     delete-success: "Erfolgreich gelöscht."
+    save-error: "Während dem Speichern ist ein Fehler aufgetretten. Bitte versuchen Sie es erneut."
     delete-error: "Beim löschen ist ein Problem aufgetretten. Falls der Eintrag noch existiert, versuchen Sie es erneut."
     phone-hint: "Buchstaben sind in Telefonnummern nicht erlaubt."
     slug-hint: "Es sind nur Buchstaben, Nummern und Bindestriche erlaubt."
