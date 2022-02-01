@@ -6,7 +6,7 @@ emeis:
   general-error: "Ein Problem ist aufgetretten. Bitte versuchen Sie es erneut."
 
   scopes:
-    title: "Berechtigungsbereiche"
+    title: "Organisationen"
     headings:
       name: "Name"
       description: "Beschreibung"
@@ -16,7 +16,8 @@ emeis:
       edit-scope: "Berechtigungsbereich bearbeiten"
       acl:
         title: "Berechtigung"
-    aclHint: "Berechtigungen können erst hinzugefügt werden, sobald die Organisation gespeichert wurde."
+    emptyAclList: "Diese Organisation enthält keine Zugriffsrechte."
+    aclHint: "Zugriffsrechte können erst hinzugefügt werden, sobald die Organisation gespeichert wurde."
 
   users:
     title: "Benutzer"
@@ -32,7 +33,7 @@ emeis:
       city: "Stadt"
       zip: "PLZ"
       isActive: "Aktiv"
-    aclHint: "Berechtigungen können er hinzugefügt werden, wenn der neue Benutzer gespeichert wurde."
+    aclHint: "Zugriffsrechte können erst hinzugefügt werden, wenn der neue Benutzer gespeichert wurde."
 
     edit:
       edit-user: "Benutzer Bearbeiten"
@@ -76,21 +77,21 @@ emeis:
     custom-button-action-error: "Die konfigurierte Custom Button Action ist keine valide Funktion."
 
   acl-table:
-    title: "Berechtigung"
+    title: "Zugriffsrechte"
     headings:
       name: "Name"
       user: "Benutzername"
       scope: "Berechtigungsbereich"
       role: "Rolle"
       add-entry: "Eintrag hinzufügen"
-    new-user-hint: "Berechtigungen können erst hinzugefügt werden, sobald der neue Benutzer gespeichert wurde."
+    new-user-hint: "Zugriffsrechte können erst hinzugefügt werden, sobald der neue Benutzer gespeichert wurde."
 
   acl-wizzard:
-    add-entry: "Berechtigung hinzufügen"
-    duplicate: "Diese Kombination von Berechtigungen existiert bereits."
+    add-entry: "Zugriffsrechte hinzufügen"
+    duplicate: "Diese Kombination von Zugriffsrechten existiert bereits."
     scope:
-      select: "Klicken Sie hier um einen Berechtigungsbereich auszuwählen"
-      select-different: "Anderen Berechtigungsbereich auswählen"
+      select: "Klicken Sie hier um einen Organisation auszuwählen"
+      select-different: "Andere Organisation auswählen"
     role:
       select: "Klicken Sie hier um eine Rolle auszuwählen"
       select-different: "Andere Rolle auswählen"

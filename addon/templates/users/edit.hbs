@@ -196,7 +196,13 @@
               </tr>
             </tbody>
           {{else}}
-            <table.body as |body|>
+            <table.body
+              @emptyIcon="warning"
+              @emptyIconColor="warning"
+              @emptyWarning={{t "emeis.users.emptyAclList"}}
+              as |body|
+            >
+
               <body.row>
                 {{#let body.model as |aclEntry|}}
                   <td data-test-acl-role={{aclEntry.id}}>
