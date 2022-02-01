@@ -8,6 +8,8 @@ import UIkit from "uikit";
  * For further details have a look at: https://github.com/uikit/uikit/blob/develop/src/js/core/modal.js
  */
 
+const LABELS = ["message", "ok", "cancel"];
+
 async function confirm(text, options) {
   try {
     await UIkit.modal.confirm(text, options);
@@ -22,10 +24,6 @@ function validate(args) {
     assert(
       "You should pass the confirm-task options as an object looking like this: { message: 'emeis.form.deleteMessage', cancel: 'emeis.form.back' } ",
       typeof args[0] === "object"
-    );
-    assert(
-      "The confirm-task option object needs at least a message property.",
-      args[0].message
     );
     return true;
   }
@@ -42,7 +40,9 @@ function validateIntl(context) {
 function translateOptions(context, options) {
   const translated = {};
   for (const key in options) {
-    translated[key] = context.intl.t(options[key]);
+    if (LABELS.includes(key)) {
+      translated[key] = context.intl.t(options[key]);
+    }
   }
   return {
     labels: {
@@ -75,8 +75,16 @@ export function confirmTask(...decoratorArgs) {
     desc.value = function* (...args) {
       validateIntl(this);
       const translatedOptions = translateOptions(this, options);
+      // append other options which are not confirm-labels to the modal object
+      // that way you can modify the modal with further options like "container"
+      const filteredOptions = Object.fromEntries(
+        Object.entries(options).filter(([key]) => !LABELS.includes(key))
+      );
       if (
-        !(yield confirm(translatedOptions.labels.message, translatedOptions))
+        !(yield confirm(translatedOptions.labels.message, {
+          ...translatedOptions,
+          ...filteredOptions,
+        }))
       ) {
         return;
       }
