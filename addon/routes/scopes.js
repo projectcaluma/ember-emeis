@@ -6,7 +6,9 @@ export default class ScopesRoute extends Route {
   @service router;
 
   model() {
-    return this.store.findAll("scope");
+    // this eager fetching is necessary, since we need a store-independent result set
+    // for use-cases where we have other non-relevant scopes in store
+    return this.store.query("scope", {});
   }
 
   redirect(scopes, transition) {
