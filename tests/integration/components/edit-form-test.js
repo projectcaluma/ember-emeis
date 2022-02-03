@@ -1,5 +1,5 @@
 import Service from "@ember/service";
-import { render, click } from "@ember/test-helpers";
+import { render, click, waitFor } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupIntl } from "ember-intl/test-support";
 import { setupRenderingTest } from "ember-qunit";
@@ -89,6 +89,9 @@ module("Integration | Component | edit-form", function (hooks) {
     await render(hbs`<EditForm @model={{this.model}}/>`);
 
     await click("[data-test-delete]");
+    await waitFor(".uk-modal.uk-open");
+    await click(".uk-modal .uk-button-primary");
+
     assert.verifySteps(["destroyRecord"]);
   });
 

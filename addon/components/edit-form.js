@@ -3,6 +3,8 @@ import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
 import { task } from "ember-concurrency";
 
+import { confirmTask } from "../decorators/confirm-task";
+
 import { handleTaskErrors } from "ember-emeis/-private/decorators";
 
 export default class EditFormComponent extends Component {
@@ -76,6 +78,7 @@ export default class EditFormComponent extends Component {
   }
 
   @task
+  @confirmTask({ message: "emeis.form.confirmEntryDelete" })
   @handleTaskErrors({ errorMessage: "emeis.form.delete-error" })
   *delete() {
     yield this.args.model.destroyRecord();
