@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/projectcaluma/ember-emeis/compare/v3.2.1...v4.0.0) (2022-02-04)
+
+
+### chore
+
+* trigger major release ([#405](https://github.com/projectcaluma/ember-emeis/issues/405)) ([253ff91](https://github.com/projectcaluma/ember-emeis/commit/253ff9196e2e211badf1fdfe8f32c37f925758af))
+
+
+### BREAKING CHANGES
+
+* fix major release
+
 ## [3.2.1](https://github.com/projectcaluma/ember-emeis/compare/v3.2.0...v3.2.1) (2022-02-04)
 
 
