@@ -8,7 +8,7 @@ export default class EditFormComponent extends Component {
   @action
   updateMetaField(field, model, optionOrEvent) {
     const value = optionOrEvent?.target?.value ?? optionOrEvent?.value;
-    model.meta = { ...model.meta, [field.slug]: value };
-    model.notifyPropertyChange("meta");
+    model.metainfo = { ...model.metainfo, [field.slug]: value };
+    model.notifyPropertyChange("metainfo");
   }
 }

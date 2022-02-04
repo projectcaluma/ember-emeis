@@ -5,7 +5,7 @@
         <PowerSelect
           @disabled={{eval-meta field.readOnly @model}}
           @options={{field.options}}
-          @selected={{find-by "value" (get @model.meta field.slug) field.options}}
+          @selected={{find-by "value" (get @model.metainfo field.slug) field.options}}
           @onChange={{fn this.updateMetaField field @model}}
           @placeholder={{t field.label}}
           @allowClear={{true}}
@@ -20,7 +20,7 @@
           data-test-meta-field-text={{field.slug}}
           class="uk-input"
           type="text"
-          value={{get @model.meta field.slug}}
+          value={{get @model.metainfo field.slug}}
           disabled={{eval-meta field.readOnly @model}}
           {{on "input" (fn this.updateMetaField field @model)}}
         >
