@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/projectcaluma/ember-emeis/compare/v3.2.0...v3.2.1) (2022-02-04)
+
+
+### Bug Fixes
+
+* prevent non fresh scope in scope tree view ([#403](https://github.com/projectcaluma/ember-emeis/issues/403)) ([ac2278e](https://github.com/projectcaluma/ember-emeis/commit/ac2278e9c96c8dbeeff0d3049aeb7a8ecbc2c6b0))
+
 # [3.2.0](https://github.com/projectcaluma/ember-emeis/compare/v3.1.1...v3.2.0) (2022-02-04)
 
 
