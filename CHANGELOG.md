@@ -1,3 +1,17 @@
+# [3.2.0](https://github.com/projectcaluma/ember-emeis/compare/v3.1.1...v3.2.0) (2022-02-04)
+
+
+### Bug Fixes
+
+* new users are active (isActive) by default ([#396](https://github.com/projectcaluma/ember-emeis/issues/396)) ([2010ea0](https://github.com/projectcaluma/ember-emeis/commit/2010ea0cc36ea253f0ec70a6f17601ec9caee66e))
+* special icon and info for empty acl list ([#398](https://github.com/projectcaluma/ember-emeis/issues/398)) ([3fea057](https://github.com/projectcaluma/ember-emeis/commit/3fea057cde88f721ee397fe7257d5bbba70cc106))
+* use fullName of scopes in userlists ([#397](https://github.com/projectcaluma/ember-emeis/issues/397)) ([3dd1955](https://github.com/projectcaluma/ember-emeis/commit/3dd1955854b0b61257295ecfbf3226c480e6e7b8))
+
+
+### Features
+
+* adds edit and delete functionality to userlist ([#399](https://github.com/projectcaluma/ember-emeis/issues/399)) ([69d3c17](https://github.com/projectcaluma/ember-emeis/commit/69d3c17fe52eb2119b733f549b93bd5b72e3897b))
+
 ## [3.1.1](https://github.com/projectcaluma/ember-emeis/compare/v3.1.0...v3.1.1) (2022-01-27)
 
 
