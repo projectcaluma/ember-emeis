@@ -14,6 +14,6 @@ export default Factory.extend({
   address: () => faker.address.streetAddress(),
   city: () => localize(faker.address.city()),
   zip: () => faker.datatype.number(),
-  meta: () => {},
+  metainfo: () => {},
   isActive: () => faker.datatype.boolean(),
 });

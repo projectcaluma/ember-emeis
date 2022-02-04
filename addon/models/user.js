@@ -13,7 +13,7 @@ export default class UserModel extends LocalizedModel {
   @attr address;
   @localizedAttr city;
   @attr zip;
-  @attr meta;
+  @attr metainfo;
   @attr isActive;
 
   get fullName() {

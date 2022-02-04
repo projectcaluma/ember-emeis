@@ -78,7 +78,7 @@ module("Integration | Component | meta-fields", function (hooks) {
     this.emeisOptions = this.owner.lookup("service:emeisOptions");
 
     this.model = {
-      meta: {},
+      metainfo: {},
       notifyPropertyChange: () => {},
     };
   });
@@ -106,12 +106,12 @@ module("Integration | Component | meta-fields", function (hooks) {
     assert.dom(this.element).containsText(translations.scope.metaExample2);
 
     await selectChoose(".ember-power-select-trigger", "Ham");
-    assert.deepEqual(this.model.meta, {
+    assert.deepEqual(this.model.metainfo, {
       "meta-example": "option-1",
     });
 
     await fillIn("[data-test-meta-field-text]", "My value");
-    assert.deepEqual(this.model.meta, {
+    assert.deepEqual(this.model.metainfo, {
       "meta-example": "option-1",
       "meta-example-2": "My value",
     });
