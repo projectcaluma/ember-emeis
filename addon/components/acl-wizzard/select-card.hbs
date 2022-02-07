@@ -21,7 +21,7 @@
         @color="primary"
         class="uk-width-1 uk-text-center"
         data-test-change
-        {{on "click" @selectEntry}}
+        @onClick={{@selectEntry}}
       >
         <UkIcon @icon="pencil" class="uk-margin-small-right" />
         {{t (concat "emeis.acl-wizzard." @model ".select-different")}}
