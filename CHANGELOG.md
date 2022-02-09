@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/projectcaluma/ember-emeis/compare/v4.0.0...v4.0.1) (2022-02-09)
+
+
+### Bug Fixes
+
+* **deps:** upgrade to ember-uikit v5 ([#408](https://github.com/projectcaluma/ember-emeis/issues/408)) ([4322550](https://github.com/projectcaluma/ember-emeis/commit/4322550ffe0cb89219076851df27abcde2dc9873))
+
 # [4.0.0](https://github.com/projectcaluma/ember-emeis/compare/v3.2.1...v4.0.0) (2022-02-04)
 
 
