@@ -34,10 +34,11 @@ emeis:
       city: "Stadt"
       zip: "PLZ"
       isActive: "Aktiv"
+    emptyAclList: "Dieser Benutzer hat noch keine Zugriffsrechte."
     aclHint: "Zugriffsrechte können erst hinzugefügt werden, wenn der neue Benutzer gespeichert wurde."
 
     edit:
-      edit-user: "Benutzer Bearbeiten"
+      edit-user: "Benutzer bearbeiten"
       acl: "Berechtigung"
     new: "Benutzer hinzufügen"
 
