@@ -236,7 +236,7 @@ module("Acceptance | users", function (hooks) {
     assert.dom("[data-test-acl-delete]").exists({ count: 3 });
 
     assert.dom("[data-test-acl-role]").hasText(acl.role.name.en);
-    assert.dom("[data-test-acl-scope]").hasText(acl.scope.name.en);
+    assert.dom("[data-test-acl-scope]").hasText(acl.scope.fullName.en);
 
     this.assertRequest("DELETE", `/api/v1/acls/:id`, (request) => {
       assert.strictEqual(request.params.id, acl.id);
@@ -306,7 +306,7 @@ module("Acceptance | users", function (hooks) {
       this.element.querySelector("table tbody:not([data-test-loading])")
     );
     assert.dom("[data-test-acl-back]").doesNotExist();
-    assert.dom("[data-test-acl-scope]").hasText(scope.name.en);
+    assert.dom("[data-test-acl-scope]").hasText(scope.fullName.en);
     assert.dom("[data-test-acl-role]").hasText(role.name.en);
   });
 });
