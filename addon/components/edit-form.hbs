@@ -12,7 +12,7 @@
           @type="button"
           @label={{optional-translate button.label}}
           class="uk-margin-right {{if button.type (concat 'uk-button-' button.type) ''}}"
-          {{on "click" (fn this.customAction button @model)}}
+          @onClick={{fn this.customAction button @model}}
           data-test-custom-button
         />
       {{/each}}
@@ -35,7 +35,7 @@
         @disabled={{this.delete.isRunning}}
         class="uk-margin-right uk-button-danger"
         data-test-delete
-        {{on "click" (perform this.delete)}}
+        @onClick={{perform this.delete}}
       >
         {{t "emeis.form.delete"}}
       </UkButton>

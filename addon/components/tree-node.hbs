@@ -1,6 +1,6 @@
 <li class="{{if (or (lt @item.children.length 1) @filteredItems) 'childless'}}">
   {{#if @item.children}}
-    <UkButton class="tree-node-icon" @color="link" {{on "click" this.toggle}}>
+    <UkButton class="tree-node-icon" @color="link"  @onClick={{this.toggle}}>
       {{#unless @filteredItems}}
         <UkIcon @icon={{if this.expanded "chevron-down" "chevron-right"}} />
       {{/unless}}

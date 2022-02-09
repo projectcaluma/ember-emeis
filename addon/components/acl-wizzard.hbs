@@ -90,11 +90,8 @@
       @color="primary"
       disabled={{not this.isValidAcl}}
       data-test-create-acl
-      {{on
-        "click"
-        (fn
-          @createAclEntry (hash user=this.user role=this.role scope=this.scope)
-        )
+      @onClick={{fn
+        @createAclEntry (hash user=this.user role=this.role scope=this.scope)
       }}
     >
       <UkIcon @icon="check" class="uk-margin-small-right" />

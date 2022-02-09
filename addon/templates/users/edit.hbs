@@ -153,7 +153,7 @@
     <div class="uk-width-1-2@l">
       {{#if this.showAclWizzard}}
         <span class="uk-flex uk-flex-left">
-          <UkButton data-test-acl-back {{on "click" (set this.showAclWizzard false)}}>
+          <UkButton data-test-acl-back @onClick={{set this.showAclWizzard false}}>
             <UkIcon @icon="arrow-left" @ratio="1.5" />
             {{t "emeis.form.back"}}
           </UkButton>
@@ -182,7 +182,7 @@
                 <UkButton
                   data-test-add-acl
                   @color="primary"
-                  {{on "click" (fn (set this.showAclWizzard true))}}
+                  @onClick={{set this.showAclWizzard true}}
                 >
                   {{t "emeis.acl-table.headings.add-entry"}}
                 </UkButton>
