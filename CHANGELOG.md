@@ -1,3 +1,11 @@
+## [4.0.2](https://github.com/projectcaluma/ember-emeis/compare/v4.0.1...v4.0.2) (2022-02-09)
+
+
+### Bug Fixes
+
+* minor translation corrections ([#410](https://github.com/projectcaluma/ember-emeis/issues/410)) ([1ddec03](https://github.com/projectcaluma/ember-emeis/commit/1ddec036d9da36a3f0cbc962753605c42aeae2ef))
+* show full scope names in user acl table ([#411](https://github.com/projectcaluma/ember-emeis/issues/411)) ([3efcb94](https://github.com/projectcaluma/ember-emeis/commit/3efcb94db330276efe50ad24de1eefc924664d9e))
+
 ## [4.0.1](https://github.com/projectcaluma/ember-emeis/compare/v4.0.0...v4.0.1) (2022-02-09)
 
 
