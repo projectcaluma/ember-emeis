@@ -2,10 +2,23 @@
   <h2 class="uk-margin-remove">
     {{t (concat "emeis." @model ".title")}}
   </h2>
-  {{#unless @noCreateLink}}
-    <LinkTo @route="{{@model}}.new" class="uk-button uk-button-primary" data-test-new>
-      {{t (concat "emeis." @model ".new")}}
-    </LinkTo>
-  {{/unless}}
+  <div>
+    {{#if @onExport}}
+      <UkButton
+        class="uk-margin-small-right"
+        @onClick={{@onExport}}
+        @disabled={{@onExport.isRunning}}
+        @loading={{@onExport.isRunning}}
+      >
+        <UkIcon class="icon-in-button" @icon="cloud-download" />
+        {{t "emeis.export"}}
+      </UkButton>
+    {{/if}}
+    {{#unless @noCreateLink}}
+      <LinkTo @route="{{@model}}.new" class="uk-button uk-button-primary" data-test-new>
+        {{t (concat "emeis." @model ".new")}}
+      </LinkTo>
+    {{/unless}}
+  </div>
 </div>
 <hr />
