@@ -10,7 +10,7 @@ $ember-power-select-border-color: $global-border;
   transition: width 0.3s ease-out;
 }
 
-// fixes the negative margin overlapp of uk-grid
+// fixes the negative margin overlap of uk-grid
 .uk-grid-divider-fix {
   margin-left: 0;
 
@@ -31,6 +31,10 @@ div.uk-grid-divider-fix.uk-grid-stack > .uk-grid-margin::before {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+}
+
+.icon-in-button {
+  margin-right: 0.3rem;
 }
 
 .pointer {
