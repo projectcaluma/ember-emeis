@@ -17,6 +17,7 @@ export default class App extends Application {
         dependencies: {
           services: [
             "store",
+            "fetch",
             "intl",
             "notification",
             "router",

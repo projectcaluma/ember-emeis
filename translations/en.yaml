@@ -5,6 +5,7 @@ emeis:
   loading: "Loading..."
   general-error: "A problem occured. Please try again."
   actions: "Actions"
+  export: "Export"
 
   scopes:
     title: "Scopes"

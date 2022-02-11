@@ -35,13 +35,21 @@ export default class App extends Application {
   this.engines = {
     "ember-emeis": {
       dependencies: {
-        services: ["store", "intl", "notification", "router"],
+        services: ["store", "fetch", "intl", "notification", "router"],
       },
     },
   };
 }
 });
 ```
+
+Emeis requires the following services to be injects:
+
+- `store` - almost all of the data fetching is done using ember data
+- `fetch` - the user export requires a `fetch` services that handles authentication
+- `intl` - ember-intl for i18n
+- `notification` - handles success and error messages
+- `router` - the ember router service
 
 ## Configuration
 
