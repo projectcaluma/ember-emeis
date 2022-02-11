@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/projectcaluma/ember-emeis/compare/v4.0.2...v4.1.0) (2022-02-11)
+
+
+### Features
+
+* show user export button ([#412](https://github.com/projectcaluma/ember-emeis/issues/412)) ([0ad6560](https://github.com/projectcaluma/ember-emeis/commit/0ad656062b1cda5c87247aa4c4432c436c0f486a))
+
 ## [4.0.2](https://github.com/projectcaluma/ember-emeis/compare/v4.0.1...v4.0.2) (2022-02-09)
 
 
