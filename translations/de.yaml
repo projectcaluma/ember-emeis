@@ -10,7 +10,7 @@ emeis:
   scopes:
     title: "Organisationen"
     headings:
-      name: "Name"
+      fullName: "Name"
       description: "Beschreibung"
       parent: "Übergeordneter Berechtigungsbereich"
     new: "Neuen Berechtigungsbereich erstellen"

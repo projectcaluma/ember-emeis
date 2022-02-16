@@ -10,7 +10,7 @@ emeis:
   scopes:
     title: "Scopes"
     headings:
-      name: "Name"
+      fullName: "Name"
       description: "Description"
       parent: "Parent Scope"
     new: "Add Scope"
