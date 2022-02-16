@@ -1,3 +1,10 @@
+## [4.1.1](https://github.com/projectcaluma/ember-emeis/compare/v4.1.0...v4.1.1) (2022-02-16)
+
+
+### Bug Fixes
+
+* show full scope name in acl wizzard ([0e123f9](https://github.com/projectcaluma/ember-emeis/commit/0e123f90162bf36613a1d7b05281d8c0c383371b))
+
 # [4.1.0](https://github.com/projectcaluma/ember-emeis/compare/v4.0.2...v4.1.0) (2022-02-11)
 
 
