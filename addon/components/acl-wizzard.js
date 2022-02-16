@@ -10,7 +10,7 @@ export default class AclWizzardComponent extends Component {
 
   fields = {
     user: ["username", "fullName", "email"],
-    scope: ["name", "description"],
+    scope: ["fullName", "description"],
     role: ["name", "description"],
   };
 
