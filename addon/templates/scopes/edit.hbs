@@ -6,12 +6,12 @@
         @updateModel={{this.updateModel}}
         @listViewRouteName="scopes.index"
       >
-        <EditForm::Element @label={{t "emeis.scopes.headings.name"}}>
+        <EditForm::Element @label={{t "emeis.scopes.headings.fullName"}}>
           <input
             class="uk-input"
             type="text"
             name="name"
-            placeholder="{{t "emeis.scopes.headings.name"}}..."
+            placeholder="{{t "emeis.scopes.headings.fullName"}}..."
             required
             value={{@model.name}}
           />
