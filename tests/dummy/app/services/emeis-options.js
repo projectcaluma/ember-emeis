@@ -3,6 +3,9 @@ import Service from "@ember/service";
 export default class EmeisOptionsService extends Service {
   emailAsUsername = false;
   pageSize = 10;
+  // forceLocale = {
+  //   scope: "en",
+  // };
   // additionalUserFields = {
   //   phone: "optional",
   //   language: "optional",

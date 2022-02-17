@@ -81,6 +81,11 @@ export default class EmeisOptionsService extends Service {
   // number of items in list views
   pageSize = 10;
 
+  // force the locale of models to a specific value (i.e. to make it "untranslated")
+  forceLocale = {
+    scope: "en",
+  };
+
   // hide "username" field
   emailAsUsername = false;
 
