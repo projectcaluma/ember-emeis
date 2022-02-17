@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/projectcaluma/ember-emeis/compare/v4.1.1...v4.2.0) (2022-02-17)
+
+
+### Features
+
+* **emeis-options:** add setting to force the locale of models ([2c30e54](https://github.com/projectcaluma/ember-emeis/commit/2c30e540f47737157f5eb068c7f76085acf14d1b))
+
 ## [4.1.1](https://github.com/projectcaluma/ember-emeis/compare/v4.1.0...v4.1.1) (2022-02-16)
 
 
