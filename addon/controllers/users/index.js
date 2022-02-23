@@ -24,7 +24,7 @@ export default class UsersIndexController extends PaginationController {
   }
 
   @task
-  @confirmTask({ message: "emeis.form.confirmUserDelete" })
+  @confirmTask({ message: "emeis.form.confirmEntryDelete" })
   @handleTaskErrors({ errorMessage: "emeis.form.delete-error" })
   *delete(model) {
     yield model.destroyRecord();

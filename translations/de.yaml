@@ -75,7 +75,6 @@ emeis:
     cancel: "Abbrechen"
     confirmText: "Sind Sie sich sicher, dass Sie diese Aktion fortfahren wollen?"
     confirmEntryDelete: "Sind Sie sich sicher, dass Sie diesen Eintrag löschen wollen?"
-    confirmUserDelete: "Sind Sie sich sicher, dass Sie diesen Benutzer löschen wollen?"
     save-success: "Erfolgreich gespeichert."
     delete-success: "Erfolgreich gelöscht."
     save-error: "Während dem Speichern ist ein Fehler aufgetretten. Bitte versuchen Sie es erneut."
