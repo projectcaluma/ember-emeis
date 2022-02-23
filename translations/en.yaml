@@ -75,7 +75,6 @@ emeis:
     cancel: "Cancel"
     confirmText: "Are you sure you want to proceed with this action?"
     confirmEntryDelete: "Are you sure you want to delete this entry?"
-    confirmUserDelete: "Are you sure you want to delete this user?"
     save-success: "Saved successfully"
     delete-success: "Deleted successfully"
     save-error: "A problem occurred while saving. Please try again."
