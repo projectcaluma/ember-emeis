@@ -1,3 +1,10 @@
+## [4.2.1](https://github.com/projectcaluma/ember-emeis/compare/v4.2.0...v4.2.1) (2022-02-23)
+
+
+### Bug Fixes
+
+* **translations:** consistent warning msg for user deletion ([#422](https://github.com/projectcaluma/ember-emeis/issues/422)) ([7f27ae3](https://github.com/projectcaluma/ember-emeis/commit/7f27ae37929b6a13ccb1a96f07c6582e8e59633d))
+
 # [4.2.0](https://github.com/projectcaluma/ember-emeis/compare/v4.1.1...v4.2.0) (2022-02-17)
 
 
