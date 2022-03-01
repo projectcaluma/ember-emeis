@@ -1,5 +1,7 @@
 import Service from "@ember/service";
 
+import TestButtonComponent from "../components/dummy-button/dummy-button"; // template and component file must have the same name (if not template only)
+
 export default class EmeisOptionsService extends Service {
   emailAsUsername = false;
   pageSize = 10;
@@ -11,18 +13,8 @@ export default class EmeisOptionsService extends Service {
   //   language: "optional",
   // };
   // navigationEntries = ["users", "scopes"];
-  customButtons = {
-    users: [
-      {
-        label: "This is a custom button",
-        callback: () => console.warn("test"),
-        type: "primary",
-      },
-      {
-        label: "Second Button",
-        callback: () => console.warn("test"),
-      },
-    ],
+  customComponents = {
+    users: TestButtonComponent,
   };
   metaFields = {
     user: [
