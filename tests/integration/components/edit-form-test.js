@@ -5,19 +5,11 @@ import { setupIntl } from "ember-intl/test-support";
 import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
 
+import DummyButton from "../../../components/dummy-button/dummy-button";
+
 class EmeisOptionsStub extends Service {
-  customButtons = {
-    users: [
-      {
-        label: "This is a custom button",
-        callback: () => {
-          document
-            .querySelector("[data-test-custom-button]")
-            .setAttribute("data-test-action-triggered", true);
-        },
-        type: "danger",
-      },
-    ],
+  customComponents = {
+    users: DummyButton,
   };
 }
 
@@ -135,16 +127,16 @@ module("Integration | Component | edit-form", function (hooks) {
       <EditForm></EditForm>
     `);
 
-    assert.dom("[data-test-custom-button]").exists();
-    assert.dom("[data-test-custom-button].uk-button-danger").exists();
+    assert.dom("[data-test-custom-component]").exists();
+    assert.dom("[data-test-custom-component].uk-button-danger").exists();
     assert
-      .dom("[data-test-custom-button]")
+      .dom("[data-test-custom-component]")
       .hasNoAttribute("data-test-action-triggered");
 
-    await click("[data-test-custom-button]");
+    await click("[data-test-custom-component]");
 
     assert
-      .dom("[data-test-custom-button]")
+      .dom("[data-test-custom-component]")
       .hasAttribute("data-test-action-triggered");
   });
 });
