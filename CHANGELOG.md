@@ -1,3 +1,13 @@
+# [5.0.0](https://github.com/projectcaluma/ember-emeis/compare/v4.2.1...v5.0.0) (2022-03-04)
+
+
+* feat(emeisOptions)!: component injection via emeisOptions (#431) ([a293ea8](https://github.com/projectcaluma/ember-emeis/commit/a293ea88662db8679a6f32c9b34ae026f9049a74)), closes [#431](https://github.com/projectcaluma/ember-emeis/issues/431)
+
+
+### BREAKING CHANGES
+
+* replaces customButton with customComponent property in emeisOptions service
+
 ## [4.2.1](https://github.com/projectcaluma/ember-emeis/compare/v4.2.0...v4.2.1) (2022-02-23)
 
 
