@@ -1,4 +1,3 @@
-import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
 import { task } from "ember-concurrency";
@@ -46,18 +45,8 @@ export default class EditFormComponent extends Component {
     return this.relativeParentRouteName.split(".")[0];
   }
 
-  get customButtons() {
-    return this.emeisOptions.customButtons?.[this.modelName];
-  }
-
-  @action
-  customAction(button, model) {
-    if (typeof button.callback !== "function") {
-      this.notification.danger(
-        this.intl.t("emeis.form.custom-button-action-error")
-      );
-    }
-    button.callback(model);
+  get customComponent() {
+    return this.emeisOptions.customComponents?.[this.modelName];
   }
 
   @task

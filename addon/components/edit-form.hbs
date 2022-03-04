@@ -6,16 +6,10 @@
   {{yield}}
 
   <div class="uk-flex uk-flex-left uk-margin">
-    {{#if this.customButtons}}
-      {{#each this.customButtons as |button|}}
-        <UkButton
-          @type="button"
-          @label={{optional-translate button.label}}
-          class="uk-margin-right {{if button.type (concat 'uk-button-' button.type) ''}}"
-          @onClick={{fn this.customAction button @model}}
-          data-test-custom-button
-        />
-      {{/each}}
+    {{#if this.customComponent}}
+      {{#let (component (ensure-safe-component this.customComponent)) as |CustomComponent|}}
+        <CustomComponent @model={{@model}} />
+      {{/let}}
     {{/if}}
   </div>
 

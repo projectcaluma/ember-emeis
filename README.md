@@ -77,6 +77,8 @@ The config service supports the following options:
 ```js
 import Service from "@ember/service";
 
+import DummyButton from "dummy/app/components/dummy-button/dummy-button";
+
 export default class EmeisOptionsService extends Service {
   // number of items in list views
   pageSize = 10;
@@ -101,21 +103,12 @@ export default class EmeisOptionsService extends Service {
   // show only a subset of the main navigation entries
   navigationEntries = ["users", "scopes"];
 
-  // On each model edit view (e.g. users) you can define a list of custom buttons. Each button needs a label and a callback function. The callback function gets the current active model as first argument. Optionally you can highlight the button with the 'type' attribute.
-  customButtons = {
-    users: [
-      {
-        label: "My Button", // this could also be an ember-intl translation key
-        callback: () => window.alert("test"),
-        type: "danger" // leave blank or choose between primary, danger
-      },
-      {
-        label: "A second Button",
-        callback: (model) => console.log(model),
-      }
-    ]
-  };
-
+  /*
+   On each model edit view (e.g. users) you can define a custom component. The component will be rendered at the bottom of the edit view, but above the primary form buttons. Each component can be designed freely and the model will be passed into the component as `@model` argument. For a working demo have a look at our "dummy-button" at "dummy/app/components/dummy-button".
+  */
+  customComponents = {
+    users: DummyButton,
+  },
   // define custom fields for a given context (user, scope, role or permission)
   metaFields = {
     user: [],
