@@ -38,10 +38,10 @@
           </RelationshipSelect>
         </EditForm::Element>
 
-        <MetaFields
-          @model={{@model}}
-          @fields={{this.metaFields}}
-        />
+        {{#each this.metaFields as |field|}}
+          <MetaField @field={{field}} @model={{@model}} />
+        {{/each}}
+
       </EditForm>
     </div>
     <div class="uk-width-1-2@xl">

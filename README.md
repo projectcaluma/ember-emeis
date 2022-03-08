@@ -123,6 +123,12 @@ export default class EmeisOptionsService extends Service {
       {
         slug: "test-input-2",
         label: "some.translation.key",
+        options: [  // insert a static list of options (value, label), or a (async) function which resolves to a list of options
+          {
+            value: "option-1",
+            label: "Option one"
+          }
+        ],
         type: "choice",
         visible: () => true,
         readOnly: false
@@ -134,15 +140,19 @@ export default class EmeisOptionsService extends Service {
 
 _Watch out_ - the translation key has to be present in your local translation files.
 
-There are special options available for `type` and `visible` properties.
+There are special options available for `options`, `type` and `visible` properties.
 
 #### **type** - meta field
 
 Defines the type of the output component and can either be a _text_ or a _choice_.
 
+#### **options** - meta field
+
+In combination with `type:"choice"` the options can be a list of options (`{value, label}`) or a (async) function which resolves to a list of options.
+
 #### **visible** & **readOnly** meta field
 
-Accepts a boolean value for static visibility or a function which evaluates to a boolean value. Submitted functions will evaluate live while rendering.
+Accepts a boolean value for static visibility or a (async) function which evaluates to a boolean value. Submitted functions will evaluate live while rendering.
 
 The evaluation function will receive the current model as argument. For instance if you are on the scope route, you will receive the [scope model](addon/models/scope.js) as first argument. Same for [user](addon/models/user.js) | [role](addon/models/role.js) | [permission](addon/models/permission.js)
 

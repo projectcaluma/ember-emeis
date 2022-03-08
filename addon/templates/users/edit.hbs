@@ -131,10 +131,9 @@
           </EditForm::Element>
         {{/if}}
 
-        <MetaFields
-          @model={{@model}}
-          @fields={{this.metaFields}}
-        />
+        {{#each this.metaFields as |field|}}
+          <MetaField @field={{field}} @model={{@model}} />
+        {{/each}}
 
         <EditForm::Element @label={{t "emeis.users.headings.isActive"}}>
           <input
