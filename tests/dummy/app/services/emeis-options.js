@@ -1,4 +1,5 @@
 import Service from "@ember/service";
+import { timeout } from "ember-concurrency";
 
 import TestButtonComponent from "../components/dummy-button/dummy-button"; // template and component file must have the same name (if not template only)
 
@@ -25,26 +26,46 @@ export default class EmeisOptionsService extends Service {
         visible: true,
         readOnly: false,
       },
+      // {
+      //   slug: "user-meta-example-2",
+      //   label: "emeis.options.meta.user.example",
+      //   type: "choice", // initially supported: "text", "choice"
+      //   options: [
+      //     {
+      //       value: "Option 1",
+      //       label: "Option One",
+      //     },
+      //     {
+      //       value: "Option 2",
+      //       label: "Option Two",
+      //     },
+      //   ],
+      //   visible: true,
+      //   readOnly: false,
+      // },
     ],
     scope: [
       {
         slug: "meta-example",
         label: "emeis.options.meta.scope.meta-example",
         type: "choice", // initially supported: "text", "choice"
-        options: [
-          {
-            value: "Option 1",
-            label: "emeis.options.meta.scope.options.label-1", // again a ember-intl translation key
-          },
-          {
-            value: "Option 2",
-            label: "emeis.options.meta.scope.options.label-2",
-          },
-          {
-            value: "Option 3",
-            label: "emeis.options.meta.scope.options.label-3",
-          },
-        ],
+        options: async () => {
+          await timeout(2000);
+          return [
+            {
+              value: "Option 1",
+              label: "emeis.options.meta.scope.options.label-1", // again a ember-intl translation key
+            },
+            {
+              value: "Option 2",
+              label: "emeis.options.meta.scope.options.label-2",
+            },
+            {
+              value: "Option 3",
+              label: "emeis.options.meta.scope.options.label-3",
+            },
+          ];
+        },
         visible: () => true, // boolean or function which evaluates to a boolean value
         readOnly: false,
       },
