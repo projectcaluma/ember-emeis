@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/projectcaluma/ember-emeis/compare/v5.0.0...v5.1.0) (2022-03-09)
+
+
+### Features
+
+* **emeisOptions:** passing options as a function ([#438](https://github.com/projectcaluma/ember-emeis/issues/438)) ([953421c](https://github.com/projectcaluma/ember-emeis/commit/953421caed528fa5db2dfba8bd9d0b1734ca85d6))
+
 # [5.0.0](https://github.com/projectcaluma/ember-emeis/compare/v4.2.1...v5.0.0) (2022-03-04)
 
 
