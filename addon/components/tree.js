@@ -4,6 +4,7 @@ import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { timeout, restartableTask } from "ember-concurrency";
+import { cached } from "tracked-toolbox";
 
 export default class TreeComponent extends Component {
   @service store;
@@ -15,6 +16,7 @@ export default class TreeComponent extends Component {
     return !!this.filterValue;
   }
 
+  @cached
   get expandedItems() {
     if (this.filterValue && this.filtered) {
       const expanded = [...this.filtered];
@@ -31,8 +33,11 @@ export default class TreeComponent extends Component {
       });
       return expanded.map((item) => item.id);
     }
+    const rootNodes = this.args.items?.filter((i) => i.level === 0);
     return this.args.activeItem?.findParents
       ? this.args.activeItem?.findParents().map((item) => item.id)
+      : rootNodes.length === 1
+      ? rootNodes
       : [];
   }
 
