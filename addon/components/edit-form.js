@@ -53,6 +53,24 @@ export default class EditFormComponent extends Component {
     return this.args.model.isActive !== undefined;
   }
 
+  get canChangeActiveState() {
+    return this.emeisOptions.actions[this.args.model._internalModel.modelName]
+      ?.deactivate
+      ? this.emeisOptions.actions[
+          this.args.model._internalModel.modelName
+        ].deactivate(this.args.model)
+      : true;
+  }
+
+  get canDeleteModel() {
+    return this.emeisOptions.actions[this.args.model._internalModel.modelName]
+      ?.delete
+      ? this.emeisOptions.actions[
+          this.args.model._internalModel.modelName
+        ].delete(this.args.model)
+      : true;
+  }
+
   @task
   @handleTaskErrors({ errorMessage: "emeis.form.save-error" })
   *toggleActiveState() {

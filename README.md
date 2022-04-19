@@ -109,6 +109,21 @@ export default class EmeisOptionsService extends Service {
   customComponents = {
     users: DummyButton,
   },
+  /*
+  Within the actions block you can define functions which evaluate the visibility of the "deactivate" and "delete" buttons in the model edit form. The visibilty must be defined for each model separately.
+
+  The model must support the "isActive" property for deactivation capabilities, which are currently only supported by user and scope.
+  */
+  actions = {
+    user: {
+      deactivate: (model) => myUser.canChange(model),
+      delete: (model) => myUser.canDelete(model),
+    },
+    scope: {
+      deactivate: () => false, // statically deactivate the deactivate-button
+      // leaving out the "delete" key here will always display the delete button
+    }
+  }
   // define custom fields for a given context (user, scope, role or permission)
   metaFields = {
     user: [],

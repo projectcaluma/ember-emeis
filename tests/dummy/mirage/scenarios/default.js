@@ -8,6 +8,7 @@ export default function (server) {
     name: { en: "scope with static ID" },
     level: 2,
     parent: level1[0],
+    isActive: true,
   });
   server.createList("user", 50);
   server.createList("permission", 50);
