@@ -38,14 +38,14 @@
       {{#let body.model as |user|}}
         {{#if this.emailAsUsername}}
           <td>
-            <LinkTo @route="users.edit" @model={{user}} class="uk-link-text">
+            <LinkTo @route="users.edit" @model={{user}} class="uk-link-text {{unless user.isActive "text-line-through"}}">
               {{user.lastName}}
             </LinkTo>
           </td>
           <td>{{user.firstName}}</td>
         {{else}}
           <td data-test-user-username={{user.id}}>
-            <LinkTo @route="users.edit" @model={{user}} class="uk-link-text">
+            <LinkTo @route="users.edit" @model={{user}} class="uk-link-text {{unless user.isActive "text-line-through"}}">
               {{user.username}}
             </LinkTo>
           </td>

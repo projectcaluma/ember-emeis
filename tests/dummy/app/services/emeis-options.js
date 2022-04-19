@@ -17,6 +17,15 @@ export default class EmeisOptionsService extends Service {
   customComponents = {
     users: TestButtonComponent,
   };
+  actions = {
+    user: {
+      delete: () => true,
+    },
+    scope: {
+      delete: (model) => model.id !== "special",
+      deactivate: (model) => model.id !== "special",
+    },
+  };
   metaFields = {
     user: [
       {

@@ -6,7 +6,7 @@
       {{/unless}}
     </UkButton>
   {{/if}}
-  <LinkTo @route={{@itemRoute}} @model={{@item}} class="uk-link-text" data-test-node-id={{@item.id}}>
+  <LinkTo @route={{@itemRoute}} @model={{@item}} class="uk-link-text {{unless @item.isActive "text-line-through"}}" data-test-node-id={{@item.id}}>
     {{@item.name}}{{#if @item.children}} ({{@item.children.length}}){{/if}}
   </LinkTo>
   {{#if this.expanded}}

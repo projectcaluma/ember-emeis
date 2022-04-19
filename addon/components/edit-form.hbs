@@ -14,16 +14,19 @@
   </div>
 
   <div class="uk-flex uk-flex-right uk-margin">
-    {{! without quotes on the @route the LinkTo component tries to set the property listViewRouteName which has no setter}}
-    <LinkTo
-      @route="{{this.relativeListViewRouteName}}"
-      class="uk-button uk-button-default uk-margin-right"
-      data-test-back
-    >
-      {{t "emeis.form.back"}}
-    </LinkTo>
+    {{#if (and this.modelHasActiveState this.canChangeActiveState)}}
+      <UkButton
+        @loading={{this.toggleActiveState.isRunning}}
+        @disabled={{this.toggleActiveState.isRunning}}
+        class="uk-margin-right uk-button-default"
+        data-test-toggle-active
+        @onClick={{perform this.toggleActiveState}}
+      >
+        {{t (concat "emeis.form." (if @model.isActive "deactivate" "activate"))}}
+      </UkButton>
+    {{/if}}
 
-    {{#if (and (not @disableDelete) (not @model.isNew))}}
+    {{#if (and (not @disableDelete) (not @model.isNew) this.canDeleteModel)}}
       <UkButton
         @loading={{this.delete.isRunning}}
         @disabled={{this.delete.isRunning}}

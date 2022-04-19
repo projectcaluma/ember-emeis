@@ -9,6 +9,7 @@ export default class ScopeModel extends LocalizedModel {
   @localizedAttr description;
   @attr level;
   @attr metainfo;
+  @attr isActive;
 
   @belongsTo("scope", { inverse: "children", async: false }) parent;
   @hasMany("scope", { inverse: "parent", async: false }) children;

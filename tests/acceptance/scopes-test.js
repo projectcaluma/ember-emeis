@@ -45,7 +45,7 @@ module("Acceptance | scopes", function (hooks) {
   });
 
   test("detail view /scopes/:id", async function (assert) {
-    assert.expect(7);
+    assert.expect(6);
 
     const scope = this.server.create("scope");
     const futureParent = this.server.create("scope");
@@ -82,9 +82,6 @@ module("Acceptance | scopes", function (hooks) {
       assert.strictEqual(relationships.parent.data.id, futureParent.id);
     });
     await click("[data-test-save]");
-
-    await click("[data-test-back]");
-    assert.strictEqual(currentURL(), "/scopes");
   });
 
   test("create view /scopes/new", async function (assert) {

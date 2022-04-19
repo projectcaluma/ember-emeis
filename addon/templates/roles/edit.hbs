@@ -1,3 +1,7 @@
+<LinkTo @route="roles.index" class="uk-button uk-padding-remove uk-margin-small-bottom" data-test-back>
+  <UkIcon @icon="arrow-left" @ratio="1.5" />
+  {{t "emeis.form.back"}}
+</LinkTo>
 <EditForm @model={{@model}} @updateModel={{this.updateModel}} class="uk-margin">
   <EditForm::Element @label={{t "emeis.roles.headings.slug"}}>
     <input

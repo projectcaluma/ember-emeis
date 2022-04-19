@@ -12,4 +12,5 @@ export default Factory.extend({
   description: () => localize(faker.lorem.paragraph()),
   level: () => 0,
   metainfo: () => {},
+  isActive: () => faker.datatype.boolean(),
 });

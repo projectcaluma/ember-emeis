@@ -1,4 +1,4 @@
-<LinkTo @route="users.index" class="uk-button uk-padding-remove uk-margin-small-bottom" data-test-user-back-link>
+<LinkTo @route="users.index" class="uk-button uk-padding-remove uk-margin-small-bottom" data-test-back>
   <UkIcon @icon="arrow-left" @ratio="1.5" />
   {{t "emeis.form.back"}}
 </LinkTo>
@@ -134,17 +134,6 @@
         {{#each this.metaFields as |field|}}
           <MetaField @field={{field}} @model={{@model}} />
         {{/each}}
-
-        <EditForm::Element @label={{t "emeis.users.headings.isActive"}}>
-          <input
-            class="uk-checkbox"
-            type="checkbox"
-            name="isActive"
-            placeholder="{{t "emeis.users.headings.isActive"}}..."
-            checked={{@model.isActive}}
-          />
-        </EditForm::Element>
-
       </EditForm>
 
     </div>
@@ -230,4 +219,3 @@
       {{/if}}
     </div>
 </div>
-{{!-- {{outlet}} --}}
