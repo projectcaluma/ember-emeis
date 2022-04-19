@@ -26,7 +26,6 @@ module("Unit | Controller | users/edit", function (hooks) {
       address: { value: "address" },
       city: { value: "city" },
       zip: { value: "zip" },
-      isActive: { checked: true },
     });
 
     assert.strictEqual(model.username, "username");
@@ -38,7 +37,6 @@ module("Unit | Controller | users/edit", function (hooks) {
     assert.strictEqual(model.address, "address");
     assert.strictEqual(model.city, "city");
     assert.strictEqual(model.zip, "zip");
-    assert.true(model.isActive);
   });
 
   test("queryParamsfilter", function (assert) {

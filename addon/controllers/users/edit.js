@@ -50,7 +50,6 @@ export default class UsersEditController extends PaginationController {
     model.firstName = formElements.firstName.value;
     model.lastName = formElements.lastName.value;
     model.email = formElements.email.value;
-    model.isActive = formElements.isActive.checked;
 
     // additional fields might not be present
     model.phone = formElements.phone?.value;

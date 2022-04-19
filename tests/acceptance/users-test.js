@@ -67,7 +67,7 @@ module("Acceptance | users", function (hooks) {
   });
 
   test("detail view /users/:id", async function (assert) {
-    assert.expect(27);
+    assert.expect(25);
 
     const user = this.server.create("user", {
       isActive: true,
@@ -96,8 +96,6 @@ module("Acceptance | users", function (hooks) {
     assert.dom('[name="city"]').isRequired();
     assert.dom('[name="zip"]').isRequired();
 
-    assert.dom('[name="isActive"]').isChecked();
-
     const username = "newusername",
       firstName = "John",
       lastName = "Doe",
@@ -118,8 +116,6 @@ module("Acceptance | users", function (hooks) {
     await fillIn('[name="city"]', city);
     await fillIn('[name="zip"]', zip);
 
-    await click('[name="isActive"]');
-
     this.assertRequest("PATCH", `/api/v1/users/${user.id}`, (request) => {
       const attributes = JSON.parse(request.requestBody).data.attributes;
 
@@ -132,7 +128,6 @@ module("Acceptance | users", function (hooks) {
       assert.strictEqual(attributes.address, address);
       assert.strictEqual(attributes.city.en, city);
       assert.strictEqual(attributes.zip, zip);
-      assert.false(attributes["is-active"]);
     });
     await click("[data-test-save]");
 
@@ -142,7 +137,7 @@ module("Acceptance | users", function (hooks) {
   });
 
   test("create view /users/new", async function (assert) {
-    assert.expect(25);
+    assert.expect(24);
 
     await visit("/users");
     assert.strictEqual(currentURL(), "/users");
@@ -204,9 +199,7 @@ module("Acceptance | users", function (hooks) {
     assert.dom('[name="city"]').hasValue(user.city.en);
     assert.dom('[name="zip"]').hasValue(user.zip.toString());
 
-    assert.dom('[name="isActive"]').isChecked();
-
-    assert.dom("[data-test-user-back-link]").exists();
+    assert.dom("[data-test-back]").exists();
   });
 
   test("list view /users/:id/acl", async function (assert) {

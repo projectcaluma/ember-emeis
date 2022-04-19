@@ -48,20 +48,32 @@ module("Integration | Component | edit-form", function (hooks) {
 
     await render(hbs`<EditForm @disableDelete="true"/>`);
 
-    assert.dom("[data-test-back]").exists();
+    assert.dom("[data-test-toggle-active]").doesNotExist();
     assert.dom("[data-test-delete]").doesNotExist();
     assert.dom("[data-test-save]").exists();
   });
 
-  test("back", async function (assert) {
-    assert.expect(1);
-    this.router.transitionTo = (route) => {
-      assert.strictEqual(route, "parent-route.index");
-    };
+  test("toggle active state", async function (assert) {
+    assert.expect(2);
 
-    await render(hbs`<EditForm />`);
+    this.setProperties({
+      model: {
+        save() {
+          assert.step("save");
+        },
+        isNew: false,
+        isActive: true,
+      },
+    });
 
-    await click("[data-test-back]");
+    await render(hbs`
+      <EditForm @model={{this.model}} @updateModel={{this.updateModel}}>
+        <input name="test">
+      </EditForm>
+    `);
+
+    await click("[data-test-toggle-active]");
+    assert.verifySteps(["save"]);
   });
 
   test("delete", async function (assert) {

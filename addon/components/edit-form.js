@@ -50,11 +50,11 @@ export default class EditFormComponent extends Component {
   }
 
   get modelHasActiveState() {
-    return this.args.model.isActive !== undefined;
+    return this.args.model?.isActive !== undefined;
   }
 
   get canChangeActiveState() {
-    return this.emeisOptions.actions[this.args.model._internalModel.modelName]
+    return this.emeisOptions.actions?.[this.args.model._internalModel.modelName]
       ?.deactivate
       ? this.emeisOptions.actions[
           this.args.model._internalModel.modelName
@@ -63,7 +63,7 @@ export default class EditFormComponent extends Component {
   }
 
   get canDeleteModel() {
-    return this.emeisOptions.actions[this.args.model._internalModel.modelName]
+    return this.emeisOptions.actions?.[this.args.model._internalModel.modelName]
       ?.delete
       ? this.emeisOptions.actions[
           this.args.model._internalModel.modelName

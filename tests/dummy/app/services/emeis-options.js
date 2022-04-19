@@ -19,7 +19,7 @@ export default class EmeisOptionsService extends Service {
   };
   actions = {
     user: {
-      delete: () => false,
+      delete: () => true,
     },
     scope: {
       delete: (model) => model.id !== "special",
