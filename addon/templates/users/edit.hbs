@@ -134,17 +134,6 @@
         {{#each this.metaFields as |field|}}
           <MetaField @field={{field}} @model={{@model}} />
         {{/each}}
-
-        <EditForm::Element @label={{t "emeis.users.headings.isActive"}}>
-          <input
-            class="uk-checkbox"
-            type="checkbox"
-            name="isActive"
-            placeholder="{{t "emeis.users.headings.isActive"}}..."
-            checked={{@model.isActive}}
-          />
-        </EditForm::Element>
-
       </EditForm>
 
     </div>
@@ -230,4 +219,3 @@
       {{/if}}
     </div>
 </div>
-{{!-- {{outlet}} --}}
