@@ -42,7 +42,7 @@
               {{user.lastName}}
             </LinkTo>
           </td>
-          <td>{{user.firstName}}</td>
+          <td class="uk-link-text {{unless user.isActive "text-line-through"}}">{{user.firstName}}</td>
         {{else}}
           <td data-test-user-username={{user.id}}>
             <LinkTo @route="users.edit" @model={{user}} class="uk-link-text {{unless user.isActive "text-line-through"}}">
