@@ -1,6 +1,10 @@
 <div uk-grid class="uk-grid-divider uk-grid-divider-fix">
     <div class="uk-width-1-2@xl">
-      <h3>{{t "emeis.scopes.edit.edit-scope"}}</h3>
+      <h3>{{t "emeis.scopes.edit.edit-scope"}}
+        {{#unless @model.isActive}}
+          <span class="uk-badge uk-background-secondary">{{t "emeis.inactive"}}</span>
+        {{/unless}}
+      </h3>
       <EditForm
         @model={{@model}}
         @updateModel={{this.updateModel}}

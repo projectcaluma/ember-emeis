@@ -3,6 +3,7 @@ emeis:
   not-found: "Diese Seite konnte nicht gefunden werden."
   empty: "Keine Einträge gefunden..."
   loading: "Laden..."
+  inactive: "Inaktiv"
   general-error: "Ein Problem ist aufgetretten. Bitte versuchen Sie es erneut."
   actions: "Aktionen"
   export: "Export"

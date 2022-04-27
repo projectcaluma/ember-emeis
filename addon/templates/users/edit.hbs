@@ -4,7 +4,11 @@
 </LinkTo>
 <div uk-grid class="uk-grid-divider">
     <div class="uk-width-1-2@l">
-      <h3>{{t "emeis.users.edit.edit-user"}}</h3>
+      <h3>{{t "emeis.users.edit.edit-user"}}
+        {{#unless @model.isActive}}
+          <span class="uk-badge uk-background-secondary">{{t "emeis.inactive"}}</span>
+        {{/unless}}
+      </h3>
       <EditForm
         @model={{@model}}
         @updateModel={{this.updateModel}}

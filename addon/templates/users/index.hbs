@@ -42,21 +42,21 @@
               {{user.lastName}}
             </LinkTo>
           </td>
-          <td>{{user.firstName}}</td>
+          <td class="uk-link-text {{unless user.isActive "text-line-through"}}">{{user.firstName}}</td>
         {{else}}
           <td data-test-user-username={{user.id}}>
             <LinkTo @route="users.edit" @model={{user}} class="uk-link-text {{unless user.isActive "text-line-through"}}">
               {{user.username}}
             </LinkTo>
           </td>
-          <td>{{user.lastName}}</td>
-          <td>{{user.firstName}}</td>
+          <td class="uk-link-text {{unless user.isActive "text-line-through"}}">{{user.lastName}}</td>
+          <td class="uk-link-text {{unless user.isActive "text-line-through"}}">{{user.firstName}}</td>
         {{/if}}
 
-        <td data-test-user-email={{user.id}}>
+        <td class="uk-link-text {{unless user.isActive "text-line-through"}}" data-test-user-email={{user.id}}>
           {{user.email}}
         </td>
-        <td>
+        <td class="uk-link-text {{unless user.isActive "text-line-through"}}">
           <ul class="uk-list uk-list-divider">
             {{#each user.acls as |acl|}}
               <li>
@@ -74,7 +74,7 @@
           </ul>
         </td>
         {{!-- SCOPES --}}
-        <td>
+        <td class="uk-link-text {{unless user.isActive "text-line-through"}}">
           <ul class="uk-list uk-list-divider">
             {{#each user.acls as |acl|}}
               <li>
