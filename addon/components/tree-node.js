@@ -28,10 +28,7 @@ export default class TreeNodeComponent extends Component {
   }
 
   get expandedDefault() {
-    return (
-      this.args.item.level === 0 ||
-      this.args.activeItem?.id === this.args.item.id
-    );
+    return this.args.activeItem?.id === this.args.item.id;
   }
 
   get expanded() {
