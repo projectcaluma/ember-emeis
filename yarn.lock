@@ -5671,43 +5671,7 @@ ember-auto-import@^1.11.3, ember-auto-import@^1.5.3:
     walk-sync "^0.3.3"
     webpack "^4.43.0"
 
-ember-auto-import@^2.3.0, ember-auto-import@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/ember-auto-import/-/ember-auto-import-2.4.0.tgz#91c4797f08315728086e35af954cb60bd23c14bc"
-  integrity sha512-BwF6iTaoSmT2vJ9NEHEGRBCh2+qp+Nlaz/Q7roqNSxl5oL5iMRwenPnHhOoBPTYZvPhcV/KgXR5e+pBQ107plQ==
-  dependencies:
-    "@babel/core" "^7.16.7"
-    "@babel/plugin-proposal-class-properties" "^7.16.7"
-    "@babel/plugin-proposal-decorators" "^7.16.7"
-    "@babel/preset-env" "^7.16.7"
-    "@embroider/macros" "^1.0.0"
-    "@embroider/shared-internals" "^1.0.0"
-    babel-loader "^8.0.6"
-    babel-plugin-ember-modules-api-polyfill "^3.5.0"
-    babel-plugin-htmlbars-inline-precompile "^5.2.1"
-    babel-plugin-syntax-dynamic-import "^6.18.0"
-    broccoli-debug "^0.6.4"
-    broccoli-funnel "^3.0.8"
-    broccoli-merge-trees "^4.2.0"
-    broccoli-plugin "^4.0.0"
-    broccoli-source "^3.0.0"
-    css-loader "^5.2.0"
-    debug "^4.3.1"
-    fs-extra "^6.0.1"
-    fs-tree-diff "^2.0.0"
-    handlebars "^4.3.1"
-    js-string-escape "^1.0.1"
-    lodash "^4.17.19"
-    mini-css-extract-plugin "^2.5.2"
-    parse5 "^6.0.1"
-    resolve "^1.20.0"
-    resolve-package-path "^3.1.0"
-    semver "^7.3.4"
-    style-loader "^2.0.0"
-    typescript-memoize "^1.0.0-alpha.3"
-    walk-sync "^3.0.0"
-
-ember-auto-import@^2.4.1:
+ember-auto-import@^2.3.0, ember-auto-import@^2.4.0, ember-auto-import@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/ember-auto-import/-/ember-auto-import-2.4.1.tgz#25e1c21d403eed116b21972ccc5336b49a7ca46b"
   integrity sha512-lyCl2hzIb6Dlcmfm3gI3lAtaOk/nzR2kM4GDJRRu19YJhhSkpiIMSDVjw8ShxmnYiI005R1eOcP3C/GgRRW5mA==
@@ -5920,10 +5884,10 @@ ember-cli-lodash-subset@^2.0.1:
   resolved "https://registry.yarnpkg.com/ember-cli-lodash-subset/-/ember-cli-lodash-subset-2.0.1.tgz#20cb68a790fe0fde2488ddfd8efbb7df6fe766f2"
   integrity sha1-IMtop5D+D94kiN39jvu332/nZvI=
 
-ember-cli-mirage@3.0.0-alpha.2:
-  version "3.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/ember-cli-mirage/-/ember-cli-mirage-3.0.0-alpha.2.tgz#912f9361aa7e9b899a3251cd17b20ca740249cea"
-  integrity sha512-JRAdZSpI45pvAhfKyG+oM3kRgRkoGbjhDIa+1ovGaTlwwr4t79LA3LaajfY+iHICAMqoV3zTFWLminQAihHwXA==
+ember-cli-mirage@3.0.0-alpha.3:
+  version "3.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/ember-cli-mirage/-/ember-cli-mirage-3.0.0-alpha.3.tgz#57fc4a9b55770d20c13db11a278aa8f723a38307"
+  integrity sha512-u40mt6ZsprSATZm+RXpxhlh829cU/ONwdqg2A4p6JcmG5iF5m00YzxOX7RtPCpj3sTAtRokc6+NlbXHXF5RbjA==
   dependencies:
     "@embroider/macros" "^1.0.0"
     broccoli-file-creator "^2.1.1"
