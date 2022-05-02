@@ -33,9 +33,9 @@ export default class TreeNodeComponent extends Component {
 
   get expanded() {
     return (
-      this.args.filteredItems?.includes(this.args.item.id) ||
+      this.args.filteredItems?.includes(this.args.item) ||
       (this.args.item.children &&
-        (this.args.expandedItems?.includes(this.args.item.id) ||
+        (this.args.expandedItems?.includes(this.args.item) ||
           (this.expandedByUser !== null
             ? this.expandedByUser
             : this.expandedDefault)))
@@ -46,11 +46,11 @@ export default class TreeNodeComponent extends Component {
     const item = this.args.item;
     if (
       this.args.filteredItems &&
-      !this.args.filteredItems?.includes(item.id) &&
-      this.args.expandedItems?.includes(item.id)
+      !this.args.filteredItems?.includes(item) &&
+      this.args.expandedItems?.includes(item)
     ) {
       return item.children.filter((child) =>
-        this.args.expandedItems.includes(child.id)
+        this.args.expandedItems.includes(child)
       );
     }
     return item.children;
