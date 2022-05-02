@@ -33,10 +33,21 @@ module("Integration | Component | tree-node", function (hooks) {
     this.set("item", items[0]);
     this.set("itemRoute", "/scope/edit");
     this.set("activeItem", items[1]);
-    this.set("expandedItems", [items[0].id, items[1].id]);
+    this.set("expandedItems", [items[0], items[1]]);
   });
 
   test("it renders", async function (assert) {
+    await render(hbs`
+      <TreeNode
+        @item={{this.item}}
+        @itemRoute={{this.itemRoute}}
+      />`);
+
+    const item = this.items[0];
+    assert.dom(this.element).hasText(`${item.name} (1)`);
+  });
+
+  test("it expands when expanedItems are supplied", async function (assert) {
     await render(hbs`
       <TreeNode
         @item={{this.item}}
