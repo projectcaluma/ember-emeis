@@ -35,7 +35,7 @@ export default class TreeComponent extends Component {
     }
     const rootNodes = this.args.items?.filter((i) => i.level === 0);
     return this.args.activeItem?.findParents
-      ? this.args.activeItem?.findParents().map((item) => item.id)
+      ? this.args.activeItem?.findParents()
       : rootNodes.length === 1
       ? rootNodes
       : [];
@@ -71,7 +71,7 @@ export default class TreeComponent extends Component {
   }
 
   @action
-  filterItemList(id) {
-    return this.expandedItems.includes(id);
+  filterItemList(item) {
+    return this.expandedItems.includes(item);
   }
 }
