@@ -72,6 +72,6 @@ export default class TreeComponent extends Component {
 
   @action
   filterItemList(item) {
-    return this.expandedItems.map((item) => item.id).includes(item);
+    return this.expandedItems.find(({ id }) => id === item);
   }
 }
