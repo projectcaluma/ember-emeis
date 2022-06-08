@@ -31,6 +31,7 @@ emeis:
       lastName: "Last Name"
       email: "E-Mail"
       phone: "Phone"
+      phone-placeholder: "+41 31 123 45 56"
       language: "Language"
       address: "Address"
       city: "City"
