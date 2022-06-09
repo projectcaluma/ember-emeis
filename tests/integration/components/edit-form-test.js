@@ -18,24 +18,19 @@ module("Integration | Component | edit-form", function (hooks) {
   setupIntl(hooks);
 
   hooks.beforeEach(function () {
-    const router = class {
-      replaceWith() {}
-      hasRoute() {}
-      transitionTo() {}
-      _doTransition() {}
-      generateURL() {}
-      currentRoute = {
-        parent: {
-          name: "ember-emeis.parent-route",
-        },
-      };
-    };
-    this.router = new router();
-    this.owner.register("service:router", this.router, { instantiate: false });
-    this.owner.register("service:-routing", this.router, {
-      instantiate: false,
-    });
-    this.owner.register("router:main", this.router, { instantiate: false });
+    this.owner.unregister("service:router");
+    this.owner.register(
+      "service:router",
+      class extends Service {
+        currentRoute = {
+          name: "ember-emeis.parent-route.edit",
+          parent: {
+            name: "ember-emeis.parent-route",
+          },
+        };
+      }
+    );
+    this.router = this.owner.lookup("service:router");
     this.owner.register("service:emeis-options", EmeisOptionsStub);
   });
 
