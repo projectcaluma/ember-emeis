@@ -31,7 +31,7 @@ export default class TreeComponent extends Component {
         // we need the children in the list of expanded items, so we can expand the "searched" items.
         item.children.forEach((child) => expanded.push(child));
       });
-      return expanded.map((item) => item.id);
+      return expanded;
     }
     const rootNodes = this.args.items?.filter((i) => i.level === 0);
     return this.args.activeItem?.findParents
@@ -72,6 +72,6 @@ export default class TreeComponent extends Component {
 
   @action
   filterItemList(item) {
-    return this.expandedItems.includes(item);
+    return this.expandedItems.find(({ id }) => id === item);
   }
 }
