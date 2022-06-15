@@ -1844,7 +1844,7 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@lint-todo/utils@^13.0.2":
+"@lint-todo/utils@^13.0.3":
   version "13.0.3"
   resolved "https://registry.yarnpkg.com/@lint-todo/utils/-/utils-13.0.3.tgz#ca222f38738b43eb43384d56e7292ba9cab3e891"
   integrity sha512-7Grdii4L/ae8FiykBcsEfum3m9yxVKPNQXpqJDPhWMHsReEunaQDkx/WLsjiNBctRb+roNHZQuXQYlJwoTlqOw==
@@ -6642,10 +6642,10 @@ ember-resolver@8.0.3:
     ember-cli-version-checker "^5.1.2"
     resolve "^1.20.0"
 
-ember-resources@^4.6.4:
-  version "4.8.2"
-  resolved "https://registry.yarnpkg.com/ember-resources/-/ember-resources-4.8.2.tgz#4e86f0425882ec55a24c4b2fdbb2a24005bfcbb0"
-  integrity sha512-Ni4zkadhhPsIAGM974pK7gBaaajeFJmjrigKtPIFSaTdeCuNdDn99Cs0NVCZ22QSmh2L5/4tYQh8/nLHggZlaQ==
+ember-resources@^4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/ember-resources/-/ember-resources-4.9.0.tgz#477c11f6656cdafb06f1f3ea4b6720fc7cc3bd1c"
+  integrity sha512-pmHK44RMo+DEqmhAYXL1zjqSVzYxl4SlKvggwumpbcWUYrk2s2+AIHJUKSPcIh0L/7GEpvKzn15Tn8IBO13wGQ==
   dependencies:
     "@babel/runtime" "^7.17.8"
     "@embroider/addon-shim" "^1.2.0"
@@ -6720,12 +6720,12 @@ ember-style-modifier@^0.7.0:
     ember-cli-babel "^7.26.6"
     ember-modifier "^3.0.0"
 
-ember-template-lint@4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-4.5.0.tgz#239dacb6be004ce78ca0cb3147fe728edf05d43e"
-  integrity sha512-cH4FWDtYG3UqBAI5cBucidUgfGhua5jEc0Ookf+Jv3aeNHJWHt3MZc8g4pH2VYzPlGbEoOBd/EUzUVkmKDZYDQ==
+ember-template-lint@4.10.0:
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-4.10.0.tgz#7a0a15817ec3e83c5ac9c4b47e8018b007308635"
+  integrity sha512-Cvs7K8UxjhNecONpBlDAx6VzA7IwC7yunFGsvg/3gZqDpNVZvK4lwqCeIe/bsD3lDbMBETVHzKovgCq3pafvdw==
   dependencies:
-    "@lint-todo/utils" "^13.0.2"
+    "@lint-todo/utils" "^13.0.3"
     aria-query "^5.0.0"
     chalk "^4.1.2"
     ci-info "^3.3.0"
@@ -6740,7 +6740,7 @@ ember-template-lint@4.5.0:
     micromatch "^4.0.5"
     resolve "^1.22.0"
     v8-compile-cache "^2.3.0"
-    yargs "^17.4.1"
+    yargs "^17.5.1"
 
 ember-template-recast@^6.1.3:
   version "6.1.3"
@@ -7137,10 +7137,10 @@ eslint-plugin-prettier@4.0.0:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-qunit@7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-qunit/-/eslint-plugin-qunit-7.2.0.tgz#ad00e0007dc0bbd1d59309cc6388238b6a8784a3"
-  integrity sha512-ebT6aOpmMj4vchG0hVw9Ukbutk/lgywrc8gc9w9hH2/4WjKqwMlyM7iVwqB7OAXv6gtQMJZuziT0wNjjymAuWA==
+eslint-plugin-qunit@7.3.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-qunit/-/eslint-plugin-qunit-7.3.0.tgz#ea19c6df16b3e231764f93363709172ad3c22bc8"
+  integrity sha512-o80qEsBpnh2hGCLKmNVimPSPY6TP2eyM+wQl9vdOKWJKrQXEgNTMX9mf4X4h3GguaBlmSNnLaPVsycKaZEaGZg==
   dependencies:
     eslint-utils "^3.0.0"
     requireindex "^1.2.0"
@@ -12163,10 +12163,10 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@2.6.2:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.2.tgz#e26d71a18a74c3d0f0597f55f01fb6c06c206032"
-  integrity sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==
+prettier@2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.7.0.tgz#a4fdae07e5596c51c9857ea676cd41a0163879d6"
+  integrity sha512-nwoX4GMFgxoPC6diHvSwmK/4yU8FFH3V8XWtLQrbj4IBsK2pkYhG4kf/ljF/haaZ/aii+wNJqISrCDPgxGWDVQ==
 
 printf@^0.6.1:
   version "0.6.1"
@@ -13049,10 +13049,10 @@ sane@^4.0.0, sane@^4.1.0:
     minimist "^1.1.1"
     walker "~1.0.5"
 
-sass@1.51.0:
-  version "1.51.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.51.0.tgz#25ea36cf819581fe1fe8329e8c3a4eaaf70d2845"
-  integrity sha512-haGdpTgywJTvHC2b91GSq+clTKGbtkkZmVAb82jZQN/wTy6qs8DdFm2lhEQbEwrY0QDRgSQ3xDurqM977C3noA==
+sass@1.52.3:
+  version "1.52.3"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.52.3.tgz#b7cc7ffea2341ccc9a0c4fd372bf1b3f9be1b6cb"
+  integrity sha512-LNNPJ9lafx+j1ArtA7GyEJm9eawXN8KlA1+5dF6IZyoONg1Tyo/g+muOsENWJH/2Q1FHbbV4UwliU0cXMa/VIA==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
@@ -15162,7 +15162,7 @@ yargs@^16.2.0:
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
 
-yargs@^17.0.0, yargs@^17.4.1:
+yargs@^17.0.0, yargs@^17.5.1:
   version "17.5.1"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.5.1.tgz#e109900cab6fcb7fd44b1d8249166feb0b36e58e"
   integrity sha512-t6YAJcxDkNX7NFYiVtKvWUz8l+PaKTLiL63mJYWR2GnHq2gjEWISzsLp9wg3aY36dY1j+gfIEL3pIF+XlJJfbA==
