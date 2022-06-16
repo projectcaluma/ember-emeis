@@ -3,12 +3,13 @@
   {{t "emeis.form.back"}}
 </LinkTo>
 <EditForm @model={{@model}} @updateModel={{this.updateModel}} class="uk-margin">
-  <EditForm::Element @label={{t "emeis.roles.headings.slug"}}>
+  <EditForm::Element @label={{t "emeis.roles.headings.slug"}} @optional={{unless @model.isNew true}}>
     <input
       class="uk-input"
       type="text"
       name="slug"
       pattern="^[-a-zA-Z0-9_]+$"
+      required
       disabled={{not @model.isNew}}
       value={{@model.slug}}
     />

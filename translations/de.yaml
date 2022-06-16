@@ -4,6 +4,7 @@ emeis:
   empty: "Keine Einträge gefunden..."
   loading: "Laden..."
   inactive: "Inaktiv"
+  optional: "optional"
   general-error: "Ein Problem ist aufgetretten. Bitte versuchen Sie es erneut."
   actions: "Aktionen"
   export: "Export"

@@ -61,7 +61,7 @@
         </EditForm::Element>
 
         {{#if (includes "phone" this.visibleFields)}}
-          <EditForm::Element @label={{t "emeis.users.headings.phone"}}>
+          <EditForm::Element @label={{t "emeis.users.headings.phone"}} @optional={{not (includes "phone" this.requiredFields)}}>
             <input
               class="uk-input"
               type="tel"
@@ -79,7 +79,7 @@
         {{/if}}
 
         {{#if (includes "language" this.visibleFields)}}
-          <EditForm::Element @label={{t "emeis.users.headings.language"}}>
+          <EditForm::Element @label={{t "emeis.users.headings.language"}} @optional={{not (includes "language" this.requiredFields)}}>
             <select
                 class="uk-select uk-text-uppercase"
                 required={{includes "language" this.requiredFields}}
@@ -97,20 +97,20 @@
         {{/if}}
 
         {{#if (includes "address" this.visibleFields)}}
-          <EditForm::Element @label={{t "emeis.users.headings.address"}}>
+          <EditForm::Element @label={{t "emeis.users.headings.address"}} @optional={{not (includes "address" this.requiredFields)}}>
             <input
               class="uk-input"
               type="text"
               name="address"
               placeholder="{{t "emeis.users.headings.address"}}..."
-              required={{includes "phone" this.requiredFields}}
+              required={{includes "address" this.requiredFields}}
               value={{@model.address}}
             />
           </EditForm::Element>
         {{/if}}
 
         {{#if (includes "city" this.visibleFields)}}
-          <EditForm::Element @label={{t "emeis.users.headings.city"}}>
+          <EditForm::Element @label={{t "emeis.users.headings.city"}} @optional={{not (includes "city" this.requiredFields)}}>
             <input
               class="uk-input"
               type="text"
@@ -123,7 +123,7 @@
         {{/if}}
 
         {{#if (includes "zip" this.visibleFields)}}
-          <EditForm::Element @label={{t "emeis.users.headings.zip"}}>
+          <EditForm::Element @label={{t "emeis.users.headings.zip"}} @optional={{not (includes "zip" this.requiredFields)}}>
             <input
               class="uk-input"
               type="number"
@@ -136,7 +136,7 @@
         {{/if}}
 
         {{#each this.metaFields as |field|}}
-          <MetaField @field={{field}} @model={{@model}} />
+          <MetaField @field={{field}} @model={{@model}} @optional={{unless field.required true}} />
         {{/each}}
       </EditForm>
 

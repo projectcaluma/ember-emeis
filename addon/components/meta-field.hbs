@@ -1,5 +1,5 @@
 {{#if this.visible.value}}
-  <EditForm::Element @label={{optional-translate @field.label}}>
+  <EditForm::Element @label={{optional-translate @field.label}} @optional={{@optional}}>
     {{#if (eq @field.type "choice")}}
       {{#if this.options.isRunning}}
         <UkSpinner @ratio="1" />
@@ -9,7 +9,7 @@
           @options={{this.options.value}}
           @selected={{find-by "value" (get @model.metainfo @field.slug) this.options.value}}
           @onChange={{fn this.updateMetaField @field @model}}
-          @placeholder={{t @field.label}}
+          @placeholder={{optional-translate @field.placeholder}}
           @allowClear={{true}}
           @renderInPlace={{true}}
           as |option|
@@ -25,6 +25,8 @@
         type="text"
         value={{get @model.metainfo @field.slug}}
         disabled={{this.readOnly.value}}
+        required={{@field.required}}
+        placeholder={{optional-translate @field.placeholder}}
         {{on "input" (fn this.updateMetaField @field @model)}}
       >
     {{/if}}

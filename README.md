@@ -133,7 +133,9 @@ export default class EmeisOptionsService extends Service {
         label: "My Input", // this could also be an ember-intl translation key
         type: "text",
         visible: true,
-        readOnly: false
+        readOnly: false,
+        required: false, //marks this field as optional
+        placeholder: "some.translation.key" //ember-intl translation key or plain string
       },
       {
         slug: "test-input-2",
@@ -146,7 +148,8 @@ export default class EmeisOptionsService extends Service {
         ],
         type: "choice",
         visible: () => true,
-        readOnly: false
+        readOnly: false,
+        required: true, //marks this field as required
       }
     ]
   }
@@ -160,6 +163,10 @@ There are special options available for `options`, `type` and `visible` properti
 #### **type** - meta field
 
 Defines the type of the output component and can either be a _text_ or a _choice_.
+
+#### **required** - meta field
+
+Marks this field as optional or validates its presence in case it's set to `true`. Custom _choice_ fields may not be validated as required, tho.
 
 #### **options** - meta field
 
