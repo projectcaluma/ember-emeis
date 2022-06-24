@@ -76,9 +76,10 @@ module("Acceptance | users", function (hooks) {
   setupIntl(hooks, "en");
 
   test("list view /users", async function (assert) {
-    assert.expect(5);
+    assert.expect(6);
 
-    const user = this.server.createList("user", 10)[0];
+    const users = this.server.createList("user", 10);
+    const user = this.server.create("user", { isActive: true });
 
     await visit("/users");
     // eslint-disable-next-line ember/no-settled-after-test-helper
@@ -86,12 +87,21 @@ module("Acceptance | users", function (hooks) {
 
     assert.strictEqual(currentURL(), "/users");
 
-    assert.dom("[data-test-user-username]").exists({ count: 10 });
+    assert
+      .dom("[data-test-user-username]")
+      .exists({ count: users.filter((user) => user.isActive).length + 1 });
     assert.dom(`[data-test-user-username="${user.id}"]`).hasText(user.username);
     assert.dom(`[data-test-user-email="${user.id}"]`).hasText(user.email);
     assert
       .dom(`[data-test-user-username="${user.id}"] a`)
       .hasAttribute("href", `/users/${user.id}`);
+
+    await click(
+      "[data-test-filters-radio-buttons='active'] [data-test-filters-radio-buttons-button='off']"
+    );
+    assert.dom("[data-test-user-username]").exists({
+      count: users.filter((user) => user.isActive === false).length,
+    });
   });
 
   test("can hide fields via config", async function (assert) {
@@ -253,14 +263,19 @@ module("Acceptance | users", function (hooks) {
   test("list view /users/:id/acl", async function (assert) {
     assert.expect(9);
 
-    const user = this.server.create("user");
-    const acl = this.server.createList("acl", 3)[0];
+    const user = this.server.create("user", { isActive: true });
+    const acls = this.server.createList("acl", 3);
+    const acl = acls[0];
+
+    const userCount = [user]
+      .concat(acls.map((acl) => acl.user))
+      .filter((u) => u.isActive).length;
 
     await visit(`/users`);
     // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
     // Each acl also creates a user
-    assert.dom("[data-test-user-username]").exists({ count: 4 });
+    assert.dom("[data-test-user-username]").exists({ count: userCount });
 
     await click("[data-test-user-username] a");
     assert.strictEqual(currentURL(), `/users/${user.id}`);

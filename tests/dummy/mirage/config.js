@@ -24,7 +24,14 @@ export default function makeServer(config) {
       this.put("/permissions/:id");
       this.del("/permissions/:id");
 
-      this.get("/users");
+      this.get("/users", (schema, request) => {
+        if (!request.queryParams["filter[isActive]"]) {
+          return schema.users.all();
+        }
+        return schema.users.where({
+          isActive: request.queryParams["filter[isActive]"] === "true",
+        });
+      });
       this.post("/users");
       this.get("/users/:id");
       this.patch("/users/:id");

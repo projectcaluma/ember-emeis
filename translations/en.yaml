@@ -63,6 +63,12 @@ emeis:
       description: "Description"
     new: "Add Role"
 
+  filters:
+    active:
+      title: "Status"
+      on: "Active"
+      off: "Inactive"
+
   pagination:
     next: "Next"
     previous: "Previous"
