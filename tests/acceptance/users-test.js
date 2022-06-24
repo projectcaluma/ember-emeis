@@ -15,9 +15,11 @@ import { module, test } from "qunit";
 import setupRequestAssertions from "./../helpers/assert-request";
 
 class EmeisOptionsStub extends Service {
-  additionalUserFields = {
-    phone: "optional",
-    language: "required",
+  user = {
+    additionalFields: {
+      phone: "optional",
+      language: "required",
+    },
   };
 }
 
