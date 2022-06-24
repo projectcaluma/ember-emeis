@@ -54,7 +54,7 @@
     "ember-intl": "^5.7.2",
     "ember-modifier": "^3.2.7",
     "ember-power-select": "^5.0.4",
-    "ember-resources": "^4.6.4",
+    "ember-resources": "^4.9.0",
     "ember-simple-set-helper": "^0.1.2",
     "ember-test-selectors": "^6.0.0",
     "ember-truth-helpers": "^3.0.0",
@@ -64,11 +64,11 @@
   "devDependencies": {
     "@adfinis-sygroup/eslint-config": "1.5.0",
     "@adfinis-sygroup/semantic-release-config": "3.4.0",
-    "@commitlint/cli": "16.2.4",
-    "@commitlint/config-conventional": "16.2.1",
+    "@commitlint/cli": "17.0.2",
+    "@commitlint/config-conventional": "17.0.2",
     "@ember/optional-features": "2.0.0",
     "@ember/test-helpers": "2.8.1",
-    "@embroider/test-setup": "1.7.1",
+    "@embroider/test-setup": "1.8.0",
     "@faker-js/faker": "6.2.0",
     "babel-eslint": "10.1.0",
     "broccoli-asset-rev": "3.0.0",
@@ -88,7 +88,7 @@
     "ember-resolver": "8.0.3",
     "ember-source": "3.28.9",
     "ember-source-channel-url": "3.0.0",
-    "ember-template-lint": "4.5.0",
+    "ember-template-lint": "4.10.0",
     "ember-try": "2.0.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.5.0",
@@ -96,22 +96,22 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-qunit": "7.2.0",
+    "eslint-plugin-qunit": "7.3.0",
     "husky": "7.0.4",
     "lint-staged": "12.4.1",
     "loader.js": "4.7.0",
     "miragejs": "0.1.45",
     "npm-package-json-lint": "6.3.0",
     "npm-run-all": "4.1.5",
-    "prettier": "2.6.2",
+    "prettier": "2.7.0",
     "qunit": "2.19.1",
     "qunit-dom": "2.0.0",
-    "sass": "1.51.0",
+    "sass": "1.52.3",
     "tracked-toolbox": "1.2.3",
-    "webpack": "5.72.0"
+    "webpack": "5.73.0"
   },
   "engines": {
-    "node": "^12.22.0 || >= 14"
+    "node": ">= 14"
   },
   "ember": {
     "edition": "octane"
