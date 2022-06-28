@@ -55,21 +55,32 @@ export default class EditFormComponent extends Component {
   }
 
   get canChangeActiveState() {
-    return this.emeisOptions[this.args.model?._internalModel?.modelName]
-      ?.actions?.deactivate
-      ? this.emeisOptions[
-          this.args.model._internalModel.modelName
-        ]?.actions?.deactivate(this.args.model)
-      : true;
+    const deactivateOption =
+      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
+        ?.deactivate?.fn;
+    const deactivate =
+      typeof deactivateOption === "function"
+        ? deactivateOption
+        : deactivateOption?.fn;
+    return deactivate ? deactivate(this.args.model) : true;
   }
 
   get canDeleteModel() {
+    const delOption =
+      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
+        ?.delete;
+    const del = typeof delOption === "function" ? delOption : delOption?.fn;
+    return del ? del(this.args.model) : true;
+  }
+
+  get deactivateLabelOverride() {
     return this.emeisOptions[this.args.model?._internalModel?.modelName]
-      ?.actions?.delete
-      ? this.emeisOptions[
-          this.args.model._internalModel.modelName
-        ]?.actions?.delete(this.args.model)
-      : true;
+      ?.actions?.deactivate?.label;
+  }
+
+  get deleteLabelOverride() {
+    return this.emeisOptions[this.args.model?._internalModel?.modelName]
+      ?.actions?.delete?.label;
   }
 
   @task

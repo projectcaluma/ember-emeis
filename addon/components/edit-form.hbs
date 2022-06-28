@@ -22,7 +22,7 @@
         data-test-toggle-active
         @onClick={{perform this.toggleActiveState}}
       >
-        {{t (concat "emeis.form." (if @model.isActive "deactivate" "activate"))}}
+        {{or (optional-translate this.deactivateLabelOverride) (t (concat "emeis.form." (if @model.isActive "deactivate" "activate")))}}
       </UkButton>
     {{/if}}
 
@@ -34,7 +34,7 @@
         data-test-delete
         @onClick={{perform this.delete}}
       >
-        {{t "emeis.form.delete"}}
+        {{or (optional-translate this.deleteLabelOverride) (t "emeis.form.delete")}}
       </UkButton>
     {{/if}}
 

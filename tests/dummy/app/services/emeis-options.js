@@ -54,7 +54,10 @@ export default class EmeisOptionsService extends Service {
   // scope view specific settings
   scope = {
     actions: {
-      delete: (model) => model.id !== "special",
+      delete: {
+        label: "my delete label",
+        fn: (model) => model.id !== "special",
+      },
       deactivate: (model) => model.id !== "special",
     },
     metaFields: [

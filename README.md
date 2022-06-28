@@ -101,7 +101,10 @@ export default class EmeisOptionsService extends Service {
     */
     actions: {
       deactivate: (model) => myUser.canChange(model),
-      delete: (model) => myUser.canDelete(model),
+      delete: {
+        label: "some.translation.key", // you can optionally override the label for the action button with translation key or static string
+        fn: (model) => myUser.canDelete(model), // in case of label overrides, you have to define th function override via the "fn" key
+      },
     },
     // show only a subset of the "additional" fields on the user model
     additionalFields: {
