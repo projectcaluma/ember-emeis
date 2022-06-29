@@ -11,6 +11,10 @@ export default class UsersIndexController extends PaginationController {
   @service notification;
   @service intl;
 
+  get customColumns() {
+    return this.emeisOptions.user?.customColumns;
+  }
+
   get emailAsUsername() {
     return this.emeisOptions.emailAsUsername;
   }

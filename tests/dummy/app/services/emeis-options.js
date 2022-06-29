@@ -20,6 +20,14 @@ export default class EmeisOptionsService extends Service {
     //   phone: "optional",
     //   language: "optional",
     // }
+    customColumns: [
+      {
+        heading: "Funktion", // ember-intl or string
+        slug: "additional-column-function", // relative to "model.metainfo[slug]"
+        sortable: true, // whether sorting is supported for this column
+        localized: true, // whether to expect a plain value or a object with localized values
+      },
+    ],
     customComponent: TestButtonComponent,
     metaFields: [
       {
@@ -58,7 +66,7 @@ export default class EmeisOptionsService extends Service {
       deactivate: {
         label: (model) =>
           model.isActive ? "my deactivate label" : "my reactivate label",
-        fn: (model) => model.id !== "special",
+        func: (model) => model.id !== "special",
       },
     },
     metaFields: [
