@@ -9,6 +9,7 @@
       type="text"
       name="slug"
       pattern="^[-a-zA-Z0-9_]+$"
+      required
       disabled={{not @model.isNew}}
       value={{@model.slug}}
     />
@@ -46,7 +47,8 @@
       @placeholder="{{t "emeis.permissions.headings.roles"}}..."
       @onChange={{set @model.roles}}
       @multiple="true"
-      required as |role|
+      required
+      as |role|
     >
       {{role.name}}
     </RelationshipSelect>

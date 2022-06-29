@@ -34,6 +34,8 @@ export default class EmeisOptionsService extends Service {
         type: "text",
         visible: true,
         readOnly: false,
+        required: false,
+        placeholder: "emeis.options.meta.user.example",
       },
       // {
       //   slug: "user-meta-example-2",
@@ -77,6 +79,7 @@ export default class EmeisOptionsService extends Service {
         },
         visible: () => true, // boolean or function which evaluates to a boolean value
         readOnly: false,
+        required: false,
       },
       {
         slug: "meta-example-2",

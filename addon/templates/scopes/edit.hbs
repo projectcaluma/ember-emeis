@@ -21,7 +21,7 @@
           />
         </EditForm::Element>
 
-        <EditForm::Element @label={{t "emeis.scopes.headings.description"}}>
+        <EditForm::Element @label={{t "emeis.scopes.headings.description"}} @optional={{true}}>
           <textarea
             class="uk-textarea"
             rows="5"
@@ -31,7 +31,7 @@
           ></textarea>
         </EditForm::Element>
 
-        <EditForm::Element @label={{t "emeis.scopes.headings.parent"}}>
+        <EditForm::Element @label={{t "emeis.scopes.headings.parent"}} @optional={{true}}>
           <RelationshipSelect
             @model={{this.allScopes}}
             @selected={{@model.parent}}
@@ -43,7 +43,7 @@
         </EditForm::Element>
 
         {{#each this.metaFields as |field|}}
-          <MetaField @field={{field}} @model={{@model}} />
+          <MetaField @field={{field}} @model={{@model}} @optional={{unless field.required true}} />
         {{/each}}
 
       </EditForm>
