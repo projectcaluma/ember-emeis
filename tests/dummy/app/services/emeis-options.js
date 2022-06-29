@@ -9,25 +9,19 @@ export default class EmeisOptionsService extends Service {
   // forceLocale = {
   //   scope: "en",
   // };
-  // additionalUserFields = {
-  //   phone: "optional",
-  //   language: "optional",
-  // };
   // navigationEntries = ["users", "scopes"];
-  customComponents = {
-    users: TestButtonComponent,
-  };
-  actions = {
-    user: {
+
+  // user view specific settings
+  user = {
+    actions: {
       delete: () => true,
     },
-    scope: {
-      delete: (model) => model.id !== "special",
-      deactivate: (model) => model.id !== "special",
-    },
-  };
-  metaFields = {
-    user: [
+    // additionalFields: {
+    //   phone: "optional",
+    //   language: "optional",
+    // }
+    customComponent: TestButtonComponent,
+    metaFields: [
       {
         slug: "user-meta-example",
         label: "emeis.options.meta.user.example", // ember-intl translation key
@@ -55,7 +49,19 @@ export default class EmeisOptionsService extends Service {
       //   readOnly: false,
       // },
     ],
-    scope: [
+  };
+
+  // scope view specific settings
+  scope = {
+    actions: {
+      delete: (model) => model.id !== "special",
+      deactivate: {
+        label: (model) =>
+          model.isActive ? "my deactivate label" : "my reactivate label",
+        fn: (model) => model.id !== "special",
+      },
+    },
+    metaFields: [
       {
         slug: "meta-example",
         label: "emeis.options.meta.scope.meta-example",

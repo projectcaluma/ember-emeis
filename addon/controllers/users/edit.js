@@ -17,7 +17,7 @@ export default class UsersEditController extends PaginationController {
   @tracked showAclWizzard = false;
 
   get metaFields() {
-    return this.emeisOptions.metaFields?.user;
+    return this.emeisOptions.user?.metaFields;
   }
 
   get emailAsUsername() {
@@ -25,18 +25,18 @@ export default class UsersEditController extends PaginationController {
   }
 
   get visibleFields() {
-    if (!this.emeisOptions.additionalUserFields) {
+    if (!this.emeisOptions.user.additionalFields) {
       return ALL_ADDITIONAL_FIELDS;
     }
 
-    return Object.keys(this.emeisOptions.additionalUserFields);
+    return Object.keys(this.emeisOptions.user.additionalFields);
   }
 
   get requiredFields() {
-    if (!this.emeisOptions.additionalUserFields) {
+    if (!this.emeisOptions.user.additionalFields) {
       return ALL_ADDITIONAL_FIELDS;
     }
-    return Object.entries(this.emeisOptions.additionalUserFields, {})
+    return Object.entries(this.emeisOptions.user.additionalFields, {})
       .filter(([, value]) => value === "required")
       .map(([key]) => key);
   }

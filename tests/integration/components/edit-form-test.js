@@ -8,8 +8,8 @@ import { module, test } from "qunit";
 import DummyButton from "../../../components/dummy-button/dummy-button";
 
 class EmeisOptionsStub extends Service {
-  customComponents = {
-    users: DummyButton,
+  user = {
+    customComponent: DummyButton,
   };
 }
 
@@ -53,6 +53,9 @@ module("Integration | Component | edit-form", function (hooks) {
 
     this.setProperties({
       model: {
+        _internalModel: {
+          modelName: "user",
+        },
         save() {
           assert.step("save");
         },
@@ -80,6 +83,9 @@ module("Integration | Component | edit-form", function (hooks) {
     };
 
     this.set("model", {
+      _internalModel: {
+        modelName: "user",
+      },
       destroyRecord() {
         assert.step("destroyRecord");
       },
@@ -103,6 +109,9 @@ module("Integration | Component | edit-form", function (hooks) {
 
     this.setProperties({
       model: {
+        _internalModel: {
+          modelName: "user",
+        },
         save() {
           assert.step("save");
         },

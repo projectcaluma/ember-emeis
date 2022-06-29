@@ -14,7 +14,7 @@ export default class ScopesEditIndexController extends PaginationController {
   }
 
   get metaFields() {
-    return this.emeisOptions.metaFields?.scope;
+    return this.emeisOptions.scope?.metaFields;
   }
 
   get allScopes() {

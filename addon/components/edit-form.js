@@ -1,6 +1,7 @@
 import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
 import { task } from "ember-concurrency";
+import { singularize } from "ember-inflector";
 
 import { confirmTask } from "../decorators/confirm-task";
 
@@ -42,11 +43,11 @@ export default class EditFormComponent extends Component {
   }
 
   get modelName() {
-    return this.relativeParentRouteName.split(".")[0];
+    return singularize(this.relativeParentRouteName.split(".")[0]);
   }
 
   get customComponent() {
-    return this.emeisOptions.customComponents?.[this.modelName];
+    return this.emeisOptions[this.modelName]?.customComponent;
   }
 
   get modelHasActiveState() {
@@ -54,21 +55,45 @@ export default class EditFormComponent extends Component {
   }
 
   get canChangeActiveState() {
-    return this.emeisOptions.actions?.[this.args.model._internalModel.modelName]
-      ?.deactivate
-      ? this.emeisOptions.actions[
-          this.args.model._internalModel.modelName
-        ].deactivate(this.args.model)
-      : true;
+    const option =
+      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
+        ?.deactivate;
+    const func = option?.func || option;
+    return typeof func === "function" ? func(this.args.model) : true;
   }
 
   get canDeleteModel() {
-    return this.emeisOptions.actions?.[this.args.model._internalModel.modelName]
-      ?.delete
-      ? this.emeisOptions.actions[
-          this.args.model._internalModel.modelName
-        ].delete(this.args.model)
-      : true;
+    const option =
+      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
+        ?.delete;
+    const func = option?.fn || option;
+    return typeof func === "function" ? func(this.args.model) : true;
+  }
+
+  get deactivateLabelOverride() {
+    const label =
+      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
+        ?.deactivate?.label;
+    if (typeof label === "function") {
+      return label(this.args.model);
+    } else if (label) {
+      return label;
+    }
+    return this.intl.t(
+      `emeis.form.${this.args.model.isActive ? "deactivate" : "activate"}`
+    );
+  }
+
+  get deleteLabelOverride() {
+    const label =
+      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
+        ?.delete?.label;
+    if (typeof label === "function") {
+      return label(this.args.model);
+    } else if (label) {
+      return label;
+    }
+    return this.intl.t("emeis.form.delete");
   }
 
   @task

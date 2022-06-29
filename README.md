@@ -91,43 +91,42 @@ export default class EmeisOptionsService extends Service {
   // hide "username" field
   emailAsUsername = false;
 
-  // show only a subset of the "additional" fields on the user model
-  additionalUserFields = {
-    "phone": "required",
-    "language": "required",
-    "address": "optional",
-    "city": "optional",
-    "zip": "optional"
-  ];
-
   // show only a subset of the main navigation entries
   navigationEntries = ["users", "scopes"];
 
-  /*
-   On each model edit view (e.g. users) you can define a custom component. The component will be rendered at the bottom of the edit view, but above the primary form buttons. Each component can be designed freely and the model will be passed into the component as `@model` argument. For a working demo have a look at our "dummy-button" at "dummy/app/components/dummy-button".
-  */
-  customComponents = {
-    users: DummyButton,
-  },
-  /*
-  Within the actions block you can define functions which evaluate the visibility of the "deactivate" and "delete" buttons in the model edit form. The visibilty must be defined for each model separately.
-
-  The model must support the "isActive" property for deactivation capabilities, which are currently only supported by user and scope.
-  */
-  actions = {
-    user: {
+  // user view specific settings
+  user = {
+    /*
+    Within the actions block you can define functions which evaluate the visibility of the "deactivate" and "delete" buttons in the model edit form. The visibilty must be defined for each model separately. The model must support the "isActive" property for deactivation capabilities, which are currently only supported by user and scope.
+    */
+    actions: {
       deactivate: (model) => myUser.canChange(model),
-      delete: (model) => myUser.canDelete(model),
+      delete: {
+        label: "some.translation.key", // you can optionally override the label for the action button with translation key or static string
+        fn: (model) => myUser.canDelete(model), // in case of label overrides, you have to define th function override via the "fn" key
+      },
     },
-    scope: {
+    // show only a subset of the "additional" fields on the user model
+    additionalFields: {
+      phone: "required",
+      language: "required",
+      address: "optional",
+      city: "optional",
+      zip: "optional",
+    },
+    /*
+    On each model edit view (e.g. users) you can define a custom component. The component will be rendered at the bottom of the edit view, but above the primary form buttons. Each component can be designed freely and the model will be passed into the component as `@model` argument. For a working demo have a look at our "dummy-button" at "dummy/app/components/dummy-button".
+    */
+    customComponent: DummyButton,
+  };
+
+  scope = {
+    actions: {
       deactivate: () => false, // statically deactivate the deactivate-button
       // leaving out the "delete" key here will always display the delete button
-    }
-  }
-  // define custom fields for a given context (user, scope, role or permission)
-  metaFields = {
-    user: [],
-    scope: [
+    },
+    // define custom fields for a given context (user, scope, role or permission)
+    metaFields: [
       {
         slug: "test-input",
         label: "My Input", // this could also be an ember-intl translation key
@@ -135,24 +134,25 @@ export default class EmeisOptionsService extends Service {
         visible: true,
         readOnly: false,
         required: false, //marks this field as optional
-        placeholder: "some.translation.key" //ember-intl translation key or plain string
+        placeholder: "some.translation.key", //ember-intl translation key or plain string
       },
       {
         slug: "test-input-2",
         label: "some.translation.key",
-        options: [  // insert a static list of options (value, label), or a (async) function which resolves to a list of options
+        options: [
+          // insert a static list of options (value, label), or a (async) function which resolves to a list of options
           {
             value: "option-1",
-            label: "Option one"
-          }
+            label: "Option one",
+          },
         ],
         type: "choice",
         visible: () => true,
         readOnly: false,
         required: true, //marks this field as required
-      }
-    ]
-  }
+      },
+    ],
+  };
 }
 ```
 
