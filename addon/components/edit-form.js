@@ -74,13 +74,29 @@ export default class EditFormComponent extends Component {
   }
 
   get deactivateLabelOverride() {
-    return this.emeisOptions[this.args.model?._internalModel?.modelName]
-      ?.actions?.deactivate?.label;
+    const label =
+      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
+        ?.deactivate?.label;
+    if (typeof label === "function") {
+      return label(this.args.model);
+    } else if (label) {
+      return label;
+    }
+    return this.intl.t(
+      `emeis.form.${this.args.model.isActive ? "deactivate" : "activate"}`
+    );
   }
 
   get deleteLabelOverride() {
-    return this.emeisOptions[this.args.model?._internalModel?.modelName]
-      ?.actions?.delete?.label;
+    const label =
+      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
+        ?.delete?.label;
+    if (typeof label === "function") {
+      return label(this.args.model);
+    } else if (label) {
+      return label;
+    }
+    return this.intl.t("emeis.form.delete");
   }
 
   @task
