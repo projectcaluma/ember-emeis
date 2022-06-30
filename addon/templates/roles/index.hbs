@@ -5,7 +5,7 @@
   @updatePage={{fn this.updateQueryParam "page"}}
   @updateSearch={{fn this.updateQueryParam "search"}} as |table|
 >
-  <table.head>
+  <table.head as |Column|>
     <th>
       {{t "emeis.roles.headings.name"}}
     </th>
@@ -16,7 +16,7 @@
       {{t "emeis.roles.headings.description"}}
     </th>
     {{#each this.customColumns as |extraColumn|}}
-      <Column @sort={{if extraColumn.sort extraColumn.slug}}>
+      <Column @sort={{if extraColumn.sortable extraColumn.slug ""}} data-test-custom-column={{extraColumn.slug}}>
         {{optional-translate extraColumn.heading}}
       </Column>
     {{/each}}
@@ -37,7 +37,7 @@
           {{role.description}}
         </td>
         {{#each this.customColumns as |extraColumn|}}
-          <td class="uk-width-expand" data-test-custom-column={{extraColumn.slug}}>
+          <td class="uk-width-expand" data-test-custom-row={{extraColumn.slug}}>
               {{optional-localized-value (get role.metainfo extraColumn.slug) "role"}}
           </td>
         {{/each}}

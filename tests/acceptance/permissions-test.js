@@ -1,3 +1,4 @@
+import Service from "@ember/service";
 import {
   visit,
   currentURL,
@@ -8,15 +9,55 @@ import {
   settled,
 } from "@ember/test-helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
+import { setupIntl } from "ember-intl/test-support";
 import { selectChoose } from "ember-power-select/test-support";
 import { setupApplicationTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
 
+const createEmeisOptions = (context) => {
+  return class ExtendedEmeisOptionsStub extends Service {
+    permission = {
+      actions: {
+        delete: {
+          func: () => {
+            context.step("delete");
+            return true;
+          },
+          label: () => {
+            context.step("delete-label");
+            return "my delete label";
+          },
+        },
+      },
+      customColumns: [
+        {
+          heading: "Funktion", // ember-intl or string
+          slug: "additional-column-function", // relative to "model.metainfo[slug]"
+          sortable: true, // whether sorting is supported for this column
+          localized: true, // whether to expect a plain value or a object with localized values
+        },
+      ],
+      metaFields: [
+        {
+          slug: "meta-example",
+          label: "Example for custom text field", // ember-intl translation key
+          type: "text",
+          visible: true,
+          readOnly: false,
+          required: false,
+          placeholder: "Example for custom text field",
+        },
+      ],
+    };
+  };
+};
+
 module("Acceptance | permissions", function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks, "en");
   setupRequestAssertions(hooks);
 
   test("list view /permissions", async function (assert) {
@@ -161,5 +202,42 @@ module("Acceptance | permissions", function (hooks) {
 
     assert.strictEqual(currentURL(), `/permissions?page=1`);
     assert.dom("[data-test-permission-name]").doesNotExist();
+  });
+
+  test("emeisOptions integration", async function (assert) {
+    assert.expect(11);
+
+    const customEmeisOptionsStub = createEmeisOptions(assert);
+    this.owner.register("service:emeis-options", customEmeisOptionsStub);
+
+    const permission = this.server.create("permission");
+
+    await visit("/permissions");
+    // eslint-disable-next-line ember/no-settled-after-test-helper
+    await settled();
+
+    assert.strictEqual(currentURL(), "/permissions");
+
+    assert
+      .dom("[data-test-custom-column=additional-column-function]")
+      .exists({ count: 1 });
+    assert
+      .dom("[data-test-custom-column=additional-column-function]")
+      .hasText("Funktion");
+    assert
+      .dom("[data-test-custom-row=additional-column-function]")
+      .exists({ count: 1 });
+
+    await visit(`/permissions/${permission.id}`);
+    assert.dom("[data-test-delete]").hasText("my delete label");
+    assert.verifySteps(["delete", "delete-label"]);
+
+    assert.dom("[data-test-meta-field=meta-example]").exists({ count: 1 });
+    assert
+      .dom("[data-test-meta-field=meta-example]")
+      .hasText("Example for custom text field (optional)");
+    assert
+      .dom("[data-test-meta-field=meta-example] input")
+      .hasAttribute("placeholder", "Example for custom text field");
   });
 });

@@ -8,7 +8,7 @@ export default class OptionalLocalizedValue extends Helper {
   getFieldLocale(modelName) {
     return modelName
       ? this.emeisOptions.forceLocale?.[modelName]
-      : undefined || this.intl.localizedFieldLocale || this.intl.primaryLocale;
+      : this.intl.localizedFieldLocale || this.intl.primaryLocale;
   }
 
   compute([field, modelName]) {
