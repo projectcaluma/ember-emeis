@@ -26,7 +26,11 @@ export default class DataTableComponent extends Component {
   ]);
 
   get sort() {
-    return this.internalSort || this.args.defaultSort;
+    return (
+      this.internalSort ||
+      this.router.currentRoute.queryParams?.sort ||
+      this.args.defaultSort
+    );
   }
 
   get page() {

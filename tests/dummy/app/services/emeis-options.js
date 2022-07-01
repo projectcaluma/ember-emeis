@@ -22,8 +22,8 @@ export default class EmeisOptionsService extends Service {
     // }
     customColumns: [
       {
-        heading: "Funktion", // ember-intl or string
-        slug: "additional-column-function", // relative to "model.metainfo[slug]"
+        heading: "something meta", // ember-intl or string
+        slug: "megameta", // relative to "model.metainfo[slug]"
         sortable: true, // whether sorting is supported for this column
         localized: true, // whether to expect a plain value or a object with localized values
       },
@@ -31,7 +31,7 @@ export default class EmeisOptionsService extends Service {
     customComponent: TestButtonComponent,
     metaFields: [
       {
-        slug: "user-meta-example",
+        slug: "megameta",
         label: "emeis.options.meta.user.example", // ember-intl translation key
         type: "text",
         visible: true,

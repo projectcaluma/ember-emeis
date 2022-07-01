@@ -16,7 +16,7 @@
       {{t "emeis.roles.headings.description"}}
     </th>
     {{#each this.customColumns as |extraColumn|}}
-      <Column @sort={{if extraColumn.sortable extraColumn.slug ""}} data-test-custom-column={{extraColumn.slug}}>
+      <Column @sort={{if extraColumn.sortable (concat "metainfo__" extraColumn.slug) ""}} data-test-custom-column={{extraColumn.slug}}>
         {{optional-translate extraColumn.heading}}
       </Column>
     {{/each}}
