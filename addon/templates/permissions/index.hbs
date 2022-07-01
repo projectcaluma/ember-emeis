@@ -5,7 +5,7 @@
   @updatePage={{fn this.updateQueryParam "page"}}
   @updateSearch={{fn this.updateQueryParam "search"}} as |table|
 >
-  <table.head>
+  <table.head as |Column|>
     <th>
       {{t "emeis.permissions.headings.name"}}
     </th>
@@ -15,6 +15,11 @@
     <th>
       {{t "emeis.permissions.headings.description"}}
     </th>
+    {{#each this.customColumns as |extraColumn|}}
+      <Column @sort={{if extraColumn.sortable (concat "metainfo__" extraColumn.slug) ""}} data-test-custom-column={{extraColumn.slug}}>
+        {{optional-translate extraColumn.heading}}
+      </Column>
+    {{/each}}
   </table.head>
   <table.body as |body|>
     <body.row>
@@ -36,6 +41,11 @@
         <td class="uk-width-expand" data-test-permission-desc={{permission.id}}>
           {{permission.description}}
         </td>
+        {{#each this.customColumns as |extraColumn|}}
+          <td class="uk-width-expand" data-test-custom-row={{extraColumn.slug}}>
+              {{optional-localized-value (get permission.metainfo extraColumn.slug) "permission"}}
+          </td>
+        {{/each}}
       {{/let}}
     </body.row>
   </table.body>

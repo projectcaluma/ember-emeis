@@ -114,6 +114,15 @@ export default class EmeisOptionsService extends Service {
       city: "optional",
       zip: "optional",
     },
+    // adds additional custom columns to this model's list view. *Scopes are not supported, since they are represented as a tree!*
+    customColumns: [
+      {
+        heading: "Funktion", // ember-intl or string
+        slug: "additional-column-function", // relative to "model.metainfo[slug]"
+        sortable: true, // whether sorting is supported for this column
+        localized: true, // whether to expect a plain value or a object with localized values
+      },
+    ],
     /*
     On each model edit view (e.g. users) you can define a custom component. The component will be rendered at the bottom of the edit view, but above the primary form buttons. Each component can be designed freely and the model will be passed into the component as `@model` argument. For a working demo have a look at our "dummy-button" at "dummy/app/components/dummy-button".
     */

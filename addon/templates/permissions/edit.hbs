@@ -53,4 +53,9 @@
       {{role.name}}
     </RelationshipSelect>
   </EditForm::Element>
+
+  {{#each this.metaFields as |field|}}
+    <MetaField @field={{field}} @model={{@model}} @optional={{unless field.required true}} data-test-meta-field={{field.slug}} />
+  {{/each}}
+
 </EditForm>

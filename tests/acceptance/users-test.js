@@ -23,6 +23,52 @@ class EmeisOptionsStub extends Service {
   };
 }
 
+const createEmeisOptions = (context) => {
+  return class ExtendedEmeisOptionsStub extends Service {
+    user = {
+      actions: {
+        delete: () => {
+          context.step("delete");
+          return true;
+        },
+        deactivate: {
+          func: () => {
+            context.step("deactivate");
+            return true;
+          },
+          label: (model) => {
+            context.step(
+              model.isActive ? "deactivate-label" : "reactivate-label"
+            );
+            return model.isActive
+              ? "my deactivate label"
+              : "my reactivate label";
+          },
+        },
+      },
+      customColumns: [
+        {
+          heading: "Funktion", // ember-intl or string
+          slug: "additional-column-function", // relative to "model.metainfo[slug]"
+          sortable: true, // whether sorting is supported for this column
+          localized: true, // whether to expect a plain value or a object with localized values
+        },
+      ],
+      metaFields: [
+        {
+          slug: "meta-example",
+          label: "emeis.options.meta.user.example", // ember-intl translation key
+          type: "text",
+          visible: true,
+          readOnly: false,
+          required: false,
+          placeholder: "emeis.options.meta.user.example",
+        },
+      ],
+    };
+  };
+};
+
 module("Acceptance | users", function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
@@ -303,5 +349,53 @@ module("Acceptance | users", function (hooks) {
     assert.dom("[data-test-acl-back]").doesNotExist();
     assert.dom("[data-test-acl-scope]").hasText(scope.fullName.en);
     assert.dom("[data-test-acl-role]").hasText(role.name.en);
+  });
+
+  test("emeisOptions integration", async function (assert) {
+    assert.expect(16);
+
+    const customEmeisOptionsStub = createEmeisOptions(assert);
+    this.owner.register("service:emeis-options", customEmeisOptionsStub);
+
+    const user = this.server.create("user", { isActive: true });
+
+    await visit("/users");
+    // eslint-disable-next-line ember/no-settled-after-test-helper
+    await settled();
+
+    assert.strictEqual(currentURL(), "/users");
+
+    assert
+      .dom("[data-test-custom-column=additional-column-function]")
+      .exists({ count: 1 });
+    assert
+      .dom("[data-test-custom-column=additional-column-function]")
+      .hasText("Funktion");
+    assert
+      .dom("[data-test-custom-row=additional-column-function]")
+      .exists({ count: 1 });
+
+    await visit(`/users/${user.id}`);
+    assert.dom("[data-test-toggle-active]").hasText("my deactivate label");
+    assert.verifySteps(["deactivate", "deactivate-label", "delete"]);
+
+    await click("[data-test-toggle-active]");
+    // eslint-disable-next-line ember/no-settled-after-test-helper
+    await settled();
+    // have a look at 'edit-form.hbs' for further insights
+    assert.verifySteps(["reactivate-label"]);
+
+    await click("[data-test-toggle-active]");
+    // eslint-disable-next-line ember/no-settled-after-test-helper
+    await settled();
+    assert.verifySteps(["deactivate-label"]);
+
+    assert.dom("[data-test-meta-field=meta-example]").exists({ count: 1 });
+    assert
+      .dom("[data-test-meta-field=meta-example]")
+      .hasText("Example for custom text field (optional)");
+    assert
+      .dom("[data-test-meta-field=meta-example] input")
+      .hasAttribute("placeholder", "Example for custom text field");
   });
 });

@@ -24,6 +24,11 @@
     <Column @sort="email">
       {{t "emeis.users.headings.email"}}
     </Column>
+    {{#each this.customColumns as |extraColumn|}}
+      <Column @sort={{if extraColumn.sortable (concat "metainfo__" extraColumn.slug) ""}} data-test-custom-column={{extraColumn.slug}}>
+        {{optional-translate extraColumn.heading}}
+      </Column>
+    {{/each}}
     <Column>
       {{t "emeis.roles.title"}}
     </Column>
@@ -56,6 +61,11 @@
         <td class="uk-link-text {{unless user.isActive "text-line-through"}}" data-test-user-email={{user.id}}>
           {{user.email}}
         </td>
+        {{#each this.customColumns as |extraColumn|}}
+          <td class="uk-link-text {{unless user.isActive "text-line-through"}}" data-test-custom-row={{extraColumn.slug}}>
+              {{optional-localized-value (get user.metainfo extraColumn.slug) "user"}}
+          </td>
+        {{/each}}
         <td class="uk-link-text {{unless user.isActive "text-line-through"}}">
           <ul class="uk-list uk-list-divider">
             {{#each user.acls as |acl|}}

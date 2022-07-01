@@ -66,7 +66,7 @@ export default class EditFormComponent extends Component {
     const option =
       this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
         ?.delete;
-    const func = option?.fn || option;
+    const func = option?.func || option;
     return typeof func === "function" ? func(this.args.model) : true;
   }
 

@@ -1,5 +1,5 @@
 {{#if this.visible.value}}
-  <EditForm::Element @label={{optional-translate @field.label}} @optional={{@optional}}>
+  <EditForm::Element @label={{optional-translate @field.label}} @optional={{@optional}} ...attributes>
     {{#if (eq @field.type "choice")}}
       {{#if this.options.isRunning}}
         <UkSpinner @ratio="1" />
