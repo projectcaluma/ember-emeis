@@ -2,6 +2,7 @@
   @modelName="user"
   @page={{this.page}}
   @search={{this.search}}
+  @filter={{this.filters}}
   @defaultSort="last_name"
   @updatePage={{fn this.updateQueryParam "page"}}
   @updateSearch={{fn this.updateQueryParam "search"}}
@@ -9,6 +10,18 @@
   @include={{array "acls.role" "acls.scope"}}
   as |table|
 >
+  <table.filters as |Filter|>
+    <Filter.radio-buttons
+          @name="active"
+          @label={{t "emeis.filters.active.title"}}
+          @selected={{this.filter_active}}
+          @options={{array
+            (hash value=true label=(t "emeis.filters.active.on"))
+            (hash value=false label=(t "emeis.filters.active.off"))
+          }}
+          @onChange={{fn this.updateFilter "active"}}
+        />
+  </table.filters>
   <table.head as |Column|>
     {{#unless this.emailAsUsername}}
       <Column @sort="username">
@@ -83,7 +96,6 @@
             {{/each}}
           </ul>
         </td>
-        {{!-- SCOPES --}}
         <td class="uk-link-text {{unless user.isActive "text-line-through"}}">
           <ul class="uk-list uk-list-divider">
             {{#each user.acls as |acl|}}

@@ -63,6 +63,12 @@ emeis:
       description: "Beschreibung"
     new: "Neue Rolle erstellen"
 
+  filters:
+    active:
+      title: "Status"
+      on: "Aktiv"
+      off: "Inaktiv"
+
   pagination:
     next: "Nächste"
     previous: "Vorherige"
