@@ -1,3 +1,38 @@
+# [6.0.0](https://github.com/projectcaluma/ember-emeis/compare/v5.1.0...v6.0.0) (2022-07-04)
+
+
+### Bug Fixes
+
+* adapt table hover style ([#465](https://github.com/projectcaluma/ember-emeis/issues/465)) ([c3338b5](https://github.com/projectcaluma/ember-emeis/commit/c3338b535615fd70436aa0588d284de033ee700b))
+* allow to clear parent scope selection ([#464](https://github.com/projectcaluma/ember-emeis/issues/464)) ([b24dd06](https://github.com/projectcaluma/ember-emeis/commit/b24dd06d48d36a446c53c7b3f57300be7a2818be))
+* handle case where engine is mounted under different name ([#476](https://github.com/projectcaluma/ember-emeis/issues/476)) ([533b3de](https://github.com/projectcaluma/ember-emeis/commit/533b3de497821d3bd0d26984e5a7d7825703fb07))
+* tree search expansion ([#501](https://github.com/projectcaluma/ember-emeis/issues/501)) ([5eb804c](https://github.com/projectcaluma/ember-emeis/commit/5eb804cde573680b9ca49362f5582530a44b72a0))
+
+
+### Features
+
+* **emeisOptions:** action button label overrides ([#515](https://github.com/projectcaluma/ember-emeis/issues/515)) ([3d1bfce](https://github.com/projectcaluma/ember-emeis/commit/3d1bfce6f10125bf7e368f95a6e9a4ccdf224958))
+* **emeisOptions:** add custom column option ([#516](https://github.com/projectcaluma/ember-emeis/issues/516)) ([1d88b42](https://github.com/projectcaluma/ember-emeis/commit/1d88b4216784b4750101efb952b89d99d8964b06))
+* **emeisOptions:** make "delete" and "deactivate" buttons visibility configurable ([#462](https://github.com/projectcaluma/ember-emeis/issues/462)) ([afc7ca4](https://github.com/projectcaluma/ember-emeis/commit/afc7ca441c8a4952ad5c7bf81fe65ceae3934b4b))
+* mark optional fields ([#507](https://github.com/projectcaluma/ember-emeis/issues/507)) ([51debd0](https://github.com/projectcaluma/ember-emeis/commit/51debd0f006e44312d744fab725d1d1cbe4ba808))
+* **tree:** expand root only if its single ([#460](https://github.com/projectcaluma/ember-emeis/issues/460)) ([1ca9783](https://github.com/projectcaluma/ember-emeis/commit/1ca9783453d1109687ffd6b8cab9661ea3eaa6f5))
+* **users:** add 'isActive' filter radio buttons ([#510](https://github.com/projectcaluma/ember-emeis/issues/510)) ([67e6401](https://github.com/projectcaluma/ember-emeis/commit/67e6401b2972c73daeb0ea00a4dbb61dc53b64e3))
+
+
+### BREAKING CHANGES
+
+* **emeisOptions:** the emeis options object got restructured
+
+* feat(emeisOptions): enable action button label overrides
+
+* feat: accept functions as label overrides
+
+to allow different labels for active/inactive models
+
+* fix: remove incorrect `fn` lookup, minor refactoring
+
+Co-authored-by: Christian Zosel <christian@zosel.ch>
+
 # [5.1.0](https://github.com/projectcaluma/ember-emeis/compare/v5.0.0...v5.1.0) (2022-03-09)
 
 
