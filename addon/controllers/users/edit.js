@@ -25,18 +25,18 @@ export default class UsersEditController extends PaginationController {
   }
 
   get visibleFields() {
-    if (!this.emeisOptions.user.additionalFields) {
+    if (!this.emeisOptions.user?.additionalFields) {
       return ALL_ADDITIONAL_FIELDS;
     }
 
-    return Object.keys(this.emeisOptions.user.additionalFields);
+    return Object.keys(this.emeisOptions.user?.additionalFields);
   }
 
   get requiredFields() {
-    if (!this.emeisOptions.user.additionalFields) {
+    if (!this.emeisOptions.user?.additionalFields) {
       return ALL_ADDITIONAL_FIELDS;
     }
-    return Object.entries(this.emeisOptions.user.additionalFields, {})
+    return Object.entries(this.emeisOptions.user?.additionalFields, {})
       .filter(([, value]) => value === "required")
       .map(([key]) => key);
   }
