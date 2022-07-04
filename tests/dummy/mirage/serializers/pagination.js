@@ -22,6 +22,7 @@ export default class PaginationSerializer extends JSONAPISerializer {
           pagination: {
             parsedPage,
             pages: ceil(json.data.length / parsedLimit),
+            count: parsedLimit,
           },
         };
 

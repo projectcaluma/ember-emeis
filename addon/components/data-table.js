@@ -12,6 +12,7 @@ export default class DataTableComponent extends Component {
   @service emeisOptions;
 
   @tracked numPages;
+  @tracked entryCount;
   @tracked internalSearch;
   @tracked internalPage = 1;
   @tracked internalSort;
@@ -113,6 +114,7 @@ export default class DataTableComponent extends Component {
 
       const data = yield this.store.query(this.args.modelName, options);
       this.numPages = data.meta.pagination?.pages;
+      this.entryCount = data.meta.pagination?.count;
 
       return data;
     } catch (error) {

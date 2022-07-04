@@ -60,44 +60,50 @@
     <tfoot>
       <tr>
         <td colspan="99">
-          <ul class="uk-pagination uk-flex uk-flex-between" uk-margin>
-            <li
-              class={{unless this.previousPage "uk-disabled"}}
-              data-test-previous-page
-            >
-              <button
-                type="button"
-                class="no-style-button"
-                {{on "click" (fn this.updatePage this.previousPage)}}
+          <div class="uk-flex">
+            <span class="uk-width-auto uk-width-1-4@m"></span>
+            <ul class="uk-width-expand uk-width-2-4@m uk-pagination uk-flex uk-flex-center@m uk-flex-middle uk-margin-remove-top" uk-margin>
+              <li
+                class={{unless this.previousPage "uk-disabled"}}
+                data-test-previous-page
               >
-                <span
-                  class="uk-margin-small-right"
-                  uk-pagination-previous
-                ></span>
-                {{t "emeis.pagination.previous"}}
-              </button>
-            </li>
-            {{#if this.numPages}}
-              <li class="uk-active">
-              <span data-test-page>
-                {{this.page}} / {{this.numPages}}
-              </span>
+                <button
+                  type="button"
+                  class="no-style-button"
+                  {{on "click" (fn this.updatePage this.previousPage)}}
+                >
+                  <span
+                    class="uk-margin-small-right"
+                    uk-pagination-previous
+                  ></span>
+                  {{t "emeis.pagination.previous"}}
+                </button>
               </li>
-            {{/if}}
-            <li
-              class={{unless this.nextPage "uk-disabled"}}
-              data-test-next-page
-            >
-              <button
-                type="button"
-                class="no-style-button"
-                {{on "click" (fn this.updatePage this.nextPage)}}
+              {{#if this.numPages}}
+                <li class="uk-active">
+                <span data-test-page>
+                  {{this.page}} / {{this.numPages}}
+                </span>
+                </li>
+              {{/if}}
+              <li
+                class={{unless this.nextPage "uk-disabled"}}
+                data-test-next-page
               >
-                {{t "emeis.pagination.next"}}
-                <span class="uk-margin-small-left" uk-pagination-next></span>
-              </button>
-            </li>
-          </ul>
+                <button
+                  type="button"
+                  class="no-style-button"
+                  {{on "click" (fn this.updatePage this.nextPage)}}
+                >
+                  {{t "emeis.pagination.next"}}
+                  <span class="uk-margin-small-left" uk-pagination-next></span>
+                </button>
+              </li>
+            </ul>
+            <ul class="uk-width-1-4 uk-pagination uk-flex uk-flex-right uk-flex-middle uk-margin-remove-top uk-text-muted">
+              <li>{{t "emeis.pagination.total"}} {{this.entryCount}}</li>
+            </ul>
+          </div>
         </td>
       </tr>
     </tfoot>
