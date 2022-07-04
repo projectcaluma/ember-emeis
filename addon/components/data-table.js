@@ -28,7 +28,7 @@ export default class DataTableComponent extends Component {
   get sort() {
     return (
       this.internalSort ||
-      this.router.currentRoute.queryParams?.sort ||
+      this.router?.currentRoute?.queryParams?.sort ||
       this.args.defaultSort
     );
   }
