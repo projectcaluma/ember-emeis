@@ -1,3 +1,16 @@
+# [6.1.0](https://github.com/projectcaluma/ember-emeis/compare/v6.0.0...v6.1.0) (2022-07-05)
+
+
+### Bug Fixes
+
+* **data-table:** fix search bar width ([#521](https://github.com/projectcaluma/ember-emeis/issues/521)) ([6009e0d](https://github.com/projectcaluma/ember-emeis/commit/6009e0d139dbccf243db80f848b4cb781ed0a4be))
+* **emeisOptions:** save access on options properties ([#519](https://github.com/projectcaluma/ember-emeis/issues/519)) ([a990be3](https://github.com/projectcaluma/ember-emeis/commit/a990be35429c3976bf96447b523c5798d42e5395))
+
+
+### Features
+
+* **data-table:** show entry count on list views ([#520](https://github.com/projectcaluma/ember-emeis/issues/520)) ([4a36b53](https://github.com/projectcaluma/ember-emeis/commit/4a36b530ca4f41ee41e8a992b614201b4c1d543a))
+
 # [6.0.0](https://github.com/projectcaluma/ember-emeis/compare/v5.1.0...v6.0.0) (2022-07-04)
 
 
