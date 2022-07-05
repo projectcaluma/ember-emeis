@@ -3,7 +3,7 @@
   {{yield (hash filters=(component "data-table/filters")) }}
   <span class="uk-flex uk-flex-right uk-width-expand uk-margin-remove-bottom">
     <form
-      class="uk-search uk-search-default {{if @heading 'uk-width-medium@l' 'uk-width-large@l'}} uk-width-expand@m search-input-form uk-margin-auto-top"
+      class="uk-search uk-search-default {{if @heading 'uk-width-medium@m' 'uk-width-large@m'}} uk-width-1@s search-input-form uk-margin-auto-top"
       {{on "submit" this.updateSearch}}
       {{on "reset" this.resetSearch}}
     >
