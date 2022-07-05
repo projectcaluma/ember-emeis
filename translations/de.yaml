@@ -72,6 +72,7 @@ emeis:
   pagination:
     next: "Nächste"
     previous: "Vorherige"
+    total: "Anzahl"
 
   search:
     placeholder: "Suche..."
