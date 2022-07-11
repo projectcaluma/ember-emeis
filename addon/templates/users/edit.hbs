@@ -8,6 +8,11 @@
         {{#unless @model.isActive}}
           <span class="uk-badge uk-background-secondary">{{t "emeis.inactive"}}</span>
         {{/unless}}
+        {{#if this.statusComponent}}
+          {{#let (component (ensure-safe-component this.statusComponent)) as |StatusComponent|}}
+            <StatusComponent @model={{@model}} />
+          {{/let}}
+        {{/if}}
       </h3>
       <EditForm
         @model={{@model}}

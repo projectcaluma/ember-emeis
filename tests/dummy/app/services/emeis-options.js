@@ -2,6 +2,7 @@ import Service from "@ember/service";
 import { timeout } from "ember-concurrency";
 
 import TestButtonComponent from "../components/dummy-button/dummy-button"; // template and component file must have the same name (if not template only)
+import TestStatusComponent from "../components/dummy-status/dummy-status"; // template and component file must have the same name (if not template only)
 
 export default class EmeisOptionsService extends Service {
   emailAsUsername = false;
@@ -57,6 +58,7 @@ export default class EmeisOptionsService extends Service {
       //   readOnly: false,
       // },
     ],
+    statusComponent: TestStatusComponent,
   };
 
   // scope view specific settings
