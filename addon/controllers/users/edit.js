@@ -20,6 +20,10 @@ export default class UsersEditController extends PaginationController {
     return this.emeisOptions.user?.metaFields;
   }
 
+  get statusComponent() {
+    return this.emeisOptions.user?.statusComponent;
+  }
+
   get emailAsUsername() {
     return this.emeisOptions.emailAsUsername;
   }
