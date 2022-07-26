@@ -1,3 +1,10 @@
+# [6.2.0](https://github.com/projectcaluma/ember-emeis/compare/v6.1.0...v6.2.0) (2022-07-26)
+
+
+### Features
+
+* **emeis-options:** custom user status component ([#523](https://github.com/projectcaluma/ember-emeis/issues/523)) ([63eb4c7](https://github.com/projectcaluma/ember-emeis/commit/63eb4c77fe7df16bb8d67021a1553d6d58e204ee))
+
 # [6.1.0](https://github.com/projectcaluma/ember-emeis/compare/v6.0.0...v6.1.0) (2022-07-05)
 
 
