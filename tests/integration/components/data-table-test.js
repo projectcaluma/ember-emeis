@@ -1,6 +1,7 @@
 import { render, click, fillIn } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupMirage } from "ember-cli-mirage/test-support";
+import { timeout } from "ember-concurrency";
 import { setupIntl } from "ember-intl/test-support";
 import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
@@ -40,6 +41,8 @@ module("Integration | Component | data-table", function (hooks) {
     assert.dom("thead tr").exists({ count: 1 });
     assert.dom("thead tr th:first-child").hasText("Heading 1");
     assert.dom("thead tr th:last-child").hasText("Heading 2");
+
+    await timeout(100);
 
     assert.dom("tbody tr").exists({ count: 10 });
     assert

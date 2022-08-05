@@ -4,7 +4,7 @@ import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { task } from "ember-concurrency";
-import { useFunction } from "ember-resources";
+import { trackedTask } from "ember-resources/util/ember-concurrency";
 
 export default class DataTableComponent extends Component {
   @service store;
@@ -16,14 +16,14 @@ export default class DataTableComponent extends Component {
   @tracked internalSearch;
   @tracked internalPage = 1;
   @tracked internalSort;
+  @tracked dataRefresh = false;
 
-  // While using 'useTask' we ended up in an infinite loop.
-  // data = useTask(this, this.fetchData, () => [this.args.filter]);
-  data = useFunction(this, this.fetchData.perform, () => [
+  data = trackedTask(this, this.fetchData, () => [
     this.args.filter,
     this.search,
     this.sort,
     this.page,
+    this.dataRefresh,
   ]);
 
   get sort() {
@@ -65,10 +65,6 @@ export default class DataTableComponent extends Component {
     }
   }
 
-  get isLoading() {
-    return this.fetchData.isRunning;
-  }
-
   get nextPage() {
     if (this.page < this.numPages) {
       return this.page + 1;
@@ -83,8 +79,15 @@ export default class DataTableComponent extends Component {
     return null;
   }
 
+  @action
+  triggerRefresh() {
+    this.dataRefresh = !this.dataRefresh;
+  }
+
   @task
   *fetchData() {
+    yield Promise.resolve();
+
     assert(
       "Must pass a model name as string",
       typeof this.args.modelName === "string"

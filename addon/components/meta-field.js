@@ -3,7 +3,7 @@ import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
 import { task } from "ember-concurrency";
-import { useTask } from "ember-resources";
+import { trackedTask } from "ember-resources/util/ember-concurrency";
 
 export default class MetaFieldComponent extends Component {
   @service intl;
@@ -28,9 +28,15 @@ export default class MetaFieldComponent extends Component {
     return false;
   }
 
-  visible = useTask(this, this.evalVisible, () => [this.args.field.visible]);
-  readOnly = useTask(this, this.evalReadOnly, () => [this.args.field.readOnly]);
-  options = useTask(this, this.evalOptions, () => [this.args.field.options]);
+  visible = trackedTask(this, this.evalVisible, () => [
+    this.args.field.visible,
+  ]);
+  readOnly = trackedTask(this, this.evalReadOnly, () => [
+    this.args.field.readOnly,
+  ]);
+  options = trackedTask(this, this.evalOptions, () => [
+    this.args.field.options,
+  ]);
 
   @task
   *evalVisible(visible) {
