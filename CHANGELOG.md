@@ -1,3 +1,12 @@
+## [6.2.1](https://github.com/projectcaluma/ember-emeis/compare/v6.2.0...v6.2.1) (2022-08-08)
+
+
+### Bug Fixes
+
+* **data-table:** always include page meta info ([#544](https://github.com/projectcaluma/ember-emeis/issues/544)) ([43c6a28](https://github.com/projectcaluma/ember-emeis/commit/43c6a28313c80b4df936ea88d33982731447cba0))
+* **editForm:** relax phone regex ([#537](https://github.com/projectcaluma/ember-emeis/issues/537)) ([bd2d63c](https://github.com/projectcaluma/ember-emeis/commit/bd2d63c3f24778e745f38a865b2264f60a3ae0e2))
+* phone number placeholder ([#538](https://github.com/projectcaluma/ember-emeis/issues/538)) ([9b75903](https://github.com/projectcaluma/ember-emeis/commit/9b759032d98a2aeaaa922a6ad7e376ed8f5d498d))
+
 # [6.2.0](https://github.com/projectcaluma/ember-emeis/compare/v6.1.0...v6.2.0) (2022-07-26)
 
 
