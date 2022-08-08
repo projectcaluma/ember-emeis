@@ -96,21 +96,15 @@ export default class DataTableComponent extends Component {
         includes = this.args.include.join(",");
       }
 
-      let options = {
+      const options = {
+        include: includes,
         filter: { search: this.search, ...(this.args.filter || {}) },
         sort: this.sort,
-        include: includes,
+        page: {
+          number: this.page,
+          size: this.emeisOptions.pageSize,
+        },
       };
-
-      if (!this.search) {
-        options = {
-          ...options,
-          page: {
-            number: this.page,
-            size: this.emeisOptions.pageSize,
-          },
-        };
-      }
 
       const data = yield this.store.query(this.args.modelName, options);
       this.numPages = data.meta.pagination?.pages;
@@ -152,6 +146,8 @@ export default class DataTableComponent extends Component {
     // Prevent reload because of form submit
     submitEvent.preventDefault();
     this.search = submitEvent.target.elements.search.value;
+    // changing search may change the number of pages, therefore navigate to first page
+    this.page = 1;
   }
 
   @action
