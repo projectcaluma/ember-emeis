@@ -37,24 +37,24 @@
   ...attributes
 >
 
-  {{#if this.isLoading}}
-    {{yield (hash
-        head=(component "data-table/head" sortedBy=this.sort update=this.updateSort)
-      )
-    }}
-    <tbody data-test-loading>
-      <tr>
-        <td colspan="99" class="uk-padding-large uk-animation-fade uk-text-center">
-          <UkSpinner @ratio="1" />
-        </td>
-      </tr>
-    </tbody>
-  {{else}}
-    {{yield
+{{#if this.data.isRunning}}
+  {{yield (hash
+     head=(component "data-table/head" sortedBy=this.sort update=this.updateSort)
+   )
+  }}
+  <tbody data-test-loading>
+    <tr>
+      <td colspan="99" class="uk-padding-large uk-animation-fade uk-text-center">
+        <UkSpinner @ratio="1" />
+      </td>
+    </tr>
+  </tbody>
+{{else}}
+  {{yield
       (hash
         body=(component "data-table/body" models=this.data.value emptyWarning=@emptyWarning emptyIcon=@emptyIcon emptyIconColor=@emptyIconColor)
         head=(component "data-table/head" sortedBy=this.sort update=this.updateSort)
-        refresh=(perform this.fetchData)
+        refresh=this.triggerRefresh
       )
     }}
     <tfoot>

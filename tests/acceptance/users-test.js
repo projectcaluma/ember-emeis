@@ -8,6 +8,7 @@ import {
   settled,
 } from "@ember/test-helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
+import { timeout } from "ember-concurrency";
 import { setupIntl } from "ember-intl/test-support";
 import { setupApplicationTest } from "ember-qunit";
 import { module, test } from "qunit";
@@ -99,6 +100,9 @@ module("Acceptance | users", function (hooks) {
     await click(
       "[data-test-filters-radio-buttons='active'] [data-test-filters-radio-buttons-button='off']"
     );
+
+    await timeout(100);
+
     assert.dom("[data-test-user-username]").exists({
       count: users.filter((user) => user.isActive === false).length,
     });
