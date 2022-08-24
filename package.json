@@ -100,7 +100,7 @@
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-qunit": "7.3.1",
     "husky": "8.0.1",
-    "lint-staged": "12.4.1",
+    "lint-staged": "13.0.3",
     "loader.js": "4.7.0",
     "miragejs": "0.1.45",
     "npm-package-json-lint": "6.3.0",
