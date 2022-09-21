@@ -371,7 +371,7 @@ module("Acceptance | users", function (hooks) {
   });
 
   test("emeisOptions integration", async function (assert) {
-    assert.expect(16);
+    assert.expect(17);
 
     const customEmeisOptionsStub = createEmeisOptions(assert);
     this.owner.register("service:emeis-options", customEmeisOptionsStub);
@@ -396,7 +396,7 @@ module("Acceptance | users", function (hooks) {
 
     await visit(`/users/${user.id}`);
     assert.dom("[data-test-toggle-active]").hasText("my deactivate label");
-    assert.verifySteps(["deactivate", "deactivate-label", "delete"]);
+    assert.verifySteps(["delete", "deactivate", "deactivate-label", "delete"]);
 
     await click("[data-test-toggle-active]");
     // eslint-disable-next-line ember/no-settled-after-test-helper

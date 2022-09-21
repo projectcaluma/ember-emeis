@@ -117,9 +117,11 @@
           <LinkTo @route="users.edit" @model={{user}} class="uk-link-reset uk-margin-small-right">
             <UkIcon @icon="pencil"/>
           </LinkTo>
-          <UkButton @color="link" @onClick={{perform this.delete user}}>
-            <UkIcon @icon="trash" />
-          </UkButton>
+          {{#if (can-delete "user" user)}}
+            <UkButton @color="link" @onClick={{perform this.delete user}}>
+              <UkIcon @icon="trash" />
+            </UkButton>
+          {{/if}}
         </td>
       {{/let}}
     </body.row>
