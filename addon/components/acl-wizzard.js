@@ -2,6 +2,10 @@ import { action } from "@ember/object";
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 
+const DEFAULT_SORT = {
+  scope: "full_name",
+};
+
 export default class AclWizzardComponent extends Component {
   @tracked modelToSelect;
   @tracked user;
@@ -30,5 +34,11 @@ export default class AclWizzardComponent extends Component {
   selectModel(model) {
     this[this.modelToSelect] = model;
     this.modelToSelect = null;
+  }
+
+  @action
+  openModel(model) {
+    this.modelToSelect = model;
+    this.sort = DEFAULT_SORT[model];
   }
 }

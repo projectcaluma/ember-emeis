@@ -1,7 +1,7 @@
 {{#if this.modelToSelect}}
   <div class="uk-margin">
     <SectionTitle @model="{{this.modelToSelect}}s" @noCreateLink="true" />
-    <DataTable @modelName={{this.modelToSelect}} as |table|>
+    <DataTable @modelName={{this.modelToSelect}} @defaultSort={{this.sort}} as |table|>
       <table.head>
         {{#each (get this.fields this.modelToSelect) as |field|}}
           <th>
@@ -37,7 +37,7 @@
           @selected={{this.user}}
           @header={{this.user.username}}
           @model="user"
-          @selectEntry={{set this.modelToSelect "user"}}
+          @selectEntry={{fn this.openModel "user"}}
           data-test-select-user
         >
           <div uk-grid data-test-body>
@@ -61,7 +61,7 @@
         <AclWizzard::SelectCard
           @selected={{this.role}}
           @model="role"
-          @selectEntry={{set this.modelToSelect "role"}}
+          @selectEntry={{fn this.openModel "role"}}
           data-test-select-role
         />
 
@@ -78,7 +78,7 @@
         <AclWizzard::SelectCard
           @selected={{this.scope}}
           @model="scope"
-          @selectEntry={{set this.modelToSelect "scope"}}
+          @selectEntry={{fn this.openModel "scope"}}
           data-test-select-scope
         />
       {{/unless}}
