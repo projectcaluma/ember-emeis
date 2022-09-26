@@ -1,3 +1,11 @@
+## [6.2.2](https://github.com/projectcaluma/ember-emeis/compare/v6.2.1...v6.2.2) (2022-09-26)
+
+
+### Bug Fixes
+
+* **scope:** sort by full (hierarchical) name ([#565](https://github.com/projectcaluma/ember-emeis/issues/565)) ([9cf849b](https://github.com/projectcaluma/ember-emeis/commit/9cf849b9677f14103eb905752810d64ae4887f09))
+* **user:** probe ability to delete user already in table view ([#562](https://github.com/projectcaluma/ember-emeis/issues/562)) ([6982c32](https://github.com/projectcaluma/ember-emeis/commit/6982c3255a6d54952afc32c5d1a593d9fef43a2a))
+
 ## [6.2.1](https://github.com/projectcaluma/ember-emeis/compare/v6.2.0...v6.2.1) (2022-08-08)
 
 
