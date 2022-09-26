@@ -8,7 +8,7 @@ export default class ScopesRoute extends Route {
   model() {
     // this eager fetching is necessary, since we need a store-independent result set
     // for use-cases where we have other non-relevant scopes in store
-    return this.store.query("scope", {});
+    return this.store.query("scope", { sort: "full_name" });
   }
 
   redirect(scopes, transition) {
