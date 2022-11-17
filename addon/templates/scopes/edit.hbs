@@ -33,7 +33,7 @@
 
         <EditForm::Element @label={{t "emeis.scopes.headings.parent"}} @optional={{true}}>
           <RelationshipSelect
-            @model={{this.allScopes}}
+            @model={{sort-by "fullName" this.allScopes}}
             @selected={{@model.parent}}
             @placeholder="{{t "emeis.scopes.headings.parent"}}..."
             @onChange={{this.setParent}} as |scope|
