@@ -1,3 +1,10 @@
+## [6.2.4](https://github.com/projectcaluma/ember-emeis/compare/v6.2.3...v6.2.4) (2022-11-18)
+
+
+### Bug Fixes
+
+* **layout:** remove overflow from main container ([#585](https://github.com/projectcaluma/ember-emeis/issues/585)) ([1b63fe3](https://github.com/projectcaluma/ember-emeis/commit/1b63fe30bc6f0000466b9a21ed86ff3140de8b4e))
+
 ## [6.2.3](https://github.com/projectcaluma/ember-emeis/compare/v6.2.2...v6.2.3) (2022-11-18)
 
 
