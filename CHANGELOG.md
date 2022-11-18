@@ -1,3 +1,10 @@
+## [6.2.3](https://github.com/projectcaluma/ember-emeis/compare/v6.2.2...v6.2.3) (2022-11-18)
+
+
+### Bug Fixes
+
+* always sort scopes client-side ([#583](https://github.com/projectcaluma/ember-emeis/issues/583)) ([d7896ee](https://github.com/projectcaluma/ember-emeis/commit/d7896eec24a624c36f3ec25675172402cd4abbda))
+
 ## [6.2.2](https://github.com/projectcaluma/ember-emeis/compare/v6.2.1...v6.2.2) (2022-09-26)
 
 
