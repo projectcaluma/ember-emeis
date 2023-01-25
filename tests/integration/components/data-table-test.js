@@ -25,7 +25,6 @@ module("Integration | Component | data-table", function (hooks) {
         </table.head>
         <table.body as |body|>
           <body.row>
-            {{log body.model.name}}
             {{#let body.model as |role|}}
               <td data-test-role-slug="{{role.slug}}">{{role.name}}</td>
               <td>{{role.slug}}</td>

@@ -8,8 +8,8 @@
 
 ## Linting
 
-* `yarn lint`
-* `yarn lint:fix`
+- `yarn lint`
+- `yarn lint:fix`
 
 ## Running tests
 
@@ -27,4 +27,4 @@
 - set up `emeis` (see [docs](https://github.com/projectcaluma/emeis))
 - `yarn start-proxy`
 
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+For more information on using ember-cli, visit [https://cli.emberjs.com/release/](https://cli.emberjs.com/release/).
