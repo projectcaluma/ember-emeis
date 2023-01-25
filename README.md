@@ -9,14 +9,14 @@ The frontend for the [emeis](https://github.com/projectcaluma/emeis) user manage
 
 ## Compatibility
 
-- Ember.js v3.20 or above
-- Ember CLI v3.20 or above
-- Node.js v10 or above
+- Ember.js v3.28 or above
+- Ember CLI v3.28 or above
+- Node.js v14 or above
 
 ## Installation
 
 ```bash
-$ ember install ember-emeis
+ember install ember-emeis
 ```
 
 Then add the following lines to your `app/styles/app.scss`:
@@ -230,5 +230,3 @@ See the [Contributing](CONTRIBUTING.md) guide for details.
 # License
 
 This project is licensed under the [LGPL-3.0-or-later license](LICENSE).
-
-<3

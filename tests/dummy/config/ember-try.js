@@ -16,8 +16,15 @@ module.exports = async function () {
         },
       },
       {
+        name: "ember-lts-4.4",
+        npm: {
+          devDependencies: {
+            "ember-source": "~4.4.0",
+          },
+        },
+      },
+      {
         name: "ember-release",
-        allowedToFail: true,
         npm: {
           devDependencies: {
             "ember-source": await getChannelURL("release"),
@@ -25,15 +32,18 @@ module.exports = async function () {
         },
       },
       {
-        name: "ember-default-with-jquery",
-        env: {
-          EMBER_OPTIONAL_FEATURES: JSON.stringify({
-            "jquery-integration": true,
-          }),
-        },
+        name: "ember-beta",
         npm: {
           devDependencies: {
-            "@ember/jquery": "^1.1.0",
+            "ember-source": await getChannelURL("beta"),
+          },
+        },
+      },
+      {
+        name: "ember-canary",
+        npm: {
+          devDependencies: {
+            "ember-source": await getChannelURL("canary"),
           },
         },
       },
@@ -47,6 +57,9 @@ module.exports = async function () {
           }),
         },
         npm: {
+          devDependencies: {
+            "ember-source": "~3.28.0",
+          },
           ember: {
             edition: "classic",
           },
