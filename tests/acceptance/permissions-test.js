@@ -8,10 +8,10 @@ import {
   waitUntil,
   settled,
 } from "@ember/test-helpers";
+import { setupApplicationTest } from "dummy/tests/helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl } from "ember-intl/test-support";
 import { selectChoose } from "ember-power-select/test-support";
-import { setupApplicationTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
@@ -200,7 +200,7 @@ module("Acceptance | permissions", function (hooks) {
     // Probably some runloop issue.
     await waitUntil(() => currentURL() !== `/permissions/${permission.id}`);
 
-    assert.strictEqual(currentURL(), `/permissions?page=1`);
+    assert.strictEqual(currentURL(), `/permissions`);
     assert.dom("[data-test-permission-name]").doesNotExist();
   });
 

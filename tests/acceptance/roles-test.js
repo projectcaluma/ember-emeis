@@ -9,9 +9,9 @@ import {
   waitUntil,
   settled,
 } from "@ember/test-helpers";
+import { setupApplicationTest } from "dummy/tests/helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl } from "ember-intl/test-support";
-import { setupApplicationTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
@@ -180,7 +180,7 @@ module("Acceptance | roles", function (hooks) {
     // Probably some runloop issue.
     await waitUntil(() => currentURL() !== `/roles/${role.id}`);
 
-    assert.strictEqual(currentURL(), `/roles?page=1`);
+    assert.strictEqual(currentURL(), `/roles`);
     assert.dom("[data-test-role-name]").doesNotExist();
   });
 

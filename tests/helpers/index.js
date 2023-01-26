@@ -1,3 +1,4 @@
+import Service from "@ember/service";
 import {
   setupApplicationTest as upstreamSetupApplicationTest,
   setupRenderingTest as upstreamSetupRenderingTest,
@@ -7,6 +8,14 @@ import {
 // This file exists to provide wrappers around ember-qunit's / ember-mocha's
 // test setup functions. This way, you can easily extend the setup that is
 // needed per test type.
+class MockRouter extends Service {
+  currentRoute = {
+    name: "ember-emeis.parent-route.edit",
+    parent: {
+      name: "ember-emeis.parent-route",
+    },
+  };
+}
 
 function setupApplicationTest(hooks, options) {
   upstreamSetupApplicationTest(hooks, options);
@@ -29,14 +38,22 @@ function setupApplicationTest(hooks, options) {
 
 function setupRenderingTest(hooks, options) {
   upstreamSetupRenderingTest(hooks, options);
-
-  // Additional setup for rendering tests can be done here.
+  hooks.beforeEach(function () {
+    this.owner.register("service:hostRouter", MockRouter);
+  });
+  hooks.afterEach(function () {
+    this.owner.unregister("service:hostRouter");
+  });
 }
 
 function setupTest(hooks, options) {
   upstreamSetupTest(hooks, options);
-
-  // Additional setup for unit tests can be done here.
+  hooks.beforeEach(function () {
+    this.owner.register("service:hostRouter", MockRouter);
+  });
+  hooks.afterEach(function () {
+    this.owner.unregister("service:hostRouter");
+  });
 }
 
 export { setupApplicationTest, setupRenderingTest, setupTest };

@@ -1,7 +1,7 @@
 import { render } from "@ember/test-helpers";
 import { faker } from "@faker-js/faker";
+import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 const generateItems = (count) => {
@@ -37,24 +37,21 @@ module("Integration | Component | tree-node", function (hooks) {
   });
 
   test("it renders", async function (assert) {
-    await render(hbs`
-      <TreeNode
-        @item={{this.item}}
-        @itemRoute={{this.itemRoute}}
-      />`);
+    await render(
+      hbs`<TreeNode @item={{this.item}} @itemRoute={{this.itemRoute}} />`
+    );
 
     const item = this.items[0];
     assert.dom(this.element).hasText(`${item.name} (1)`);
   });
 
   test("it expands when expanedItems are supplied", async function (assert) {
-    await render(hbs`
-      <TreeNode
-        @item={{this.item}}
-        @itemRoute={{this.itemRoute}}
-        @activeItem={{this.activeItem}}
-        @expandedItems={{this.expandedItems}}
-      />`);
+    await render(hbs`<TreeNode
+  @item={{this.item}}
+  @itemRoute={{this.itemRoute}}
+  @activeItem={{this.activeItem}}
+  @expandedItems={{this.expandedItems}}
+/>`);
 
     const item = this.items[0];
     assert

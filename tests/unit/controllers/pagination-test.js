@@ -1,4 +1,4 @@
-import { setupTest } from "ember-qunit";
+import { setupTest } from "dummy/tests/helpers";
 import { module, test } from "qunit";
 
 module("Unit | Controller | pagination", function (hooks) {
@@ -9,7 +9,7 @@ module("Unit | Controller | pagination", function (hooks) {
     const controller = this.owner.lookup("-private/controller:pagination");
     assert.ok(controller);
 
-    const router = this.owner.lookup("service:router");
+    const router = this.owner.lookup("service:hostRouter");
 
     assert.notOk(controller.search);
     assert.strictEqual(controller.page, 1);

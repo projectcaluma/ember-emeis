@@ -1,8 +1,8 @@
 import { fillIn, render } from "@ember/test-helpers";
+import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupIntl } from "ember-intl/test-support";
 import { selectChoose } from "ember-power-select/test-support";
-import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 const translations = {
@@ -47,12 +47,9 @@ module("Integration | Component | meta-field", function (hooks) {
       readOnly: false,
     });
 
-    await render(hbs`
-      <MetaField
-        @model={{this.model}}
-        @field={{this.field}}
-      />
-    `);
+    await render(
+      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`
+    );
 
     assert.dom(".ember-power-select-trigger").exists();
     assert.dom(this.element).containsText(translations.metaExample);
@@ -74,12 +71,9 @@ module("Integration | Component | meta-field", function (hooks) {
       readOnly: false,
     });
 
-    await render(hbs`
-      <MetaField
-        @model={{this.model}}
-        @field={{this.field}}
-      />
-    `);
+    await render(
+      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`
+    );
 
     assert.dom("[data-test-meta-field-text]").exists({ count: 1 });
     assert.dom(this.element).containsText(translations.metaExample2);
@@ -101,12 +95,9 @@ module("Integration | Component | meta-field", function (hooks) {
       readOnly: true,
     });
 
-    await render(hbs`
-      <MetaField
-        @model={{this.model}}
-        @field={{this.field}}
-      />
-    `);
+    await render(
+      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`
+    );
 
     assert.dom(".ember-power-select-trigger").doesNotExist();
     assert.dom("[data-test-meta-field-text]").doesNotExist();
@@ -130,16 +121,8 @@ module("Integration | Component | meta-field", function (hooks) {
       readOnly: false,
     });
 
-    await render(hbs`
-      <MetaField
-        @model={{this.model}}
-        @field={{this.field1}}
-      />
-      <MetaField
-        @model={{this.model}}
-        @field={{this.field2}}
-      />
-    `);
+    await render(hbs`<MetaField @model={{this.model}} @field={{this.field1}} />
+<MetaField @model={{this.model}} @field={{this.field2}} />`);
 
     assert.dom("[data-test-meta-field-text='dynamic-visibility']").exists();
     assert
@@ -157,12 +140,9 @@ module("Integration | Component | meta-field", function (hooks) {
       readOnly: true,
     });
 
-    await render(hbs`
-      <MetaField
-        @model={{this.model}}
-        @field={{this.field}}
-      />
-    `);
+    await render(
+      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`
+    );
 
     assert
       .dom("[data-test-meta-field-text='static-read-only-text']")
@@ -199,16 +179,8 @@ module("Integration | Component | meta-field", function (hooks) {
 
     this.model.name = "readOnly";
 
-    await render(hbs`
-      <MetaField
-        @model={{this.model}}
-        @field={{this.field1}}
-      />
-      <MetaField
-        @model={{this.model}}
-        @field={{this.field2}}
-      />
-    `);
+    await render(hbs`<MetaField @model={{this.model}} @field={{this.field1}} />
+<MetaField @model={{this.model}} @field={{this.field2}} />`);
 
     assert.dom(".ember-power-select-trigger").hasAttribute("aria-disabled");
 

@@ -1,8 +1,8 @@
 import { render, fillIn } from "@ember/test-helpers";
+import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl } from "ember-intl/test-support";
-import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 module("Integration | Component | tree", function (hooks) {
@@ -33,12 +33,11 @@ module("Integration | Component | tree", function (hooks) {
 
   test("it renders", async function (assert) {
     assert.expect(2);
-    await render(hbs`
-      <Tree
-        @items={{this.rootScopes}}
-        @itemRoute={{this.itemRoute}}
-        @activeItem={{this.activeItem}}
-      />`);
+    await render(hbs`<Tree
+  @items={{this.rootScopes}}
+  @itemRoute={{this.itemRoute}}
+  @activeItem={{this.activeItem}}
+/>`);
 
     assert.dom("[data-test-tree-search]").exists();
     assert.dom("[data-test-node-id]").exists({ count: 4 });
@@ -46,12 +45,11 @@ module("Integration | Component | tree", function (hooks) {
 
   test("it renders active item", async function (assert) {
     assert.expect(3);
-    await render(hbs`
-      <Tree
-        @items={{this.rootScopes}}
-        @itemRoute={{this.itemRoute}}
-        @activeItem={{this.grandchild}}
-      />`);
+    await render(hbs`<Tree
+  @items={{this.rootScopes}}
+  @itemRoute={{this.itemRoute}}
+  @activeItem={{this.grandchild}}
+/>`);
 
     assert.dom("[data-test-tree-search]").exists();
     assert.dom("[data-test-node-id]").exists({ count: 6 });
@@ -62,12 +60,11 @@ module("Integration | Component | tree", function (hooks) {
 
   test("filter is working", async function (assert) {
     assert.expect(2);
-    await render(hbs`
-      <Tree
-        @items={{this.rootScopes}}
-        @itemRoute={{this.itemRoute}}
-        @activeItem={{this.activeItem}}
-      />`);
+    await render(hbs`<Tree
+  @items={{this.rootScopes}}
+  @itemRoute={{this.itemRoute}}
+  @activeItem={{this.activeItem}}
+/>`);
 
     const root1 = this.rootScopes[0];
     await fillIn("[data-test-tree-search]", root1._name.de);
