@@ -1,5 +1,5 @@
+import { setupTest } from "dummy/tests/helpers";
 import { restartableTask } from "ember-concurrency";
-import { setupTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 import {

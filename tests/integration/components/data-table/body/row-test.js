@@ -1,6 +1,6 @@
 import { render } from "@ember/test-helpers";
+import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 module("Integration | Component | data-table/body/row", function (hooks) {
@@ -15,11 +15,9 @@ module("Integration | Component | data-table/body/row", function (hooks) {
     assert.strictEqual(this.element.textContent.trim(), "");
 
     // Template block usage:
-    await render(hbs`
-      <DataTable::Body::Row>
-        template block text
-      </DataTable::Body::Row>
-    `);
+    await render(hbs`<DataTable::Body::Row>
+  template block text
+</DataTable::Body::Row>`);
 
     assert.strictEqual(this.element.textContent.trim(), "template block text");
   });

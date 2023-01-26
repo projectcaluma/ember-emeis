@@ -1,6 +1,6 @@
 import { click, waitFor } from "@ember/test-helpers";
+import { setupTest } from "dummy/tests/helpers";
 import { task } from "ember-concurrency";
-import { setupTest } from "ember-qunit";
 import { module, skip, test } from "qunit";
 
 import { confirmTask } from "ember-emeis/decorators/confirm-task";

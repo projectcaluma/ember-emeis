@@ -8,9 +8,9 @@ import {
   settled,
   waitFor,
 } from "@ember/test-helpers";
+import { setupApplicationTest } from "dummy/tests/helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl } from "ember-intl/test-support";
-import { setupApplicationTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
@@ -249,7 +249,7 @@ module("Acceptance | users", function (hooks) {
     await waitUntil(() => currentURL() !== "/users/new");
 
     const user = this.server.schema.users.first();
-    assert.strictEqual(currentURL(), `/users/${user.id}?page=1`);
+    assert.strictEqual(currentURL(), `/users/${user.id}`);
 
     assert.dom('[name="username"]').hasValue(user.username);
     assert.dom('[name="firstName"]').hasValue(user.firstName);
@@ -332,6 +332,11 @@ module("Acceptance | users", function (hooks) {
 
     // Test back button
     await click("[data-test-acl-back]");
+    // For some reason without the settled here,
+    // the add-acl button does nothing and then
+    // the tests fails on the next click.
+    await settled();
+
     assert.dom("[data-test-acl-role]").doesNotExist();
     assert.dom("[data-test-acl-back]").doesNotExist();
     assert.dom("[data-test-add-acl]").exists();
@@ -339,11 +344,11 @@ module("Acceptance | users", function (hooks) {
 
     await click("[data-test-add-acl]");
 
-    await waitFor("button[data-test-select-role]");
     await click("button[data-test-select-role]");
     // For some reason the await click is not actually waiting for the fetch task to finish.
     // Probably some runloop issue.
-    await waitUntil(() => this.element.querySelector("table tr"));
+    await settled();
+
     assert.dom("[data-test-row]").exists({ count: 2 });
 
     await click("[data-test-row]");

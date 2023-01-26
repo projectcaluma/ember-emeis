@@ -1,6 +1,9 @@
 import { inject as service } from "@ember/service";
+import { isTesting, macroCondition } from "@embroider/macros";
 import Component from "@glimmer/component";
 import { restartableTask, lastValue, timeout } from "ember-concurrency";
+import PowerSelect from "ember-power-select/components/power-select";
+import PowerSelectMultiple from "ember-power-select/components/power-select-multiple";
 
 import { handleTaskErrors } from "ember-emeis/-private/decorators";
 
@@ -15,6 +18,10 @@ export default class RelationshipSelectComponent extends Component {
     return this.models && this.args.modelName && this.models.length > 5;
   }
 
+  get selectComponent() {
+    return this.args.multiple ? PowerSelectMultiple : PowerSelect;
+  }
+
   @restartableTask
   @handleTaskErrors
   *fetchModels(search) {
@@ -22,7 +29,9 @@ export default class RelationshipSelectComponent extends Component {
       return this.args.model;
     }
     if (typeof search === "string") {
-      yield timeout(500);
+      if (macroCondition(!isTesting())) {
+        yield timeout(500);
+      }
       return yield this.store.query(this.args.modelName, {
         filter: { search },
       });

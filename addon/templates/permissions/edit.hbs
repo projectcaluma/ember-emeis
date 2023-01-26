@@ -49,7 +49,7 @@
       @modelName="role"
       @selected={{@model.roles}}
       @placeholder="{{t 'emeis.permissions.headings.roles'}}..."
-      @onChange={{set @model "roles"}}
+      @onChange={{this.setRoles}}
       @multiple="true"
       required
       as |role|
