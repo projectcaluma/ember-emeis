@@ -16,7 +16,7 @@ export default class EmberEmeisEngine extends Engine {
       "fetch",
       "intl",
       "notification",
-      "router",
+      "host-router",
       "emeis-options",
     ],
   };

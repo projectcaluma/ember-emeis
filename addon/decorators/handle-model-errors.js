@@ -14,8 +14,8 @@ export default function (...args) {
 
     descriptor.value = function (...args) {
       assert(
-        "Inject the `notification` as well as the `intl` service into your route to properly display errors.",
-        this.notification && this.intl
+        "Inject the `notification`, `hostRouter` as well as the `intl` service into your route to properly display errors.",
+        this.notification && this.intl && this.hostRouter
       );
 
       const catchErrors = (exception) => {
@@ -26,7 +26,7 @@ export default function (...args) {
           exception.errors[0].status === "404"
         ) {
           this.notification.danger(this.intl.t(notFoundErrorMessage));
-          this.replaceWith(routeFor404);
+          this.hostRouter.replaceWith(routeFor404);
         } else {
           console.error(exception);
           this.notification.danger(this.intl.t(errorMessage));

@@ -3,7 +3,7 @@ import { inject as service } from "@ember/service";
 
 export default class ScopesRoute extends Route {
   @service store;
-  @service router;
+  @service hostRouter;
 
   model() {
     // this eager fetching is necessary, since we need a store-independent result set
@@ -16,7 +16,10 @@ export default class ScopesRoute extends Route {
       transition.targetName === "ember-emeis.scopes.index" &&
       scopes.firstObject
     ) {
-      this.router.replaceWith("ember-emeis.scopes.edit", scopes.firstObject);
+      this.hostRouter.replaceWith(
+        "ember-emeis.scopes.edit",
+        scopes.firstObject
+      );
     }
   }
 }

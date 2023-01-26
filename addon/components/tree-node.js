@@ -5,7 +5,7 @@ import { tracked } from "@glimmer/tracking";
 
 export default class TreeNodeComponent extends Component {
   @tracked expandedByUser = null;
-  @service router;
+  @service hostRouter;
 
   @action
   toggle() {
@@ -20,8 +20,8 @@ export default class TreeNodeComponent extends Component {
         ?.findParents()
         .find((parent) => parent.id === this.args.item.id)
     ) {
-      this.router.transitionTo(
-        this.router.currentRoute.name,
+      this.hostRouter.transitionTo(
+        this.hostRouter.currentRoute.name,
         this.args.item.id
       );
     }
