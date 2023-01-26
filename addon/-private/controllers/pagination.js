@@ -6,7 +6,7 @@ import { tracked } from "@glimmer/tracking";
 export default class PaginationController extends Controller {
   queryParams = ["page", "search", "sort"];
 
-  @service router;
+  @service hostRouter;
 
   @tracked page = 1;
   @tracked search;
@@ -18,6 +18,6 @@ export default class PaginationController extends Controller {
       value = null;
     }
 
-    this.router.transitionTo({ queryParams: { [field]: value } });
+    this.hostRouter.transitionTo({ queryParams: { [field]: value } });
   }
 }

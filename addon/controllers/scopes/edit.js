@@ -8,7 +8,7 @@ export default class ScopesEditIndexController extends PaginationController {
   @service emeisOptions;
   @service notification;
   @service intl;
-  @service router;
+  @service hostRouter;
   @service store;
 
   @localCopy("model.parent") parent;
