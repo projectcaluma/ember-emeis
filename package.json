@@ -42,7 +42,7 @@
     "*.{scss,graphql,json,md,yml}": "prettier --write"
   },
   "dependencies": {
-    "@ember/render-modifiers": "^2.0.4",
+    "@ember/render-modifiers": "^2.0.5",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "ember-auto-import": "^2.5.0",
@@ -55,7 +55,7 @@
     "ember-intl": "^5.7.2",
     "ember-modifier": "^3.2.7",
     "ember-power-select": "^6.0.1",
-    "ember-resources": "^5.2.1",
+    "ember-resources": "^5.6.4",
     "ember-simple-set-helper": "^0.1.2",
     "ember-test-selectors": "^6.0.0",
     "ember-truth-helpers": "^3.1.1",
@@ -98,15 +98,15 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.2.1",
-    "eslint-plugin-qunit": "7.3.2",
-    "husky": "8.0.2",
+    "eslint-plugin-qunit": "7.3.4",
+    "husky": "8.0.3",
     "lint-staged": "13.1.0",
     "loader.js": "4.7.0",
-    "miragejs": "0.1.46",
+    "miragejs": "0.1.47",
     "npm-package-json-lint": "6.4.0",
     "npm-run-all": "4.1.5",
-    "prettier": "2.8.1",
-    "qunit": "2.19.3",
+    "prettier": "2.8.7",
+    "qunit": "2.19.4",
     "qunit-dom": "2.0.0",
     "sass": "1.56.1",
     "webpack": "5.75.0"
@@ -122,5 +122,11 @@
   },
   "release": {
     "extends": "@adfinis-sygroup/semantic-release-config"
+  },
+  "//": [
+    "TODO(miragejs): conflicts with ember-cli-mirage in floating dependencies test"
+  ],
+  "resolutions": {
+    "miragejs": "0.1.47"
   }
 }
