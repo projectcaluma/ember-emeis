@@ -32,7 +32,7 @@ export default class UsersIndexController extends PaginationController {
   }
 
   get filtersVisible() {
-    return this.emeisOptions.users?.filtersVisible ?? true;
+    return this.emeisOptions.user?.filtersVisible ?? true;
   }
 
   get filters() {
