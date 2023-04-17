@@ -5998,7 +5998,7 @@ ember-auto-import@^2.3.0, ember-auto-import@^2.4.2, ember-auto-import@^2.5.0:
     typescript-memoize "^1.0.0-alpha.3"
     walk-sync "^3.0.0"
 
-ember-auto-import@^2.6.1:
+ember-auto-import@^2.6.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/ember-auto-import/-/ember-auto-import-2.6.3.tgz#f18d1b93dd10b08ba5496518436f9d56dd4e000a"
   integrity sha512-uLhrRDJYWCRvQ4JQ1e64XlSrqAKSd6PXaJ9ZsZI6Tlms9T4DtQFxNXasqji2ZRJBVrxEoLCRYX3RTldsQ0vNGQ==
@@ -7025,10 +7025,10 @@ ember-try@2.0.0:
     rimraf "^3.0.2"
     walk-sync "^2.2.0"
 
-ember-uikit@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/ember-uikit/-/ember-uikit-7.0.1.tgz#c9c5eb8840f3e422b5f985b0ab364abf24d9712b"
-  integrity sha512-WCU1YA+lHN77xF477Zl8cmpJiQF93UlL844ZRpixamD5nc0ry+7L5ZH5cdQQVdtBaNmh9RB7mrPdayvC1sSiSw==
+ember-uikit@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/ember-uikit/-/ember-uikit-7.0.2.tgz#dfa98e7bb1da2468abdc9ac9eaa95671a0036442"
+  integrity sha512-VWxwzOGt8Wbsb4l8elCjWK4Y0rF3vim5LP96iKEOj3RvMDr5JGzXEOXL8Yd9VYl8h/KtoKu/i5uKkHKtdJgeHg==
   dependencies:
     "@ember/string" "^3.0.1"
     "@embroider/util" "^1.10.0"
@@ -7037,7 +7037,7 @@ ember-uikit@^7.0.1:
     broccoli-funnel "^3.0.8"
     broccoli-merge-trees "^4.2.0"
     broccoli-stew "^3.0.0"
-    ember-auto-import "^2.6.1"
+    ember-auto-import "^2.6.3"
     ember-cli-babel "^7.26.11"
     ember-cli-htmlbars "^6.2.0"
     ember-composable-helpers "^5.0.0"
@@ -7045,7 +7045,7 @@ ember-uikit@^7.0.1:
     ember-modifier "^4.1.0"
     ember-toggle "^9.0.3"
     ember-truth-helpers "^3.1.1"
-    uikit "^3.16.13"
+    uikit "^3.16.15"
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -14819,7 +14819,7 @@ uglify-js@^3.1.4:
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.17.4.tgz#61678cf5fa3f5b7eb789bb345df29afb8257c22c"
   integrity sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==
 
-uikit@^3.16.13:
+uikit@^3.16.15:
   version "3.16.15"
   resolved "https://registry.yarnpkg.com/uikit/-/uikit-3.16.15.tgz#47599dc1851bd803bc2a760da3a946d55a6dc290"
   integrity sha512-uw0vn+h+isInT4Eq/CPxwQx5X0CDS2I9FQwgnxHyDDXOBEnnMEpCxiQWEvVgwkelJlMh/Qv+2ePyXVcb9Wx93A==
