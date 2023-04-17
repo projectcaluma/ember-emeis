@@ -1,3 +1,10 @@
+## [6.3.1](https://github.com/projectcaluma/ember-emeis/compare/v6.3.0...v6.3.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* typo in user filter visibility setting ([#649](https://github.com/projectcaluma/ember-emeis/issues/649)) ([ef9c07b](https://github.com/projectcaluma/ember-emeis/commit/ef9c07b1f765d94f5d466c0fa734f98c22c370de))
+
 # [6.3.0](https://github.com/projectcaluma/ember-emeis/compare/v6.2.4...v6.3.0) (2023-04-17)
 
 
