@@ -31,6 +31,10 @@ export default class UsersIndexController extends PaginationController {
     return this.emeisOptions.navigationEntries?.includes("scopes");
   }
 
+  get filtersVisible() {
+    return this.emeisOptions.users?.filtersVisible ?? true;
+  }
+
   get filters() {
     return { isActive: this.filter_active };
   }

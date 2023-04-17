@@ -127,7 +127,13 @@ export default class EmeisOptionsService extends Service {
     On each model edit view (e.g. users) you can define a custom component. The component will be rendered at the bottom of the edit view, but above the primary form buttons. Each component can be designed freely and the model will be passed into the component as `@model` argument. For a working demo have a look at our "dummy-button" at "dummy/app/components/dummy-button".
     */
     customComponent: DummyButton,
-    /* Exclusively on USER model - define a custom component which will get displayed next to the 'inacitve' pill on top of the user detail view. Ideally this will be an inline element.
+    /* 
+    Exclusively on USER model - Optionally hide the "active" / "inactive" filter buttons on top of the user list. You can pass
+    a function, boolean or string as value.
+    */
+    filtersVisible: () => true,
+    /* 
+    Exclusively on USER model - define a custom component which will get displayed next to the 'inacitve' pill on top of the user detail view. Ideally this will be an inline element.
      */
     statusComponent: DummyStatus,
   };
