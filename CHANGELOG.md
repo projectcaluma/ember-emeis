@@ -1,3 +1,10 @@
+# [6.3.0](https://github.com/projectcaluma/ember-emeis/compare/v6.2.4...v6.3.0) (2023-04-17)
+
+
+### Features
+
+* **emeisOptions:** make user filter optionally visible ([#648](https://github.com/projectcaluma/ember-emeis/issues/648)) ([107b7de](https://github.com/projectcaluma/ember-emeis/commit/107b7de222e548d1e10748e14eb817f79aa95294))
+
 ## [6.2.4](https://github.com/projectcaluma/ember-emeis/compare/v6.2.3...v6.2.4) (2022-11-18)
 
 
