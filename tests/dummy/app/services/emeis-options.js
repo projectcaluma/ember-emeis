@@ -30,6 +30,7 @@ export default class EmeisOptionsService extends Service {
       },
     ],
     customComponent: TestButtonComponent,
+    filtersVisible: () => true,
     metaFields: [
       {
         slug: "megameta",
