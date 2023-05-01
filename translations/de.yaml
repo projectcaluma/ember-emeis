@@ -96,6 +96,7 @@ emeis:
     phone-hint: "Buchstaben sind in Telefonnummern nicht erlaubt."
     slug-hint: "Es sind nur Buchstaben, Nummern und Bindestriche erlaubt."
     custom-button-action-error: "Die konfigurierte Custom Button Action ist keine valide Funktion."
+    invalid-scope-assignment-warning: "Diese ausgewählte Organisation kann nicht als übergeordnete Organisation eingesetzt werden."
 
   acl-table:
     title: "Zugriffsrechte"
