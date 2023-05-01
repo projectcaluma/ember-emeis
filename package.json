@@ -115,7 +115,7 @@
     "webpack": "5.75.0"
   },
   "engines": {
-    "node": ">= 18"
+    "node": ">= 18.*"
   },
   "ember": {
     "edition": "octane"

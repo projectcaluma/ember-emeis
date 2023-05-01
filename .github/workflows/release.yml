@@ -2,6 +2,9 @@ name: Release
 
 on: workflow_dispatch
 
+env:
+  NODE_VERSION: 18
+
 jobs:
   build:
     name: Release
@@ -9,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Install dependencies
         run: yarn install
