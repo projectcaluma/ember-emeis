@@ -100,8 +100,8 @@ module("Acceptance | permissions", function (hooks) {
     assert.dom('[name="name"]').hasValue(permission.name.en);
     assert.dom('[name="description"]').hasValue(permission.description.en);
 
-    const name = "Permission 1",
-      description = "The one and only";
+    const name = "Permission 1";
+    const description = "The one and only";
 
     await fillIn('[name="name"]', name);
     await fillIn('[name="description"]', description);
@@ -139,9 +139,9 @@ module("Acceptance | permissions", function (hooks) {
     await click("[data-test-new]");
     assert.strictEqual(currentURL(), "/permissions/new");
 
-    const name = "Permission 1",
-      description = "The one and only",
-      slug = "permission-1";
+    const name = "Permission 1";
+    const description = "The one and only";
+    const slug = "permission-1";
 
     await fillIn('[name="name"]', name);
     await fillIn('[name="description"]', description);
