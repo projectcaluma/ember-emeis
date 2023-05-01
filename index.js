@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable ember/avoid-leaking-state-in-ember-objects, node/no-unpublished-require */
+/* eslint-disable ember/avoid-leaking-state-in-ember-objects, n/no-unpublished-require */
 
 const EngineAddon = require("ember-engines/lib/engine-addon");
 

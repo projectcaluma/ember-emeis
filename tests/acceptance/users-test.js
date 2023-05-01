@@ -158,15 +158,15 @@ module("Acceptance | users", function (hooks) {
     assert.dom('[name="city"]').isRequired();
     assert.dom('[name="zip"]').isRequired();
 
-    const username = "newusername",
-      firstName = "John",
-      lastName = "Doe",
-      email = "john.doe@adfinis.com",
-      phone = "123 123 12 23",
-      language = "de",
-      address = "Somestreet 32",
-      city = "Sity",
-      zip = "2313";
+    const username = "newusername";
+    const firstName = "John";
+    const lastName = "Doe";
+    const email = "john.doe@adfinis.com";
+    const phone = "123 123 12 23";
+    const language = "de";
+    const address = "Somestreet 32";
+    const city = "Sity";
+    const zip = "2313";
 
     await fillIn('[name="username"]', username);
     await fillIn('[name="firstName"]', firstName);
@@ -208,15 +208,15 @@ module("Acceptance | users", function (hooks) {
     await click("[data-test-new]");
     assert.strictEqual(currentURL(), "/users/new");
 
-    const username = "newusername",
-      firstName = "John",
-      lastName = "Doe",
-      email = "john.doe@adfinis.com",
-      phone = "123 123 12 23",
-      language = "de",
-      address = "Somestreet 32",
-      city = "Sity",
-      zip = "2313";
+    const username = "newusername";
+    const firstName = "John";
+    const lastName = "Doe";
+    const email = "john.doe@adfinis.com";
+    const phone = "123 123 12 23";
+    const language = "de";
+    const address = "Somestreet 32";
+    const city = "Sity";
+    const zip = "2313";
 
     await fillIn('[name="username"]', username);
     await fillIn('[name="firstName"]', firstName);

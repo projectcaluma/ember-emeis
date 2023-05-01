@@ -64,8 +64,8 @@ module("Acceptance | scopes", function (hooks) {
     assert.dom('[name="name"]').hasValue(scope.name.en);
     assert.dom('[name="description"]').hasValue(scope.description.en);
 
-    const name = "test",
-      description = "test desc";
+    const name = "test";
+    const description = "test desc";
 
     await fillIn('[name="name"]', name);
     await fillIn('[name="description"]', description);

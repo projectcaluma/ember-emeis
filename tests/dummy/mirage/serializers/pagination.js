@@ -15,8 +15,8 @@ export default class PaginationSerializer extends JSONAPISerializer {
 
     if (method === "GET" && Array.isArray(json.data)) {
       if (page && limit) {
-        const parsedPage = parseInt(page),
-          parsedLimit = parseInt(limit);
+        const parsedPage = parseInt(page);
+        const parsedLimit = parseInt(limit);
 
         json.meta = {
           pagination: {
