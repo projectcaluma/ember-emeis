@@ -39,10 +39,13 @@
       @hover="true"
       @color="primary"
       class="uk-height-1"
-      data-test-change as |card|
+      data-test-change
+      as |card|
     >
       <card.body>
-        <p class="uk-text-lead">{{t (concat "emeis.acl-wizzard." @model ".select")}}</p>
+        <p class="uk-text-lead">{{t
+            (concat "emeis.acl-wizzard." @model ".select")
+          }}</p>
       </card.body>
     </UkCard>
   </button>

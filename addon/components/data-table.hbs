@@ -1,9 +1,13 @@
 <div class="uk-flex">
-  {{#if @heading}}<h3 class="uk-align-left uk-margin-remove-bottom">{{@heading}}</h3>{{/if}}
-  {{yield (hash filters=(component "data-table/filters")) }}
+  {{#if @heading}}<h3
+      class="uk-align-left uk-margin-remove-bottom"
+    >{{@heading}}</h3>{{/if}}
+  {{yield (hash filters=(component "data-table/filters"))}}
   <span class="uk-flex uk-flex-right uk-width-expand uk-margin-remove-bottom">
     <form
-      class="uk-search uk-search-default {{if @heading 'uk-width-medium@m' 'uk-width-large@m'}} uk-width-1@s search-input-form uk-margin-auto-top"
+      class="uk-search uk-search-default
+        {{if @heading 'uk-width-medium@m' 'uk-width-large@m'}}
+        uk-width-1@s search-input-form uk-margin-auto-top"
       {{on "submit" this.updateSearch}}
       {{on "reset" this.resetSearch}}
     >
@@ -14,7 +18,7 @@
         value={{this.search}}
         placeholder={{t "emeis.search.placeholder"}}
         data-test-search-input
-        />
+      />
       <button
         type="submit"
         class="uk-search-icon"
@@ -24,7 +28,8 @@
       {{#if this.search}}
         <button
           type="reset"
-          class="uk-search-icon uk-search-icon-flip" uk-icon="close"
+          class="uk-search-icon uk-search-icon-flip"
+          uk-icon="close"
           data-test-search-reset
         />
       {{/if}}
@@ -32,28 +37,39 @@
   </span>
 </div>
 
-<table
-  class="uk-table uk-table-striped uk-table-hover"
-  ...attributes
->
+<table class="uk-table uk-table-striped uk-table-hover" ...attributes>
 
-{{#if this.data.isRunning}}
-  {{yield (hash
-     head=(component "data-table/head" sortedBy=this.sort update=this.updateSort)
-   )
-  }}
-  <tbody data-test-loading>
-    <tr>
-      <td colspan="99" class="uk-padding-large uk-animation-fade uk-text-center">
-        <UkSpinner @ratio="1" />
-      </td>
-    </tr>
-  </tbody>
-{{else}}
-  {{yield
+  {{#if this.data.isRunning}}
+    {{yield
       (hash
-        body=(component "data-table/body" models=this.data.value emptyWarning=@emptyWarning emptyIcon=@emptyIcon emptyIconColor=@emptyIconColor)
-        head=(component "data-table/head" sortedBy=this.sort update=this.updateSort)
+        head=(component
+          "data-table/head" sortedBy=this.sort update=this.updateSort
+        )
+      )
+    }}
+    <tbody data-test-loading>
+      <tr>
+        <td
+          colspan="99"
+          class="uk-padding-large uk-animation-fade uk-text-center"
+        >
+          <UkSpinner @ratio="1" />
+        </td>
+      </tr>
+    </tbody>
+  {{else}}
+    {{yield
+      (hash
+        body=(component
+          "data-table/body"
+          models=this.data.value
+          emptyWarning=@emptyWarning
+          emptyIcon=@emptyIcon
+          emptyIconColor=@emptyIconColor
+        )
+        head=(component
+          "data-table/head" sortedBy=this.sort update=this.updateSort
+        )
         refresh=this.triggerRefresh
       )
     }}
@@ -62,7 +78,10 @@
         <td colspan="99">
           <div class="uk-flex">
             <span class="uk-width-auto uk-width-1-4@m"></span>
-            <ul class="uk-width-expand uk-width-2-4@m uk-pagination uk-flex uk-flex-center@m uk-flex-middle uk-margin-remove-top" uk-margin>
+            <ul
+              class="uk-width-expand uk-width-2-4@m uk-pagination uk-flex uk-flex-center@m uk-flex-middle uk-margin-remove-top"
+              uk-margin
+            >
               <li
                 class={{unless this.previousPage "uk-disabled"}}
                 data-test-previous-page
@@ -81,9 +100,11 @@
               </li>
               {{#if this.numPages}}
                 <li class="uk-active">
-                <span data-test-page>
-                  {{this.page}} / {{this.numPages}}
-                </span>
+                  <span data-test-page>
+                    {{this.page}}
+                    /
+                    {{this.numPages}}
+                  </span>
                 </li>
               {{/if}}
               <li
@@ -100,7 +121,9 @@
                 </button>
               </li>
             </ul>
-            <ul class="uk-width-1-4 uk-pagination uk-flex uk-flex-right uk-flex-middle uk-margin-remove-top uk-text-muted">
+            <ul
+              class="uk-width-1-4 uk-pagination uk-flex uk-flex-right uk-flex-middle uk-margin-remove-top uk-text-muted"
+            >
               <li>{{t "emeis.pagination.total"}} {{this.entryCount}}</li>
             </ul>
           </div>

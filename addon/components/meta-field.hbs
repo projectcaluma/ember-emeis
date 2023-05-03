@@ -1,5 +1,9 @@
 {{#if this.visible.value}}
-  <EditForm::Element @label={{optional-translate @field.label}} @optional={{@optional}} ...attributes>
+  <EditForm::Element
+    @label={{optional-translate @field.label}}
+    @optional={{@optional}}
+    ...attributes
+  >
     {{#if (eq @field.type "choice")}}
       {{#if this.options.isRunning}}
         <UkSpinner @ratio="1" />
@@ -7,7 +11,11 @@
         <PowerSelect
           @disabled={{this.readOnly.value}}
           @options={{this.options.value}}
-          @selected={{find-by "value" (get @model.metainfo @field.slug) this.options.value}}
+          @selected={{find-by
+            "value"
+            (get @model.metainfo @field.slug)
+            this.options.value
+          }}
           @onChange={{fn this.updateMetaField @field @model}}
           @placeholder={{optional-translate @field.placeholder}}
           @allowClear={{true}}
@@ -28,7 +36,7 @@
         required={{@field.required}}
         placeholder={{optional-translate @field.placeholder}}
         {{on "input" (fn this.updateMetaField @field @model)}}
-      >
+      />
     {{/if}}
   </EditForm::Element>
 {{/if}}

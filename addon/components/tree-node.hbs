@@ -1,12 +1,18 @@
 <li class="{{if (or (lt @item.children.length 1) @filteredItems) 'childless'}}">
   {{#if @item.children}}
-    <UkButton class="tree-node-icon" @color="link"  @onClick={{this.toggle}}>
+    <UkButton class="tree-node-icon" @color="link" @onClick={{this.toggle}}>
       {{#unless @filteredItems}}
         <UkIcon @icon={{if this.expanded "chevron-down" "chevron-right"}} />
       {{/unless}}
     </UkButton>
   {{/if}}
-  <LinkTo @route={{@itemRoute}} @model={{@item}} class="uk-link-text {{unless @item.isActive "text-line-through uk-text-muted"}}" data-test-node-id={{@item.id}}>
+  <LinkTo
+    @route={{@itemRoute}}
+    @model={{@item}}
+    class="uk-link-text
+      {{unless @item.isActive 'text-line-through uk-text-muted'}}"
+    data-test-node-id={{@item.id}}
+  >
     {{@item.name}}{{#if @item.children}} ({{@item.children.length}}){{/if}}
   </LinkTo>
   {{#if this.expanded}}

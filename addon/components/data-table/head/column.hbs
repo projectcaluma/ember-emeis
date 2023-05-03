@@ -8,9 +8,9 @@
     >
       {{yield}}
       {{#if (eq @sortedBy @sort)}}
-        <UkIcon role="presentation" @icon="chevron-down"/>
+        <UkIcon role="presentation" @icon="chevron-down" />
       {{else if (eq @sortedBy (concat "-" @sort))}}
-        <UkIcon role="presentation" @icon="chevron-up"/>
+        <UkIcon role="presentation" @icon="chevron-up" />
       {{/if}}
     </span>
   {{else}}

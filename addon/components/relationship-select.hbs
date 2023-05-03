@@ -5,22 +5,24 @@
   {{did-insert (perform this.fetchModels)}}
 />
 {{#let
-  (component
-    (if @multiple "power-select-multiple" "power-select")
-  ) as |RelationPowerSelect|
+  (component (if @multiple "power-select-multiple" "power-select"))
+  as |RelationPowerSelect|
 }}
   <RelationPowerSelect
     @searchEnabled={{this.searchEnabled}}
     @search={{perform this.fetchModels}}
     @options={{this.models}}
     @selected={{@selected}}
-    @placeholder={{
-      if this.fetchModels.isRunning (t "emeis.loading") @placeholder
+    @placeholder={{if
+      this.fetchModels.isRunning
+      (t "emeis.loading")
+      @placeholder
     }}
     @noMatchesMessage={{t "emeis.empty"}}
     @renderInPlace={{true}}
     @allowClear={{true}}
-    @onChange={{@onChange}} as |model|
+    @onChange={{@onChange}}
+    as |model|
   >
     {{yield model}}
   </RelationPowerSelect>
