@@ -1,4 +1,8 @@
-<LinkTo @route="permissions.index" class="uk-button uk-padding-remove uk-margin-small-bottom" data-test-back>
+<LinkTo
+  @route="permissions.index"
+  class="uk-button uk-padding-remove uk-margin-small-bottom"
+  data-test-back
+>
   <UkIcon @icon="arrow-left" @ratio="1.5" />
   {{t "emeis.form.back"}}
 </LinkTo>
@@ -23,7 +27,7 @@
       class="uk-input"
       type="text"
       name="name"
-      placeholder="{{t "emeis.permissions.headings.name"}}..."
+      placeholder="{{t 'emeis.permissions.headings.name'}}..."
       required
       value={{@model.name}}
     />
@@ -34,7 +38,7 @@
       class="uk-textarea"
       rows="5"
       name="description"
-      placeholder="{{t "emeis.permissions.headings.description"}}..."
+      placeholder="{{t 'emeis.permissions.headings.description'}}..."
       value={{@model.description}}
       required
     ></textarea>
@@ -44,7 +48,7 @@
     <RelationshipSelect
       @modelName="role"
       @selected={{@model.roles}}
-      @placeholder="{{t "emeis.permissions.headings.roles"}}..."
+      @placeholder="{{t 'emeis.permissions.headings.roles'}}..."
       @onChange={{set @model.roles}}
       @multiple="true"
       required
@@ -55,7 +59,12 @@
   </EditForm::Element>
 
   {{#each this.metaFields as |field|}}
-    <MetaField @field={{field}} @model={{@model}} @optional={{unless field.required true}} data-test-meta-field={{field.slug}} />
+    <MetaField
+      @field={{field}}
+      @model={{@model}}
+      @optional={{unless field.required true}}
+      data-test-meta-field={{field.slug}}
+    />
   {{/each}}
 
 </EditForm>

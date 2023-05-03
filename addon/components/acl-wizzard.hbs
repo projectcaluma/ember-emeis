@@ -1,7 +1,11 @@
 {{#if this.modelToSelect}}
   <div class="uk-margin">
     <SectionTitle @model="{{this.modelToSelect}}s" @noCreateLink="true" />
-    <DataTable @modelName={{this.modelToSelect}} @defaultSort={{this.sort}} as |table|>
+    <DataTable
+      @modelName={{this.modelToSelect}}
+      @defaultSort={{this.sort}}
+      as |table|
+    >
       <table.head>
         {{#each (get this.fields this.modelToSelect) as |field|}}
           <th>
@@ -91,7 +95,8 @@
       disabled={{not this.isValidAcl}}
       data-test-create-acl
       @onClick={{fn
-        @createAclEntry (hash user=this.user role=this.role scope=this.scope)
+        @createAclEntry
+        (hash user=this.user role=this.role scope=this.scope)
       }}
     >
       <UkIcon @icon="check" class="uk-margin-small-right" />

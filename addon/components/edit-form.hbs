@@ -7,7 +7,10 @@
 
   <div class="uk-flex uk-flex-left uk-margin">
     {{#if this.customComponent}}
-      {{#let (component (ensure-safe-component this.customComponent)) as |CustomComponent|}}
+      {{#let
+        (component (ensure-safe-component this.customComponent))
+        as |CustomComponent|
+      }}
         <CustomComponent @model={{@model}} />
       {{/let}}
     {{/if}}

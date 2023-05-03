@@ -1,230 +1,272 @@
-<LinkTo @route="users.index" class="uk-button uk-padding-remove uk-margin-small-bottom" data-test-back>
+<LinkTo
+  @route="users.index"
+  class="uk-button uk-padding-remove uk-margin-small-bottom"
+  data-test-back
+>
   <UkIcon @icon="arrow-left" @ratio="1.5" />
   {{t "emeis.form.back"}}
 </LinkTo>
 <div uk-grid class="uk-grid-divider">
-    <div class="uk-width-1-2@l">
-      <h3>{{t "emeis.users.edit.edit-user"}}
-        {{#unless @model.isActive}}
-          <span class="uk-badge uk-background-secondary">{{t "emeis.inactive"}}</span>
-        {{/unless}}
-        {{#if this.statusComponent}}
-          {{#let (component (ensure-safe-component this.statusComponent)) as |StatusComponent|}}
-            <StatusComponent @model={{@model}} />
-          {{/let}}
-        {{/if}}
-      </h3>
-      <EditForm
-        @model={{@model}}
-        @updateModel={{this.updateModel}}
-        @listViewRouteName="users.index"
-      >
-        {{#unless this.emailAsUsername}}
-          <EditForm::Element @label={{t "emeis.users.headings.username"}}>
-            <input
-              class="uk-input"
-              type="text"
-              name="username"
-              placeholder="{{t "emeis.users.headings.username"}}..."
-              required
-              value={{@model.username}}
-            />
-          </EditForm::Element>
-        {{/unless}}
-
-        <EditForm::Element @label={{t "emeis.users.headings.firstName"}}>
-          <input
-            class="uk-input"
-            type="text"
-            name="firstName"
-            placeholder="{{t "emeis.users.headings.firstName"}}..."
-            required
-            value={{@model.firstName}}
-          />
-        </EditForm::Element>
-
-        <EditForm::Element @label={{t "emeis.users.headings.lastName"}}>
-          <input
-            class="uk-input"
-            type="text"
-            name="lastName"
-            placeholder="{{t "emeis.users.headings.lastName"}}..."
-            required
-            value={{@model.lastName}}
-          />
-        </EditForm::Element>
-
-        <EditForm::Element @label={{t "emeis.users.headings.email"}}>
-          <input
-            class="uk-input"
-            type="email"
-            name="email"
-            placeholder="{{t "emeis.users.headings.email"}}..."
-            required
-            value={{@model.email}}
-          />
-        </EditForm::Element>
-
-        {{#if (includes "phone" this.visibleFields)}}
-          <EditForm::Element @label={{t "emeis.users.headings.phone"}} @optional={{not (includes "phone" this.requiredFields)}}>
-            <input
-              class="uk-input"
-              type="tel"
-              name="phone"
-              placeholder="{{t "emeis.users.headings.phone-placeholder"}}"
-              required={{includes "phone" this.requiredFields}}
-              pattern="^[0-9()\+\-\s]+$"
-              value={{@model.phone}}
-            />
-
-            <span class="uk-text-meta">
-              {{t "emeis.form.phone-hint"}}
-            </span>
-          </EditForm::Element>
-        {{/if}}
-
-        {{#if (includes "language" this.visibleFields)}}
-          <EditForm::Element @label={{t "emeis.users.headings.language"}} @optional={{not (includes "language" this.requiredFields)}}>
-            <select
-                class="uk-select uk-text-uppercase"
-                required={{includes "language" this.requiredFields}}
-                name="language">
-              <option value="" class="uk-text-capitalize">
-                {{t "emeis.users.headings.language"}}...
-              </option>
-              {{#each this.intl.locales as |language|}}
-                <option value={{language}} selected={{eq language @model.language}}>
-                  {{language}}
-                </option>
-              {{/each}}
-            </select>
-          </EditForm::Element>
-        {{/if}}
-
-        {{#if (includes "address" this.visibleFields)}}
-          <EditForm::Element @label={{t "emeis.users.headings.address"}} @optional={{not (includes "address" this.requiredFields)}}>
-            <input
-              class="uk-input"
-              type="text"
-              name="address"
-              placeholder="{{t "emeis.users.headings.address"}}..."
-              required={{includes "address" this.requiredFields}}
-              value={{@model.address}}
-            />
-          </EditForm::Element>
-        {{/if}}
-
-        {{#if (includes "city" this.visibleFields)}}
-          <EditForm::Element @label={{t "emeis.users.headings.city"}} @optional={{not (includes "city" this.requiredFields)}}>
-            <input
-              class="uk-input"
-              type="text"
-              name="city"
-              placeholder="{{t "emeis.users.headings.city"}}..."
-              required={{includes "city" this.requiredFields}}
-              value={{@model.city}}
-            />
-          </EditForm::Element>
-        {{/if}}
-
-        {{#if (includes "zip" this.visibleFields)}}
-          <EditForm::Element @label={{t "emeis.users.headings.zip"}} @optional={{not (includes "zip" this.requiredFields)}}>
-            <input
-              class="uk-input"
-              type="number"
-              name="zip"
-              placeholder="{{t "emeis.users.headings.zip"}}..."
-              required={{includes "zip" this.requiredFields}}
-              value={{@model.zip}}
-            />
-          </EditForm::Element>
-        {{/if}}
-
-        {{#each this.metaFields as |field|}}
-          <MetaField @field={{field}} @model={{@model}} @optional={{unless field.required true}} data-test-meta-field={{field.slug}} />
-        {{/each}}
-      </EditForm>
-
-    </div>
-    <div class="uk-width-1-2@l">
-      {{#if this.showAclWizzard}}
-        <span class="uk-flex uk-flex-left">
-          <UkButton data-test-acl-back @onClick={{set this.showAclWizzard false}}>
-            <UkIcon @icon="arrow-left" @ratio="1.5" />
-            {{t "emeis.form.back"}}
-          </UkButton>
-        </span>
-        <AclWizzard @createAclEntry={{perform this.createAclEntry}} @user={{@model}} />
-      {{else}}
-        <DataTable
-          @heading={{t "emeis.users.edit.acl"}}
-          @modelName="acl"
-          @filter={{this.queryParamsfilter}}
-          @include="user,role,scope"
-          @page={{this.page}}
-          @search={{this.search}}
-          @updatePage={{fn this.updateQueryParam "page"}}
-          @updateSearch={{fn this.updateQueryParam "search"}} as |table|
-        >
-          <table.head>
-            <th>
-              {{t "emeis.acl-table.headings.role"}}
-            </th>
-            <th>
-              {{t "emeis.acl-table.headings.scope"}}
-            </th>
-            <th class="uk-table-shrink uk-text-nowrap">
-              {{#unless @model.isNew}}
-                <UkButton
-                  data-test-add-acl
-                  @color="primary"
-                  @onClick={{set this.showAclWizzard true}}
-                >
-                  {{t "emeis.acl-table.headings.add-entry"}}
-                </UkButton>
-              {{/unless}}
-            </th>
-          </table.head>
-          {{#if @model.isNew}}
-            <tbody>
-              <tr>
-                <td colspan="99" class="uk-text-center">{{t "emeis.users.aclHint"}}</td>
-              </tr>
-            </tbody>
-          {{else}}
-            <table.body
-              @emptyIcon="warning"
-              @emptyIconColor="warning"
-              @emptyWarning={{t "emeis.users.emptyAclList"}}
-              as |body|
-            >
-
-              <body.row>
-                {{#let body.model as |aclEntry|}}
-                  <td data-test-acl-role={{aclEntry.id}}>
-                    {{aclEntry.role.name}}
-                  </td>
-
-                  <td data-test-acl-scope={{aclEntry.id}}>
-                    {{aclEntry.scope.fullName}}
-                  </td>
-
-                  <td data-test-acl-delete={{aclEntry.id}}>
-                    <span class="uk-flex uk-flex-center">
-                      <button
-                        type="button"
-                        class="uk-icon-button uk-margin-small-right"
-                        uk-icon="trash"
-                        tooltip="hey there"
-                        {{on "click" (perform this.deleteAclEntry aclEntry table.refresh)}}
-                      ></button>
-                    </span>
-                  </td>
-                {{/let}}
-              </body.row>
-            </table.body>
-          {{/if}}
-        </DataTable>
+  <div class="uk-width-1-2@l">
+    <h3>{{t "emeis.users.edit.edit-user"}}
+      {{#unless @model.isActive}}
+        <span class="uk-badge uk-background-secondary">{{t
+            "emeis.inactive"
+          }}</span>
+      {{/unless}}
+      {{#if this.statusComponent}}
+        {{#let
+          (component (ensure-safe-component this.statusComponent))
+          as |StatusComponent|
+        }}
+          <StatusComponent @model={{@model}} />
+        {{/let}}
       {{/if}}
-    </div>
+    </h3>
+    <EditForm
+      @model={{@model}}
+      @updateModel={{this.updateModel}}
+      @listViewRouteName="users.index"
+    >
+      {{#unless this.emailAsUsername}}
+        <EditForm::Element @label={{t "emeis.users.headings.username"}}>
+          <input
+            class="uk-input"
+            type="text"
+            name="username"
+            placeholder="{{t 'emeis.users.headings.username'}}..."
+            required
+            value={{@model.username}}
+          />
+        </EditForm::Element>
+      {{/unless}}
+
+      <EditForm::Element @label={{t "emeis.users.headings.firstName"}}>
+        <input
+          class="uk-input"
+          type="text"
+          name="firstName"
+          placeholder="{{t 'emeis.users.headings.firstName'}}..."
+          required
+          value={{@model.firstName}}
+        />
+      </EditForm::Element>
+
+      <EditForm::Element @label={{t "emeis.users.headings.lastName"}}>
+        <input
+          class="uk-input"
+          type="text"
+          name="lastName"
+          placeholder="{{t 'emeis.users.headings.lastName'}}..."
+          required
+          value={{@model.lastName}}
+        />
+      </EditForm::Element>
+
+      <EditForm::Element @label={{t "emeis.users.headings.email"}}>
+        <input
+          class="uk-input"
+          type="email"
+          name="email"
+          placeholder="{{t 'emeis.users.headings.email'}}..."
+          required
+          value={{@model.email}}
+        />
+      </EditForm::Element>
+
+      {{#if (includes "phone" this.visibleFields)}}
+        <EditForm::Element
+          @label={{t "emeis.users.headings.phone"}}
+          @optional={{not (includes "phone" this.requiredFields)}}
+        >
+          <input
+            class="uk-input"
+            type="tel"
+            name="phone"
+            placeholder="{{t 'emeis.users.headings.phone-placeholder'}}"
+            required={{includes "phone" this.requiredFields}}
+            pattern="^[0-9()\+\-\s]+$"
+            value={{@model.phone}}
+          />
+
+          <span class="uk-text-meta">
+            {{t "emeis.form.phone-hint"}}
+          </span>
+        </EditForm::Element>
+      {{/if}}
+
+      {{#if (includes "language" this.visibleFields)}}
+        <EditForm::Element
+          @label={{t "emeis.users.headings.language"}}
+          @optional={{not (includes "language" this.requiredFields)}}
+        >
+          <select
+            class="uk-select uk-text-uppercase"
+            required={{includes "language" this.requiredFields}}
+            name="language"
+          >
+            <option value="" class="uk-text-capitalize">
+              {{t "emeis.users.headings.language"}}...
+            </option>
+            {{#each this.intl.locales as |language|}}
+              <option
+                value={{language}}
+                selected={{eq language @model.language}}
+              >
+                {{language}}
+              </option>
+            {{/each}}
+          </select>
+        </EditForm::Element>
+      {{/if}}
+
+      {{#if (includes "address" this.visibleFields)}}
+        <EditForm::Element
+          @label={{t "emeis.users.headings.address"}}
+          @optional={{not (includes "address" this.requiredFields)}}
+        >
+          <input
+            class="uk-input"
+            type="text"
+            name="address"
+            placeholder="{{t 'emeis.users.headings.address'}}..."
+            required={{includes "address" this.requiredFields}}
+            value={{@model.address}}
+          />
+        </EditForm::Element>
+      {{/if}}
+
+      {{#if (includes "city" this.visibleFields)}}
+        <EditForm::Element
+          @label={{t "emeis.users.headings.city"}}
+          @optional={{not (includes "city" this.requiredFields)}}
+        >
+          <input
+            class="uk-input"
+            type="text"
+            name="city"
+            placeholder="{{t 'emeis.users.headings.city'}}..."
+            required={{includes "city" this.requiredFields}}
+            value={{@model.city}}
+          />
+        </EditForm::Element>
+      {{/if}}
+
+      {{#if (includes "zip" this.visibleFields)}}
+        <EditForm::Element
+          @label={{t "emeis.users.headings.zip"}}
+          @optional={{not (includes "zip" this.requiredFields)}}
+        >
+          <input
+            class="uk-input"
+            type="number"
+            name="zip"
+            placeholder="{{t 'emeis.users.headings.zip'}}..."
+            required={{includes "zip" this.requiredFields}}
+            value={{@model.zip}}
+          />
+        </EditForm::Element>
+      {{/if}}
+
+      {{#each this.metaFields as |field|}}
+        <MetaField
+          @field={{field}}
+          @model={{@model}}
+          @optional={{unless field.required true}}
+          data-test-meta-field={{field.slug}}
+        />
+      {{/each}}
+    </EditForm>
+
+  </div>
+  <div class="uk-width-1-2@l">
+    {{#if this.showAclWizzard}}
+      <span class="uk-flex uk-flex-left">
+        <UkButton data-test-acl-back @onClick={{set this.showAclWizzard false}}>
+          <UkIcon @icon="arrow-left" @ratio="1.5" />
+          {{t "emeis.form.back"}}
+        </UkButton>
+      </span>
+      <AclWizzard
+        @createAclEntry={{perform this.createAclEntry}}
+        @user={{@model}}
+      />
+    {{else}}
+      <DataTable
+        @heading={{t "emeis.users.edit.acl"}}
+        @modelName="acl"
+        @filter={{this.queryParamsfilter}}
+        @include="user,role,scope"
+        @page={{this.page}}
+        @search={{this.search}}
+        @updatePage={{fn this.updateQueryParam "page"}}
+        @updateSearch={{fn this.updateQueryParam "search"}}
+        as |table|
+      >
+        <table.head>
+          <th>
+            {{t "emeis.acl-table.headings.role"}}
+          </th>
+          <th>
+            {{t "emeis.acl-table.headings.scope"}}
+          </th>
+          <th class="uk-table-shrink uk-text-nowrap">
+            {{#unless @model.isNew}}
+              <UkButton
+                data-test-add-acl
+                @color="primary"
+                @onClick={{set this.showAclWizzard true}}
+              >
+                {{t "emeis.acl-table.headings.add-entry"}}
+              </UkButton>
+            {{/unless}}
+          </th>
+        </table.head>
+        {{#if @model.isNew}}
+          <tbody>
+            <tr>
+              <td colspan="99" class="uk-text-center">{{t
+                  "emeis.users.aclHint"
+                }}</td>
+            </tr>
+          </tbody>
+        {{else}}
+          <table.body
+            @emptyIcon="warning"
+            @emptyIconColor="warning"
+            @emptyWarning={{t "emeis.users.emptyAclList"}}
+            as |body|
+          >
+
+            <body.row>
+              {{#let body.model as |aclEntry|}}
+                <td data-test-acl-role={{aclEntry.id}}>
+                  {{aclEntry.role.name}}
+                </td>
+
+                <td data-test-acl-scope={{aclEntry.id}}>
+                  {{aclEntry.scope.fullName}}
+                </td>
+
+                <td data-test-acl-delete={{aclEntry.id}}>
+                  <span class="uk-flex uk-flex-center">
+                    <button
+                      type="button"
+                      class="uk-icon-button uk-margin-small-right"
+                      uk-icon="trash"
+                      tooltip="hey there"
+                      {{on
+                        "click"
+                        (perform this.deleteAclEntry aclEntry table.refresh)
+                      }}
+                    ></button>
+                  </span>
+                </td>
+              {{/let}}
+            </body.row>
+          </table.body>
+        {{/if}}
+      </DataTable>
+    {{/if}}
+  </div>
 </div>

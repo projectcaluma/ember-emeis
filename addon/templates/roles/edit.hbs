@@ -1,9 +1,16 @@
-<LinkTo @route="roles.index" class="uk-button uk-padding-remove uk-margin-small-bottom" data-test-back>
+<LinkTo
+  @route="roles.index"
+  class="uk-button uk-padding-remove uk-margin-small-bottom"
+  data-test-back
+>
   <UkIcon @icon="arrow-left" @ratio="1.5" />
   {{t "emeis.form.back"}}
 </LinkTo>
 <EditForm @model={{@model}} @updateModel={{this.updateModel}} class="uk-margin">
-  <EditForm::Element @label={{t "emeis.roles.headings.slug"}} @optional={{unless @model.isNew true}}>
+  <EditForm::Element
+    @label={{t "emeis.roles.headings.slug"}}
+    @optional={{unless @model.isNew true}}
+  >
     <input
       class="uk-input"
       type="text"
@@ -23,7 +30,7 @@
       class="uk-input"
       type="text"
       name="name"
-      placeholder="{{t "emeis.roles.headings.name"}}..."
+      placeholder="{{t 'emeis.roles.headings.name'}}..."
       required
       value={{@model.name}}
     />
@@ -34,14 +41,19 @@
       class="uk-textarea"
       rows="5"
       name="description"
-      placeholder="{{t "emeis.roles.headings.description"}}..."
+      placeholder="{{t 'emeis.roles.headings.description'}}..."
       value={{@model.description}}
       required
     ></textarea>
   </EditForm::Element>
 
   {{#each this.metaFields as |field|}}
-    <MetaField @field={{field}} @model={{@model}} @optional={{unless field.required true}} data-test-meta-field={{field.slug}} />
+    <MetaField
+      @field={{field}}
+      @model={{@model}}
+      @optional={{unless field.required true}}
+      data-test-meta-field={{field.slug}}
+    />
   {{/each}}
 
 </EditForm>
@@ -52,7 +64,8 @@
     @modelName="permission"
     @filter={{this.permissionFilter}}
     class="uk-margin"
-    data-test-permissions as |table|
+    data-test-permissions
+    as |table|
   >
     <table.head>
       <th>
