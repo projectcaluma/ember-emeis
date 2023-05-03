@@ -41,7 +41,7 @@
         @optional={{true}}
       >
         <RelationshipSelect
-          @model={{sort-by "fullName" this.allScopes}}
+          @model={{sort-by "fullName" this.allOtherScopes}}
           @selected={{@model.parent}}
           @placeholder="{{t 'emeis.scopes.headings.parent'}}..."
           @onChange={{this.setParent}}

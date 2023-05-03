@@ -22,6 +22,7 @@
     @renderInPlace={{true}}
     @allowClear={{true}}
     @onChange={{@onChange}}
+    {{did-update (perform this.fetchModels) @model}}
     as |model|
   >
     {{yield model}}
