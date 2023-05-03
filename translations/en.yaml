@@ -96,7 +96,6 @@ emeis:
     phone-hint: "Letters are not allowed in phone numbers."
     slug-hint: "Only letters, numbers and hyphens are allowed."
     custom-button-action-error: "The submitted custom button action is not a valid function."
-    invalid-scope-assignment-warning: "The selected scope assignment is not allowed."
 
   acl-table:
     title: "ACL"

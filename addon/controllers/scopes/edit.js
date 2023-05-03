@@ -14,7 +14,7 @@ export default class ScopesEditIndexController extends PaginationController {
   @localCopy("model.parent") parent;
 
   get queryParamsfilter() {
-    return { scope: this.model?.id };
+    return { scope: this.model?.id ?? "" };
   }
 
   get metaFields() {
@@ -22,7 +22,7 @@ export default class ScopesEditIndexController extends PaginationController {
   }
 
   get childScopeIds() {
-    return this.model?.children.map((s) => s.id) ?? [];
+    return this.model?.findChildren().map((s) => s.id) ?? [];
   }
 
   get allOtherScopes() {
@@ -38,19 +38,7 @@ export default class ScopesEditIndexController extends PaginationController {
   updateModel(model, formElements) {
     model.name = formElements.name.value;
     model.description = formElements.description.value;
-    if (
-      this.parent
-        .findParents()
-        .map((scope) => scope.id)
-        .includes(this.model.id)
-    ) {
-      this.parent = model.parent;
-      this.notification.warning(
-        this.intl.t("emeis.form.invalid-scope-assignment-warning")
-      );
-    } else {
-      model.parent = this.parent;
-    }
+    model.parent = this.parent;
 
     return model;
   }

@@ -24,4 +24,15 @@ export default class ScopeModel extends LocalizedModel {
     }
     return anchestors;
   }
+
+  findChildren() {
+    const getAllChildren = (members) => {
+      return members.flatMap((member) => [
+        member,
+        ...getAllChildren(member.children?.toArray()),
+      ]);
+    };
+
+    return getAllChildren(this.children.toArray() ?? []);
+  }
 }
