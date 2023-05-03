@@ -2,24 +2,25 @@ name: Release
 
 on: workflow_dispatch
 
-env:
-  NODE_VERSION: 18
-
 jobs:
-  build:
+  release:
     name: Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: 18
+          cache: "yarn"
 
       - name: Install dependencies
         run: yarn install
 
       - name: Release on NPM
+        run: yarn semantic-release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn semantic-release
