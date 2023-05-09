@@ -1,3 +1,10 @@
+## [6.3.2](https://github.com/projectcaluma/ember-emeis/compare/v6.3.1...v6.3.2) (2023-05-09)
+
+
+### Bug Fixes
+
+* **scopes:** prevent circular relation selection ([#656](https://github.com/projectcaluma/ember-emeis/issues/656)) ([ecfcc97](https://github.com/projectcaluma/ember-emeis/commit/ecfcc97ac777a6cb44c724c7c02b128aec11b8b1))
+
 ## [6.3.1](https://github.com/projectcaluma/ember-emeis/compare/v6.3.0...v6.3.1) (2023-04-17)
 
 
