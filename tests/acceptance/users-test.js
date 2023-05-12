@@ -6,9 +6,9 @@ import {
   fillIn,
   waitUntil,
   settled,
+  waitFor,
 } from "@ember/test-helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
-import { timeout } from "ember-concurrency";
 import { setupIntl } from "ember-intl/test-support";
 import { setupApplicationTest } from "ember-qunit";
 import { module, test } from "qunit";
@@ -101,7 +101,7 @@ module("Acceptance | users", function (hooks) {
       "[data-test-filters-radio-buttons='active'] [data-test-filters-radio-buttons-button='off']"
     );
 
-    await timeout(100);
+    await waitFor("[data-test-user-username]");
 
     assert.dom("[data-test-user-username]").exists({
       count: users.filter((user) => user.isActive === false).length,
@@ -339,6 +339,7 @@ module("Acceptance | users", function (hooks) {
 
     await click("[data-test-add-acl]");
 
+    await waitFor("button[data-test-select-role]");
     await click("button[data-test-select-role]");
     // For some reason the await click is not actually waiting for the fetch task to finish.
     // Probably some runloop issue.
