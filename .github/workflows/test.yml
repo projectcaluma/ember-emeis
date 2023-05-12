@@ -21,17 +21,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: yarn-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            yarn-${{ hashFiles('yarn.lock') }}
-            yarn-
+          cache: "yarn"
 
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Lint JS & Handlebars
         run: yarn lint
@@ -46,14 +39,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: yarn-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            yarn-${{ hashFiles('yarn.lock') }}
-            yarn-
+          cache: "yarn"
 
       - name: Install dependencies (no lockfile)
         run: yarn install --no-lockfile
@@ -62,7 +48,7 @@ jobs:
         run: yarn test:ember
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Run tests
         run: yarn test:ember
@@ -83,17 +69,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: yarn-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            yarn-${{ hashFiles('yarn.lock') }}
-            yarn-
+          cache: "yarn"
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - uses: actions/cache@v3
         with:
