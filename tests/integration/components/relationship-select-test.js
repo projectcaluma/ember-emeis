@@ -26,7 +26,7 @@ module("Integration | Component | relationship-select", function (hooks) {
     await render(hbs`
       <RelationshipSelect
         @modelName={{this.modelName}}
-        @onChange={{set this.selected}}
+        @onChange={{set this "selected"}}
         @selected={{this.selected}}
         @placeholder="test"
         as |model|
@@ -61,7 +61,7 @@ module("Integration | Component | relationship-select", function (hooks) {
     await render(hbs`
       <RelationshipSelect
         @modelName={{this.modelName}}
-        @onChange={{set this.selected}}
+        @onChange={{set this "selected"}}
         @selected={{this.selected}}
         as |model|
       >
@@ -86,7 +86,7 @@ module("Integration | Component | relationship-select", function (hooks) {
     await render(hbs`
       <RelationshipSelect
         @modelName={{this.modelName}}
-        @onChange={{set this.selected}}
+        @onChange={{set this "selected"}}
         @selected={{this.selected}}
         @placeholder="test"
         @multiple="true"
