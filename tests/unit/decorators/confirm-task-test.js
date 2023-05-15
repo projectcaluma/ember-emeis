@@ -1,4 +1,4 @@
-import { click, findAll, waitFor, waitUntil } from "@ember/test-helpers";
+import { click, waitFor } from "@ember/test-helpers";
 import { task } from "ember-concurrency";
 import { setupTest } from "ember-qunit";
 import { module, test } from "qunit";
@@ -48,15 +48,6 @@ module("Unit | decorators | confirm-task", function (hooks) {
 
     await waitFor(".uk-modal-close");
     await click(".uk-modal-close");
-    // This fixes flaky test behavior, since UIKit needs a little more time to close the
-    // modal and handle it's state. Sadly this can not be awaited via the settled helper
-    // nor other ember built-ins.
-    await waitUntil(
-      function () {
-        return findAll(".uk-modal-close").length === 0;
-      },
-      { timeout: 2000 }
-    );
 
     assert.verifySteps([]);
   });
