@@ -97,12 +97,17 @@ export function confirmTask(...decoratorArgs) {
       // append other options which are not confirm-labels to the modal object
       // that way you can modify the modal with further options like "container"
       const filteredOptions = filterOptions(options);
-      if (
-        !(yield confirm(translatedOptions.labels.message, {
-          ...translatedOptions,
-          ...filteredOptions,
-        }))
-      ) {
+      const confirmation = async () => {
+        try {
+          return await confirm(translatedOptions.labels.message, {
+            ...translatedOptions,
+            ...filteredOptions,
+          });
+        } catch (e) {
+          console.error(e);
+        }
+      };
+      if (!(yield confirmation())) {
         return;
       }
       return yield* gen.apply(this, args);
