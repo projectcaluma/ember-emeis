@@ -234,7 +234,7 @@ module("Integration | Component | data-table", function (hooks) {
       <DataTable
         @modelName="role"
         @search={{this.search}}
-        @updateSearch={{set this.search}}
+        @updateSearch={{set this "search"}}
         as |table|>
           <table.body as |body|>
             <body.row>

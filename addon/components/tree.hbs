@@ -7,7 +7,7 @@
           type="reset"
           class="uk-form-icon uk-form-icon-flip"
           uk-icon="close"
-          {{on "click" (set this.filterValue null)}}
+          {{on "click" (set this "filterValue" null)}}
           data-test-search-reset
         />
       {{/if}}

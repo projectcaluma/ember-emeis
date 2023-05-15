@@ -1,6 +1,6 @@
 <form
   class="uk-form-stacked"
-  {{did-insert (set this.form)}}
+  {{did-insert (set this "form")}}
   {{on "submit" (perform this.save)}}
 >
   {{yield}}
