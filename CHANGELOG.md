@@ -1,3 +1,36 @@
+# [7.0.0](https://github.com/projectcaluma/ember-emeis/compare/v6.3.2...v7.0.0) (2023-05-16)
+
+
+### Bug Fixes
+
+* confirm task tests ([#669](https://github.com/projectcaluma/ember-emeis/issues/669)) ([01db8a2](https://github.com/projectcaluma/ember-emeis/commit/01db8a235aa270f5f58b67594126966f52e929cd))
+* **scopes:** show updated parent after selection ([#665](https://github.com/projectcaluma/ember-emeis/issues/665)) ([2eb3440](https://github.com/projectcaluma/ember-emeis/commit/2eb3440e335a95739cb25fd5438b0c2863611699))
+
+
+### chore
+
+* adapt ember try scenarios ([#670](https://github.com/projectcaluma/ember-emeis/issues/670)) ([f9e530b](https://github.com/projectcaluma/ember-emeis/commit/f9e530b93e4f22765bdb418326920a7c18fa0a1c))
+
+
+### BREAKING CHANGES
+
+* drop support for ember v3.24
+
+* chore(deps): update ember-ty to v3.0.0-beta.1
+
+Prevents local build error.
+
+* test(confirm-task): revert waitUntil calls
+
+* fix(confirm-task): catch nested promise rejection
+
+* test(confirm-task): skip flaky test
+* drop support for ember v3.24
+
+* chore(deps): update ember-ty to v3.0.0-beta.1
+
+Prevents local build error.
+
 ## [6.3.2](https://github.com/projectcaluma/ember-emeis/compare/v6.3.1...v6.3.2) (2023-05-09)
 
 
