@@ -3135,7 +3135,7 @@ argv-formatter@~1.0.0:
   resolved "https://registry.yarnpkg.com/argv-formatter/-/argv-formatter-1.0.0.tgz#a0ca0cbc29a5b73e836eebe1cbf6c5e0e4eb82f9"
   integrity sha512-F2+Hkm9xFaRg+GkaNnbwXNDV5O6pnCFEmqyhvfC/Ic5LbgOWjJh3L+mN/s91rxVL3znE7DYVpW0GJFT+4YBgWw==
 
-aria-query@^5.0.0:
+aria-query@^5.0.2:
   version "5.1.3"
   resolved "https://registry.yarnpkg.com/aria-query/-/aria-query-5.1.3.tgz#19db27cd101152773631396f7a95a3b58c22c35e"
   integrity sha512-R5iJ5lkuHybztUfuOAznmboyjWq8O6sqNqtK7CLOqdydi54VNbORp49mb14KbWgG1QD3JFO9hJdZ+y4KutfdOQ==
@@ -4760,7 +4760,7 @@ ci-info@^2.0.0:
   resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-2.0.0.tgz#67a9e964be31a51e15e5010d58e6f12834002f46"
   integrity sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ==
 
-ci-info@^3.3.2, ci-info@^3.6.1, ci-info@^3.7.1, ci-info@^3.8.0:
+ci-info@^3.6.1, ci-info@^3.7.1, ci-info@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-3.8.0.tgz#81408265a5380c929f0bc665d62256628ce9ef91"
   integrity sha512-eXTggHWSooYhq49F2opQhuHWgzucfF2YgODK4e1566GQs5BIfP30B0oenwBJHfWxAs2fyPB1s7Mg949zLf61Yw==
@@ -5439,7 +5439,7 @@ dargs@^7.0.0:
   resolved "https://registry.yarnpkg.com/dargs/-/dargs-7.0.0.tgz#04015c41de0bcb69ec84050f3d9be0caf8d6d5cc"
   integrity sha512-2iy1EkLdlBzQGvbweYRFxmFath8+K7+AKB0TlhHWkNuH+TmovaMH/Wp7V7R4u7f4SnX3OgLsU9t1NI9ioDnUpg==
 
-date-fns@^2.28.0:
+date-fns@^2.30.0:
   version "2.30.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.30.0.tgz#f367e644839ff57894ec6ac480de40cae4b0f4d0"
   integrity sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==
@@ -6656,7 +6656,7 @@ ember-source@3.28.9:
     ember-cli-babel "^7.26.11"
     ember-modifier "^3.2.7 || ^4.0.0"
 
-ember-template-imports@^3.1.1:
+ember-template-imports@^3.1.1, ember-template-imports@^3.4.2:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/ember-template-imports/-/ember-template-imports-3.4.2.tgz#6cf7de7d4b8348a0fddf3aaec4947aa1211289e6"
   integrity sha512-OS8TUVG2kQYYwP3netunLVfeijPoOKIs1SvPQRTNOQX4Pu8xGGBEZmrv0U1YTnQn12Eg+p6w/0UdGbUnITjyzw==
@@ -6678,29 +6678,31 @@ ember-template-lint-plugin-prettier@4.1.0:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-ember-template-lint@4.10.1:
-  version "4.10.1"
-  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-4.10.1.tgz#2c348187a7bce15f0fdf371f6f3f54e3717b0a0a"
-  integrity sha512-uFJ4jjzbYuVKTeTEVqzLDQR7XHFbSLQDZoFC6XZ3OMxX07YArmM78MKBOAJ6ri9fVCd1LD9j99j6qXwUWqWr1g==
+ember-template-lint@5.10.1:
+  version "5.10.1"
+  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-5.10.1.tgz#cce793ac82d72a901ce444da91f6131e245306ab"
+  integrity sha512-WZZypF73Bmei7WQYGMcClARkno3Sdvv1piV3R7jrHEud9Yg589oiFUtwEsCJ28Zbjx7gkcXIt24cRZAqtNvdZQ==
   dependencies:
     "@lint-todo/utils" "^13.0.3"
-    aria-query "^5.0.0"
-    chalk "^4.1.2"
-    ci-info "^3.3.2"
-    date-fns "^2.28.0"
-    ember-template-recast "^6.1.3"
+    aria-query "^5.0.2"
+    chalk "^5.2.0"
+    ci-info "^3.8.0"
+    date-fns "^2.30.0"
+    ember-template-imports "^3.4.2"
+    ember-template-recast "^6.1.4"
+    eslint-formatter-kakoune "^1.0.0"
     find-up "^6.3.0"
     fuse.js "^6.5.3"
     get-stdin "^9.0.0"
-    globby "^13.1.2"
+    globby "^13.1.4"
     is-glob "^4.0.3"
-    language-tags "^1.0.5"
+    language-tags "^1.0.8"
     micromatch "^4.0.5"
-    resolve "^1.22.1"
+    resolve "^1.22.3"
     v8-compile-cache "^2.3.0"
-    yargs "^17.5.1"
+    yargs "^17.7.2"
 
-ember-template-recast@^6.1.3:
+ember-template-recast@^6.1.4:
   version "6.1.4"
   resolved "https://registry.yarnpkg.com/ember-template-recast/-/ember-template-recast-6.1.4.tgz#e964c184adfd876878009f8aa0b84c95633fce20"
   integrity sha512-fCh+rOK6z+/tsdkTbOE+e7f84P6ObnIRQrCCrnu21E4X05hPeradikIkRMhJdxn4NWrxitfZskQDd37TR/lsNQ==
@@ -7051,6 +7053,11 @@ eslint-config-prettier@8.5.0:
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz#5a81680ec934beca02c7b1a61cf8ca34b66feab1"
   integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
+
+eslint-formatter-kakoune@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-formatter-kakoune/-/eslint-formatter-kakoune-1.0.0.tgz#a95cc4fe1fbc06b84e0f2397e83f5f0b68340125"
+  integrity sha512-Uk/TVLt6Nf6Xoz7C1iYuZjOSdJxe5aaauGRke8JhKeJwD66Y61/pY2FjtLP04Ooq9PwV34bzrkKkU2UZ5FtDRA==
 
 eslint-import-resolver-node@^0.3.6:
   version "0.3.7"
@@ -8460,7 +8467,7 @@ globby@^11.0.0, globby@^11.0.3, globby@^11.1.0:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-globby@^13.1.2:
+globby@^13.1.4:
   version "13.1.4"
   resolved "https://registry.yarnpkg.com/globby/-/globby-13.1.4.tgz#2f91c116066bcec152465ba36e5caa4a13c01317"
   integrity sha512-iui/IiiW+QrJ1X1hKH5qwlMQyv34wJAYwH1vrf8b9kBA4sNiif3gKsMHa+BrdnOpEudWjpotfa7LrTzB1ERS/g==
@@ -9193,6 +9200,13 @@ is-core-module@^2.11.0, is-core-module@^2.5.0, is-core-module@^2.8.1:
   dependencies:
     has "^1.0.3"
 
+is-core-module@^2.12.0:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/is-core-module/-/is-core-module-2.12.1.tgz#0c0b6885b6f80011c71541ce15c8d66cf5a4f9fd"
+  integrity sha512-Q4ZuBAe2FUsKtyQJoQHlvP8OvBERxO3jEmy1I7hcRXcJBGGHFh/aJBswbXuS9sgrDH2QUO8ilkwNPHvHMd8clg==
+  dependencies:
+    has "^1.0.3"
+
 is-data-descriptor@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/is-data-descriptor/-/is-data-descriptor-0.1.4.tgz#0b5ee648388e2c860282e793f1856fec3f301b56"
@@ -9809,7 +9823,7 @@ language-subtag-registry@^0.3.20:
   resolved "https://registry.yarnpkg.com/language-subtag-registry/-/language-subtag-registry-0.3.22.tgz#2e1500861b2e457eba7e7ae86877cbd08fa1fd1d"
   integrity sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==
 
-language-tags@^1.0.5:
+language-tags@^1.0.8:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/language-tags/-/language-tags-1.0.8.tgz#042b4bdb0d4e771a9f8cc2fdc9bb26a52a367312"
   integrity sha512-aWAZwgPLS8hJ20lNPm9HNVs4inexz6S2sQa3wx/+ycuutMNE5/IfYxiWYBbi+9UWCQVaXYCOPUl6gFrPR7+jGg==
@@ -13060,12 +13074,12 @@ resolve-url@^0.2.1:
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
   integrity sha512-ZuF55hVUQaaczgOIwqWzkEcEidmlD/xl44x1UZnhOXcYuFN2S6+rcxpG+C1N3So0wvNI3DmJICUFfu2SxhBmvg==
 
-resolve@^1.10.0, resolve@^1.10.1, resolve@^1.11.1, resolve@^1.13.1, resolve@^1.14.2, resolve@^1.17.0, resolve@^1.20.0, resolve@^1.22.0, resolve@^1.22.1, resolve@^1.3.3, resolve@^1.4.0, resolve@^1.5.0:
-  version "1.22.2"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.2.tgz#0ed0943d4e301867955766c9f3e1ae6d01c6845f"
-  integrity sha512-Sb+mjNHOULsBv818T40qSPeRiuWLyaGMa5ewydRLFimneixmVy2zdivRl+AF6jaYPC8ERxGDmFSiqui6SfPd+g==
+resolve@^1.10.0, resolve@^1.10.1, resolve@^1.11.1, resolve@^1.13.1, resolve@^1.14.2, resolve@^1.17.0, resolve@^1.20.0, resolve@^1.22.0, resolve@^1.22.1, resolve@^1.22.3, resolve@^1.3.3, resolve@^1.4.0, resolve@^1.5.0:
+  version "1.22.3"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.3.tgz#4b4055349ffb962600972da1fdc33c46a4eb3283"
+  integrity sha512-P8ur/gp/AmbEzjr729bZnLjXK5Z+4P0zhIJgBgzqRih7hL7BOukHGtSTA3ACMY467GRFz3duQsi0bDZdR7DKdw==
   dependencies:
-    is-core-module "^2.11.0"
+    is-core-module "^2.12.0"
     path-parse "^1.0.7"
     supports-preserve-symlinks-flag "^1.0.0"
 
@@ -15434,7 +15448,7 @@ yargs-parser@^21.1.1:
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-21.1.1.tgz#9096bceebf990d21bb31fa9516e0ede294a77d35"
   integrity sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==
 
-yargs@^17.0.0, yargs@^17.5.1:
+yargs@^17.0.0, yargs@^17.5.1, yargs@^17.7.2:
   version "17.7.2"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.7.2.tgz#991df39aca675a192b816e1e0363f9d75d2aa269"
   integrity sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==
