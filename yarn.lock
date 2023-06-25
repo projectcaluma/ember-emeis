@@ -5771,6 +5771,14 @@ ember-assign-helper@^0.4.0:
     ember-cli-babel "^7.26.0"
     ember-cli-htmlbars "^6.0.0"
 
+ember-async-data@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ember-async-data/-/ember-async-data-1.0.1.tgz#57158eba0c75eac64b7d030a6e5c5d01b4cb6020"
+  integrity sha512-R9nBxCZ9WDPMJpuGBODs8wV1PHXUbkSbrzVmL34R4aOWbx237yLBllJghQOwfJs1+D72wdzgxg/+J3DY43xz3g==
+  dependencies:
+    "@ember/test-waiters" "^3.0.0"
+    "@embroider/addon-shim" "^1.8.4"
+
 ember-auto-import@^1.5.3:
   version "1.12.2"
   resolved "https://registry.yarnpkg.com/ember-auto-import/-/ember-auto-import-1.12.2.tgz#cc7298ee5c0654b0249267de68fb27a2861c3579"
@@ -6578,14 +6586,15 @@ ember-resolver@8.0.3:
     ember-cli-version-checker "^5.1.2"
     resolve "^1.20.0"
 
-ember-resources@^5.6.4:
-  version "5.6.4"
-  resolved "https://registry.yarnpkg.com/ember-resources/-/ember-resources-5.6.4.tgz#1ae05bb5398ab0d8fab8c0925c5bf679ee86e327"
-  integrity sha512-ShdosnruPm37jPpzPOgPVelymEDJT/27Jz/j5AGPVAfCaUhRIocTxNMtPx13ox890A2babuPF5M3Ur8UFidqtw==
+ember-resources@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/ember-resources/-/ember-resources-6.1.1.tgz#b421ac536b62e1c123bd0ae2bfe6c57db364c8cc"
+  integrity sha512-Ajx0T+IGQwNG6ilYfBXR52+4+K5Tm5dJYJ6i95DK5ZcP4M39V/OfheEG+uRMOITHL9/S5QfO6Mhacai6xzvBiA==
   dependencies:
     "@babel/runtime" "^7.17.8"
     "@embroider/addon-shim" "^1.2.0"
     "@embroider/macros" "^1.2.0"
+    ember-async-data "^1.0.1"
 
 ember-rfc176-data@^0.3.15, ember-rfc176-data@^0.3.17:
   version "0.3.18"
