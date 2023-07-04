@@ -116,7 +116,7 @@
     "prettier": "2.8.7",
     "qunit": "2.19.4",
     "qunit-dom": "2.0.0",
-    "sass": "1.56.1",
+    "sass": "1.63.6",
     "webpack": "5.88.1"
   },
   "peerDependencies": {
