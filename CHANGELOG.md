@@ -1,3 +1,29 @@
+# [8.0.0](https://github.com/projectcaluma/ember-emeis/compare/v7.0.0...v8.0.0) (2023-07-05)
+
+
+### chore
+
+* udpate to ember 4.12 and make embroider optimized ([37cdaed](https://github.com/projectcaluma/ember-emeis/commit/37cdaeda348f17d3a6e7a4e34fb9a1ef88a19700))
+* update to ember v4 ([04865f1](https://github.com/projectcaluma/ember-emeis/commit/04865f1d0e947a6b90a6a34082f9197ab8f7557a))
+
+
+### Code Refactoring
+
+* rename `router` service dependency to `hostRouter` ([855a842](https://github.com/projectcaluma/ember-emeis/commit/855a84276f1111e530aba5dcb554db602b09f9df))
+
+
+### BREAKING CHANGES
+
+* - Ember.js v3.28 or above
+- Ember CLI v3.28 or above
+- Node.js v14 or above
+* - Rename `router` service dependency to `hostRouter` due to deprecation
+
+Deprecation id: ember-engines.deprecation-router-service-from-host
+* - Ember.js v3.28 or above
+- Ember CLI v3.28 or above
+- Node.js v16 or above
+
 # [7.0.0](https://github.com/projectcaluma/ember-emeis/compare/v6.3.2...v7.0.0) (2023-05-16)
 
 
