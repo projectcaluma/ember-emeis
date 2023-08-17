@@ -1,3 +1,10 @@
+## [8.0.1](https://github.com/projectcaluma/ember-emeis/compare/v8.0.0...v8.0.1) (2023-08-17)
+
+
+### Bug Fixes
+
+* mount point of the package ([#707](https://github.com/projectcaluma/ember-emeis/issues/707)) ([2caca26](https://github.com/projectcaluma/ember-emeis/commit/2caca26f04052709e322453a91706825911f43d4))
+
 # [8.0.0](https://github.com/projectcaluma/ember-emeis/compare/v7.0.0...v8.0.0) (2023-07-05)
 
 
