@@ -1,3 +1,10 @@
+# [8.1.0](https://github.com/projectcaluma/ember-emeis/compare/v8.0.1...v8.1.0) (2023-10-13)
+
+
+### Features
+
+* **user:** filter export ([#722](https://github.com/projectcaluma/ember-emeis/issues/722)) ([2b53e45](https://github.com/projectcaluma/ember-emeis/commit/2b53e453f7d812d2457710db69fa51ffbe7e9139))
+
 ## [8.0.1](https://github.com/projectcaluma/ember-emeis/compare/v8.0.0...v8.0.1) (2023-08-17)
 
 
