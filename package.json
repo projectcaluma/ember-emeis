@@ -72,7 +72,7 @@
     "@babel/eslint-parser": "7.22.6",
     "@babel/plugin-proposal-decorators": "7.23.2",
     "@commitlint/cli": "17.6.6",
-    "@commitlint/config-conventional": "17.6.6",
+    "@commitlint/config-conventional": "19.1.0",
     "@ember/optional-features": "2.0.0",
     "@ember/test-helpers": "2.9.4",
     "@embroider/compat": "3.1.4",
