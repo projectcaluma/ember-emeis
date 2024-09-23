@@ -7,10 +7,10 @@ import {
   waitUntil,
   settled,
 } from "@ember/test-helpers";
+import { setupApplicationTest } from "dummy/tests/helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl } from "ember-intl/test-support";
 import { selectChoose } from "ember-power-select/test-support";
-import { setupApplicationTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
@@ -35,7 +35,7 @@ module("Acceptance | scopes", function (hooks) {
     // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
 
-    assert.strictEqual(currentURL(), `/scopes/${root.id}?page=1`);
+    assert.strictEqual(currentURL(), `/scopes/${root.id}`);
 
     // only root and first level is shown by default
     assert.dom("[data-test-node-id]").exists({ count: 4 });
@@ -64,8 +64,8 @@ module("Acceptance | scopes", function (hooks) {
     assert.dom('[name="name"]').hasValue(scope.name.en);
     assert.dom('[name="description"]').hasValue(scope.description.en);
 
-    const name = "test",
-      description = "test desc";
+    const name = "test";
+    const description = "test desc";
 
     await fillIn('[name="name"]', name);
     await fillIn('[name="description"]', description);
@@ -111,7 +111,7 @@ module("Acceptance | scopes", function (hooks) {
     await waitUntil(() => currentURL() !== "/scopes/new");
 
     const scope = this.server.schema.scopes.first();
-    assert.strictEqual(currentURL(), `/scopes/${scope.id}?page=1`);
+    assert.strictEqual(currentURL(), `/scopes/${scope.id}`);
 
     assert.dom('[name="name"]').hasValue(scope.name.en);
     assert.dom('[name="description"]').hasValue(scope.description.en);
@@ -160,6 +160,8 @@ module("Acceptance | scopes", function (hooks) {
     });
 
     await visit(`/scopes/${scope.id}`);
+    // Needed because otherwise it wont wait for the <DataTable/>.
+    await settled();
 
     assert.dom("[data-test-acl-role]").exists({ count: 3 });
 

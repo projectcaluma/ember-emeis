@@ -1,6 +1,6 @@
 import { render, click } from "@ember/test-helpers";
+import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupRenderingTest } from "ember-qunit";
 import { module, skip } from "qunit";
 
 module("Integration | Component | acl-wizzard/select-card", function (hooks) {
@@ -12,13 +12,11 @@ module("Integration | Component | acl-wizzard/select-card", function (hooks) {
       assert.step("selectEntry");
     });
 
-    await render(hbs`
-      <AclWizzard::SelectCard
-        selected={{this.selected}}
-        header={{this.header}}
-        selectEntry={{this.selectEntry}}
-      />
-    `);
+    await render(hbs`<AclWizzard::SelectCard
+  selected={{this.selected}}
+  header={{this.header}}
+  selectEntry={{this.selectEntry}}
+/>`);
 
     assert.dom("[data-test-change]").exists();
     await click("[data-test-change]");
@@ -34,13 +32,11 @@ module("Integration | Component | acl-wizzard/select-card", function (hooks) {
       },
     });
 
-    await render(hbs`
-      <AclWizzard::SelectCard
-        selected={{this.selected}}
-        header={{this.header}}
-        selectEntry={{this.selectEntry}}
-      />
-    `);
+    await render(hbs`<AclWizzard::SelectCard
+  selected={{this.selected}}
+  header={{this.header}}
+  selectEntry={{this.selectEntry}}
+/>`);
 
     assert.dom("[data-test-title]").hasText("test");
     assert.dom("[data-test-body]").hasText("desc");
@@ -58,15 +54,13 @@ module("Integration | Component | acl-wizzard/select-card", function (hooks) {
       selectEntry() {},
     });
 
-    await render(hbs`
-      <AclWizzard::SelectCard
-        selected={{this.selected}}
-        header={{this.header}}
-        selectEntry={{this.selectEntry}}
-      >
-        test desc
-      </AclWizzard::SelectCard>
-    `);
+    await render(hbs`<AclWizzard::SelectCard
+  selected={{this.selected}}
+  header={{this.header}}
+  selectEntry={{this.selectEntry}}
+>
+  test desc
+</AclWizzard::SelectCard>`);
 
     assert.dom("[data-test-title]").hasText("test");
     assert.dom("[data-test-body]").hasText("test desc");

@@ -1,3 +1,5 @@
+<SectionTitle @model="users" @onExport={{perform this.export}} />
+
 <DataTable
   @modelName="user"
   @page={{this.page}}
@@ -10,24 +12,26 @@
   @include={{array "acls.role" "acls.scope"}}
   as |table|
 >
-  <table.filters as |Filter|>
-    <Filter.radio-buttons
-          @name="active"
-          @label={{t "emeis.filters.active.title"}}
-          @selected={{this.filter_active}}
-          @options={{array
-            (hash value=true label=(t "emeis.filters.active.on"))
-            (hash value=false label=(t "emeis.filters.active.off"))
-          }}
-          @onChange={{fn this.updateFilter "active"}}
-        />
-  </table.filters>
+  {{#if (evaluate-to-boolean this.filtersVisible)}}
+    <table.filters as |Filter|>
+      <Filter.radio-buttons
+        @name="active"
+        @label={{t "emeis.filters.active.title"}}
+        @selected={{this.filter_active}}
+        @options={{array
+          (hash value=true label=(t "emeis.filters.active.on"))
+          (hash value=false label=(t "emeis.filters.active.off"))
+        }}
+        @onChange={{fn this.updateFilter "active"}}
+      />
+    </table.filters>
+  {{/if}}
   <table.head as |Column|>
     {{#unless this.emailAsUsername}}
       <Column @sort="username">
         {{t "emeis.users.headings.username"}}
       </Column>
-      {{/unless}}
+    {{/unless}}
     <Column @sort="last_name">
       {{t "emeis.users.headings.lastName"}}
     </Column>
@@ -38,7 +42,14 @@
       {{t "emeis.users.headings.email"}}
     </Column>
     {{#each this.customColumns as |extraColumn|}}
-      <Column @sort={{if extraColumn.sortable (concat "metainfo__" extraColumn.slug) ""}} data-test-custom-column={{extraColumn.slug}}>
+      <Column
+        @sort={{if
+          extraColumn.sortable
+          (concat "metainfo__" extraColumn.slug)
+          ""
+        }}
+        data-test-custom-column={{extraColumn.slug}}
+      >
         {{optional-translate extraColumn.heading}}
       </Column>
     {{/each}}
@@ -48,43 +59,69 @@
     <Column>
       {{t "emeis.scopes.title"}}
     </Column>
-    <Column>
-    </Column>
+    <Column />
   </table.head>
   <table.body as |body|>
     <body.row>
       {{#let body.model as |user|}}
         {{#if this.emailAsUsername}}
           <td>
-            <LinkTo @route="users.edit" @model={{user}} class="uk-link-text {{unless user.isActive "text-line-through"}}">
+            <LinkTo
+              @route="users.edit"
+              @model={{user}}
+              class="uk-link-text {{unless user.isActive 'text-line-through'}}"
+            >
               {{user.lastName}}
             </LinkTo>
           </td>
-          <td class="uk-link-text {{unless user.isActive "text-line-through"}}">{{user.firstName}}</td>
+          <td
+            class="uk-link-text {{unless user.isActive 'text-line-through'}}"
+          >{{user.firstName}}</td>
         {{else}}
           <td data-test-user-username={{user.id}}>
-            <LinkTo @route="users.edit" @model={{user}} class="uk-link-text {{unless user.isActive "text-line-through"}}">
+            <LinkTo
+              @route="users.edit"
+              @model={{user}}
+              class="uk-link-text {{unless user.isActive 'text-line-through'}}"
+            >
               {{user.username}}
             </LinkTo>
           </td>
-          <td class="uk-link-text {{unless user.isActive "text-line-through"}}">{{user.lastName}}</td>
-          <td class="uk-link-text {{unless user.isActive "text-line-through"}}">{{user.firstName}}</td>
+          <td
+            class="uk-link-text {{unless user.isActive 'text-line-through'}}"
+          >{{user.lastName}}</td>
+          <td
+            class="uk-link-text {{unless user.isActive 'text-line-through'}}"
+          >{{user.firstName}}</td>
         {{/if}}
 
-        <td class="uk-link-text {{unless user.isActive "text-line-through"}}" data-test-user-email={{user.id}}>
+        <td
+          class="uk-link-text {{unless user.isActive 'text-line-through'}}"
+          data-test-user-email={{user.id}}
+        >
           {{user.email}}
         </td>
         {{#each this.customColumns as |extraColumn|}}
-          <td class="uk-link-text {{unless user.isActive "text-line-through"}}" data-test-custom-row={{extraColumn.slug}}>
-              {{optional-localized-value (get user.metainfo extraColumn.slug) "user"}}
+          <td
+            class="uk-link-text {{unless user.isActive 'text-line-through'}}"
+            data-test-custom-row={{extraColumn.slug}}
+          >
+            {{optional-localized-value
+              (get user.metainfo extraColumn.slug)
+              "user"
+            }}
           </td>
         {{/each}}
-        <td class="uk-link-text {{unless user.isActive "text-line-through"}}">
+        <td class="uk-link-text {{unless user.isActive 'text-line-through'}}">
           <ul class="uk-list uk-list-divider">
             {{#each user.acls as |acl|}}
               <li>
                 {{#if this.linkToRole}}
-                  <LinkTo @route="roles.edit" @model={{acl.role}} class="uk-link-text">
+                  <LinkTo
+                    @route="roles.edit"
+                    @model={{acl.role}}
+                    class="uk-link-text"
+                  >
                     {{acl.role.name}}
                   </LinkTo>
                 {{else}}
@@ -92,30 +129,38 @@
                 {{/if}}
               </li>
             {{else}}
-            -
+              -
             {{/each}}
           </ul>
         </td>
-        <td class="uk-link-text {{unless user.isActive "text-line-through"}}">
+        <td class="uk-link-text {{unless user.isActive 'text-line-through'}}">
           <ul class="uk-list uk-list-divider">
             {{#each user.acls as |acl|}}
               <li>
                 {{#if this.linkToScope}}
-                  <LinkTo @route="scopes.edit" @model={{acl.scope}} class="uk-link-text">
+                  <LinkTo
+                    @route="scopes.edit"
+                    @model={{acl.scope}}
+                    class="uk-link-text"
+                  >
                     {{acl.scope.fullName}}
                   </LinkTo>
                 {{else}}
-                    {{acl.scope.fullName}}
+                  {{acl.scope.fullName}}
                 {{/if}}
               </li>
             {{else}}
-            -
+              -
             {{/each}}
           </ul>
         </td>
         <td class="uk-text-right small-padding-right">
-          <LinkTo @route="users.edit" @model={{user}} class="uk-link-reset uk-margin-small-right">
-            <UkIcon @icon="pencil"/>
+          <LinkTo
+            @route="users.edit"
+            @model={{user}}
+            class="uk-link-reset uk-margin-small-right"
+          >
+            <UkIcon @icon="pencil" />
           </LinkTo>
           {{#if (can-delete "user" user)}}
             <UkButton @color="link" @onClick={{perform this.delete user}}>

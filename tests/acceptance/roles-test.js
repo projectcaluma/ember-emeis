@@ -9,9 +9,9 @@ import {
   waitUntil,
   settled,
 } from "@ember/test-helpers";
+import { setupApplicationTest } from "dummy/tests/helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl } from "ember-intl/test-support";
-import { setupApplicationTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
@@ -96,8 +96,8 @@ module("Acceptance | roles", function (hooks) {
     assert.dom('[name="name"]').hasValue(role.name.en);
     assert.dom('[name="description"]').hasValue(role.description.en);
 
-    const name = "Role 1",
-      description = "The one and only";
+    const name = "Role 1";
+    const description = "The one and only";
 
     await fillIn('[name="name"]', name);
     await fillIn('[name="description"]', description);
@@ -124,9 +124,9 @@ module("Acceptance | roles", function (hooks) {
     await click("[data-test-new]");
     assert.strictEqual(currentURL(), "/roles/new");
 
-    const name = "Role 1",
-      description = "The one and only",
-      slug = "role-1";
+    const name = "Role 1";
+    const description = "The one and only";
+    const slug = "role-1";
 
     await fillIn('[name="name"]', name);
     await fillIn('[name="description"]', description);
@@ -180,7 +180,7 @@ module("Acceptance | roles", function (hooks) {
     // Probably some runloop issue.
     await waitUntil(() => currentURL() !== `/roles/${role.id}`);
 
-    assert.strictEqual(currentURL(), `/roles?page=1`);
+    assert.strictEqual(currentURL(), `/roles`);
     assert.dom("[data-test-role-name]").doesNotExist();
   });
 

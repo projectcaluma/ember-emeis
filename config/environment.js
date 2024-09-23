@@ -2,7 +2,7 @@
 
 module.exports = function (environment) {
   const ENV = {
-    modulePrefix: "ember-emeis",
+    modulePrefix: require("./../package").name,
     environment,
   };
 

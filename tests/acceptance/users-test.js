@@ -6,11 +6,11 @@ import {
   fillIn,
   waitUntil,
   settled,
+  waitFor,
 } from "@ember/test-helpers";
+import { setupApplicationTest } from "dummy/tests/helpers";
 import { setupMirage } from "ember-cli-mirage/test-support";
-import { timeout } from "ember-concurrency";
 import { setupIntl } from "ember-intl/test-support";
-import { setupApplicationTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
@@ -101,7 +101,7 @@ module("Acceptance | users", function (hooks) {
       "[data-test-filters-radio-buttons='active'] [data-test-filters-radio-buttons-button='off']"
     );
 
-    await timeout(100);
+    await waitFor("[data-test-user-username]");
 
     assert.dom("[data-test-user-username]").exists({
       count: users.filter((user) => user.isActive === false).length,
@@ -158,15 +158,15 @@ module("Acceptance | users", function (hooks) {
     assert.dom('[name="city"]').isRequired();
     assert.dom('[name="zip"]').isRequired();
 
-    const username = "newusername",
-      firstName = "John",
-      lastName = "Doe",
-      email = "john.doe@adfinis.com",
-      phone = "123 123 12 23",
-      language = "de",
-      address = "Somestreet 32",
-      city = "Sity",
-      zip = "2313";
+    const username = "newusername";
+    const firstName = "John";
+    const lastName = "Doe";
+    const email = "john.doe@adfinis.com";
+    const phone = "123 123 12 23";
+    const language = "de";
+    const address = "Somestreet 32";
+    const city = "Sity";
+    const zip = "2313";
 
     await fillIn('[name="username"]', username);
     await fillIn('[name="firstName"]', firstName);
@@ -208,15 +208,15 @@ module("Acceptance | users", function (hooks) {
     await click("[data-test-new]");
     assert.strictEqual(currentURL(), "/users/new");
 
-    const username = "newusername",
-      firstName = "John",
-      lastName = "Doe",
-      email = "john.doe@adfinis.com",
-      phone = "123 123 12 23",
-      language = "de",
-      address = "Somestreet 32",
-      city = "Sity",
-      zip = "2313";
+    const username = "newusername";
+    const firstName = "John";
+    const lastName = "Doe";
+    const email = "john.doe@adfinis.com";
+    const phone = "123 123 12 23";
+    const language = "de";
+    const address = "Somestreet 32";
+    const city = "Sity";
+    const zip = "2313";
 
     await fillIn('[name="username"]', username);
     await fillIn('[name="firstName"]', firstName);
@@ -249,7 +249,7 @@ module("Acceptance | users", function (hooks) {
     await waitUntil(() => currentURL() !== "/users/new");
 
     const user = this.server.schema.users.first();
-    assert.strictEqual(currentURL(), `/users/${user.id}?page=1`);
+    assert.strictEqual(currentURL(), `/users/${user.id}`);
 
     assert.dom('[name="username"]').hasValue(user.username);
     assert.dom('[name="firstName"]').hasValue(user.firstName);
@@ -332,6 +332,11 @@ module("Acceptance | users", function (hooks) {
 
     // Test back button
     await click("[data-test-acl-back]");
+    // For some reason without the settled here,
+    // the add-acl button does nothing and then
+    // the tests fails on the next click.
+    await settled();
+
     assert.dom("[data-test-acl-role]").doesNotExist();
     assert.dom("[data-test-acl-back]").doesNotExist();
     assert.dom("[data-test-add-acl]").exists();
@@ -342,7 +347,8 @@ module("Acceptance | users", function (hooks) {
     await click("button[data-test-select-role]");
     // For some reason the await click is not actually waiting for the fetch task to finish.
     // Probably some runloop issue.
-    await waitUntil(() => this.element.querySelector("table tr"));
+    await settled();
+
     assert.dom("[data-test-row]").exists({ count: 2 });
 
     await click("[data-test-row]");

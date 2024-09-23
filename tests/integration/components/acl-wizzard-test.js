@@ -1,8 +1,8 @@
 import { render, click, waitUntil } from "@ember/test-helpers";
+import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl } from "ember-intl/test-support";
-import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 module("Integration | Component | acl-wizzard", function (hooks) {
@@ -26,11 +26,11 @@ module("Integration | Component | acl-wizzard", function (hooks) {
 
     await render(
       hbs`<AclWizzard
-        @user={{this.user}}
-        @scope={{this.scope}}
-        @role={{this.role}}
-        @createAclEntry={{this.createAclEntry}}
-      />`
+  @user={{this.user}}
+  @scope={{this.scope}}
+  @role={{this.role}}
+  @createAclEntry={{this.createAclEntry}}
+/>`
     );
 
     assert.dom("[data-test-select-user]").doesNotExist();
@@ -52,11 +52,11 @@ module("Integration | Component | acl-wizzard", function (hooks) {
 
     await render(
       hbs`<AclWizzard
-        @user={{this.user}}
-        @scope={{this.scope}}
-        @role={{this.role}}
-        @createAclEntry={{this.createAclEntry}}
-      />`
+  @user={{this.user}}
+  @scope={{this.scope}}
+  @role={{this.role}}
+  @createAclEntry={{this.createAclEntry}}
+/>`
     );
     assert.dom("[data-test-select-user]").doesNotExist();
     assert.dom("[data-test-select-scope]").exists();
@@ -74,11 +74,11 @@ module("Integration | Component | acl-wizzard", function (hooks) {
 
     await render(
       hbs`<AclWizzard
-        @user={{this.user}}
-        @scope={{this.scope}}
-        @role={{this.role}}
-        @createAclEntry={{this.createAclEntry}}
-      />`
+  @user={{this.user}}
+  @scope={{this.scope}}
+  @role={{this.role}}
+  @createAclEntry={{this.createAclEntry}}
+/>`
     );
     assert.dom("[data-test-select-user]").doesNotExist();
     assert.dom("[data-test-select-scope]").exists();
@@ -92,11 +92,11 @@ module("Integration | Component | acl-wizzard", function (hooks) {
 
     await render(
       hbs`<AclWizzard
-        @user={{this.user}}
-        @scope={{this.scope}}
-        @role={{this.role}}
-        @createAclEntry={{this.createAclEntry}}
-      />`
+  @user={{this.user}}
+  @scope={{this.scope}}
+  @role={{this.role}}
+  @createAclEntry={{this.createAclEntry}}
+/>`
     );
     assert.dom("[data-test-select-user]").exists();
     assert.dom("[data-test-select-scope]").exists();

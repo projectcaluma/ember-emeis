@@ -1,4 +1,5 @@
 import Service from "@ember/service";
+import { isTesting, macroCondition } from "@embroider/macros";
 import { timeout } from "ember-concurrency";
 
 import TestButtonComponent from "../components/dummy-button/dummy-button"; // template and component file must have the same name (if not template only)
@@ -30,6 +31,7 @@ export default class EmeisOptionsService extends Service {
       },
     ],
     customComponent: TestButtonComponent,
+    filtersVisible: () => true,
     metaFields: [
       {
         slug: "megameta",
@@ -77,7 +79,9 @@ export default class EmeisOptionsService extends Service {
         label: "emeis.options.meta.scope.meta-example",
         type: "choice", // initially supported: "text", "choice"
         options: async () => {
-          await timeout(2000);
+          if (macroCondition(!isTesting())) {
+            await timeout(2000);
+          }
           return [
             {
               value: "Option 1",

@@ -1,9 +1,9 @@
 import { render, click, fillIn } from "@ember/test-helpers";
+import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { timeout } from "ember-concurrency";
 import { setupIntl } from "ember-intl/test-support";
-import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 module("Integration | Component | data-table", function (hooks) {
@@ -17,23 +17,20 @@ module("Integration | Component | data-table", function (hooks) {
     this.set("modelName", "role");
     const role = this.server.createList("role", 10)[0];
 
-    await render(hbs`
-      <DataTable @modelName={{this.modelName}} as |table|>
-        <table.head as |Column|>
-          <Column>Heading 1</Column>
-          <Column>Heading 2</Column>
-        </table.head>
-        <table.body as |body|>
-          <body.row>
-            {{log body.model.name}}
-            {{#let body.model as |role|}}
-              <td data-test-role-slug="{{role.slug}}">{{role.name}}</td>
-              <td>{{role.slug}}</td>
-            {{/let}}
-          </body.row>
-        </table.body>
-      </DataTable>
-    `);
+    await render(hbs`<DataTable @modelName={{this.modelName}} as |table|>
+  <table.head as |Column|>
+    <Column>Heading 1</Column>
+    <Column>Heading 2</Column>
+  </table.head>
+  <table.body as |body|>
+    <body.row>
+      {{#let body.model as |role|}}
+        <td data-test-role-slug="{{role.slug}}">{{role.name}}</td>
+        <td>{{role.slug}}</td>
+      {{/let}}
+    </body.row>
+  </table.body>
+</DataTable>`);
 
     assert.dom('form input[name="search"]').exists();
     assert.dom('form button[type="submit"]').exists();
@@ -63,29 +60,24 @@ module("Integration | Component | data-table", function (hooks) {
       return { meta: { pagination: { pages: 3 } } };
     };
 
-    await render(hbs`
-      <DataTable
-        @modelName={{this.modelName}}
-        @page={{this.page}}
-        as |table|>
-          <table.head as |Column|>
-            <Column @sort="one">
-              Heading One
-            </Column>
-            <Column>
-              Heading One
-            </Column>
-          </table.head>
-          <table.body as |body|>
-            <body.row>
-              {{#let body.model as |role|}}
-                <td>{{role.name}}</td>
-                <td>{{role.slug}}</td>
-              {{/let}}
-            </body.row>
-          </table.body>
-      </DataTable>
-    `);
+    await render(hbs`<DataTable @modelName={{this.modelName}} @page={{this.page}} as |table|>
+  <table.head as |Column|>
+    <Column @sort="one">
+      Heading One
+    </Column>
+    <Column>
+      Heading One
+    </Column>
+  </table.head>
+  <table.body as |body|>
+    <body.row>
+      {{#let body.model as |role|}}
+        <td>{{role.name}}</td>
+        <td>{{role.slug}}</td>
+      {{/let}}
+    </body.row>
+  </table.body>
+</DataTable>`);
 
     assert.dom("tfoot tr").exists();
 
@@ -148,33 +140,32 @@ module("Integration | Component | data-table", function (hooks) {
       return data;
     };
 
-    await render(hbs`
-      <DataTable
-        @modelName={{this.modelName}}
-        @include={{array "acls.role" "acls.scope"}}
-        as |table|>
-          <table.head as |Column|>
-            <Column @sort="one">
-              Heading One
-            </Column>
-            <Column>
-              Roles
-            </Column>
-            <Column>
-              Scopes
-            </Column>
-          </table.head>
-          <table.body as |body|>
-            <body.row>
-              {{#let body.model as |user|}}
-                <td>{{user.name}}</td>
-                <td>{{user.acls.role.name}}</td>
-                <td>{{user.acls.scope.name}}</td>
-              {{/let}}
-            </body.row>
-          </table.body>
-      </DataTable>
-    `);
+    await render(hbs`<DataTable
+  @modelName={{this.modelName}}
+  @include={{array "acls.role" "acls.scope"}}
+  as |table|
+>
+  <table.head as |Column|>
+    <Column @sort="one">
+      Heading One
+    </Column>
+    <Column>
+      Roles
+    </Column>
+    <Column>
+      Scopes
+    </Column>
+  </table.head>
+  <table.body as |body|>
+    <body.row>
+      {{#let body.model as |user|}}
+        <td>{{user.name}}</td>
+        <td>{{user.acls.role.name}}</td>
+        <td>{{user.acls.scope.name}}</td>
+      {{/let}}
+    </body.row>
+  </table.body>
+</DataTable>`);
 
     assert.dom("thead tr th:first-child").hasText("Heading One");
     assert.dom("thead tr th:last-child").hasText("Scopes");
@@ -195,20 +186,16 @@ module("Integration | Component | data-table", function (hooks) {
       return { meta: { pagination: { pages: 3 } } };
     };
 
-    await render(hbs`
-      <DataTable
-        @modelName="role"
-        as |table|>
-          <table.body as |body|>
-            <body.row>
-              {{#let body.model as |role|}}
-                <td>{{role.name}}</td>
-                <td>{{role.slug}}</td>
-              {{/let}}
-            </body.row>
-          </table.body>
-      </DataTable>
-    `);
+    await render(hbs`<DataTable @modelName="role" as |table|>
+  <table.body as |body|>
+    <body.row>
+      {{#let body.model as |role|}}
+        <td>{{role.name}}</td>
+        <td>{{role.slug}}</td>
+      {{/let}}
+    </body.row>
+  </table.body>
+</DataTable>`);
 
     assert.dom('form input[name="search"]').exists();
     assert.dom('form button[type="submit"]').exists();
@@ -230,22 +217,21 @@ module("Integration | Component | data-table", function (hooks) {
       return { meta: { pagination: { pages: 3 } } };
     };
 
-    await render(hbs`
-      <DataTable
-        @modelName="role"
-        @search={{this.search}}
-        @updateSearch={{set this.search}}
-        as |table|>
-          <table.body as |body|>
-            <body.row>
-              {{#let body.model as |role|}}
-                <td>{{role.name}}</td>
-                <td>{{role.slug}}</td>
-              {{/let}}
-            </body.row>
-          </table.body>
-      </DataTable>
-    `);
+    await render(hbs`<DataTable
+  @modelName="role"
+  @search={{this.search}}
+  @updateSearch={{set this "search"}}
+  as |table|
+>
+  <table.body as |body|>
+    <body.row>
+      {{#let body.model as |role|}}
+        <td>{{role.name}}</td>
+        <td>{{role.slug}}</td>
+      {{/let}}
+    </body.row>
+  </table.body>
+</DataTable>`);
 
     assert.dom('form input[name="search"]').exists();
     assert.dom('form button[type="submit"]').exists();

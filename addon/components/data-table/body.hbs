@@ -12,7 +12,11 @@
         <UkIcon
           @ratio="5"
           @icon={{or @emptyIcon "search"}}
-          class={{if @emptyIconColor (concat 'uk-text-' @emptyIconColor) "uk-margin-bottom"}}
+          class={{if
+            @emptyIconColor
+            (concat "uk-text-" @emptyIconColor)
+            "uk-margin-bottom"
+          }}
           data-test-loading
         />
         <span>

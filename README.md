@@ -9,14 +9,14 @@ The frontend for the [emeis](https://github.com/projectcaluma/emeis) user manage
 
 ## Compatibility
 
-- Ember.js v3.20 or above
-- Ember CLI v3.20 or above
-- Node.js v10 or above
+- Ember.js v3.28 or above
+- Ember CLI v3.28 or above
+- Node.js v14 or above
 
 ## Installation
 
 ```bash
-$ ember install ember-emeis
+ember install ember-emeis
 ```
 
 Then add the following lines to your `app/styles/app.scss`:
@@ -35,7 +35,8 @@ export default class App extends Application {
   this.engines = {
     "ember-emeis": {
       dependencies: {
-        services: ["store", "fetch", "intl", "notification", "router"],
+        services: ["store", "fetch", "intl", "notification", { "host-router": "router"
+}],
       },
     },
   };
@@ -49,7 +50,7 @@ Emeis requires the following services to be injects:
 - `fetch` - the user export requires a `fetch` services that handles authentication
 - `intl` - ember-intl for i18n
 - `notification` - handles success and error messages
-- `router` - the ember router service
+- `host-router` - the ember router service
 
 ## Configuration
 
@@ -127,7 +128,13 @@ export default class EmeisOptionsService extends Service {
     On each model edit view (e.g. users) you can define a custom component. The component will be rendered at the bottom of the edit view, but above the primary form buttons. Each component can be designed freely and the model will be passed into the component as `@model` argument. For a working demo have a look at our "dummy-button" at "dummy/app/components/dummy-button".
     */
     customComponent: DummyButton,
-    /* Exclusively on USER model - define a custom component which will get displayed next to the 'inacitve' pill on top of the user detail view. Ideally this will be an inline element.
+    /* 
+    Exclusively on USER model - Optionally hide the "active" / "inactive" filter buttons on top of the user list. You can pass
+    a function, boolean or string as value.
+    */
+    filtersVisible: () => true,
+    /* 
+    Exclusively on USER model - define a custom component which will get displayed next to the 'inacitve' pill on top of the user detail view. Ideally this will be an inline element.
      */
     statusComponent: DummyStatus,
   };
@@ -224,5 +231,3 @@ See the [Contributing](CONTRIBUTING.md) guide for details.
 # License
 
 This project is licensed under the [LGPL-3.0-or-later license](LICENSE).
-
-<3

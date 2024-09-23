@@ -1,13 +1,16 @@
 <form
   class="uk-form-stacked"
-  {{did-insert (set this.form)}}
+  {{did-insert (set this "form")}}
   {{on "submit" (perform this.save)}}
 >
   {{yield}}
 
   <div class="uk-flex uk-flex-left uk-margin">
     {{#if this.customComponent}}
-      {{#let (component (ensure-safe-component this.customComponent)) as |CustomComponent|}}
+      {{#let
+        (component (ensure-safe-component this.customComponent))
+        as |CustomComponent|
+      }}
         <CustomComponent @model={{@model}} />
       {{/let}}
     {{/if}}

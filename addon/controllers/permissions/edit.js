@@ -17,4 +17,8 @@ export default class PermissionsEditController extends Controller {
 
     return model;
   }
+
+  @action setRoles(roles) {
+    this.model.roles = roles;
+  }
 }

@@ -20,7 +20,7 @@ export default class App extends Application {
             "fetch",
             "intl",
             "notification",
-            "router",
+            { "host-router": "router" },
             "emeis-options",
           ],
         },

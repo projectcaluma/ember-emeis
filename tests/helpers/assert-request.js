@@ -58,15 +58,15 @@ export default function setupRequestAssertions(hooks) {
         ["GET", "POST", "DELETE", "PUT", "PATCH"].includes(method)
       );
 
-      const logging = this.server.logging,
-        pretender = this.server.pretender,
-        originalHandler = getAndCacheDefaultHandler(
-          pretender,
-          method,
-          path,
-          this.defaultHandlers
-        ),
-        server = this.server;
+      const logging = this.server.logging;
+      const pretender = this.server.pretender;
+      const originalHandler = getAndCacheDefaultHandler(
+        pretender,
+        method,
+        path,
+        this.defaultHandlers
+      );
+      const server = this.server;
 
       pretender[method.toLowerCase()](path, async function (request) {
         // Reset the get handler for this path to

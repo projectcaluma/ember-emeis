@@ -10,20 +10,23 @@ import { handleTaskErrors } from "ember-emeis/-private/decorators";
 export default class EditFormComponent extends Component {
   @service intl;
   @service notification;
-  @service router;
+  @service hostRouter;
   @service emeisOptions;
 
   get parentRouteName() {
-    return this.router.currentRoute.parent.name;
+    return this.hostRouter.currentRoute.parent.name;
   }
 
   get topLevelRouteName() {
-    return this.router.currentRoute.name.split(".").shift();
+    return this.hostRouter.currentRoute.name.split(".").shift();
   }
 
   get relativeParentRouteName() {
     // Remove the top level route
-    return this.router.currentRoute.parent.name.split(".").slice(1).join(".");
+    return this.hostRouter.currentRoute.parent.name
+      .split(".")
+      .slice(1)
+      .join(".");
   }
 
   get listViewRouteName() {
@@ -125,7 +128,7 @@ export default class EditFormComponent extends Component {
     this.notification.success(this.intl.t("emeis.form.save-success"));
 
     if (isNew) {
-      this.router.replaceWith(this.editViewRouteName, model);
+      this.hostRouter.replaceWith(this.editViewRouteName, model);
     }
   }
 
@@ -136,7 +139,7 @@ export default class EditFormComponent extends Component {
     yield this.args.model.destroyRecord();
     this.notification.success(this.intl.t("emeis.form.delete-success"));
 
-    this.router.replaceWith(
+    this.hostRouter.replaceWith(
       `${this.topLevelRouteName}.${this.relativeListViewRouteName}`
     );
   }

@@ -1,8 +1,8 @@
 import Service from "@ember/service";
 import { render, click, waitFor } from "@ember/test-helpers";
+import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupIntl } from "ember-intl/test-support";
-import { setupRenderingTest } from "ember-qunit";
 import { module, test } from "qunit";
 
 import DummyButton from "../../../components/dummy-button/dummy-button";
@@ -18,19 +18,7 @@ module("Integration | Component | edit-form", function (hooks) {
   setupIntl(hooks);
 
   hooks.beforeEach(function () {
-    this.owner.unregister("service:router");
-    this.owner.register(
-      "service:router",
-      class extends Service {
-        currentRoute = {
-          name: "ember-emeis.parent-route.edit",
-          parent: {
-            name: "ember-emeis.parent-route",
-          },
-        };
-      }
-    );
-    this.router = this.owner.lookup("service:router");
+    this.router = this.owner.lookup("service:hostRouter");
     this.owner.register("service:emeis-options", EmeisOptionsStub);
   });
 
@@ -41,7 +29,7 @@ module("Integration | Component | edit-form", function (hooks) {
   test("disableDelete", async function (assert) {
     assert.expect(3);
 
-    await render(hbs`<EditForm @disableDelete="true"/>`);
+    await render(hbs`<EditForm @disableDelete="true" />`);
 
     assert.dom("[data-test-toggle-active]").doesNotExist();
     assert.dom("[data-test-delete]").doesNotExist();
@@ -64,11 +52,9 @@ module("Integration | Component | edit-form", function (hooks) {
       },
     });
 
-    await render(hbs`
-      <EditForm @model={{this.model}} @updateModel={{this.updateModel}}>
-        <input name="test">
-      </EditForm>
-    `);
+    await render(hbs`<EditForm @model={{this.model}} @updateModel={{this.updateModel}}>
+  <input name="test" />
+</EditForm>`);
 
     await click("[data-test-toggle-active]");
     assert.verifySteps(["save"]);
@@ -91,7 +77,7 @@ module("Integration | Component | edit-form", function (hooks) {
       },
     });
 
-    await render(hbs`<EditForm @model={{this.model}}/>`);
+    await render(hbs`<EditForm @model={{this.model}} />`);
 
     await click("[data-test-delete]");
     await waitFor(".uk-modal.uk-open");
@@ -125,11 +111,9 @@ module("Integration | Component | edit-form", function (hooks) {
       },
     });
 
-    await render(hbs`
-      <EditForm @model={{this.model}} @updateModel={{this.updateModel}}>
-        <input name="test">
-      </EditForm>
-    `);
+    await render(hbs`<EditForm @model={{this.model}} @updateModel={{this.updateModel}}>
+  <input name="test" />
+</EditForm>`);
 
     await click("[data-test-save]");
     assert.verifySteps(["updateModel", "save", "replaceWith"]);
@@ -139,9 +123,7 @@ module("Integration | Component | edit-form", function (hooks) {
     assert.expect(4);
     this.router.currentRoute.parent.name = "ember-emeis.users.edit";
 
-    await render(hbs`
-      <EditForm></EditForm>
-    `);
+    await render(hbs`<EditForm />`);
 
     assert.dom("[data-test-custom-component]").exists();
     assert.dom("[data-test-custom-component].uk-button-danger").exists();

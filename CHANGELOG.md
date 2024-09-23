@@ -1,3 +1,97 @@
+# [8.1.0](https://github.com/projectcaluma/ember-emeis/compare/v8.0.1...v8.1.0) (2023-10-13)
+
+
+### Features
+
+* **user:** filter export ([#722](https://github.com/projectcaluma/ember-emeis/issues/722)) ([2b53e45](https://github.com/projectcaluma/ember-emeis/commit/2b53e453f7d812d2457710db69fa51ffbe7e9139))
+
+## [8.0.1](https://github.com/projectcaluma/ember-emeis/compare/v8.0.0...v8.0.1) (2023-08-17)
+
+
+### Bug Fixes
+
+* mount point of the package ([#707](https://github.com/projectcaluma/ember-emeis/issues/707)) ([2caca26](https://github.com/projectcaluma/ember-emeis/commit/2caca26f04052709e322453a91706825911f43d4))
+
+# [8.0.0](https://github.com/projectcaluma/ember-emeis/compare/v7.0.0...v8.0.0) (2023-07-05)
+
+
+### chore
+
+* udpate to ember 4.12 and make embroider optimized ([37cdaed](https://github.com/projectcaluma/ember-emeis/commit/37cdaeda348f17d3a6e7a4e34fb9a1ef88a19700))
+* update to ember v4 ([04865f1](https://github.com/projectcaluma/ember-emeis/commit/04865f1d0e947a6b90a6a34082f9197ab8f7557a))
+
+
+### Code Refactoring
+
+* rename `router` service dependency to `hostRouter` ([855a842](https://github.com/projectcaluma/ember-emeis/commit/855a84276f1111e530aba5dcb554db602b09f9df))
+
+
+### BREAKING CHANGES
+
+* - Ember.js v3.28 or above
+- Ember CLI v3.28 or above
+- Node.js v14 or above
+* - Rename `router` service dependency to `hostRouter` due to deprecation
+
+Deprecation id: ember-engines.deprecation-router-service-from-host
+* - Ember.js v3.28 or above
+- Ember CLI v3.28 or above
+- Node.js v16 or above
+
+# [7.0.0](https://github.com/projectcaluma/ember-emeis/compare/v6.3.2...v7.0.0) (2023-05-16)
+
+
+### Bug Fixes
+
+* confirm task tests ([#669](https://github.com/projectcaluma/ember-emeis/issues/669)) ([01db8a2](https://github.com/projectcaluma/ember-emeis/commit/01db8a235aa270f5f58b67594126966f52e929cd))
+* **scopes:** show updated parent after selection ([#665](https://github.com/projectcaluma/ember-emeis/issues/665)) ([2eb3440](https://github.com/projectcaluma/ember-emeis/commit/2eb3440e335a95739cb25fd5438b0c2863611699))
+
+
+### chore
+
+* adapt ember try scenarios ([#670](https://github.com/projectcaluma/ember-emeis/issues/670)) ([f9e530b](https://github.com/projectcaluma/ember-emeis/commit/f9e530b93e4f22765bdb418326920a7c18fa0a1c))
+
+
+### BREAKING CHANGES
+
+* drop support for ember v3.24
+
+* chore(deps): update ember-ty to v3.0.0-beta.1
+
+Prevents local build error.
+
+* test(confirm-task): revert waitUntil calls
+
+* fix(confirm-task): catch nested promise rejection
+
+* test(confirm-task): skip flaky test
+* drop support for ember v3.24
+
+* chore(deps): update ember-ty to v3.0.0-beta.1
+
+Prevents local build error.
+
+## [6.3.2](https://github.com/projectcaluma/ember-emeis/compare/v6.3.1...v6.3.2) (2023-05-09)
+
+
+### Bug Fixes
+
+* **scopes:** prevent circular relation selection ([#656](https://github.com/projectcaluma/ember-emeis/issues/656)) ([ecfcc97](https://github.com/projectcaluma/ember-emeis/commit/ecfcc97ac777a6cb44c724c7c02b128aec11b8b1))
+
+## [6.3.1](https://github.com/projectcaluma/ember-emeis/compare/v6.3.0...v6.3.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* typo in user filter visibility setting ([#649](https://github.com/projectcaluma/ember-emeis/issues/649)) ([ef9c07b](https://github.com/projectcaluma/ember-emeis/commit/ef9c07b1f765d94f5d466c0fa734f98c22c370de))
+
+# [6.3.0](https://github.com/projectcaluma/ember-emeis/compare/v6.2.4...v6.3.0) (2023-04-17)
+
+
+### Features
+
+* **emeisOptions:** make user filter optionally visible ([#648](https://github.com/projectcaluma/ember-emeis/issues/648)) ([107b7de](https://github.com/projectcaluma/ember-emeis/commit/107b7de222e548d1e10748e14eb817f79aa95294))
+
 ## [6.2.4](https://github.com/projectcaluma/ember-emeis/compare/v6.2.3...v6.2.4) (2022-11-18)
 
 

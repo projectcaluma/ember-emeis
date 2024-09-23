@@ -8,7 +8,7 @@ import { trackedTask } from "ember-resources/util/ember-concurrency";
 
 export default class DataTableComponent extends Component {
   @service store;
-  @service router;
+  @service hostRouter;
   @service emeisOptions;
 
   @tracked numPages;
@@ -29,7 +29,7 @@ export default class DataTableComponent extends Component {
   get sort() {
     return (
       this.internalSort ||
-      this.router?.currentRoute?.queryParams?.sort ||
+      this.hostRouter?.currentRoute?.queryParams?.sort ||
       this.args.defaultSort
     );
   }

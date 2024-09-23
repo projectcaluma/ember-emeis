@@ -1,103 +1,119 @@
 <div uk-grid class="uk-grid-divider uk-grid-divider-fix">
-    <div class="uk-width-1-2@xl">
-      <h3>{{t "emeis.scopes.edit.edit-scope"}}
-        {{#unless @model.isActive}}
-          <span class="uk-badge uk-background-secondary">{{t "emeis.inactive"}}</span>
-        {{/unless}}
-      </h3>
-      <EditForm
-        @model={{@model}}
-        @updateModel={{this.updateModel}}
-        @listViewRouteName="scopes.index"
+  <div class="uk-width-1-2@xl">
+    <h3>{{t "emeis.scopes.edit.edit-scope"}}
+      {{#unless @model.isActive}}
+        <span class="uk-badge uk-background-secondary">{{t
+            "emeis.inactive"
+          }}</span>
+      {{/unless}}
+    </h3>
+    <EditForm
+      @model={{@model}}
+      @updateModel={{this.updateModel}}
+      @listViewRouteName="scopes.index"
+    >
+      <EditForm::Element @label={{t "emeis.scopes.headings.fullName"}}>
+        <input
+          class="uk-input"
+          type="text"
+          name="name"
+          placeholder="{{t 'emeis.scopes.headings.fullName'}}..."
+          required
+          value={{@model.name}}
+        />
+      </EditForm::Element>
+
+      <EditForm::Element
+        @label={{t "emeis.scopes.headings.description"}}
+        @optional={{true}}
       >
-        <EditForm::Element @label={{t "emeis.scopes.headings.fullName"}}>
-          <input
-            class="uk-input"
-            type="text"
-            name="name"
-            placeholder="{{t "emeis.scopes.headings.fullName"}}..."
-            required
-            value={{@model.name}}
-          />
-        </EditForm::Element>
+        <textarea
+          class="uk-textarea"
+          rows="5"
+          name="description"
+          placeholder="{{t 'emeis.scopes.headings.description'}}..."
+          value={{@model.description}}
+        ></textarea>
+      </EditForm::Element>
 
-        <EditForm::Element @label={{t "emeis.scopes.headings.description"}} @optional={{true}}>
-          <textarea
-            class="uk-textarea"
-            rows="5"
-            name="description"
-            placeholder="{{t "emeis.scopes.headings.description"}}..."
-            value={{@model.description}}
-          ></textarea>
-        </EditForm::Element>
-
-        <EditForm::Element @label={{t "emeis.scopes.headings.parent"}} @optional={{true}}>
-          <RelationshipSelect
-            @model={{sort-by "fullName" this.allScopes}}
-            @selected={{@model.parent}}
-            @placeholder="{{t "emeis.scopes.headings.parent"}}..."
-            @onChange={{this.setParent}} as |scope|
-          >
-            {{scope.fullName}}
-          </RelationshipSelect>
-        </EditForm::Element>
-
-        {{#each this.metaFields as |field|}}
-          <MetaField @field={{field}} @model={{@model}} @optional={{unless field.required true}} />
-        {{/each}}
-
-      </EditForm>
-    </div>
-    <div class="uk-width-1-2@xl">
-      <DataTable
-        @heading={{t "emeis.scopes.edit.acl.title"}}
-        @modelName="acl"
-        @filter={{this.queryParamsfilter}}
-        @include="user,role,scope"
-        @page={{this.page}}
-        @search={{this.search}}
-        @updatePage={{fn this.updateQueryParam "page"}}
-        @updateSearch={{fn this.updateQueryParam "search"}} as |table|
+      <EditForm::Element
+        @label={{t "emeis.scopes.headings.parent"}}
+        @optional={{true}}
       >
-        <table.head>
-          <th>
-            {{t "emeis.acl-table.headings.name"}}
-          </th>
-          <th>
-            {{t "emeis.acl-table.headings.user"}}
-          </th>
-          <th>
-            {{t "emeis.acl-table.headings.role"}}
-          </th>
-        </table.head>
-        {{#if @model.isNew}}
-          <tbody>
-            <tr>
-              <td colspan="99" class="uk-text-center">{{t "emeis.scopes.aclHint"}}</td>
-            </tr>
-          </tbody>
-        {{else}}
-          <table.body
-            @emptyIcon="warning"
-            @emptyIconColor="warning"
-            @emptyWarning={{t "emeis.scopes.emptyAclList"}}
-            as |body|
-          >
-            <body.row>
-              {{#let body.model as |aclEntry|}}
-                <td data-test-acl-name={{aclEntry.id}}>
-                  {{concat aclEntry.user.firstName " " aclEntry.user.lastName}}
-                </td>
-                <td data-test-acl-username={{aclEntry.id}}>
-                  {{aclEntry.user.username}}
-                </td>
-                <td data-test-acl-role={{aclEntry.id}}>
-                  {{aclEntry.role.name}}
-                </td>
-              {{/let}}
-            </body.row>
-          </table.body>
-        {{/if}}
-      </DataTable>
-    </div>
+        <RelationshipSelect
+          @model={{sort-by "fullName" this.allOtherScopes}}
+          @selected={{this.parent}}
+          @placeholder="{{t 'emeis.scopes.headings.parent'}}..."
+          @onChange={{this.setParent}}
+          as |scope|
+        >
+          {{scope.fullName}}
+        </RelationshipSelect>
+      </EditForm::Element>
+
+      {{#each this.metaFields as |field|}}
+        <MetaField
+          @field={{field}}
+          @model={{@model}}
+          @optional={{unless field.required true}}
+        />
+      {{/each}}
+
+    </EditForm>
+  </div>
+  <div class="uk-width-1-2@xl">
+    <DataTable
+      @heading={{t "emeis.scopes.edit.acl.title"}}
+      @modelName="acl"
+      @filter={{this.queryParamsfilter}}
+      @include="user,role,scope"
+      @page={{this.page}}
+      @search={{this.search}}
+      @updatePage={{fn this.updateQueryParam "page"}}
+      @updateSearch={{fn this.updateQueryParam "search"}}
+      as |table|
+    >
+      <table.head>
+        <th>
+          {{t "emeis.acl-table.headings.name"}}
+        </th>
+        <th>
+          {{t "emeis.acl-table.headings.user"}}
+        </th>
+        <th>
+          {{t "emeis.acl-table.headings.role"}}
+        </th>
+      </table.head>
+      {{#if @model.isNew}}
+        <tbody>
+          <tr>
+            <td colspan="99" class="uk-text-center">{{t
+                "emeis.scopes.aclHint"
+              }}</td>
+          </tr>
+        </tbody>
+      {{else}}
+        <table.body
+          @emptyIcon="warning"
+          @emptyIconColor="warning"
+          @emptyWarning={{t "emeis.scopes.emptyAclList"}}
+          as |body|
+        >
+          <body.row>
+            {{#let body.model as |aclEntry|}}
+              <td data-test-acl-name={{aclEntry.id}}>
+                {{concat aclEntry.user.firstName " " aclEntry.user.lastName}}
+              </td>
+              <td data-test-acl-username={{aclEntry.id}}>
+                {{aclEntry.user.username}}
+              </td>
+              <td data-test-acl-role={{aclEntry.id}}>
+                {{aclEntry.role.name}}
+              </td>
+            {{/let}}
+          </body.row>
+        </table.body>
+      {{/if}}
+    </DataTable>
+  </div>
 </div>

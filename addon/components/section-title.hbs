@@ -15,7 +15,11 @@
       </UkButton>
     {{/if}}
     {{#unless @noCreateLink}}
-      <LinkTo @route="{{@model}}.new" class="uk-button uk-button-primary" data-test-new>
+      <LinkTo
+        @route="{{@model}}.new"
+        class="uk-button uk-button-primary"
+        data-test-new
+      >
         {{t (concat "emeis." @model ".new")}}
       </LinkTo>
     {{/unless}}
