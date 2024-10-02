@@ -44,11 +44,11 @@
   "dependencies": {
     "@ember/legacy-built-in-components": "^0.4.2",
     "@ember/render-modifiers": "^2.0.5",
-    "@embroider/macros": "^1.13.2",
+    "@embroider/macros": "^1.16.6",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
-    "ember-auto-import": "^2.5.0",
-    "ember-cli-babel": "^7.26.11",
+    "ember-auto-import": "^2.8.1",
+    "ember-cli-babel": "^8.2.0",
     "ember-cli-htmlbars": "^6.3.0",
     "ember-composable-helpers": "^5.0.0",
     "ember-concurrency": "^2.1.2",
@@ -68,24 +68,24 @@
   "devDependencies": {
     "@adfinis/eslint-config": "2.0.0",
     "@adfinis/semantic-release-config": "4.0.0",
-    "@babel/core": "7.22.9",
-    "@babel/eslint-parser": "7.22.6",
-    "@babel/plugin-proposal-decorators": "7.23.2",
+    "@babel/core": "7.25.2",
+    "@babel/eslint-parser": "7.25.1",
+    "@babel/plugin-proposal-decorators": "7.24.7",
     "@commitlint/cli": "17.6.6",
     "@commitlint/config-conventional": "17.6.6",
-    "@ember/optional-features": "2.0.0",
+    "@ember/optional-features": "2.1.0",
     "@ember/test-helpers": "2.9.4",
-    "@embroider/compat": "3.1.4",
-    "@embroider/core": "3.1.2",
-    "@embroider/test-setup": "3.0.1",
-    "@embroider/webpack": "3.1.2",
+    "@embroider/compat": "3.6.1",
+    "@embroider/core": "3.4.16",
+    "@embroider/test-setup": "4.0.0",
+    "@embroider/webpack": "4.0.5",
     "@faker-js/faker": "6.2.0",
     "broccoli-asset-rev": "3.0.0",
     "concurrently": "7.6.0",
     "ember-cli": "4.12.1",
     "ember-cli-dependency-checker": "3.3.2",
     "ember-cli-inject-live-reload": "2.1.0",
-    "ember-cli-mirage": "3.0.0-alpha.3",
+    "ember-cli-mirage": "3.0.4",
     "ember-cli-sass": "11.0.1",
     "ember-cli-sri": "2.1.1",
     "ember-cli-uglify": "3.0.0",
@@ -117,7 +117,7 @@
     "qunit": "2.19.4",
     "qunit-dom": "2.0.0",
     "sass": "1.63.6",
-    "webpack": "5.91.0"
+    "webpack": "5.95.0"
   },
   "peerDependencies": {
     "ember-source": "^3.28.0 || ^4.0.0"
@@ -133,11 +133,5 @@
   },
   "release": {
     "extends": "@adfinis/semantic-release-config"
-  },
-  "//": [
-    "TODO(miragejs): conflicts with ember-cli-mirage in floating dependencies test"
-  ],
-  "resolutions": {
-    "miragejs": "0.1.47"
   }
 }
