@@ -80,7 +80,7 @@
     "@embroider/core": "3.4.19",
     "@embroider/test-setup": "4.0.0",
     "@embroider/webpack": "4.0.8",
-    "@faker-js/faker": "6.2.0",
+    "@faker-js/faker": "9.2.0",
     "broccoli-asset-rev": "3.0.0",
     "concurrently": "7.6.0",
     "ember-cli": "4.12.1",
