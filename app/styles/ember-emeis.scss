@@ -4,6 +4,7 @@
 $ember-power-select-default-border-radius: 0;
 $ember-power-select-border-color: $global-border;
 @import "ember-power-select";
+@import "ember-basic-dropdown";
 
 /* GENERAL INPUTS */
 [class*="uk-width-"] {
