@@ -46,7 +46,6 @@
     "*.{scss,graphql,json,md,yml}": "prettier --write"
   },
   "dependencies": {
-    "@babel/core": "^7.28.4",
     "@ember/legacy-built-in-components": "^0.5.0",
     "@ember/render-modifiers": "^2.0.5",
     "@embroider/macros": "^1.16.9",
@@ -75,6 +74,7 @@
   "devDependencies": {
     "@adfinis/eslint-config": "3.0.2",
     "@adfinis/semantic-release-config": "4.0.0",
+    "@babel/core": "7.28.4",
     "@babel/eslint-parser": "7.28.4",
     "@babel/plugin-proposal-decorators": "7.28.0",
     "@commitlint/cli": "17.6.6",
