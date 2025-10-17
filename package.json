@@ -44,7 +44,6 @@
   "dependencies": {
     "@ember/legacy-built-in-components": "^0.4.2",
     "@ember/render-modifiers": "^2.0.5",
-    "@ember/string": "^4.0.0",
     "@embroider/macros": "^1.16.9",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
