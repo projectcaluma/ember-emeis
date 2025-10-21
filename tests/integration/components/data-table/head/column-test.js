@@ -35,10 +35,10 @@ module("Integration | Component | data-table/head/column", function (hooks) {
 
   test("it toggles sort state", async function (assert) {
     await render(hbs`<DataTable::Head @sortedBy={{this.sort}} @update={{this.update}} as |Column|>
-  <Column @sort={{"last_name"}}>
+  <Column @sort="last_name">
     one
   </Column>
-  <Column @sort={{"first_name"}}>
+  <Column @sort="first_name">
     two
   </Column>
 </DataTable::Head>`);
