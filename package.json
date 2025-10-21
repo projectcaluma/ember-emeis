@@ -67,7 +67,6 @@
     "ember-test-selectors": "^7.1.0",
     "ember-truth-helpers": "^4.0.3",
     "ember-uikit": "^9.1.4",
-    "eslint-plugin-prettier": "^5.5.4",
     "file-saver": "^2.0.5",
     "reactiveweb": "^1.9.0",
     "tracked-toolbox": "^2.0.0"
@@ -118,6 +117,7 @@
     "eslint-plugin-ember": "12.5.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-n": "17.17.0",
+    "eslint-plugin-prettier": "5.5.4",
     "eslint-plugin-qunit": "8.1.2",
     "globals": "15.15.0",
     "husky": "8.0.3",
@@ -133,6 +133,7 @@
     "sass": "1.63.6",
     "stylelint": "16.19.1",
     "stylelint-config-standard": "36.0.1",
+    "stylelint-prettier": "5.0.3",
     "webpack": "5.99.7"
   },
   "peerDependencies": {
