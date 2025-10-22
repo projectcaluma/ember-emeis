@@ -63,11 +63,11 @@ export default class UsersIndexController extends PaginationController {
       Object.entries(this.filters).map(([key, value]) => [
         `filter[${key}]`,
         value,
-      ])
+      ]),
     );
     const queryParams = new URLSearchParams(filters).toString();
     const response = yield this.fetch.fetch(
-      `/api/v1/users/export?${queryParams}`
+      `/api/v1/users/export?${queryParams}`,
     );
 
     const filename = response.headers

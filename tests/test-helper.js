@@ -1,10 +1,10 @@
-import Application from 'dummy/app';
-import config from 'dummy/config/environment';
-import * as QUnit from 'qunit';
-import { setApplication } from '@ember/test-helpers';
-import { setup } from 'qunit-dom';
-import { loadTests } from 'ember-qunit/test-loader';
-import { start, setupEmberOnerrorValidation } from 'ember-qunit';
+import { setApplication } from "@ember/test-helpers";
+import Application from "dummy/app";
+import config from "dummy/config/environment";
+import { start, setupEmberOnerrorValidation } from "ember-qunit";
+import { loadTests } from "ember-qunit/test-loader";
+import * as QUnit from "qunit";
+import { setup } from "qunit-dom";
 
 setApplication(Application.create(config.APP));
 

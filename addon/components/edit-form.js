@@ -83,7 +83,7 @@ export default class EditFormComponent extends Component {
       return label;
     }
     return this.intl.t(
-      `emeis.form.${this.args.model.isActive ? "deactivate" : "activate"}`
+      `emeis.form.${this.args.model.isActive ? "deactivate" : "activate"}`,
     );
   }
 
@@ -110,8 +110,8 @@ export default class EditFormComponent extends Component {
       this.intl.t(
         activeState
           ? "emeis.form.deactivate-success"
-          : "emeis.form.activate-success"
-      )
+          : "emeis.form.activate-success",
+      ),
     );
   }
 
@@ -140,7 +140,7 @@ export default class EditFormComponent extends Component {
     this.notification.success(this.intl.t("emeis.form.delete-success"));
 
     this.hostRouter.replaceWith(
-      `${this.topLevelRouteName}.${this.relativeListViewRouteName}`
+      `${this.topLevelRouteName}.${this.relativeListViewRouteName}`,
     );
   }
 }

@@ -16,7 +16,7 @@ async function confirm(text, options) {
   try {
     await UIkit.modal.confirm(text, options);
     return true;
-  } catch (error) {
+  } catch {
     return false;
   }
 }
@@ -25,7 +25,7 @@ function initOptions(args) {
   if (args.length === 1) {
     assert(
       "You should pass the confirm-task options as an object looking like this: { message: 'emeis.form.deleteMessage', cancel: 'emeis.form.back' } ",
-      typeof args[0] === "object"
+      typeof args[0] === "object",
     );
     return args[0];
   }
@@ -35,7 +35,7 @@ function initOptions(args) {
 function validateIntl(context) {
   assert(
     "Inject the `intl` service into your component to properly translate the modal dialog.",
-    context.intl
+    context.intl,
   );
 }
 
@@ -60,7 +60,7 @@ function translateOptions(context, options) {
 
 function filterOptions(options) {
   const filteredOptions = Object.fromEntries(
-    Object.entries(options).filter(([key]) => !LABELS.includes(key))
+    Object.entries(options).filter(([key]) => !LABELS.includes(key)),
   );
 
   if (ENV.environment === "test") {

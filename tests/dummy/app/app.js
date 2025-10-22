@@ -1,11 +1,11 @@
-import Application from '@ember/application';
-import Resolver from 'ember-resolver';
-import loadInitializers from 'ember-load-initializers';
-import config from 'dummy/config/environment';
-import { importSync, isDevelopingApp, macroCondition } from '@embroider/macros';
+import Application from "@ember/application";
+import { importSync, isDevelopingApp, macroCondition } from "@embroider/macros";
+import config from "dummy/config/environment";
+import loadInitializers from "ember-load-initializers";
+import Resolver from "ember-resolver";
 
 if (macroCondition(isDevelopingApp())) {
-  importSync('./deprecation-workflow');
+  importSync("./deprecation-workflow");
 }
 
 export default class App extends Application {

@@ -48,7 +48,7 @@ module("Integration | Component | meta-field", function (hooks) {
     });
 
     await render(
-      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`
+      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`,
     );
 
     assert.dom(".ember-power-select-trigger").exists();
@@ -72,7 +72,7 @@ module("Integration | Component | meta-field", function (hooks) {
     });
 
     await render(
-      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`
+      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`,
     );
 
     assert.dom("[data-test-meta-field-text]").exists({ count: 1 });
@@ -96,7 +96,7 @@ module("Integration | Component | meta-field", function (hooks) {
     });
 
     await render(
-      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`
+      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`,
     );
 
     assert.dom(".ember-power-select-trigger").doesNotExist();
@@ -141,7 +141,7 @@ module("Integration | Component | meta-field", function (hooks) {
     });
 
     await render(
-      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`
+      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`,
     );
 
     assert

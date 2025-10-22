@@ -6,7 +6,7 @@ module.exports = {
 
   afterInstall(options) {
     this.ui.writeLine(
-      `\nFinished! To make your service avaliable in the engine add the following to your engine definitions dependencies in app.js: \`{"store": "${options.entity.name}"}\``
+      `\nFinished! To make your service avaliable in the engine add the following to your engine definitions dependencies in app.js: \`{"store": "${options.entity.name}"}\``,
     );
   },
 };

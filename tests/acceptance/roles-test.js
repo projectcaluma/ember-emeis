@@ -201,7 +201,7 @@ module("Acceptance | roles", function (hooks) {
     await settled();
     assert.dom("[data-test-permissions]").exists();
     await waitUntil(
-      () => findAll("[data-test-permissions] [data-test-row]").length > 1
+      () => findAll("[data-test-permissions] [data-test-row]").length > 1,
     );
     assert.dom("[data-test-permissions] [data-test-row]").exists({ count: 10 });
   });

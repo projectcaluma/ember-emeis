@@ -58,7 +58,7 @@ module("Acceptance | scopes", function (hooks) {
     await waitUntil(
       () =>
         this.element.querySelector(".ember-power-select-placeholder")
-          .innerText !== "Loading..."
+          .innerText !== "Loading...",
     );
 
     assert.dom('[name="name"]').hasValue(scope.name.en);
@@ -74,7 +74,7 @@ module("Acceptance | scopes", function (hooks) {
 
     this.assertRequest("PATCH", `/api/v1/scopes/${scope.id}`, (request) => {
       const { attributes, relationships } = JSON.parse(
-        request.requestBody
+        request.requestBody,
       ).data;
 
       assert.strictEqual(attributes.name.en, name);
@@ -132,7 +132,7 @@ module("Acceptance | scopes", function (hooks) {
     await waitUntil(
       () =>
         this.element.querySelector(".ember-power-select-placeholder")
-          .innerText !== "Loading..."
+          .innerText !== "Loading...",
     );
     this.assertRequest("DELETE", `/api/v1/scopes/:id`, (request) => {
       assert.strictEqual(scope.id, request.params.id);
@@ -161,7 +161,6 @@ module("Acceptance | scopes", function (hooks) {
 
     await visit(`/scopes/${scope.id}`);
     // Needed because otherwise it wont wait for the <DataTable/>.
-    await settled();
 
     assert.dom("[data-test-acl-role]").exists({ count: 3 });
 

@@ -90,7 +90,7 @@ export default class DataTableComponent extends Component {
 
     assert(
       "Must pass a model name as string",
-      typeof this.args.modelName === "string"
+      typeof this.args.modelName === "string",
     );
 
     try {
@@ -117,7 +117,7 @@ export default class DataTableComponent extends Component {
     } catch (error) {
       console.error(
         "Non-standard JSON:API response while fetching table data.",
-        error
+        error,
       );
     }
   }

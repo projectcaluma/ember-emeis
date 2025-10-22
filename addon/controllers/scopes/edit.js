@@ -30,7 +30,7 @@ export default class ScopesEditIndexController extends PaginationController {
       .peekAll("scope")
       .filter(
         (scope) =>
-          scope.id !== this.model?.id && !this.childScopeIds.includes(scope.id)
+          scope.id !== this.model?.id && !this.childScopeIds.includes(scope.id),
       );
   }
 

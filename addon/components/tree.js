@@ -38,8 +38,8 @@ export default class TreeComponent extends Component {
     return this.args.activeItem?.findParents
       ? this.args.activeItem?.findParents()
       : rootNodes.length === 1
-      ? rootNodes
-      : [];
+        ? rootNodes
+        : [];
   }
 
   @restartableTask
@@ -51,21 +51,21 @@ export default class TreeComponent extends Component {
     const filterItems = (
       items,
       searchTerm = this.filterValue,
-      includedKeys = ["name"]
+      includedKeys = ["name"],
     ) => {
       if (!searchTerm || !items || !isArray(items)) {
         return [];
       }
       const ownMatches = items.filter((item) =>
         includedKeys.find((key) =>
-          item[key]?.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+          item[key]?.toLowerCase().includes(searchTerm.toLowerCase()),
+        ),
       );
 
       const childMatches = items
         .filter((item) => item.children)
         .flatMap((item) =>
-          filterItems(item.children, searchTerm, includedKeys)
+          filterItems(item.children, searchTerm, includedKeys),
         );
       return [...ownMatches, ...childMatches];
     };

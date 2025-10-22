@@ -22,7 +22,7 @@ export default class TreeNodeComponent extends Component {
     ) {
       this.hostRouter.transitionTo(
         this.hostRouter.currentRoute.name,
-        this.args.item.id
+        this.args.item.id,
       );
     }
   }
@@ -50,7 +50,7 @@ export default class TreeNodeComponent extends Component {
       this.args.expandedItems?.includes(item)
     ) {
       return item.children.filter((child) =>
-        this.args.expandedItems.includes(child)
+        this.args.expandedItems.includes(child),
       );
     }
     return item.children;

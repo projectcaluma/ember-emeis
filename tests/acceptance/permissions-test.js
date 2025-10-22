@@ -113,13 +113,13 @@ module("Acceptance | permissions", function (hooks) {
       `/api/v1/permissions/${permission.id}`,
       (request) => {
         const { attributes, relationships } = JSON.parse(
-          request.requestBody
+          request.requestBody,
         ).data;
 
         assert.strictEqual(attributes.name.en, name);
         assert.strictEqual(attributes.description.en, description);
         assert.strictEqual(relationships.roles.data[0].id, role.id);
-      }
+      },
     );
     await click("[data-test-save]");
 
@@ -150,7 +150,7 @@ module("Acceptance | permissions", function (hooks) {
 
     this.assertRequest("POST", "/api/v1/permissions", (request) => {
       const { attributes, relationships } = JSON.parse(
-        request.requestBody
+        request.requestBody,
       ).data;
 
       assert.strictEqual(attributes.slug, slug);

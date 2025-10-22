@@ -14,7 +14,6 @@ module("Integration | Component | nav/item", function (hooks) {
       @tracked name = "someotherroute";
     }
 
-    // eslint-disable-next-line ember/no-private-routing-service
     this.router = this.owner.lookup("service:hostRouter");
     this.router.currentRoute = new CurrentRoute();
 

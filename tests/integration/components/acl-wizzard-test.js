@@ -30,7 +30,7 @@ module("Integration | Component | acl-wizzard", function (hooks) {
   @scope={{this.scope}}
   @role={{this.role}}
   @createAclEntry={{this.createAclEntry}}
-/>`
+/>`,
     );
 
     assert.dom("[data-test-select-user]").doesNotExist();
@@ -56,7 +56,7 @@ module("Integration | Component | acl-wizzard", function (hooks) {
   @scope={{this.scope}}
   @role={{this.role}}
   @createAclEntry={{this.createAclEntry}}
-/>`
+/>`,
     );
     assert.dom("[data-test-select-user]").doesNotExist();
     assert.dom("[data-test-select-scope]").exists();
@@ -78,7 +78,7 @@ module("Integration | Component | acl-wizzard", function (hooks) {
   @scope={{this.scope}}
   @role={{this.role}}
   @createAclEntry={{this.createAclEntry}}
-/>`
+/>`,
     );
     assert.dom("[data-test-select-user]").doesNotExist();
     assert.dom("[data-test-select-scope]").exists();
@@ -96,7 +96,7 @@ module("Integration | Component | acl-wizzard", function (hooks) {
   @scope={{this.scope}}
   @role={{this.role}}
   @createAclEntry={{this.createAclEntry}}
-/>`
+/>`,
     );
     assert.dom("[data-test-select-user]").exists();
     assert.dom("[data-test-select-scope]").exists();
