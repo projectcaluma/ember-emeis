@@ -3,7 +3,7 @@ import ember from "eslint-plugin-ember";
 
 export default [
   {
-    ignores: ["/blueprints/**", "node_modules/**"],
+    ignores: ["blueprints/**", "node_modules/**"],
   },
   {
     plugins: { ember },
