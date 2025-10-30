@@ -1,4 +1,4 @@
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import Model from "@ember-data/model";
 
 export default class LocalizedModel extends Model {
