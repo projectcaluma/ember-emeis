@@ -3,10 +3,10 @@ import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl } from "ember-intl/test-support";
+import { selectChoose } from "ember-power-select/test-support";
 import {
   typeInSearch,
   clickTrigger,
-  selectChoose,
 } from "ember-power-select/test-support/helpers";
 import { module, test } from "qunit";
 
