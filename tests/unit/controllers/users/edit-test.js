@@ -1,14 +1,10 @@
 import { setupTest } from "dummy/tests/helpers";
-import { setupMirage } from "ember-cli-mirage/test-support";
-import { setupIntl } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "../../../helpers/assert-request";
 
 module("Unit | Controller | users/edit", function (hooks) {
   setupTest(hooks);
-  setupIntl(hooks);
-  setupMirage(hooks);
   setupRequestAssertions(hooks);
 
   test("updateModel", function (assert) {

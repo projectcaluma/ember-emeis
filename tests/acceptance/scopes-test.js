@@ -8,8 +8,6 @@ import {
   settled,
 } from "@ember/test-helpers";
 import { setupApplicationTest } from "dummy/tests/helpers";
-import { setupMirage } from "ember-cli-mirage/test-support";
-import { setupIntl } from "ember-intl/test-support";
 import { selectChoose } from "ember-power-select/test-support";
 import { module, test } from "qunit";
 
@@ -17,9 +15,7 @@ import setupRequestAssertions from "./../helpers/assert-request";
 
 module("Acceptance | scopes", function (hooks) {
   setupApplicationTest(hooks);
-  setupMirage(hooks);
   setupRequestAssertions(hooks);
-  setupIntl(hooks, ["en"]);
 
   test("tree view /scopes", async function (assert) {
     assert.expect(3);

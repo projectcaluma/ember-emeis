@@ -1,8 +1,6 @@
 import { render, waitUntil } from "@ember/test-helpers";
 import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupMirage } from "ember-cli-mirage/test-support";
-import { setupIntl } from "ember-intl/test-support";
 import { selectChoose } from "ember-power-select/test-support";
 import {
   typeInSearch,
@@ -14,9 +12,7 @@ import setupRequestAssertions from "./../../helpers/assert-request";
 
 module("Integration | Component | relationship-select", function (hooks) {
   setupRenderingTest(hooks);
-  setupMirage(hooks);
   setupRequestAssertions(hooks);
-  setupIntl(hooks, ["en"]);
 
   test("single select", async function (assert) {
     assert.expect(4);

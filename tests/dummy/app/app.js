@@ -20,12 +20,12 @@ export default class App extends Application {
       "ember-emeis": {
         dependencies: {
           services: [
-            "store",
             "fetch",
             "intl",
             "notification",
             { "host-router": "router" },
             "emeis-options",
+            "store",
           ],
         },
       },

@@ -1,15 +1,11 @@
 import { render, click, fillIn } from "@ember/test-helpers";
 import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupMirage } from "ember-cli-mirage/test-support";
 import { timeout } from "ember-concurrency";
-import { setupIntl } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 module("Integration | Component | data-table", function (hooks) {
   setupRenderingTest(hooks);
-  setupMirage(hooks);
-  setupIntl(hooks, "en");
 
   test("fetch and display correct data", async function (assert) {
     assert.expect(7);

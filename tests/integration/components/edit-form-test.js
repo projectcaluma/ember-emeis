@@ -2,7 +2,6 @@ import Service from "@ember/service";
 import { render, click, waitFor } from "@ember/test-helpers";
 import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupIntl } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 import DummyButton from "../../../components/dummy-button/dummy-button";
@@ -15,7 +14,6 @@ class EmeisOptionsStub extends Service {
 
 module("Integration | Component | edit-form", function (hooks) {
   setupRenderingTest(hooks);
-  setupIntl(hooks);
 
   hooks.beforeEach(function () {
     this.router = this.owner.lookup("service:hostRouter");

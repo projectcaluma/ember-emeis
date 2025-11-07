@@ -1,11 +1,9 @@
 import { visit, currentURL, click } from "@ember/test-helpers";
 import { setupApplicationTest } from "dummy/tests/helpers";
-import { setupMirage } from "ember-cli-mirage/test-support";
 import { module, test } from "qunit";
 
 module("Acceptance | nav", function (hooks) {
   setupApplicationTest(hooks);
-  setupMirage(hooks);
 
   test("nav-bar", async function (assert) {
     assert.expect(9);

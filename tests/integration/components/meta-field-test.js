@@ -17,7 +17,7 @@ const translations = {
 
 module("Integration | Component | meta-field", function (hooks) {
   setupRenderingTest(hooks);
-  setupIntl(hooks, ["en"], translations);
+  setupIntl(hooks, "en", translations);
 
   hooks.beforeEach(function () {
     this.model = {

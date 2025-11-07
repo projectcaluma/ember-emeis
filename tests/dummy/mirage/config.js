@@ -1,14 +1,15 @@
 import { discoverEmberDataModels } from "ember-cli-mirage";
 import { createServer } from "miragejs";
 
-export default function makeServer(config) {
+export default function (config) {
   return createServer({
     ...config,
-    models: { ...discoverEmberDataModels(), ...config.models },
+    models: { ...discoverEmberDataModels(config.store), ...config.models },
     routes() {
       this.urlPrefix = "";
       this.namespace = "/api/v1";
       this.timing = 400;
+      this.logging = true;
 
       this.get("/scopes");
       this.post("/scopes");

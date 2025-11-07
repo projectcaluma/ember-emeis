@@ -1,14 +1,10 @@
 import { render, click, waitUntil } from "@ember/test-helpers";
 import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupMirage } from "ember-cli-mirage/test-support";
-import { setupIntl } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 module("Integration | Component | acl-wizzard", function (hooks) {
   setupRenderingTest(hooks);
-  setupMirage(hooks);
-  setupIntl(hooks, ["en"]);
 
   test("preset user scope role", async function (assert) {
     assert.expect(7);

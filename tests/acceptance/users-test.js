@@ -9,8 +9,6 @@ import {
   waitFor,
 } from "@ember/test-helpers";
 import { setupApplicationTest } from "dummy/tests/helpers";
-import { setupMirage } from "ember-cli-mirage/test-support";
-import { setupIntl } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
@@ -72,9 +70,7 @@ const createEmeisOptions = (context) => {
 
 module("Acceptance | users", function (hooks) {
   setupApplicationTest(hooks);
-  setupMirage(hooks);
   setupRequestAssertions(hooks);
-  setupIntl(hooks, "en");
 
   test("list view /users", async function (assert) {
     assert.expect(6);
