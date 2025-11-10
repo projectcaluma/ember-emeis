@@ -4,12 +4,12 @@
 
 - `git clone git@github.com:projectcaluma/ember-emeis`
 - `cd ember-emeis`
-- `yarn install`
+- `pnpm install`
 
 ## Linting
 
-- `yarn lint`
-- `yarn lint:fix`
+- `pnpm lint`
+- `pnpm lint:fix`
 
 ## Running tests
 
@@ -19,12 +19,12 @@
 
 ## Running the dummy application (mirage backend)
 
-- `yarn start`
+- `pnpm start`
 - Visit the dummy application at [http://localhost:4200](http://localhost:4200).
 
 ## Running the dummy application (real backend)
 
 - set up `emeis` (see [docs](https://github.com/projectcaluma/emeis))
-- `yarn start-proxy`
+- `pnpm start-proxy`
 
 For more information on using ember-cli, visit [https://cli.emberjs.com/release/](https://cli.emberjs.com/release/).
