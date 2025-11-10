@@ -17,10 +17,13 @@ jobs:
     name: Lint
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v3
-      - uses: wyvox/action-setup-pnpm@v3
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - name: Install Node
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
 
       - name: Lint JS & Handlebars
         run: pnpm lint
@@ -31,10 +34,13 @@ jobs:
     runs-on: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: wyvox/action-setup-pnpm@v3
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - name: Install Node
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
 
       - name: Run tests (floating dependencies)
         run: pnpm test:ember
@@ -60,10 +66,13 @@ jobs:
           - embroider-safe
           - embroider-optimized
     steps:
-      - uses: actions/checkout@v3
-      - uses: wyvox/action-setup-pnpm@v3
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - name: Install Node
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
 
       - uses: actions/cache@v3
         with:
