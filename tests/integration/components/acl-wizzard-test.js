@@ -22,11 +22,12 @@ module("Integration | Component | acl-wizzard", function (hooks) {
 
     await render(
       hbs`<AclWizzard
-  @user={{this.user}}
-  @scope={{this.scope}}
-  @role={{this.role}}
-  @createAclEntry={{this.createAclEntry}}
-/>`,
+        @user={{this.user}}
+        @scope={{this.scope}}
+        @role={{this.role}}
+        @createAclEntry={{this.createAclEntry}}
+      />`,
+      { owner: this.engine },
     );
 
     assert.dom("[data-test-select-user]").doesNotExist();
@@ -48,11 +49,12 @@ module("Integration | Component | acl-wizzard", function (hooks) {
 
     await render(
       hbs`<AclWizzard
-  @user={{this.user}}
-  @scope={{this.scope}}
-  @role={{this.role}}
-  @createAclEntry={{this.createAclEntry}}
-/>`,
+        @user={{this.user}}
+        @scope={{this.scope}}
+        @role={{this.role}}
+        @createAclEntry={{this.createAclEntry}}
+      />`,
+      { owner: this.engine },
     );
     assert.dom("[data-test-select-user]").doesNotExist();
     assert.dom("[data-test-select-scope]").exists();
@@ -70,11 +72,12 @@ module("Integration | Component | acl-wizzard", function (hooks) {
 
     await render(
       hbs`<AclWizzard
-  @user={{this.user}}
-  @scope={{this.scope}}
-  @role={{this.role}}
-  @createAclEntry={{this.createAclEntry}}
-/>`,
+        @user={{this.user}}
+        @scope={{this.scope}}
+        @role={{this.role}}
+        @createAclEntry={{this.createAclEntry}}
+      />`,
+      { owner: this.engine },
     );
     assert.dom("[data-test-select-user]").doesNotExist();
     assert.dom("[data-test-select-scope]").exists();
@@ -88,11 +91,12 @@ module("Integration | Component | acl-wizzard", function (hooks) {
 
     await render(
       hbs`<AclWizzard
-  @user={{this.user}}
-  @scope={{this.scope}}
-  @role={{this.role}}
-  @createAclEntry={{this.createAclEntry}}
-/>`,
+        @user={{this.user}}
+        @scope={{this.scope}}
+        @role={{this.role}}
+        @createAclEntry={{this.createAclEntry}}
+      />`,
+      { owner: this.engine },
     );
     assert.dom("[data-test-select-user]").exists();
     assert.dom("[data-test-select-scope]").exists();
@@ -113,7 +117,9 @@ module("Integration | Component | acl-wizzard", function (hooks) {
       assert.strictEqual(acl.scope.id, scope.id);
     });
 
-    await render(hbs`<AclWizzard @createAclEntry={{this.createAclEntry}} />`);
+    await render(hbs`<AclWizzard @createAclEntry={{this.createAclEntry}} />`, {
+      owner: this.engine,
+    });
 
     assert.dom("[data-test-select-user]").exists();
     assert.dom("[data-test-select-scope]").exists();
