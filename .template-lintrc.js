@@ -5,5 +5,6 @@ module.exports = {
 
   rules: {
     "require-input-label": "warn",
+    "no-at-ember-render-modifiers": "warn",
   },
 };

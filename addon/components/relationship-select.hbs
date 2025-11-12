@@ -2,7 +2,7 @@
   class="hidden-input"
   value={{or (or @selected.id @selected.length) ""}}
   ...attributes
-  {{setup-element (perform this.fetchModels)}}
+  {{did-insert (perform this.fetchModels)}}
 />
 <this.selectComponent
   @searchEnabled={{this.searchEnabled}}
@@ -18,7 +18,7 @@
   @renderInPlace={{true}}
   @allowClear={{true}}
   @onChange={{@onChange}}
-  {{track-update (perform this.fetchModels) @model}}
+  {{did-update (perform this.fetchModels) @model}}
   as |model|
 >
   {{yield model}}
