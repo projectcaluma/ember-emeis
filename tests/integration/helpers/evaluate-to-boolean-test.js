@@ -11,6 +11,7 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
 
     await render(
       hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("true");
@@ -21,6 +22,7 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
 
     await render(
       hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("false");
@@ -31,6 +33,7 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
 
     await render(
       hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("true");
@@ -41,6 +44,7 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
 
     await render(
       hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("false");
@@ -51,6 +55,7 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
 
     await render(
       hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("true");
@@ -61,6 +66,7 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
 
     await render(
       hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("false");
@@ -71,6 +77,7 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
 
     await render(
       hbs`{{if (evaluate-to-boolean this.inputValue 2) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("false");
@@ -81,6 +88,7 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
 
     await render(
       hbs`{{if (evaluate-to-boolean this.inputValue 1 "a") "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("true");

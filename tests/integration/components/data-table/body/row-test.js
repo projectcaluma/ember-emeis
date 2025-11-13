@@ -15,9 +15,12 @@ module("Integration | Component | data-table/body/row", function (hooks) {
     assert.strictEqual(this.element.textContent.trim(), "");
 
     // Template block usage:
-    await render(hbs`<DataTable::Body::Row>
+    await render(
+      hbs`<DataTable::Body::Row>
   template block text
-</DataTable::Body::Row>`);
+</DataTable::Body::Row>`,
+      { owner: this.engine },
+    );
 
     assert.strictEqual(this.element.textContent.trim(), "template block text");
   });

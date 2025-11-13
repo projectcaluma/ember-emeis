@@ -15,33 +15,42 @@ module("Integration | Component | data-table/head/column", function (hooks) {
   });
 
   test("it renders", async function (assert) {
-    await render(hbs`<DataTable::Head @sortedBy={{this.sort}} @update={{this.update}} as |Column|>
+    await render(
+      hbs`<DataTable::Head @sortedBy={{this.sort}} @update={{this.update}} as |Column|>
   <Column @sort={{this.sort}}>
     test
   </Column>
-</DataTable::Head>`);
+</DataTable::Head>`,
+      { owner: this.engine },
+    );
 
     assert.dom(this.element).hasText("test");
     assert.dom("span[icon=chevron-down]").exists();
   });
 
   test("it renders as block", async function (assert) {
-    await render(hbs`<DataTable::Head::Column @update={{this.update}}>
+    await render(
+      hbs`<DataTable::Head::Column @update={{this.update}}>
   template block text
-</DataTable::Head::Column>`);
+</DataTable::Head::Column>`,
+      { owner: this.engine },
+    );
 
     assert.dom(this.element).hasText("template block text");
   });
 
   test("it toggles sort state", async function (assert) {
-    await render(hbs`<DataTable::Head @sortedBy={{this.sort}} @update={{this.update}} as |Column|>
+    await render(
+      hbs`<DataTable::Head @sortedBy={{this.sort}} @update={{this.update}} as |Column|>
   <Column @sort="last_name">
     one
   </Column>
   <Column @sort="first_name">
     two
   </Column>
-</DataTable::Head>`);
+</DataTable::Head>`,
+      { owner: this.engine },
+    );
 
     assert.dom("[data-test-sortable-th=last_name]").hasText("one");
     assert.dom("[data-test-sortable-th=first_name]").hasText("two");

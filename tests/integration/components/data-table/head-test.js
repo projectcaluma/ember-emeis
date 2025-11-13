@@ -7,9 +7,12 @@ module("Integration | Component | data-table/head", function (hooks) {
   setupRenderingTest(hooks);
 
   test("it renders", async function (assert) {
-    await render(hbs`<DataTable::Head>
+    await render(
+      hbs`<DataTable::Head>
   <td>Test Header</td>
-</DataTable::Head>`);
+</DataTable::Head>`,
+      { owner: this.engine },
+    );
 
     assert.dom("thead tr").exists();
     assert.dom("tr td").hasText("Test Header");

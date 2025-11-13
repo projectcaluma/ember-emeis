@@ -9,14 +9,18 @@ module("Integration | Helper | optional-localized-value", function (hooks) {
   test("it renders a localized field", async function (assert) {
     this.set("inputValue", { en: "english", de: "deutsch" });
 
-    await render(hbs`{{optional-localized-value this.inputValue}}`);
+    await render(hbs`{{optional-localized-value this.inputValue}}`, {
+      owner: this.engine,
+    });
 
     assert.dom(this.element).hasText("english");
   });
   test("it renders a unlocalized field", async function (assert) {
     this.set("inputValue", "1234-string");
 
-    await render(hbs`{{optional-localized-value this.inputValue}}`);
+    await render(hbs`{{optional-localized-value this.inputValue}}`, {
+      owner: this.engine,
+    });
 
     assert.dom(this.element).hasText("1234-string");
   });

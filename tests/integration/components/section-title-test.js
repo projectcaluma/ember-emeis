@@ -10,7 +10,7 @@ module("Integration | Component | section-title", function (hooks) {
     const intl = this.owner.lookup("service:intl");
     intl.set("locale", "en");
 
-    await render(hbs`<SectionTitle @model="roles" />`);
+    await render(hbs`<SectionTitle @model="roles" />`, { owner: this.engine });
 
     assert.dom("h2").hasText("Roles");
     assert.dom("[data-test-new]").hasText("Add Role");

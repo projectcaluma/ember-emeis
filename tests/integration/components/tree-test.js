@@ -29,11 +29,14 @@ module("Integration | Component | tree", function (hooks) {
 
   test("it renders", async function (assert) {
     assert.expect(2);
-    await render(hbs`<Tree
+    await render(
+      hbs`<Tree
   @items={{this.rootScopes}}
   @itemRoute={{this.itemRoute}}
   @activeItem={{this.activeItem}}
-/>`);
+/>`,
+      { owner: this.engine },
+    );
 
     assert.dom("[data-test-tree-search]").exists();
     assert.dom("[data-test-node-id]").exists({ count: 4 });
@@ -41,11 +44,14 @@ module("Integration | Component | tree", function (hooks) {
 
   test("it renders active item", async function (assert) {
     assert.expect(3);
-    await render(hbs`<Tree
+    await render(
+      hbs`<Tree
   @items={{this.rootScopes}}
   @itemRoute={{this.itemRoute}}
   @activeItem={{this.grandchild}}
-/>`);
+/>`,
+      { owner: this.engine },
+    );
 
     assert.dom("[data-test-tree-search]").exists();
     assert.dom("[data-test-node-id]").exists({ count: 6 });
@@ -56,11 +62,14 @@ module("Integration | Component | tree", function (hooks) {
 
   test("filter is working", async function (assert) {
     assert.expect(2);
-    await render(hbs`<Tree
+    await render(
+      hbs`<Tree
   @items={{this.rootScopes}}
   @itemRoute={{this.itemRoute}}
   @activeItem={{this.activeItem}}
-/>`);
+/>`,
+      { owner: this.engine },
+    );
 
     const root1 = this.rootScopes[0];
     await fillIn("[data-test-tree-search]", root1._name.de);

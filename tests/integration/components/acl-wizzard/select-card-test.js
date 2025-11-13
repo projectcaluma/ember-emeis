@@ -12,11 +12,14 @@ module("Integration | Component | acl-wizzard/select-card", function (hooks) {
       assert.step("selectEntry");
     });
 
-    await render(hbs`<AclWizzard::SelectCard
+    await render(
+      hbs`<AclWizzard::SelectCard
   selected={{this.selected}}
   header={{this.header}}
   selectEntry={{this.selectEntry}}
-/>`);
+/>`,
+      { owner: this.engine },
+    );
 
     assert.dom("[data-test-change]").exists();
     await click("[data-test-change]");
@@ -32,11 +35,14 @@ module("Integration | Component | acl-wizzard/select-card", function (hooks) {
       },
     });
 
-    await render(hbs`<AclWizzard::SelectCard
+    await render(
+      hbs`<AclWizzard::SelectCard
   selected={{this.selected}}
   header={{this.header}}
   selectEntry={{this.selectEntry}}
-/>`);
+/>`,
+      { owner: this.engine },
+    );
 
     assert.dom("[data-test-title]").hasText("test");
     assert.dom("[data-test-body]").hasText("desc");
@@ -54,13 +60,16 @@ module("Integration | Component | acl-wizzard/select-card", function (hooks) {
       selectEntry() {},
     });
 
-    await render(hbs`<AclWizzard::SelectCard
+    await render(
+      hbs`<AclWizzard::SelectCard
   selected={{this.selected}}
   header={{this.header}}
   selectEntry={{this.selectEntry}}
 >
   test desc
-</AclWizzard::SelectCard>`);
+</AclWizzard::SelectCard>`,
+      { owner: this.engine },
+    );
 
     assert.dom("[data-test-title]").hasText("test");
     assert.dom("[data-test-body]").hasText("test desc");

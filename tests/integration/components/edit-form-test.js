@@ -27,7 +27,9 @@ module("Integration | Component | edit-form", function (hooks) {
   test("disableDelete", async function (assert) {
     assert.expect(3);
 
-    await render(hbs`<EditForm @disableDelete="true" />`);
+    await render(hbs`<EditForm @disableDelete="true" />`, {
+      owner: this.engine,
+    });
 
     assert.dom("[data-test-toggle-active]").doesNotExist();
     assert.dom("[data-test-delete]").doesNotExist();
@@ -50,9 +52,12 @@ module("Integration | Component | edit-form", function (hooks) {
       },
     });
 
-    await render(hbs`<EditForm @model={{this.model}} @updateModel={{this.updateModel}}>
+    await render(
+      hbs`<EditForm @model={{this.model}} @updateModel={{this.updateModel}}>
   <input name="test" />
-</EditForm>`);
+</EditForm>`,
+      { owner: this.engine },
+    );
 
     await click("[data-test-toggle-active]");
     assert.verifySteps(["save"]);
@@ -75,7 +80,9 @@ module("Integration | Component | edit-form", function (hooks) {
       },
     });
 
-    await render(hbs`<EditForm @model={{this.model}} />`);
+    await render(hbs`<EditForm @model={{this.model}} />`, {
+      owner: this.engine,
+    });
 
     await click("[data-test-delete]");
     await waitFor(".uk-modal.uk-open");
@@ -109,9 +116,12 @@ module("Integration | Component | edit-form", function (hooks) {
       },
     });
 
-    await render(hbs`<EditForm @model={{this.model}} @updateModel={{this.updateModel}}>
+    await render(
+      hbs`<EditForm @model={{this.model}} @updateModel={{this.updateModel}}>
   <input name="test" />
-</EditForm>`);
+</EditForm>`,
+      { owner: this.engine },
+    );
 
     await click("[data-test-save]");
     assert.verifySteps(["updateModel", "save", "replaceWith"]);
@@ -121,7 +131,7 @@ module("Integration | Component | edit-form", function (hooks) {
     assert.expect(4);
     this.router.currentRoute.parent.name = "ember-emeis.users.edit";
 
-    await render(hbs`<EditForm />`);
+    await render(hbs`<EditForm />`, { owner: this.engine });
 
     assert.dom("[data-test-custom-component]").exists();
     assert.dom("[data-test-custom-component].uk-button-danger").exists();
