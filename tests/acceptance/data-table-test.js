@@ -24,10 +24,10 @@ module("Acceptance | data-table", function (hooks) {
         "1",
         "Test if queryParam page[number] is 1",
       );
-      assert.strictEqual(request.queryParams["page[size]"], "10"),
-        "Test if queryParam page[size] is 10";
-      assert.notOk(request.queryParams.search),
-        "Test that queryParam search is not set";
+      (assert.strictEqual(request.queryParams["page[size]"], "10"),
+        "Test if queryParam page[size] is 10");
+      (assert.notOk(request.queryParams.search),
+        "Test that queryParam search is not set");
     });
     await visit("/permissions");
 
