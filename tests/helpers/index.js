@@ -22,6 +22,7 @@ class MockRouter extends Service {
 
 function setupApplicationTest(hooks, options) {
   upstreamSetupApplicationTest(hooks, options);
+  setupEngine(hooks, "ember-emeis");
   setupIntl(hooks, "en");
   setupMirage(hooks);
 }
