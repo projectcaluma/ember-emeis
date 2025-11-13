@@ -16,7 +16,7 @@ module("Integration | Component | tree", function (hooks) {
       parent: level1[0],
     });
 
-    const store = this.owner.lookup("service:store");
+    const store = this.engine.lookup("service:store");
     const scopes = await store.findAll("scope");
     const rootScopes = scopes.filter((scope) => !scope.parent);
     const grandchild = scopes.find((scope) => scope.id === grandchildren[0].id);

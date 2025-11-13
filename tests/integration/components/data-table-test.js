@@ -52,7 +52,7 @@ module("Integration | Component | data-table", function (hooks) {
     this.set("modelName", "role");
     this.set("page", 1);
 
-    const store = this.owner.lookup("service:store");
+    const store = this.engine.lookup("service:store");
     store.query = (_, options) => {
       assert.strictEqual(options.page.number, this.page);
       assert.strictEqual(options.page.size, 10);
@@ -107,7 +107,7 @@ module("Integration | Component | data-table", function (hooks) {
 
     this.set("modelName", "user");
 
-    const store = this.owner.lookup("service:store");
+    const store = this.engine.lookup("service:store");
     store.query = (_, options) => {
       assert.strictEqual(options.include, "acls.role,acls.scope");
 
@@ -184,7 +184,7 @@ module("Integration | Component | data-table", function (hooks) {
     assert.expect(5);
     const search = "test";
 
-    const store = this.owner.lookup("service:store");
+    const store = this.engine.lookup("service:store");
     const expectedSearch = [undefined, search];
     store.query = (_, options) => {
       assert.strictEqual(options.filter.search, expectedSearch.shift());
@@ -219,7 +219,7 @@ module("Integration | Component | data-table", function (hooks) {
       search: undefined,
     });
 
-    const store = this.owner.lookup("service:store");
+    const store = this.engine.lookup("service:store");
     store.query = (_, options) => {
       assert.strictEqual(options.filter.search, this.search);
       return { meta: { pagination: { pages: 3 } } };

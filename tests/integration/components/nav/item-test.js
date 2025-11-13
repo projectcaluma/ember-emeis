@@ -14,7 +14,7 @@ module("Integration | Component | nav/item", function (hooks) {
       @tracked name = "someotherroute";
     }
 
-    this.router = this.owner.lookup("service:hostRouter");
+    this.router = this.engine.lookup("service:hostRouter");
     this.router.currentRoute = new CurrentRoute();
 
     await render(

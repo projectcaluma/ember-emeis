@@ -8,7 +8,7 @@ module("Unit | Controller | users/edit", function (hooks) {
   setupRequestAssertions(hooks);
 
   test("updateModel", function (assert) {
-    const controller = this.owner.lookup("controller:users/edit");
+    const controller = this.engine.lookup("controller:users/edit");
     assert.ok(controller);
 
     const model = {};
@@ -36,7 +36,7 @@ module("Unit | Controller | users/edit", function (hooks) {
   });
 
   test("queryParamsfilter", function (assert) {
-    const controller = this.owner.lookup("controller:users/edit");
+    const controller = this.engine.lookup("controller:users/edit");
     assert.ok(controller);
 
     controller.model = { id: 1 };
@@ -45,7 +45,7 @@ module("Unit | Controller | users/edit", function (hooks) {
 
   test("createEntry", async function (assert) {
     assert.expect(3);
-    const controller = this.owner.lookup("controller:users/edit");
+    const controller = this.engine.lookup("controller:users/edit");
     assert.ok(controller);
 
     this.assertRequest("POST", "/api/v1/acls", (request) => {
@@ -58,7 +58,7 @@ module("Unit | Controller | users/edit", function (hooks) {
 
   test("deleteEntry", async function (assert) {
     assert.expect(3);
-    const controller = this.owner.lookup("controller:users/edit");
+    const controller = this.engine.lookup("controller:users/edit");
     assert.ok(controller);
     const refresh = () => {
       assert.ok(true);

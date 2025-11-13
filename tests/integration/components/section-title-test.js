@@ -7,7 +7,7 @@ module("Integration | Component | section-title", function (hooks) {
   setupRenderingTest(hooks);
 
   test("it renders", async function (assert) {
-    const intl = this.owner.lookup("service:intl");
+    const intl = this.engine.lookup("service:intl");
     intl.set("locale", "en");
 
     await render(hbs`<SectionTitle @model="roles" />`, { owner: this.engine });

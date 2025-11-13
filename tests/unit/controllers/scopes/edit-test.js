@@ -5,7 +5,7 @@ module("Unit | Controller | scopes/edit", function (hooks) {
   setupTest(hooks);
 
   test("updateModel", function (assert) {
-    const controller = this.owner.lookup("controller:scopes/edit");
+    const controller = this.engine.lookup("controller:scopes/edit");
     assert.ok(controller);
 
     const model = {};

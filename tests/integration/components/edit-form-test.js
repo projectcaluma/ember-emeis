@@ -16,8 +16,8 @@ module("Integration | Component | edit-form", function (hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function () {
-    this.router = this.owner.lookup("service:hostRouter");
-    this.owner.register("service:emeis-options", EmeisOptionsStub);
+    this.router = this.engine.lookup("service:hostRouter");
+    this.engine.register("service:emeis-options", EmeisOptionsStub);
   });
 
   hooks.afterEach(function () {

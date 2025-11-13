@@ -32,10 +32,10 @@ function setupRenderingTest(hooks, options) {
   setupIntl(hooks, "en");
   setupMirage(hooks);
   hooks.beforeEach(function () {
-    this.owner.register("service:hostRouter", MockRouter);
+    this.engine.register("service:hostRouter", MockRouter);
   });
   hooks.afterEach(function () {
-    this.owner.unregister("service:hostRouter");
+    this.engine.unregister("service:hostRouter");
   });
 }
 
@@ -44,10 +44,10 @@ function setupTest(hooks, options) {
   setupEngine(hooks, "ember-emeis");
   setupMirage(hooks);
   hooks.beforeEach(function () {
-    this.owner.register("service:hostRouter", MockRouter);
+    this.engine.register("service:hostRouter", MockRouter);
   });
   hooks.afterEach(function () {
-    this.owner.unregister("service:hostRouter");
+    this.engine.unregister("service:hostRouter");
   });
 }
 

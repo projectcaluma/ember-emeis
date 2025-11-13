@@ -204,7 +204,7 @@ module("Acceptance | permissions", function (hooks) {
     assert.expect(11);
 
     const customEmeisOptionsStub = createEmeisOptions(assert);
-    this.owner.register("service:emeis-options", customEmeisOptionsStub);
+    this.engine.register("service:emeis-options", customEmeisOptionsStub);
 
     const permission = this.server.create("permission");
 
