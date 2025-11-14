@@ -43,6 +43,7 @@ function setupRenderingTest(hooks, options) {
 function setupTest(hooks, options) {
   upstreamSetupTest(hooks, options);
   setupEngine(hooks, "ember-emeis");
+  setupIntl(hooks, "en");
   setupMirage(hooks);
   hooks.beforeEach(function () {
     this.engine.register("service:hostRouter", MockRouter);
