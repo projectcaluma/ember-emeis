@@ -9,6 +9,7 @@ import {
   waitFor,
 } from "@ember/test-helpers";
 import { setupApplicationTest } from "dummy/tests/helpers";
+import { setLocale } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
@@ -110,7 +111,7 @@ module("Acceptance | users", function (hooks) {
     const user = this.server.create("user", {
       isActive: true,
     });
-    this.intl.locale = ["en", "de"];
+    await setLocale(["en"]);
 
     await visit(`/users/${user.id}`);
     // eslint-disable-next-line ember/no-settled-after-test-helper
@@ -130,7 +131,7 @@ module("Acceptance | users", function (hooks) {
     const user = this.server.create("user", {
       isActive: true,
     });
-    this.intl.locale = ["en", "de"];
+    await setLocale(["en"]);
 
     await visit(`/users/${user.id}`);
     // eslint-disable-next-line ember/no-settled-after-test-helper
