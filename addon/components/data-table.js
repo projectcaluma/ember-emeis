@@ -110,8 +110,8 @@ export default class DataTableComponent extends Component {
       };
 
       const data = yield this.store.query(this.args.modelName, options);
-      this.numPages = data.meta.pagination?.pages;
-      this.entryCount = data.meta.pagination?.count;
+      this.numPages = data.meta?.pagination?.pages;
+      this.entryCount = data.meta?.pagination?.count;
 
       return data;
     } catch (error) {
