@@ -206,7 +206,7 @@ module("Acceptance | roles", function (hooks) {
     assert.expect(11);
 
     const customEmeisOptionsStub = createEmeisOptions(assert);
-    this.engine.register("service:emeis-options", customEmeisOptionsStub);
+    this.owner.register("service:emeis-options", customEmeisOptionsStub);
 
     const role = this.server.create("role");
 

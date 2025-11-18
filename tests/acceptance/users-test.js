@@ -106,7 +106,7 @@ module("Acceptance | users", function (hooks) {
   });
 
   test("can hide fields via config", async function (assert) {
-    this.engine.register("service:emeis-options", EmeisOptionsStub);
+    this.owner.register("service:emeis-options", EmeisOptionsStub);
 
     const user = this.server.create("user", {
       isActive: true,
@@ -375,7 +375,7 @@ module("Acceptance | users", function (hooks) {
     assert.expect(17);
 
     const customEmeisOptionsStub = createEmeisOptions(assert);
-    this.engine.register("service:emeis-options", customEmeisOptionsStub);
+    this.owner.register("service:emeis-options", customEmeisOptionsStub);
 
     const user = this.server.create("user", { isActive: true });
 

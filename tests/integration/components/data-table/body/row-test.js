@@ -10,7 +10,7 @@ module("Integration | Component | data-table/body/row", function (hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<DataTable::Body::Row />`);
+    await render(hbs`<DataTable::Body::Row />`, { owner: this.engine });
 
     assert.strictEqual(this.element.textContent.trim(), "");
 
