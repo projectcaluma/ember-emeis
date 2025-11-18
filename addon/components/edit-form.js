@@ -58,25 +58,19 @@ export default class EditFormComponent extends Component {
   }
 
   get canChangeActiveState() {
-    const option =
-      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
-        ?.deactivate;
+    const option = this.emeisOptions[this.modelName]?.actions?.deactivate;
     const func = option?.func || option;
     return typeof func === "function" ? func(this.args.model) : true;
   }
 
   get canDeleteModel() {
-    const option =
-      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
-        ?.delete;
+    const option = this.emeisOptions[this.modelName]?.actions?.delete;
     const func = option?.func || option;
     return typeof func === "function" ? func(this.args.model) : true;
   }
 
   get deactivateLabelOverride() {
-    const label =
-      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
-        ?.deactivate?.label;
+    const label = this.emeisOptions[this.modelName]?.actions?.deactivate?.label;
     if (typeof label === "function") {
       return label(this.args.model);
     } else if (label) {
@@ -88,9 +82,7 @@ export default class EditFormComponent extends Component {
   }
 
   get deleteLabelOverride() {
-    const label =
-      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
-        ?.delete?.label;
+    const label = this.emeisOptions[this.modelName]?.actions?.delete?.label;
     if (typeof label === "function") {
       return label(this.args.model);
     } else if (label) {
