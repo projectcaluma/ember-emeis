@@ -44,16 +44,23 @@ module("Unit | Controller | users/edit", function (hooks) {
   });
 
   test("createEntry", async function (assert) {
-    assert.expect(3);
+    assert.expect(5);
+    this.server.create("role", { id: 1 });
+    this.server.create("scope", { id: 2 });
     const controller = this.engine.lookup("controller:users/edit");
     assert.ok(controller);
 
     this.assertRequest("POST", "/api/v1/acls", (request) => {
       const relationships = JSON.parse(request.requestBody).data.relationships;
       assert.ok(relationships.role);
+      assert.equal(relationships.role.data.id, 1);
       assert.ok(relationships.scope);
+      assert.ok(relationships.scope.data.id, 2);
     });
-    await controller.createAclEntry.perform({ role: 1, scope: 2 });
+    const store = this.engine.lookup("service:store");
+    const role = await store.findRecord("role", 1);
+    const scope = await store.findRecord("scope", 2);
+    await controller.createAclEntry.perform({ role, scope });
   });
 
   test("deleteEntry", async function (assert) {
