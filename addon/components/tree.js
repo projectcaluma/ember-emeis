@@ -47,6 +47,7 @@ export default class TreeComponent extends Component {
     if (macroCondition(!isTesting())) {
       yield timeout(100);
     }
+    this.filterValue = event.target.value;
 
     const filterItems = (
       items,

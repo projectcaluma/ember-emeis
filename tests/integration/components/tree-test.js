@@ -72,7 +72,7 @@ module("Integration | Component | tree", function (hooks) {
     );
 
     const root1 = this.rootScopes[0];
-    await fillIn("[data-test-tree-search]", root1._name.de);
+    await fillIn("[data-test-tree-search]", root1._name.en);
     assert.dom(`[data-test-node-id="${root1.id}"]`).exists({ count: 1 });
 
     await fillIn("[data-test-tree-search]", "X2!+42");
