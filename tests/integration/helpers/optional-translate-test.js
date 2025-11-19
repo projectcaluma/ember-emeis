@@ -1,12 +1,10 @@
 import { render } from "@ember/test-helpers";
 import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupIntl } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 module("Integration | Helper | optional-translate", function (hooks) {
-  setupRenderingTest(hooks);
-  setupIntl(hooks, { foo: "translation of foo" });
+  setupRenderingTest(hooks, undefined, { foo: "translation of foo" });
 
   test("it translates if the translation exists", async function (assert) {
     await render(hbs`{{optional-translate "foo"}}`, { owner: this.engine });
