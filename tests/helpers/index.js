@@ -26,7 +26,7 @@ function setupApplicationTest(hooks, options) {
   setupMirage(hooks);
 }
 
-function setupRenderingTest(hooks, options, addTranslation = undefined) {
+function setupRenderingTest(hooks, options, addTranslation) {
   upstreamSetupRenderingTest(hooks, options);
   setupEngine(hooks, "ember-emeis");
   setupIntl(hooks, "en", addTranslation);

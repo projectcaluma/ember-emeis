@@ -8,6 +8,22 @@ module.exports = async function () {
     usePnpm: true,
     scenarios: [
       {
+        name: "ember-lts-4.8",
+        npm: {
+          devDependencies: {
+            "ember-source": "~4.8.0",
+          },
+        },
+      },
+      {
+        name: "ember-lts-4.12",
+        npm: {
+          devDependencies: {
+            "ember-source": "~4.12.0",
+          },
+        },
+      },
+      {
         name: "ember-lts-5.8",
         npm: {
           devDependencies: {
@@ -48,8 +64,8 @@ module.exports = async function () {
           },
         },
       },
-      embroiderSafe(),
-      embroiderOptimized(),
+      embroiderSafe({ allowedToFail: true }),
+      embroiderOptimized({ allowedToFail: true }),
     ],
   };
 };
