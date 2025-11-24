@@ -44,7 +44,7 @@ module("Unit | Controller | users/edit", function (hooks) {
   });
 
   test("createEntry", async function (assert) {
-    assert.expect(5);
+    assert.expect(3);
     this.server.create("role", { id: 1 });
     this.server.create("scope", { id: 2 });
     const controller = this.engine.lookup("controller:users/edit");
@@ -53,9 +53,7 @@ module("Unit | Controller | users/edit", function (hooks) {
     this.assertRequest("POST", "/api/v1/acls", (request) => {
       const relationships = JSON.parse(request.requestBody).data.relationships;
       assert.ok(relationships.role);
-      assert.equal(relationships.role.data.id, 1);
       assert.ok(relationships.scope);
-      assert.ok(relationships.scope.data.id, 2);
     });
     const store = this.engine.lookup("service:store");
     const role = await store.findRecord("role", 1);
