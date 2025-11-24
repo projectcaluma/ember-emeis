@@ -1,12 +1,10 @@
 import { render, waitUntil } from "@ember/test-helpers";
 import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupMirage } from "ember-cli-mirage/test-support";
-import { setupIntl } from "ember-intl/test-support";
+import { selectChoose } from "ember-power-select/test-support";
 import {
   typeInSearch,
   clickTrigger,
-  selectChoose,
 } from "ember-power-select/test-support/helpers";
 import { module, test } from "qunit";
 
@@ -14,16 +12,15 @@ import setupRequestAssertions from "./../../helpers/assert-request";
 
 module("Integration | Component | relationship-select", function (hooks) {
   setupRenderingTest(hooks);
-  setupMirage(hooks);
   setupRequestAssertions(hooks);
-  setupIntl(hooks, ["en"]);
 
   test("single select", async function (assert) {
     assert.expect(4);
     this.set("modelName", "role");
     const role = this.server.createList("role", 10)[0];
 
-    await render(hbs`<RelationshipSelect
+    await render(
+      hbs`<RelationshipSelect
   @modelName={{this.modelName}}
   @onChange={{set this "selected"}}
   @selected={{this.selected}}
@@ -31,7 +28,9 @@ module("Integration | Component | relationship-select", function (hooks) {
   as |model|
 >
   <span data-test-name>{{model.name}}</span>
-</RelationshipSelect>`);
+</RelationshipSelect>`,
+      { owner: this.engine },
+    );
 
     this.assertRequest("GET", "/api/v1/roles", (request) => {
       assert.ok(request);
@@ -56,14 +55,17 @@ module("Integration | Component | relationship-select", function (hooks) {
     this.set("modelName", "role");
     this.server.create("role");
 
-    await render(hbs`<RelationshipSelect
+    await render(
+      hbs`<RelationshipSelect
   @modelName={{this.modelName}}
   @onChange={{set this "selected"}}
   @selected={{this.selected}}
   as |model|
 >
   <span data-test-name>{{model.name}}</span>
-</RelationshipSelect>`);
+</RelationshipSelect>`,
+      { owner: this.engine },
+    );
 
     await clickTrigger();
 
@@ -79,7 +81,8 @@ module("Integration | Component | relationship-select", function (hooks) {
     this.set("modelName", "role");
     const role = this.server.createList("role", 10)[0];
 
-    await render(hbs`<RelationshipSelect
+    await render(
+      hbs`<RelationshipSelect
   @modelName={{this.modelName}}
   @onChange={{set this "selected"}}
   @selected={{this.selected}}
@@ -88,7 +91,9 @@ module("Integration | Component | relationship-select", function (hooks) {
   as |model|
 >
   <span data-test-name>{{model.name}}</span>
-</RelationshipSelect>`);
+</RelationshipSelect>`,
+      { owner: this.engine },
+    );
 
     this.assertRequest("GET", "/api/v1/roles", (request) => {
       assert.ok(request);

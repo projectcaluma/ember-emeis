@@ -34,7 +34,7 @@ const catchErrors = (context, args, exception) => {
 const validate = (context) => {
   assert(
     "Inject the `notification` as well as the `intl` service into your route to properly display errors.",
-    context.notification && context.intl
+    context.notification && context.intl,
   );
 };
 
@@ -58,7 +58,7 @@ export function handleModelErrors(...decoratorArgs) {
         const result = originalDescriptor.apply(this, args);
         return result?.then
           ? result.catch((exception) =>
-              catchErrors(this, decoratorArgs, exception)
+              catchErrors(this, decoratorArgs, exception),
             )
           : result;
       } catch (exception) {

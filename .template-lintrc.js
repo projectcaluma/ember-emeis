@@ -1,10 +1,10 @@
 "use strict";
 
 module.exports = {
-  extends: ["recommended", "ember-template-lint-plugin-prettier:recommended"],
-  plugins: ["ember-template-lint-plugin-prettier"],
+  extends: ["recommended"],
 
   rules: {
     "require-input-label": "warn",
+    "no-at-ember-render-modifiers": "warn",
   },
 };

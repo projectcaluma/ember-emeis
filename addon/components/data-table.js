@@ -1,6 +1,6 @@
 import { assert } from "@ember/debug";
 import { action } from "@ember/object";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { task } from "ember-concurrency";
@@ -90,7 +90,7 @@ export default class DataTableComponent extends Component {
 
     assert(
       "Must pass a model name as string",
-      typeof this.args.modelName === "string"
+      typeof this.args.modelName === "string",
     );
 
     try {
@@ -110,14 +110,14 @@ export default class DataTableComponent extends Component {
       };
 
       const data = yield this.store.query(this.args.modelName, options);
-      this.numPages = data.meta.pagination?.pages;
-      this.entryCount = data.meta.pagination?.count;
+      this.numPages = data.meta?.pagination?.pages;
+      this.entryCount = data.meta?.pagination?.count;
 
       return data;
     } catch (error) {
       console.error(
         "Non-standard JSON:API response while fetching table data.",
-        error
+        error,
       );
     }
   }

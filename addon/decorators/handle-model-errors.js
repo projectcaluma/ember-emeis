@@ -15,7 +15,7 @@ export default function (...args) {
     descriptor.value = function (...args) {
       assert(
         "Inject the `notification`, `hostRouter` as well as the `intl` service into your route to properly display errors.",
-        this.notification && this.intl && this.hostRouter
+        this.notification && this.intl && this.hostRouter,
       );
 
       const catchErrors = (exception) => {

@@ -1,21 +1,22 @@
 import { render } from "@ember/test-helpers";
 import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupIntl } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 module("Integration | Component | data-table/body", function (hooks) {
   setupRenderingTest(hooks);
-  setupIntl(hooks);
 
   test("it renders", async function (assert) {
     this.set("models", [{ name: "Test 1" }, { name: "Test 2" }]);
 
-    await render(hbs`<DataTable::Body @models={{this.models}} as |body|>
+    await render(
+      hbs`<DataTable::Body @models={{this.models}} as |body|>
   <body.row>
     <td>{{body.model.name}}</td>
   </body.row>
-</DataTable::Body>`);
+</DataTable::Body>`,
+      { owner: this.engine },
+    );
 
     assert.dom("tbody tr").exists({ count: 2 });
     assert.dom("tr:first-child td").hasText("Test 1");

@@ -10,7 +10,8 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
     this.set("inputValue", true);
 
     await render(
-      hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`
+      hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("true");
@@ -20,7 +21,8 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
     this.set("inputValue", false);
 
     await render(
-      hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`
+      hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("false");
@@ -30,7 +32,8 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
     this.set("inputValue", "true");
 
     await render(
-      hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`
+      hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("true");
@@ -40,7 +43,8 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
     this.set("inputValue", "false");
 
     await render(
-      hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`
+      hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("false");
@@ -50,7 +54,8 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
     this.set("inputValue", () => true);
 
     await render(
-      hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`
+      hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("true");
@@ -60,7 +65,8 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
     this.set("inputValue", () => false);
 
     await render(
-      hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`
+      hbs`{{if (evaluate-to-boolean this.inputValue) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("false");
@@ -70,7 +76,8 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
     this.set("inputValue", (p) => p === 1);
 
     await render(
-      hbs`{{if (evaluate-to-boolean this.inputValue 2) "true" "false"}}`
+      hbs`{{if (evaluate-to-boolean this.inputValue 2) "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("false");
@@ -80,7 +87,8 @@ module("Integration | Helper | evaluateToBoolean", function (hooks) {
     this.set("inputValue", (p1, p2) => p1 !== p2);
 
     await render(
-      hbs`{{if (evaluate-to-boolean this.inputValue 1 "a") "true" "false"}}`
+      hbs`{{if (evaluate-to-boolean this.inputValue 1 "a") "true" "false"}}`,
+      { owner: this.engine },
     );
 
     assert.dom(this.element).hasText("true");

@@ -7,10 +7,13 @@ module("Integration | Component | nav", function (hooks) {
   setupRenderingTest(hooks);
 
   test("it renders", async function (assert) {
-    await render(hbs`<Nav>
+    await render(
+      hbs`<Nav>
   <li>Nav 1</li>
   <li>Nav 2</li>
-</Nav>`);
+</Nav>`,
+      { owner: this.engine },
+    );
 
     assert.dom("ul li").exists({ count: 2 });
   });

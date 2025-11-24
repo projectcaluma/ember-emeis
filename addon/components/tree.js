@@ -1,6 +1,6 @@
 import { isArray } from "@ember/array";
 import { action } from "@ember/object";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import { isTesting, macroCondition } from "@embroider/macros";
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
@@ -38,8 +38,8 @@ export default class TreeComponent extends Component {
     return this.args.activeItem?.findParents
       ? this.args.activeItem?.findParents()
       : rootNodes.length === 1
-      ? rootNodes
-      : [];
+        ? rootNodes
+        : [];
   }
 
   @restartableTask
@@ -47,25 +47,26 @@ export default class TreeComponent extends Component {
     if (macroCondition(!isTesting())) {
       yield timeout(100);
     }
+    this.filterValue = event.target.value;
 
     const filterItems = (
       items,
       searchTerm = this.filterValue,
-      includedKeys = ["name"]
+      includedKeys = ["name"],
     ) => {
       if (!searchTerm || !items || !isArray(items)) {
         return [];
       }
       const ownMatches = items.filter((item) =>
         includedKeys.find((key) =>
-          item[key]?.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+          item[key]?.toLowerCase().includes(searchTerm.toLowerCase()),
+        ),
       );
 
       const childMatches = items
         .filter((item) => item.children)
         .flatMap((item) =>
-          filterItems(item.children, searchTerm, includedKeys)
+          filterItems(item.children, searchTerm, includedKeys),
         );
       return [...ownMatches, ...childMatches];
     };

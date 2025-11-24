@@ -3,7 +3,9 @@
 
 $ember-power-select-default-border-radius: 0;
 $ember-power-select-border-color: $global-border;
+
 @import "ember-power-select";
+@import "ember-basic-dropdown";
 
 /* GENERAL INPUTS */
 [class*="uk-width-"] {
@@ -28,7 +30,7 @@ $ember-power-select-border-color: $global-border;
 }
 
 div.uk-grid-divider-fix.uk-grid-stack > .uk-grid-margin::before {
-  left: 0px;
+  left: 0;
 }
 // end fix
 
@@ -90,10 +92,11 @@ div.uk-grid-divider-fix.uk-grid-stack > .uk-grid-margin::before {
     text-decoration: underline;
   }
 }
-/* END GENERAL INPUTS*/
+
+/* END GENERAL INPUTS */
 
 /* TREE VIEW */
-@media screen and (min-width: 640px) {
+@media screen and (width >= 640px) {
   .tree-border-right {
     border-right: solid 1px $global-border;
   }
@@ -107,7 +110,6 @@ $tree_node_icon_margin: calc($tree_indicator_height/2);
 .tree-wrapper {
   display: flex;
   flex-direction: column;
-
   padding-right: $tree_node_icon_margin;
   height: 100%;
   max-height: 65vh;
@@ -148,7 +150,7 @@ ul.tree li:last-child {
   border-left: none;
 }
 
-ul.tree li:before {
+ul.tree li::before {
   width: $tree_indicator_width - 0.15em;
   height: $tree_indicator_height;
   margin-right: 0.15em;
@@ -158,7 +160,7 @@ ul.tree li:before {
   display: inline-block;
 }
 
-ul.tree li.childless:before {
+ul.tree li.childless::before {
   width: calc($tree_indicator_width * 3 - 0.5em);
   height: $tree_indicator_height;
   vertical-align: top;
@@ -167,11 +169,12 @@ ul.tree li.childless:before {
   display: inline-block;
 }
 
-ul.tree li:last-child:before {
+ul.tree li:last-child::before {
   border-left: thin solid $global-border;
 }
 
 ul.tree li button.tree-node-icon {
-  margin: 0 -0.25em 0.25em -0.25em;
+  margin: 0 -0.25em 0.25em;
 }
+
 /* END TREE VIEW */

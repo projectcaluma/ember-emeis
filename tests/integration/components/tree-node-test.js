@@ -38,7 +38,8 @@ module("Integration | Component | tree-node", function (hooks) {
 
   test("it renders", async function (assert) {
     await render(
-      hbs`<TreeNode @item={{this.item}} @itemRoute={{this.itemRoute}} />`
+      hbs`<TreeNode @item={{this.item}} @itemRoute={{this.itemRoute}} />`,
+      { owner: this.engine },
     );
 
     const item = this.items[0];
@@ -46,18 +47,21 @@ module("Integration | Component | tree-node", function (hooks) {
   });
 
   test("it expands when expanedItems are supplied", async function (assert) {
-    await render(hbs`<TreeNode
+    await render(
+      hbs`<TreeNode
   @item={{this.item}}
   @itemRoute={{this.itemRoute}}
   @activeItem={{this.activeItem}}
   @expandedItems={{this.expandedItems}}
-/>`);
+/>`,
+      { owner: this.engine },
+    );
 
     const item = this.items[0];
     assert
       .dom(this.element)
       .hasText(
-        `${item.name} (1) ${item.children[0].name} (1) ${item.children[0].children[0].name}`
+        `${item.name} (1) ${item.children[0].name} (1) ${item.children[0].children[0].name}`,
       );
   });
 });

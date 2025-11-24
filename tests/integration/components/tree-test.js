@@ -1,14 +1,10 @@
 import { render, fillIn } from "@ember/test-helpers";
 import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupMirage } from "ember-cli-mirage/test-support";
-import { setupIntl } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 module("Integration | Component | tree", function (hooks) {
   setupRenderingTest(hooks);
-  setupMirage(hooks);
-  setupIntl(hooks, ["de"]);
   hooks.beforeEach(async function () {
     const root = this.server.create("scope");
     const level1 = this.server.createList("scope", 3, {
@@ -20,7 +16,7 @@ module("Integration | Component | tree", function (hooks) {
       parent: level1[0],
     });
 
-    const store = this.owner.lookup("service:store");
+    const store = this.engine.lookup("service:store");
     const scopes = await store.findAll("scope");
     const rootScopes = scopes.filter((scope) => !scope.parent);
     const grandchild = scopes.find((scope) => scope.id === grandchildren[0].id);
@@ -33,11 +29,14 @@ module("Integration | Component | tree", function (hooks) {
 
   test("it renders", async function (assert) {
     assert.expect(2);
-    await render(hbs`<Tree
+    await render(
+      hbs`<Tree
   @items={{this.rootScopes}}
   @itemRoute={{this.itemRoute}}
   @activeItem={{this.activeItem}}
-/>`);
+/>`,
+      { owner: this.engine },
+    );
 
     assert.dom("[data-test-tree-search]").exists();
     assert.dom("[data-test-node-id]").exists({ count: 4 });
@@ -45,11 +44,14 @@ module("Integration | Component | tree", function (hooks) {
 
   test("it renders active item", async function (assert) {
     assert.expect(3);
-    await render(hbs`<Tree
+    await render(
+      hbs`<Tree
   @items={{this.rootScopes}}
   @itemRoute={{this.itemRoute}}
   @activeItem={{this.grandchild}}
-/>`);
+/>`,
+      { owner: this.engine },
+    );
 
     assert.dom("[data-test-tree-search]").exists();
     assert.dom("[data-test-node-id]").exists({ count: 6 });
@@ -60,14 +62,17 @@ module("Integration | Component | tree", function (hooks) {
 
   test("filter is working", async function (assert) {
     assert.expect(2);
-    await render(hbs`<Tree
+    await render(
+      hbs`<Tree
   @items={{this.rootScopes}}
   @itemRoute={{this.itemRoute}}
   @activeItem={{this.activeItem}}
-/>`);
+/>`,
+      { owner: this.engine },
+    );
 
     const root1 = this.rootScopes[0];
-    await fillIn("[data-test-tree-search]", root1._name.de);
+    await fillIn("[data-test-tree-search]", root1._name.en);
     assert.dom(`[data-test-node-id="${root1.id}"]`).exists({ count: 1 });
 
     await fillIn("[data-test-tree-search]", "X2!+42");

@@ -18,7 +18,7 @@ export default class ScopesRoute extends Route {
     ) {
       this.hostRouter.replaceWith(
         "ember-emeis.scopes.edit",
-        scopes.firstObject
+        scopes.firstObject,
       );
     }
   }

@@ -1,15 +1,11 @@
 import { render, click, fillIn } from "@ember/test-helpers";
 import { setupRenderingTest } from "dummy/tests/helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupMirage } from "ember-cli-mirage/test-support";
 import { timeout } from "ember-concurrency";
-import { setupIntl } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 module("Integration | Component | data-table", function (hooks) {
   setupRenderingTest(hooks);
-  setupMirage(hooks);
-  setupIntl(hooks, "en");
 
   test("fetch and display correct data", async function (assert) {
     assert.expect(7);
@@ -17,7 +13,8 @@ module("Integration | Component | data-table", function (hooks) {
     this.set("modelName", "role");
     const role = this.server.createList("role", 10)[0];
 
-    await render(hbs`<DataTable @modelName={{this.modelName}} as |table|>
+    await render(
+      hbs`<DataTable @modelName={{this.modelName}} as |table|>
   <table.head as |Column|>
     <Column>Heading 1</Column>
     <Column>Heading 2</Column>
@@ -30,7 +27,9 @@ module("Integration | Component | data-table", function (hooks) {
       {{/let}}
     </body.row>
   </table.body>
-</DataTable>`);
+</DataTable>`,
+      { owner: this.engine },
+    );
 
     assert.dom('form input[name="search"]').exists();
     assert.dom('form button[type="submit"]').exists();
@@ -53,14 +52,15 @@ module("Integration | Component | data-table", function (hooks) {
     this.set("modelName", "role");
     this.set("page", 1);
 
-    const store = this.owner.lookup("service:store");
+    const store = this.engine.lookup("service:store");
     store.query = (_, options) => {
       assert.strictEqual(options.page.number, this.page);
       assert.strictEqual(options.page.size, 10);
       return { meta: { pagination: { pages: 3 } } };
     };
 
-    await render(hbs`<DataTable @modelName={{this.modelName}} @page={{this.page}} as |table|>
+    await render(
+      hbs`<DataTable @modelName={{this.modelName}} @page={{this.page}} as |table|>
   <table.head as |Column|>
     <Column @sort="one">
       Heading One
@@ -77,7 +77,9 @@ module("Integration | Component | data-table", function (hooks) {
       {{/let}}
     </body.row>
   </table.body>
-</DataTable>`);
+</DataTable>`,
+      { owner: this.engine },
+    );
 
     assert.dom("tfoot tr").exists();
 
@@ -105,7 +107,7 @@ module("Integration | Component | data-table", function (hooks) {
 
     this.set("modelName", "user");
 
-    const store = this.owner.lookup("service:store");
+    const store = this.engine.lookup("service:store");
     store.query = (_, options) => {
       assert.strictEqual(options.include, "acls.role,acls.scope");
 
@@ -140,7 +142,8 @@ module("Integration | Component | data-table", function (hooks) {
       return data;
     };
 
-    await render(hbs`<DataTable
+    await render(
+      hbs`<DataTable
   @modelName={{this.modelName}}
   @include={{array "acls.role" "acls.scope"}}
   as |table|
@@ -165,7 +168,9 @@ module("Integration | Component | data-table", function (hooks) {
       {{/let}}
     </body.row>
   </table.body>
-</DataTable>`);
+</DataTable>`,
+      { owner: this.engine },
+    );
 
     assert.dom("thead tr th:first-child").hasText("Heading One");
     assert.dom("thead tr th:last-child").hasText("Scopes");
@@ -179,14 +184,15 @@ module("Integration | Component | data-table", function (hooks) {
     assert.expect(5);
     const search = "test";
 
-    const store = this.owner.lookup("service:store");
+    const store = this.engine.lookup("service:store");
     const expectedSearch = [undefined, search];
     store.query = (_, options) => {
       assert.strictEqual(options.filter.search, expectedSearch.shift());
       return { meta: { pagination: { pages: 3 } } };
     };
 
-    await render(hbs`<DataTable @modelName="role" as |table|>
+    await render(
+      hbs`<DataTable @modelName="role" as |table|>
   <table.body as |body|>
     <body.row>
       {{#let body.model as |role|}}
@@ -195,7 +201,9 @@ module("Integration | Component | data-table", function (hooks) {
       {{/let}}
     </body.row>
   </table.body>
-</DataTable>`);
+</DataTable>`,
+      { owner: this.engine },
+    );
 
     assert.dom('form input[name="search"]').exists();
     assert.dom('form button[type="submit"]').exists();
@@ -211,13 +219,14 @@ module("Integration | Component | data-table", function (hooks) {
       search: undefined,
     });
 
-    const store = this.owner.lookup("service:store");
+    const store = this.engine.lookup("service:store");
     store.query = (_, options) => {
       assert.strictEqual(options.filter.search, this.search);
       return { meta: { pagination: { pages: 3 } } };
     };
 
-    await render(hbs`<DataTable
+    await render(
+      hbs`<DataTable
   @modelName="role"
   @search={{this.search}}
   @updateSearch={{set this "search"}}
@@ -231,7 +240,9 @@ module("Integration | Component | data-table", function (hooks) {
       {{/let}}
     </body.row>
   </table.body>
-</DataTable>`);
+</DataTable>`,
+      { owner: this.engine },
+    );
 
     assert.dom('form input[name="search"]').exists();
     assert.dom('form button[type="submit"]').exists();

@@ -6,10 +6,10 @@ module("Unit | Controller | pagination", function (hooks) {
 
   test("updateQueryParam", function (assert) {
     assert.expect(5);
-    const controller = this.owner.lookup("-private/controller:pagination");
+    const controller = this.engine.lookup("-private/controller:pagination");
     assert.ok(controller);
 
-    const router = this.owner.lookup("service:hostRouter");
+    const router = this.engine.lookup("service:hostRouter");
 
     assert.notOk(controller.search);
     assert.strictEqual(controller.page, 1);

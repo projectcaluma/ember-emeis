@@ -7,7 +7,7 @@ export default Factory.extend({
   name: () => localize(faker.company.companyName()),
   fullName: () =>
     localize(
-      `${faker.company.companyName()} \u00bb ${faker.company.companyName()}`
+      `${faker.company.companyName()} \u00bb ${faker.company.companyName()}`,
     ),
   description: () => localize(faker.lorem.paragraph()),
   level: () => 0,

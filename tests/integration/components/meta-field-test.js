@@ -17,7 +17,7 @@ const translations = {
 
 module("Integration | Component | meta-field", function (hooks) {
   setupRenderingTest(hooks);
-  setupIntl(hooks, ["en"], translations);
+  setupIntl(hooks, "en", translations);
 
   hooks.beforeEach(function () {
     this.model = {
@@ -48,7 +48,8 @@ module("Integration | Component | meta-field", function (hooks) {
     });
 
     await render(
-      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`
+      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`,
+      { owner: this.engine },
     );
 
     assert.dom(".ember-power-select-trigger").exists();
@@ -72,7 +73,8 @@ module("Integration | Component | meta-field", function (hooks) {
     });
 
     await render(
-      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`
+      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`,
+      { owner: this.engine },
     );
 
     assert.dom("[data-test-meta-field-text]").exists({ count: 1 });
@@ -96,7 +98,8 @@ module("Integration | Component | meta-field", function (hooks) {
     });
 
     await render(
-      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`
+      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`,
+      { owner: this.engine },
     );
 
     assert.dom(".ember-power-select-trigger").doesNotExist();
@@ -121,8 +124,11 @@ module("Integration | Component | meta-field", function (hooks) {
       readOnly: false,
     });
 
-    await render(hbs`<MetaField @model={{this.model}} @field={{this.field1}} />
-<MetaField @model={{this.model}} @field={{this.field2}} />`);
+    await render(
+      hbs`<MetaField @model={{this.model}} @field={{this.field1}} />
+<MetaField @model={{this.model}} @field={{this.field2}} />`,
+      { owner: this.engine },
+    );
 
     assert.dom("[data-test-meta-field-text='dynamic-visibility']").exists();
     assert
@@ -141,7 +147,8 @@ module("Integration | Component | meta-field", function (hooks) {
     });
 
     await render(
-      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`
+      hbs`<MetaField @model={{this.model}} @field={{this.field}} />`,
+      { owner: this.engine },
     );
 
     assert
@@ -179,8 +186,11 @@ module("Integration | Component | meta-field", function (hooks) {
 
     this.model.name = "readOnly";
 
-    await render(hbs`<MetaField @model={{this.model}} @field={{this.field1}} />
-<MetaField @model={{this.model}} @field={{this.field2}} />`);
+    await render(
+      hbs`<MetaField @model={{this.model}} @field={{this.field1}} />
+<MetaField @model={{this.model}} @field={{this.field2}} />`,
+      { owner: this.engine },
+    );
 
     assert.dom(".ember-power-select-trigger").hasAttribute("aria-disabled");
 

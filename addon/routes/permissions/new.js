@@ -1,4 +1,4 @@
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 
 import CreateRoute from "ember-emeis/-private/routes/create";
 

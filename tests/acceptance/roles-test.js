@@ -10,8 +10,6 @@ import {
   settled,
 } from "@ember/test-helpers";
 import { setupApplicationTest } from "dummy/tests/helpers";
-import { setupMirage } from "ember-cli-mirage/test-support";
-import { setupIntl } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
@@ -56,8 +54,6 @@ const createEmeisOptions = (context) => {
 
 module("Acceptance | roles", function (hooks) {
   setupApplicationTest(hooks);
-  setupMirage(hooks);
-  setupIntl(hooks, "en");
   setupRequestAssertions(hooks);
 
   test("list view /roles", async function (assert) {
@@ -201,7 +197,7 @@ module("Acceptance | roles", function (hooks) {
     await settled();
     assert.dom("[data-test-permissions]").exists();
     await waitUntil(
-      () => findAll("[data-test-permissions] [data-test-row]").length > 1
+      () => findAll("[data-test-permissions] [data-test-row]").length > 1,
     );
     assert.dom("[data-test-permissions] [data-test-row]").exists({ count: 10 });
   });

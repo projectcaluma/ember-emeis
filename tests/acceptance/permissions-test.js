@@ -9,8 +9,6 @@ import {
   settled,
 } from "@ember/test-helpers";
 import { setupApplicationTest } from "dummy/tests/helpers";
-import { setupMirage } from "ember-cli-mirage/test-support";
-import { setupIntl } from "ember-intl/test-support";
 import { selectChoose } from "ember-power-select/test-support";
 import { module, test } from "qunit";
 
@@ -56,8 +54,6 @@ const createEmeisOptions = (context) => {
 
 module("Acceptance | permissions", function (hooks) {
   setupApplicationTest(hooks);
-  setupMirage(hooks);
-  setupIntl(hooks, "en");
   setupRequestAssertions(hooks);
 
   test("list view /permissions", async function (assert) {
@@ -113,13 +109,13 @@ module("Acceptance | permissions", function (hooks) {
       `/api/v1/permissions/${permission.id}`,
       (request) => {
         const { attributes, relationships } = JSON.parse(
-          request.requestBody
+          request.requestBody,
         ).data;
 
         assert.strictEqual(attributes.name.en, name);
         assert.strictEqual(attributes.description.en, description);
         assert.strictEqual(relationships.roles.data[0].id, role.id);
-      }
+      },
     );
     await click("[data-test-save]");
 
@@ -150,7 +146,7 @@ module("Acceptance | permissions", function (hooks) {
 
     this.assertRequest("POST", "/api/v1/permissions", (request) => {
       const { attributes, relationships } = JSON.parse(
-        request.requestBody
+        request.requestBody,
       ).data;
 
       assert.strictEqual(attributes.slug, slug);

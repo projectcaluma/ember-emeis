@@ -9,9 +9,12 @@ module("Integration | Component | edit-form/element", function (hooks) {
   test("it renders", async function (assert) {
     this.set("label", "Hey");
 
-    await render(hbs`<EditForm::Element @label={{this.label}}>
+    await render(
+      hbs`<EditForm::Element @label={{this.label}}>
   Text
-</EditForm::Element>`);
+</EditForm::Element>`,
+      { owner: this.engine },
+    );
 
     assert.dom("label").hasText(this.label);
     assert.dom(".uk-form-controls").hasText("Text");

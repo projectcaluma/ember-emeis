@@ -1,5 +1,5 @@
 import { action } from "@ember/object";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import { localCopy } from "tracked-toolbox";
 
 import PaginationController from "ember-emeis/-private/controllers/pagination";
@@ -30,7 +30,7 @@ export default class ScopesEditIndexController extends PaginationController {
       .peekAll("scope")
       .filter(
         (scope) =>
-          scope.id !== this.model?.id && !this.childScopeIds.includes(scope.id)
+          scope.id !== this.model?.id && !this.childScopeIds.includes(scope.id),
       );
   }
 

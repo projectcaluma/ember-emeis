@@ -9,8 +9,7 @@ import {
   waitFor,
 } from "@ember/test-helpers";
 import { setupApplicationTest } from "dummy/tests/helpers";
-import { setupMirage } from "ember-cli-mirage/test-support";
-import { setupIntl } from "ember-intl/test-support";
+import { setLocale } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
@@ -39,7 +38,7 @@ const createEmeisOptions = (context) => {
           },
           label: (model) => {
             context.step(
-              model.isActive ? "deactivate-label" : "reactivate-label"
+              model.isActive ? "deactivate-label" : "reactivate-label",
             );
             return model.isActive
               ? "my deactivate label"
@@ -72,9 +71,7 @@ const createEmeisOptions = (context) => {
 
 module("Acceptance | users", function (hooks) {
   setupApplicationTest(hooks);
-  setupMirage(hooks);
   setupRequestAssertions(hooks);
-  setupIntl(hooks, "en");
 
   test("list view /users", async function (assert) {
     assert.expect(6);
@@ -98,7 +95,7 @@ module("Acceptance | users", function (hooks) {
       .hasAttribute("href", `/users/${user.id}`);
 
     await click(
-      "[data-test-filters-radio-buttons='active'] [data-test-filters-radio-buttons-button='off']"
+      "[data-test-filters-radio-buttons='active'] [data-test-filters-radio-buttons-button='off']",
     );
 
     await waitFor("[data-test-user-username]");
@@ -114,7 +111,7 @@ module("Acceptance | users", function (hooks) {
     const user = this.server.create("user", {
       isActive: true,
     });
-    this.intl.locale = ["en", "de"];
+    await setLocale(["en"]);
 
     await visit(`/users/${user.id}`);
     // eslint-disable-next-line ember/no-settled-after-test-helper
@@ -134,7 +131,7 @@ module("Acceptance | users", function (hooks) {
     const user = this.server.create("user", {
       isActive: true,
     });
-    this.intl.locale = ["en", "de"];
+    await setLocale(["en"]);
 
     await visit(`/users/${user.id}`);
     // eslint-disable-next-line ember/no-settled-after-test-helper
@@ -305,7 +302,7 @@ module("Acceptance | users", function (hooks) {
     // eslint-disable-next-line ember/no-settled-after-test-helper
     await settled();
     await waitUntil(() =>
-      this.element.querySelector("table tbody:not([data-test-loading])")
+      this.element.querySelector("table tbody:not([data-test-loading])"),
     );
     assert.dom("[data-test-acl-role]").exists({ count: 2 });
   });
@@ -335,7 +332,6 @@ module("Acceptance | users", function (hooks) {
     // For some reason without the settled here,
     // the add-acl button does nothing and then
     // the tests fails on the next click.
-    await settled();
 
     assert.dom("[data-test-acl-role]").doesNotExist();
     assert.dom("[data-test-acl-back]").doesNotExist();
@@ -347,7 +343,6 @@ module("Acceptance | users", function (hooks) {
     await click("button[data-test-select-role]");
     // For some reason the await click is not actually waiting for the fetch task to finish.
     // Probably some runloop issue.
-    await settled();
 
     assert.dom("[data-test-row]").exists({ count: 2 });
 
@@ -369,7 +364,7 @@ module("Acceptance | users", function (hooks) {
     // For some reason the await click is not actually waiting for the fetch task to finish.
     // Probably some runloop issue.
     await waitUntil(() =>
-      this.element.querySelector("table tbody:not([data-test-loading])")
+      this.element.querySelector("table tbody:not([data-test-loading])"),
     );
     assert.dom("[data-test-acl-back]").doesNotExist();
     assert.dom("[data-test-acl-scope]").hasText(scope.fullName.en);

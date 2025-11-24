@@ -1,4 +1,4 @@
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import Component from "@glimmer/component";
 import { task } from "ember-concurrency";
 import { singularize } from "ember-inflector";
@@ -58,39 +58,31 @@ export default class EditFormComponent extends Component {
   }
 
   get canChangeActiveState() {
-    const option =
-      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
-        ?.deactivate;
+    const option = this.emeisOptions[this.modelName]?.actions?.deactivate;
     const func = option?.func || option;
     return typeof func === "function" ? func(this.args.model) : true;
   }
 
   get canDeleteModel() {
-    const option =
-      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
-        ?.delete;
+    const option = this.emeisOptions[this.modelName]?.actions?.delete;
     const func = option?.func || option;
     return typeof func === "function" ? func(this.args.model) : true;
   }
 
   get deactivateLabelOverride() {
-    const label =
-      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
-        ?.deactivate?.label;
+    const label = this.emeisOptions[this.modelName]?.actions?.deactivate?.label;
     if (typeof label === "function") {
       return label(this.args.model);
     } else if (label) {
       return label;
     }
     return this.intl.t(
-      `emeis.form.${this.args.model.isActive ? "deactivate" : "activate"}`
+      `emeis.form.${this.args.model.isActive ? "deactivate" : "activate"}`,
     );
   }
 
   get deleteLabelOverride() {
-    const label =
-      this.emeisOptions[this.args.model?._internalModel?.modelName]?.actions
-        ?.delete?.label;
+    const label = this.emeisOptions[this.modelName]?.actions?.delete?.label;
     if (typeof label === "function") {
       return label(this.args.model);
     } else if (label) {
@@ -110,8 +102,8 @@ export default class EditFormComponent extends Component {
       this.intl.t(
         activeState
           ? "emeis.form.deactivate-success"
-          : "emeis.form.activate-success"
-      )
+          : "emeis.form.activate-success",
+      ),
     );
   }
 
@@ -140,7 +132,7 @@ export default class EditFormComponent extends Component {
     this.notification.success(this.intl.t("emeis.form.delete-success"));
 
     this.hostRouter.replaceWith(
-      `${this.topLevelRouteName}.${this.relativeListViewRouteName}`
+      `${this.topLevelRouteName}.${this.relativeListViewRouteName}`,
     );
   }
 }

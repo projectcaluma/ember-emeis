@@ -14,13 +14,15 @@ module("Integration | Component | nav/item", function (hooks) {
       @tracked name = "someotherroute";
     }
 
-    // eslint-disable-next-line ember/no-private-routing-service
-    this.router = this.owner.lookup("service:hostRouter");
+    this.router = this.engine.lookup("service:hostRouter");
     this.router.currentRoute = new CurrentRoute();
 
-    await render(hbs`<Nav::Item @route={{this.route}}>
+    await render(
+      hbs`<Nav::Item @route={{this.route}}>
   Test
-</Nav::Item>`);
+</Nav::Item>`,
+      { owner: this.engine },
+    );
 
     assert.dom("li").doesNotHaveClass("uk-active");
     assert.dom("li a").hasText("Test");

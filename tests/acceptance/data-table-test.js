@@ -7,16 +7,12 @@ import {
   waitFor,
 } from "@ember/test-helpers";
 import { setupApplicationTest } from "dummy/tests/helpers";
-import { setupMirage } from "ember-cli-mirage/test-support";
-import { setupIntl } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "./../helpers/assert-request";
 
 module("Acceptance | data-table", function (hooks) {
   setupApplicationTest(hooks);
-  setupMirage(hooks);
-  setupIntl(hooks);
   setupRequestAssertions(hooks);
 
   test("search", async function (assert) {
@@ -26,26 +22,26 @@ module("Acceptance | data-table", function (hooks) {
       assert.strictEqual(
         request.queryParams["page[number]"],
         "1",
-        "Test if queryParam page[number] is 1"
+        "Test if queryParam page[number] is 1",
       );
-      assert.strictEqual(request.queryParams["page[size]"], "10"),
-        "Test if queryParam page[size] is 10";
-      assert.notOk(request.queryParams.search),
-        "Test that queryParam search is not set";
+      (assert.strictEqual(request.queryParams["page[size]"], "10"),
+        "Test if queryParam page[size] is 10");
+      (assert.notOk(request.queryParams.search),
+        "Test that queryParam search is not set");
     });
     await visit("/permissions");
 
     assert.strictEqual(
       currentURL(),
       "/permissions",
-      "Test currentURL is /permissions"
+      "Test currentURL is /permissions",
     );
 
     this.assertRequest("GET", "/api/v1/permissions", (request) => {
       assert.strictEqual(
         request.queryParams["filter[search]"],
         "test",
-        "Test queryParam filter[search] is 'test'"
+        "Test queryParam filter[search] is 'test'",
       );
     });
     await fillIn("[data-test-search-input]", "test");
@@ -53,14 +49,14 @@ module("Acceptance | data-table", function (hooks) {
     assert.strictEqual(
       currentURL(),
       "/permissions?search=test",
-      "Test currentURL is /permissions?search=test"
+      "Test currentURL is /permissions?search=test",
     );
 
     await click("[data-test-search-reset]");
     assert.strictEqual(
       currentURL(),
       "/permissions",
-      "Test currentURL is reset to /permissions"
+      "Test currentURL is reset to /permissions",
     );
 
     await fillIn("[data-test-search-input]", "");
@@ -68,7 +64,7 @@ module("Acceptance | data-table", function (hooks) {
     assert.strictEqual(
       currentURL(),
       "/permissions",
-      "Test currentURL is /permissions"
+      "Test currentURL is /permissions",
     );
   });
 

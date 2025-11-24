@@ -28,7 +28,7 @@ export default class PaginationSerializer extends JSONAPISerializer {
 
         json.data = json.data.slice(
           (parsedPage - 1) * parsedLimit,
-          parsedPage * parsedLimit
+          parsedPage * parsedLimit,
         );
       }
     }

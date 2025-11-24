@@ -1,18 +1,14 @@
 import { setupTest } from "dummy/tests/helpers";
-import { setupMirage } from "ember-cli-mirage/test-support";
-import { setupIntl } from "ember-intl/test-support";
 import { module, test } from "qunit";
 
 import setupRequestAssertions from "../../../helpers/assert-request";
 
 module("Unit | Controller | users/edit", function (hooks) {
   setupTest(hooks);
-  setupIntl(hooks);
-  setupMirage(hooks);
   setupRequestAssertions(hooks);
 
   test("updateModel", function (assert) {
-    const controller = this.owner.lookup("controller:users/edit");
+    const controller = this.engine.lookup("controller:users/edit");
     assert.ok(controller);
 
     const model = {};
@@ -40,7 +36,7 @@ module("Unit | Controller | users/edit", function (hooks) {
   });
 
   test("queryParamsfilter", function (assert) {
-    const controller = this.owner.lookup("controller:users/edit");
+    const controller = this.engine.lookup("controller:users/edit");
     assert.ok(controller);
 
     controller.model = { id: 1 };
@@ -49,7 +45,9 @@ module("Unit | Controller | users/edit", function (hooks) {
 
   test("createEntry", async function (assert) {
     assert.expect(3);
-    const controller = this.owner.lookup("controller:users/edit");
+    this.server.create("role", { id: 1 });
+    this.server.create("scope", { id: 2 });
+    const controller = this.engine.lookup("controller:users/edit");
     assert.ok(controller);
 
     this.assertRequest("POST", "/api/v1/acls", (request) => {
@@ -57,12 +55,15 @@ module("Unit | Controller | users/edit", function (hooks) {
       assert.ok(relationships.role);
       assert.ok(relationships.scope);
     });
-    await controller.createAclEntry.perform({ role: 1, scope: 2 });
+    const store = this.engine.lookup("service:store");
+    const role = await store.findRecord("role", 1);
+    const scope = await store.findRecord("scope", 2);
+    await controller.createAclEntry.perform({ role, scope });
   });
 
   test("deleteEntry", async function (assert) {
     assert.expect(3);
-    const controller = this.owner.lookup("controller:users/edit");
+    const controller = this.engine.lookup("controller:users/edit");
     assert.ok(controller);
     const refresh = () => {
       assert.ok(true);
