@@ -9,8 +9,7 @@ The frontend for the [emeis](https://github.com/projectcaluma/emeis) user manage
 
 ## Compatibility
 
-- Ember.js v5.8 or above
-- Ember CLI v5.8 or above
+- Ember.js v4.12 or above
 - Node.js v20 or above
 
 ## Installation
