@@ -1,15 +1,13 @@
 # [9.0.0](https://github.com/projectcaluma/ember-emeis/compare/v8.1.0...v9.0.0) (2025-11-24)
 
-
 ### Bug Fixes
 
-* upgrade ember and drop node < v20 ([#825](https://github.com/projectcaluma/ember-emeis/issues/825)) ([f56c8da](https://github.com/projectcaluma/ember-emeis/commit/f56c8da209d218ed308ca48e47366f0d5f1f0806))
-* **user/edit:** escape parenthesis in input pattern ([#823](https://github.com/projectcaluma/ember-emeis/issues/823)) ([b64e2c0](https://github.com/projectcaluma/ember-emeis/commit/b64e2c095dcd2b523ee6b274486594a93bacc41d))
-
+- upgrade ember and drop node < v20 ([#825](https://github.com/projectcaluma/ember-emeis/issues/825)) ([f56c8da](https://github.com/projectcaluma/ember-emeis/commit/f56c8da209d218ed308ca48e47366f0d5f1f0806))
+- **user/edit:** escape parenthesis in input pattern ([#823](https://github.com/projectcaluma/ember-emeis/issues/823)) ([b64e2c0](https://github.com/projectcaluma/ember-emeis/commit/b64e2c095dcd2b523ee6b274486594a93bacc41d))
 
 ### BREAKING CHANGES
 
-* drop support for node < 20 and ember < v4.12
+- drop support for node < 20 and ember < v4.12
 
 # [8.1.0](https://github.com/projectcaluma/ember-emeis/compare/v8.0.1...v8.1.0) (2023-10-13)
 
