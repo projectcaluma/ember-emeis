@@ -11,6 +11,7 @@ export default class AclWizzardComponent extends Component {
   @tracked user;
   @tracked role;
   @tracked scope;
+  @tracked sort;
 
   fields = {
     user: ["username", "fullName", "email"],
