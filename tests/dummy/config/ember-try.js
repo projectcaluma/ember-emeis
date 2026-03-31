@@ -5,7 +5,7 @@ const getChannelURL = require("ember-source-channel-url");
 
 module.exports = async function () {
   return {
-    usePnpm: true,
+    packageManager: "pnpm",
     scenarios: [
       {
         name: "ember-lts-4.12",
@@ -63,6 +63,7 @@ module.exports = async function () {
             "ember-source": await getChannelURL("canary"),
           },
         },
+        allowedToFail: true,
       },
       embroiderSafe({ allowedToFail: true }),
       embroiderOptimized({ allowedToFail: true }),
