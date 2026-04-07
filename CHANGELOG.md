@@ -1,3 +1,10 @@
+## [9.0.1](https://github.com/projectcaluma/ember-emeis/compare/v9.0.0...v9.0.1) (2026-04-07)
+
+
+### Bug Fixes
+
+* **acl-wizzard:** track sort property ([#829](https://github.com/projectcaluma/ember-emeis/issues/829)) ([631c52e](https://github.com/projectcaluma/ember-emeis/commit/631c52e43214674d45eef0cb940581a0e7900109))
+
 # [9.0.0](https://github.com/projectcaluma/ember-emeis/compare/v8.1.0...v9.0.0) (2025-11-24)
 
 ### Bug Fixes
