@@ -12,3 +12,5 @@ updates:
       - velrest
       - derrabauke
     versioning-strategy: increase
+    cooldown:
+      default-days: 7
