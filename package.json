@@ -91,7 +91,7 @@
     "@ember/test-helpers": "5.4.0",
     "@embroider/test-setup": "4.0.0",
     "@eslint/js": "9.37.0",
-    "@faker-js/faker": "6.2.0",
+    "@faker-js/faker": "10.4.0",
     "@glint/template": "1.7.2",
     "broccoli-asset-rev": "3.0.0",
     "concurrently": "9.2.1",
